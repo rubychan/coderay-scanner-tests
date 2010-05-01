@@ -191,13 +191,19 @@ module CodeRay
           
           tokens = example_test example_filename, name, scanner, max
           
-          if defined?(@time_for_encoding) && time = @time_for_encoding
-            kilo_tokens_per_second = tokens.size / time / 1000
-            print 'finished in '.green + '%5.2fs'.white % time
+          if defined?(@time_for_encoding) && @time_for_encoding
+            time_total = @time_for_scanning + @time_for_encoding
+            print '%5.2fs'.blue % time_total
+            print ':'.yellow + '%5.2fs'.magenta % @time_for_direct_streaming
             if filesize >= 1024
-              print ' ('.green + '%4.0f Ktok/s'.white % kilo_tokens_per_second + ')'.green
+              print ' '
+              print '%3.0f scanning'.white % [tokens.count / @time_for_scanning / 1000] + ', '.green
+              print '%3.0f encoding'.white % [tokens.count / @time_for_encoding / 1000] + ', '.green
+              print '%3.0f both'.blue % [tokens.count / time_total / 1000] + ', '.green
+              print '%3.0f direct streaming'.magenta % [tokens.count / @time_for_direct_streaming / 1000]
+              print ' (KTok/s)'.white
             end
-            @time_for_encoding = nil
+            @time_for_encoding = @time_for_scanning = nil
           end
           puts '.'.green
           if @known_issue_description
@@ -244,7 +250,7 @@ module CodeRay
     end
     
     def random_test scanner, max
-      if defined?(JRUBY_VERSION) && JRUBY_VERSION >= '1.4.0' && %w[ruby nitroxhtml rhtml].include?(scanner.lang)
+      if defined?(JRUBY_VERSION) && JRUBY_VERSION >= '1.4.0' && %w[ruby nitro_xhtml rhtml].include?(scanner.lang)
         puts 'Random test skipped due to a bug in JRuby. See http://redmine.rubychan.de/issues/136.'.red
         @@warning_about_jruby_bug = true
         return
@@ -312,13 +318,24 @@ module CodeRay
     end
     
     def complete_test scanner, code, name
-      print 'complete...'.yellow
+      print 'benchmarking...'.magenta
+      @time_for_direct_streaming = Benchmark.realtime do
+        Tokenizer.encode code, scanner.lang
+      end
+      print "\b" * 'benchmarking...'.size
+      print ' ' * 'benchmarking...'.size
+      print "\b" * 'benchmarking...'.size
+      
+      print "complete...".yellow
       expected_filename = name + '.expected.' + Tokenizer.file_extension
+      
       scanner.string = code
       
       tokens = result = nil
-      @time_for_encoding = Benchmark.realtime do
+      @time_for_scanning = Benchmark.realtime do
         tokens = scanner.tokens
+      end
+      @time_for_encoding = Benchmark.realtime do
         result = Tokenizer.encode_tokens tokens
       end
       
@@ -404,7 +421,6 @@ module CodeRay
     )
     
     def highlight_test tokens, name, okay, changed_lines
-      
       actual_html = name + '.actual.html'
       title = "Testing #{self.class.name[/\w+$/]}: #{name}"
       report 'highlighting' do
@@ -433,8 +449,8 @@ module CodeRay
         if File.exist? expected_raydebug
           latest_change = File.ctime expected_raydebug
           if !File.exist?(expected_html) || latest_change > File.ctime(expected_html)
-            tokens = CodeRay.scan_file expected_raydebug, :debug
-            highlighted = Highlighter.encode_tokens tokens,
+            expected_tokens = CodeRay.scan_file expected_raydebug, :debug
+            highlighted = Highlighter.encode_tokens expected_tokens,
               :highlight_lines => changed_lines,
               :title => title
             File.open(expected_html, 'w') { |f| f.write highlighted }
