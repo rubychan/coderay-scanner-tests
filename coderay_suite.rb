@@ -399,15 +399,11 @@ module CodeRay
     
     def identity_test scanner, tokens
       report 'identity' do
-        if scanner.instance_of? CodeRay::Scanners[:debug]
-          okay = true
-        else
-          okay = scanner.code == tokens.text
-          unless okay
-            flunk 'identity test failed!' if ENV['assert']
-          end
-          okay
+        okay = scanner.code == tokens.text
+        unless okay
+          flunk 'identity test failed!' if ENV['assert']
         end
+        okay
       end
     end
     
