@@ -12575,7 +12575,7 @@ keyword(class) class(ObjectiveCLexer)operator(()ident(RegexLexer)operator(\))ope
         keyword(return) pre_constant(False)
 
 keyword(class) class(FortranLexer)operator(()ident(RegexLexer)operator(\))operator(:)
-    string<delimiter(''')content(
+    docstring<delimiter(''')content(
 )content(    Lexer for FORTRAN 90 code.)content(
 )content(
 )content(    *New in Pygments 0.10.*)content(
@@ -14308,7 +14308,7 @@ keyword(class) class(MatlabSessionLexer)operator(()ident(Lexer)operator(\))opera
 
 
 keyword(class) class(NumPyLexer)operator(()ident(PythonLexer)operator(\))operator(:)
-    string<delimiter(''')content(
+    docstring<delimiter(''')content(
 )content(    A Python lexer recognizing Numerical Python builtins.)content(
 )content(
 )content(    *New in Pygments 0.10.*)content(
@@ -20688,7 +20688,7 @@ keyword(class) class(XmlLexer)operator(()ident(RegexLexer)operator(\))operator(:
 
 
 keyword(class) class(XsltLexer)operator(()ident(XmlLexer)operator(\))operator(:)
-    string<delimiter(''')content(
+    docstring<delimiter(''')content(
 )content(    A lexer for XSLT.)content(
 )content(
 )content(    *New in Pygments 0.10.*)content(
