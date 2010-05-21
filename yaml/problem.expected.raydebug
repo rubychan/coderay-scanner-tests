@@ -1,0 +1,72 @@
+operator(-) string(source: http://rubygems.org)
+
+operator(-) string(package: rails)
+  key(path)operator(:) string(.)
+
+operator(-) string(package: arel)
+  key(git)operator(:) string(git://github.com/rails/arel.git)
+
+operator(-) string(package: rake 0.8.7+)
+
+operator(-) string(package: mocha 0.9.8+)
+
+operator(-) string(package: system_timer)
+  key(engine) operator(:) string(mri <1.9)
+
+operator(-) string(package: ruby-debug 0.10.3+)
+  key(engine) operator(:) string(mri <1.9)
+
+operator(-) string(package: json)
+  key(engine) operator(:) string([mri, rbx])
+
+operator(-) string(package: yajl-ruby)
+  key(engine) operator(:) string([mri, rbx])
+
+operator(-) string(package: nokogiri 1.4.0+)
+  key(engine) operator(:) string([mri, rbx])
+
+operator(-) string(package: ruby-debug)
+  key(engine) operator(:) string(jruby)
+
+operator(-) string(package: jruby-openssl)
+  key(engine) operator(:) string(jruby)
+
+comment(# AR)
+operator(-) string(package: sqlite3-ruby 1.3.0.beta.2)
+  key(engine) operator(:) string([mri, rbx])
+
+operator(-) string(package: pg 0.9.0+)
+  key(enigne) operator(:) string([mri, rbx])
+  key(group)  operator(:) string(db)
+
+operator(-) string(package: mysql 2.8.1+)
+  key(enigne) operator(:) string([mri, rbx])
+  key(group)  operator(:) string(db)
+
+operator(-) string(package: activerecord-jdbcsqlite3-adapter)
+  key(engine) operator(:) string(jruby)
+
+operator(-) string(package: activerecord-jdbcmysql-adapter)
+  key(engine) operator(:) string(jruby)
+  key(group)  operator(:) string(db)
+
+operator(-) string(package: activerecord-jdbcpostgresql-adapter)
+  key(engine) operator(:) string(jruby)
+  key(group)  operator(:) string(db)
+
+comment(# AP)
+operator(-) string(package: rack-test 0.5.3)
+
+operator(-) string(package: RedCloth 4.2.2+)
+
+operator(-) string(package: rdoc 2.1)
+  key(group)  operator(:) string(documentation)
+
+operator(-) string(package: nokogiri 1.4.0+)
+  key(group)  operator(:) string(ci)
+  key(optional)operator(:) string(true)
+
+operator(-) string(package: fcgi 0.8.7+)
+  key(engine) operator(:) string(mri <1.9)   comment(# fcgi gem doesn't compile on 1.9)
+  key(group)  operator(:) string(ci)
+  key(optional)operator(:) string(true)
