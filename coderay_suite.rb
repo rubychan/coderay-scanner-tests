@@ -239,7 +239,7 @@ module CodeRay
       
       tokens, ok, changed_lines = complete_test scanner, code, name
       
-      identity_test scanner, tokens
+      identity_test scanner, tokens unless ENV['noidentity']
       
       unless ENV['nohighlighting'] or (code.size > MAX_CODE_SIZE_TO_HIGHLIGHT and not ENV['only'])
         highlight_test tokens, name, ok, changed_lines
@@ -342,10 +342,13 @@ module CodeRay
       if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && name == ENV['new'])
         expected = File.open(expected_filename, 'rb') { |f| break f.read }
         if result.respond_to?(:bytesize) && result.bytesize != result.size
-          # for char, i in result.chars.with_index
-          #   raise "result has non-ASCII-8BIT character in line #{result[0,i].count(?\n) + 1}" if char.bytesize != 1
-          # end
           # UTF-8 encoded result; comparison needs to be done on binary level
+          for char, i in result.chars.with_index
+            if char.bytesize != 1
+              warn "result has non-ASCII-8BIT character in line #{result[0,i].count(?\n) + 1}"
+              break
+            end
+          end if $CODERAY_DEBUG
           result.force_encoding('binary')
         end
         ok = expected == result
