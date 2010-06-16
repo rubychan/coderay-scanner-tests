@@ -42,7 +42,7 @@ predefined(list)operator(()local_variable($leading)operator(,) local_variable($s
     predefined(array_values)operator(()predefined(unpack)operator(()string<delimiter(")content(A5a/x3/A8b/A8c/A*d)delimiter(")>operator(,) local_variable($data)operator(\))operator(;)
 
 comment(# split at five byte boundaries)
-predefined(preg_match_all) operator(()string<delimiter(")content(/.)string({)content(5}/)delimiter(")>operator(,) local_variable($data)operator(,) local_variable($f)operator(,) constant(PREG_PATTERN_ORDER)operator(\))operator(;)
+predefined(preg_match_all) operator(()string<delimiter(")content(/.)content({)content(5}/)delimiter(")>operator(,) local_variable($data)operator(,) local_variable($f)operator(,) constant(PREG_PATTERN_ORDER)operator(\))operator(;)
 local_variable($fivers) operator(=) local_variable($f)operator([)integer(0)operator(])operator(;)
 
 comment(# chop string into individual characters)
@@ -340,7 +340,7 @@ comment(#-----------------------------)
 predefined(echo) local_variable($var1) operator(.) ident(func)operator(()operator(\)) operator(.) local_variable($var2)operator(;) comment(// scalar only)
 comment(#-----------------------------)
 comment(// PHP can only handle variable expression without operators)
-local_variable($answer) operator(=) string<delimiter(")content(STRING )content($)string({)content([ VAR EXPR ]} MORE STRING)delimiter(")>operator(;)
+local_variable($answer) operator(=) string<delimiter(")content(STRING )content($)content({)content([ VAR EXPR ]} MORE STRING)delimiter(")>operator(;)
 comment(#-----------------------------)
 local_variable($phrase) operator(=) string<delimiter(")content(I have )delimiter(")> operator(.) operator(()local_variable($n) operator(+) integer(1)operator(\)) operator(.) string<delimiter(")content( guanacos.)delimiter(")>operator(;)
 comment(// PHP cannot handle the complex exression: ${\\($n + 1\)})

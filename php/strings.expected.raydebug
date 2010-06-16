@@ -234,7 +234,7 @@ predefined(error_reporting)operator(()exception(E_ALL)operator(\))operator(;)
 local_variable($great) operator(=) string<delimiter(')content(fantastic)delimiter(')>operator(;)
 
 comment(// Won't work, outputs: This is { fantastic})
-predefined(echo) string<delimiter(")content(This is )string({)content( )local_variable($great)content(})delimiter(")>operator(;)
+predefined(echo) string<delimiter(")content(This is )content({)content( )local_variable($great)content(})delimiter(")>operator(;)
 
 comment(// Works, outputs: This is fantastic)
 predefined(echo) string<delimiter(")content(This is )inline<delimiter({)local_variable($great)delimiter(})>delimiter(")>operator(;)
@@ -352,7 +352,7 @@ plain(If you want a parsed variable surrounded by curly braces, just double the 
 
 )inline_delimiter(<?php) 
   local_variable($foo) operator(=) string<delimiter(")content(bar)delimiter(")>operator(;) 
-  predefined(echo) string<delimiter(")string({)inline<delimiter({)local_variable($foo)delimiter(})>content(})delimiter(")>operator(;) 
+  predefined(echo) string<delimiter(")content({)inline<delimiter({)local_variable($foo)delimiter(})>content(})delimiter(")>operator(;) 
 inline_delimiter(?>)
 
 plain(Although current documentation says 'A string literal can be specified in four different ways: ...', actually there is a fifth way to specify a (binary\) string: 
