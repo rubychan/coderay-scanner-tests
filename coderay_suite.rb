@@ -197,10 +197,10 @@ module CodeRay
             print ':'.yellow + '%5.2fs'.magenta % @time_for_direct_streaming
             if filesize >= 1024
               print ' '
-              print '%3.0f scanning'.white % [tokens.count / @time_for_scanning / 1000] + ', '.green
-              print '%3.0f encoding'.white % [tokens.count / @time_for_encoding / 1000] + ', '.green
-              print '%3.0f both'.blue % [tokens.count / time_total / 1000] + ', '.green
-              print '%3.0f direct streaming'.magenta % [tokens.count / @time_for_direct_streaming / 1000]
+              print '%4.0f scanning'.white % [tokens.count / @time_for_scanning / 1000] + ', '.green
+              print '%4.0f encoding'.white % [tokens.count / @time_for_encoding / 1000] + ', '.green
+              print '%4.0f both'.blue % [tokens.count / time_total / 1000] + ', '.green
+              print '%4.0f direct streaming'.magenta % [tokens.count / @time_for_direct_streaming / 1000]
               print ' (KTok/s)'.white
             end
             @time_for_encoding = @time_for_scanning = nil
