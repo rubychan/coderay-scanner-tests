@@ -16457,7 +16457,7 @@ module ActionController #:nodoc:
                   callstack.slice!(0) if callstack.first["rescue.rb"]
                   file, line, method = *callstack.first.match(/^(.+?):(\d+)(?::in `(.*?)')?/).captures
 
-                  message = "Exception at #{file}:#{line}#{" in `#{method}'" if method}." # `´ ( for ruby-mode)
+                  message = "Exception at #{file}:#{line}#{" in `#{method}'" if method}." # `' ( for ruby-mode)
 
                   Breakpoint.handle_breakpoint(context, message, file, line)
                 end
@@ -17859,7 +17859,7 @@ begin
         #
         # expires:: an expiry time value to use for session entries in
         #     the session cache. +expires+ is interpreted in seconds
-        #     relative to the current time if it’s less than 60*60*24*30
+        #     relative to the current time if it's less than 60*60*24*30
         #     (30 days), or as an absolute Unix time (e.g., Time#to_i) if
         #     greater. If +expires+ is +0+, or not passed on +options+,
         #     the entry will never expire.
@@ -58747,7 +58747,7 @@ module Transaction
     # object *except* +nil+. As with Hash keys, String names will be
     # duplicated and frozen before using.
     #
-    # Copyright::   Copyright © 2003 - 2005 by Austin Ziegler
+    # Copyright::   Copyright Â© 2003 - 2005 by Austin Ziegler
     # Version::     1.3.0
     # Licence::     MIT-Style
     #
