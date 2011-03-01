@@ -3,11 +3,11 @@ require 'benchmark'
 require 'yaml'
 require 'fileutils'
 
-$mydir = File.dirname(__FILE__)
-$:.unshift File.join($mydir, '..', '..', 'lib')
+$mydir = Pathname.new(__FILE__).dirname.expand_path
+$:.unshift $mydir + '..' + '..' + 'lib'
 require 'coderay'
 
-$:.unshift File.join($mydir, '..', 'lib')
+$:.unshift $mydir + '..' + 'lib'
 
 require 'term/ansicolor' unless ENV['nocolor']
 
@@ -107,7 +107,7 @@ module CodeRay
     else
       MAX_CODE_SIZE_TO_HIGHLIGHT = 10_000_000
       MAX_CODE_SIZE_TO_TEST = 10_000_000
-      DEFAULT_MAX = 1024
+      DEFAULT_MAX = 256
     end
     
     class << self
@@ -118,7 +118,7 @@ module CodeRay
       # Calls its block with the working directory set to the examples
       # for this test case.
       def dir
-        examples = File.join $mydir, lang.to_s
+        examples = $mydir + lang.to_s
         Dir.chdir examples do
           yield
         end
@@ -141,11 +141,11 @@ module CodeRay
     Tokenizer = CodeRay::Encoders[:debug].new
     
     def test_ALL
-      puts
       scanner = CodeRay::Scanners[self.class.lang].new
       raise "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[nil]
-      puts '    >> Testing '.magenta + scanner.class.title.cyan +
-        ' scanner <<'.magenta
+      
+      puts
+      puts '    >> Testing '.magenta + scanner.class.title.cyan + ' scanner <<'.magenta
       puts
       
       time_for_lang = Benchmark.realtime do
@@ -168,7 +168,7 @@ module CodeRay
         else
           puts '%d'.yellow % examples.size + " example#{'s' if examples.size > 1} found.".green
         end
-        for example_filename in examples
+        for example_filename in examples.sort
           @known_issue_description = @known_issue_ticket_url = nil
           name = File.basename(example_filename, ".#{extension}")
           next if ENV['lang'] && ENV['only'] && ENV['only'] != name
@@ -227,7 +227,7 @@ module CodeRay
         print 'too big'
         return
       end
-      code = File.open(example_filename, 'rb') { |f| break f.read }
+      code = File.open(example_filename, 'r') { |f| break f.read }
       
       incremental_test scanner, code, max unless ENV['noincremental']
       
@@ -326,38 +326,40 @@ module CodeRay
       print ' ' * 'benchmarking...'.size
       print "\b" * 'benchmarking...'.size
       
-      print "complete...".yellow
+      print 'complete...'.blue
       expected_filename = name + '.expected.' + Tokenizer.file_extension
       
       scanner.string = code
       
       tokens = result = nil
+      print 'scanning...'.yellow
       @time_for_scanning = Benchmark.realtime do
         tokens = scanner.tokens
       end
+      print "\b" * 'scanning...'.size
+      print 'encoding...'.yellow
       @time_for_encoding = Benchmark.realtime do
         result = Tokenizer.encode_tokens tokens
       end
+      print "\b" * 'encoding...'.size
       
       if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && name == ENV['new'])
-        expected = File.open(expected_filename, 'rb') { |f| break f.read }
-        if result.respond_to?(:bytesize) && result.bytesize != result.size
-          # UTF-8 encoded result; comparison needs to be done on binary level
-          for char, i in result.chars.with_index
-            if char.bytesize != 1
-              warn "result has non-ASCII-8BIT character in line #{result[0,i].count(?\n) + 1}"
-              break
-            end
-          end if $CODERAY_DEBUG
-          result.force_encoding('binary')
-        end
+        expected = scanner.class.normalize File.read(expected_filename)
         ok = expected == result
+        if !ok && expected.respond_to?(:encoding) && expected.encoding != result.encoding
+          if expected.encode(result.encoding) == result
+            ok = true
+          else
+            # warn "Encodings do not match: expected is %p, result is %p" % [expected.encoding, result.encoding]
+          end
+        end
         unless ok
           actual_filename = expected_filename.sub('.expected.', '.actual.')
-          File.open(actual_filename, 'wb') { |f| f.write result }
+          File.open(actual_filename, 'w') { |f| f.write result }
           diff = expected_filename.sub(/\.expected\..*/, '.debug.diff')
           system "diff --unified=0 --text #{expected_filename} #{actual_filename} > #{diff}"
           debug_diff = File.read diff
+          debug_diff.force_encoding 'ASCII-8BIT' if debug_diff.respond_to? :force_encoding
           changed_lines = []
           debug_diff.scan(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/) do |offset, size|
             offset = offset.to_i
@@ -366,9 +368,11 @@ module CodeRay
           end
           system "diff --unified=0 --text #{expected_filename} #{actual_filename} > #{diff}"
           debug_diff = File.read diff
-          File.open diff + '.html', 'wb' do |f|
+          File.open diff + '.html', 'w' do |f|
+            coderay_debug, $CODERAY_DEBUG = $CODERAY_DEBUG, false
             f.write Highlighter.encode_tokens(CodeRay.scan(debug_diff, :diff),
               :title => "#{self.class.name[/\w+$/]}: #{name}, differences from expected output")
+            $CODERAY_DEBUG = coderay_debug
           end
         end
         
@@ -402,7 +406,7 @@ module CodeRay
     
     def identity_test scanner, tokens
       report 'identity' do
-        okay = scanner.code == tokens.text
+        okay = scanner.string == tokens.text
         unless okay
           flunk 'identity test failed!' if ENV['assert']
         end
@@ -415,8 +419,7 @@ module CodeRay
       :line_numbers => :table,
       :wrap => :page,
       :hint => :debug,
-      :css => :class,
-      :style => :alpha
+      :css => :class
     )
     
     def highlight_test tokens, name, okay, changed_lines
