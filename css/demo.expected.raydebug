@@ -1,4 +1,4 @@
-comment(/*) comment(See) comment(http://reference.sitepoint.com/css/content.) comment(*/)
+comment(/* See http://reference.sitepoint.com/css/content. */)
 directive(@media) type(print) operator({)
   type(a)operator([)attribute_name(href)operator(])pseudo_class(:after) operator({)
     key(content)operator(:) string<delimiter(")content(<)delimiter(")> string<delimiter(attr()content(href)delimiter(\))> string<delimiter(")content(>)delimiter(")>operator(;)
