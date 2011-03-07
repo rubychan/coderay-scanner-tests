@@ -344,7 +344,7 @@ change[change(@@)plain( -143,42 +150,45 )change(@@)]
        ident(hint) operator(=) ident(options)operator([)symbol(:hint)operator(])
        reserved(if) ident(hint) reserved(and) reserved(not) operator([)symbol(:debug)operator(,) symbol(:info)operator(,) symbol(:info_long)operator(])operator(.)ident(include?) ident(hint)
 delete[delete(-)        ident(raise) constant(ArgumentError)operator(,) string<delimiter(")content(Unknown value %p for :hint; expected :info, :debug, false or nil.)delimiter(")> operator(%) ident(hint)]
-insert[insert(+)        ident(raise) constant(ArgumentError)operator(,) string<delimiter(")content(Unknown value %p for :hint; )char(\\)>]
+insert[insert(+)        ident(raise) constant(ArgumentError)operator(,) string<delimiter(")content(Unknown value %p for :hint; )error(\\)>]
 insert[insert(+)string<content(          expected :info, :debug, false, or nil.)delimiter(")> operator(%) ident(hint)]
        reserved(end)
  
