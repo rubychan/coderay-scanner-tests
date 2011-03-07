@@ -924,7 +924,7 @@ ident(p) integer(99) operator(/) integer(3)
 ident(a)operator(=)integer(99)operator(;)ident(b)operator(=)integer(3)
 ident(p) integer(1)operator(+)operator(()ident(a) operator(/) ident(b)operator(\))
 ident(p) string<delimiter(%Q[)char(\\")delimiter(])>
-ident(p) string<delimiter(%Q[)content( some )nesting_delimiter([)content(nested)nesting_delimiter(])content( text)delimiter(])>
+ident(p) string<delimiter(%Q[)content( some )content([)content(nested)content(])content( text)delimiter(])>
 
 reserved(if) pre_constant(false)
      ident(formatter)operator(.)ident(format_element)operator(()ident(element)operator(\)) reserved(do)
@@ -1114,10 +1114,4 @@ ident(p) string<delimiter(")char(\\v)delimiter(")>
 ident(c)operator(=)integer(0)
       reserved(while) ident(c) operator(==) regexp<delimiter(/)content([ )char(\\t)char(\\f)char(\\r)char(\\13)content(])delimiter(/)>operator(;) reserved(end)
 
-
-
-
-
-
-
-
+constant(Kernel)operator(.)ident(`)operator(()string<delimiter(")content(cd)delimiter(")>operator(\))

@@ -616,7 +616,7 @@ reserved(class) class(SortedSet) operator(<) constant(Set)
 
 	  def delete_if
 	    n = @hash.size
-	    @hash.delete_if )nesting_delimiter({)content( |o,| yield(o\) )nesting_delimiter(})content(
+	    @hash.delete_if )content({)content( |o,| yield(o\) )content(})content(
 	    @keys = nil if @hash.size != n
 	    self
 	  end
@@ -627,7 +627,7 @@ reserved(class) class(SortedSet) operator(<) constant(Set)
 	  end
 
 	  def each
-	    to_a.each )nesting_delimiter({)content( |o| yield(o\) )nesting_delimiter(})content(
+	    to_a.each )content({)content( |o| yield(o\) )content(})content(
 	  end
 
 	  def to_a
