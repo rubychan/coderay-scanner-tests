@@ -25,11 +25,11 @@ tag(<link) attribute_name(rel)operator(=)string<delimiter(")content(search)delim
 tag(<link) attribute_name(rel)operator(=)string<delimiter(")content(download)delimiter(")> attribute_name(href)operator(=)string<delimiter(")content(/goodies/downloads)delimiter(")> tag(/>)
 tag(<link) attribute_name(rel)operator(=)string<delimiter(")content(bookmark)delimiter(")> attribute_name(href)operator(=)string<delimiter(")content(http://www.faszination-tolkien.de)delimiter(")> attribute_name(title)operator(=)string<delimiter(")content(Faszination Tolkien)delimiter(")> tag(/>)
 tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
-comment(<!--
-if(top.frames.length > 0\)
-top.location.href=self.location;
-//-->)
-tag(</script>)
+comment(<!--)inline<
+keyword(if)operator(()ident(top)operator(.)ident(frames)operator(.)ident(length) operator(>) integer(0)operator(\))
+ident(top)operator(.)ident(location)operator(.)ident(href)operator(=)ident(self)operator(.)ident(location)operator(;)
+comment(//)>comment(-->)plain(
+)tag(</script>)
 tag(</head>)
 tag(<body>)
 tag(<div) attribute_name(id)operator(=)string<delimiter(")content(kopf)delimiter(")> attribute_name(title)operator(=)string<delimiter(")content(Anmerkungen zu den Bildern und )entity(&copy;) content(in dem Styleswitch-Bereich)delimiter(")>tag(>)
@@ -37,19 +37,19 @@ tag(</div>)
 tag(<div) attribute_name(id)operator(=)string<delimiter(")content(inhalt)delimiter(")>tag(>)
 tag(<div) attribute_name(style)operator(=)string<delimiter(")content(font:11px verdana, sans-serif; margin:3px 0 0 0;)delimiter(")>tag(>)
 tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
-comment(<!-- start js_paths.js???
-var path = "";
-var href = document.location.href;
-var s = href.split("/"\);
-for (var i=2;i<(s.length-1\);i++\) {
-path+="<a href=\\""+href.substring(0,href.indexOf(s[i]\)+s[i].length\)+"/\\">"+s[i]+"</a> / ";
-}
-i=s.length-1;
-path+="<a href=\\""+href.substring(0,href.indexOf(s[i]\)+s[i].length\)+"\\">"+s[i]+"</a>";
-var url = /* window.location.protocol + "//" + */ path;
-document.writeln(url\);
-// ende -->)
-tag(</script>)
+comment(<!--)inline< ident(start) ident(js_paths)operator(.)ident(js)operator(???)
+keyword(var) ident(path) operator(=) string<delimiter(")delimiter(")>operator(;)
+keyword(var) ident(href) operator(=) ident(document)operator(.)ident(location)operator(.)ident(href)operator(;)
+keyword(var) ident(s) operator(=) ident(href)operator(.)ident(split)operator(()string<delimiter(")content(/)delimiter(")>operator(\))operator(;)
+keyword(for) operator(()keyword(var) ident(i)operator(=)integer(2)operator(;)ident(i)operator(<()ident(s)operator(.)ident(length)operator(-)integer(1)operator(\))operator(;)ident(i)operator(++)operator(\)) operator({)
+ident(path)operator(+=)string<delimiter(")content(<a href=)char(\\")delimiter(")>operator(+)ident(href)operator(.)ident(substring)operator(()integer(0)operator(,)ident(href)operator(.)ident(indexOf)operator(()ident(s)operator([)ident(i)operator(]\))operator(+)ident(s)operator([)ident(i)operator(])operator(.)ident(length)operator(\))operator(+)string<delimiter(")content(/)char(\\")content(>)delimiter(")>operator(+)ident(s)operator([)ident(i)operator(])operator(+)string<delimiter(")content(</a> / )delimiter(")>operator(;)
+operator(})
+ident(i)operator(=)ident(s)operator(.)ident(length)operator(-)integer(1)operator(;)
+ident(path)operator(+=)string<delimiter(")content(<a href=)char(\\")delimiter(")>operator(+)ident(href)operator(.)ident(substring)operator(()integer(0)operator(,)ident(href)operator(.)ident(indexOf)operator(()ident(s)operator([)ident(i)operator(]\))operator(+)ident(s)operator([)ident(i)operator(])operator(.)ident(length)operator(\))operator(+)string<delimiter(")char(\\")content(>)delimiter(")>operator(+)ident(s)operator([)ident(i)operator(])operator(+)string<delimiter(")content(</a>)delimiter(")>operator(;)
+keyword(var) ident(url) operator(=) comment(/* window.location.protocol + "//" + */) ident(path)operator(;)
+ident(document)operator(.)ident(writeln)operator(()ident(url)operator(\))operator(;)
+comment(// ende )>comment(-->)plain(
+)tag(</script>)
 
 tag(</div>)
 tag(<h1>)plain(Faszination Tolkien - Herr der Ringe )entity(&amp;) plain(Co.)tag(</h1>)
@@ -62,7 +62,7 @@ tag(<p>)plain(Immer auf dem laufenden bleiben? Mit )tag(<a) attribute_name(href)
 
 tag(<p>)tag(<strong>)tag(<a) attribute_name(href)operator(=)string<delimiter(")content(goodies/styleswitcher)delimiter(")>tag(>)plain(Styleswitcher)tag(</a>)tag(</strong>) plain(- )entity(&auml;)plain(ndere das Aussehen dieser Seite.)tag(</p>)
 
-tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgründen nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
+tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgrï¿½nden nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
 
 
 tag(<div) attribute_name(style)operator(=)string<delimiter(")content(text-align:center; padding:5px;)delimiter(")>tag(>)
