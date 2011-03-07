@@ -1831,7 +1831,7 @@ Index: lib/coderay/tokens.rb
    #
    #   [:comment, '# It looks like this']
    #   [:float, '3.1415926']
--  #   [:error, 'äöü']
+-  #   [:error, 'Ã¤Ã¶Ã¼']
 +  #   [:error, '$^']
    #
    # Some scanners also yield some kind of sub-tokens, represented by special

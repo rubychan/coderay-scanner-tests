@@ -1831,7 +1831,7 @@ change[change(@@)plain( -14,7 +14,7 )change(@@)]
    comment(#)
    comment(#   [:comment, '# It looks like this'])
    comment(#   [:float, '3.1415926'])
-delete[delete(-)  comment(#   [:error, ')eyecatcher<comment(äöü)>comment('])]
+delete[delete(-)  comment(#   [:error, ')eyecatcher<comment(Ã¤Ã¶Ã¼)>comment('])]
 insert[insert(+)  comment(#   [:error, ')eyecatcher<comment($^)>comment('])]
    comment(#)
    comment(# Some scanners also yield some kind of sub-tokens, represented by special)
