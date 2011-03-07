@@ -1169,7 +1169,7 @@ comment({=======================================================================
    cYcnus.Pluto 1.57 Beta 14
    by Murphy
 
-   ©2000-2003 by cYcnus
+   Â©2000-2003 by cYcnus
    visit www.cYcnus.de
 
    murphy@cYcnus.de (Kornelius Kalnbach\)
@@ -5168,7 +5168,7 @@ reserved(begin)
     ident(RegTV)operator(.)ident(Items)operator(.)ident(AddChild)operator(()ident(CurNode)operator(,) ident(Dif)operator(.)ident(OnlyB)operator([)ident(i)operator(])operator(\))operator(;)
     ident(AddTrace)operator(()string<delimiter(')content(New Key: )delimiter(')> operator(+) ident(dif)operator(.)ident(OnlyB)operator([)ident(i)operator(])operator(\))operator(;)
     ident(MainWin)operator(.)ident(StatusBarUpdate)operator(;)
-    comment(//AddHint('Neuer Schlüssel: ' + CurNode.Text + '\\' + Dif.OnlyB[i]\);)
+    comment(//AddHint('Neuer SchlÃ¼ssel: ' + CurNode.Text + '\\' + Dif.OnlyB[i]\);)
   reserved(end)operator(;)
 reserved(end)operator(;)
 
@@ -5280,7 +5280,7 @@ reserved(begin)
   ident(Real)operator(.)ident(Free)operator(;)
   ident(Cur)operator(.)ident(Free)operator(;)
 
-  reserved(for) ident(i) operator(:=) integer(0) reserved(to) ident(Dif)operator(.)ident(OnlyA)operator(.)ident(Count)operator(-)integer(1) reserved(do) reserved(begin) comment(//Gelöscht/wegbenannt)
+  reserved(for) ident(i) operator(:=) integer(0) reserved(to) ident(Dif)operator(.)ident(OnlyA)operator(.)ident(Count)operator(-)integer(1) reserved(do) reserved(begin) comment(//GelÃ¶scht/wegbenannt)
     ident(Item) operator(:=) ident(FindItemByRealName)operator(()ident(ValueList)operator(,) ident(Dif)operator(.)ident(OnlyA)operator([)ident(i)operator(])operator(\))operator(;)
     reserved(if) ident(Assigned)operator(()ident(Item)operator(\)) reserved(then) reserved(begin)
       ident(Item)operator(.)ident(Delete)operator(;)
@@ -8252,7 +8252,7 @@ reserved(begin)
     ident(AllowEdit) operator(:=) ident(False)operator(;)
   ident(Exit)operator(;) reserved(end)operator(;)
 
-  reserved(if) ident(ItemIsDefaultValue)operator(()ident(Item)operator(\)) reserved(then) comment(//unschön, aber beste Lösung bisher)
+  reserved(if) ident(ItemIsDefaultValue)operator(()ident(Item)operator(\)) reserved(then) comment(//unschÃ¶n, aber beste LÃ¶sung bisher)
     ident(Keyboard)operator(.)ident(SimKey)operator(()ident(VK_DELETE)operator(\))operator(;)
 reserved(end)operator(;)
 
@@ -8276,7 +8276,7 @@ reserved(begin)
 
     reserved(if) ident(TryRenameValue)operator(()ident(Old)operator(,) ident(s)operator(\)) reserved(then) reserved(begin)
       ident(SetRealValueName)operator(()ident(Item)operator(,) ident(s)operator(\))operator(;) comment(//Sichere Zuweisung des Standard-Flags)
-      ident(s) operator(:=) ident(Item)operator(.)ident(Caption)operator(;) comment(//Anschließend externer Aufruf "Item.Caption := s"!)
+      ident(s) operator(:=) ident(Item)operator(.)ident(Caption)operator(;) comment(//AnschlieÃŸend externer Aufruf "Item.Caption := s"!)
     reserved(end) reserved(else) reserved(begin)
       ident(s) operator(:=) ident(OldCaption)operator(;)
     reserved(end)operator(;)
@@ -8821,7 +8821,7 @@ reserved(begin)
   reserved(if) reserved(not) ident(OpenCurKey) reserved(then)
     ident(Exit)operator(;)
 
-  reserved(if) ident(SameText)operator(()ident(OldName)operator(,) ident(NewName)operator(\)) reserved(then) reserved(begin) comment(//CharCase ändern)
+  reserved(if) ident(SameText)operator(()ident(OldName)operator(,) ident(NewName)operator(\)) reserved(then) reserved(begin) comment(//CharCase Ã¤ndern)
     ident(x) operator(:=) ident(MainReg)operator(.)ident(GetFreeValueName)operator(;)
     ident(MainReg)operator(.)ident(RenameValue)operator(()ident(OldName)operator(,) ident(x)operator(\))operator(;)
     ident(MainReg)operator(.)ident(RenameValue)operator(()ident(x)operator(,) ident(NewName)operator(\))operator(;)

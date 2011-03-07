@@ -1169,7 +1169,7 @@ unit plutomain;
    cYcnus.Pluto 1.57 Beta 14
    by Murphy
 
-   ©2000-2003 by cYcnus
+   Â©2000-2003 by cYcnus
    visit www.cYcnus.de
 
    murphy@cYcnus.de (Kornelius Kalnbach)
@@ -5168,7 +5168,7 @@ begin
     RegTV.Items.AddChild(CurNode, Dif.OnlyB[i]);
     AddTrace('New Key: ' + dif.OnlyB[i]);
     MainWin.StatusBarUpdate;
-    //AddHint('Neuer Schlüssel: ' + CurNode.Text + '\' + Dif.OnlyB[i]);
+    //AddHint('Neuer SchlÃ¼ssel: ' + CurNode.Text + '\' + Dif.OnlyB[i]);
   end;
 end;
 
@@ -5280,7 +5280,7 @@ begin
   Real.Free;
   Cur.Free;
 
-  for i := 0 to Dif.OnlyA.Count-1 do begin //Gelöscht/wegbenannt
+  for i := 0 to Dif.OnlyA.Count-1 do begin //GelÃ¶scht/wegbenannt
     Item := FindItemByRealName(ValueList, Dif.OnlyA[i]);
     if Assigned(Item) then begin
       Item.Delete;
@@ -8252,7 +8252,7 @@ begin
     AllowEdit := False;
   Exit; end;
 
-  if ItemIsDefaultValue(Item) then //unschön, aber beste Lösung bisher
+  if ItemIsDefaultValue(Item) then //unschÃ¶n, aber beste LÃ¶sung bisher
     Keyboard.SimKey(VK_DELETE);
 end;
 
@@ -8276,7 +8276,7 @@ begin
 
     if TryRenameValue(Old, s) then begin
       SetRealValueName(Item, s); //Sichere Zuweisung des Standard-Flags
-      s := Item.Caption; //Anschließend externer Aufruf "Item.Caption := s"!
+      s := Item.Caption; //AnschlieÃŸend externer Aufruf "Item.Caption := s"!
     end else begin
       s := OldCaption;
     end;
@@ -8821,7 +8821,7 @@ begin
   if not OpenCurKey then
     Exit;
 
-  if SameText(OldName, NewName) then begin //CharCase ändern
+  if SameText(OldName, NewName) then begin //CharCase Ã¤ndern
     x := MainReg.GetFreeValueName;
     MainReg.RenameValue(OldName, x);
     MainReg.RenameValue(x, NewName);
