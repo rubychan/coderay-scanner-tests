@@ -62,7 +62,7 @@ tag(<p>)plain(Immer auf dem laufenden bleiben? Mit )tag(<a) attribute_name(href)
 
 tag(<p>)tag(<strong>)tag(<a) attribute_name(href)operator(=)string<delimiter(")content(goodies/styleswitcher)delimiter(")>tag(>)plain(Styleswitcher)tag(</a>)tag(</strong>) plain(- )entity(&auml;)plain(ndere das Aussehen dieser Seite.)tag(</p>)
 
-tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgrï¿½nden nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
+tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgründen nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
 
 
 tag(<div) attribute_name(style)operator(=)string<delimiter(")content(text-align:center; padding:5px;)delimiter(")>tag(>)
