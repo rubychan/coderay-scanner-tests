@@ -12,16 +12,16 @@ comment(/**
 
 directive(public) type(class) class(RequestBuilder) operator({)
 
-  directive(private) pre_type(String) ident(user)
-  directive(private) pre_type(String) ident(password)
-  directive(private) pre_type(String) ident(head) operator(=) string<delimiter(')content(<?xml version="1.0" encoding="UTF-8" ?>)delimiter(')>
-  directive(private) pre_type(String) ident(lastRequest) operator(=) string<delimiter(")delimiter(")>operator(;)
-  directive(private) pre_type(Integer) ident(reqID) operator(=) integer(1)operator(;)
+  directive(private) predefined_type(String) ident(user)
+  directive(private) predefined_type(String) ident(password)
+  directive(private) predefined_type(String) ident(head) operator(=) string<delimiter(')content(<?xml version="1.0" encoding="UTF-8" ?>)delimiter(')>
+  directive(private) predefined_type(String) ident(lastRequest) operator(=) string<delimiter(")delimiter(")>operator(;)
+  directive(private) predefined_type(Integer) ident(reqID) operator(=) integer(1)operator(;)
 
   comment(/**
    * Konstruktur für das XMLRequestBuild-Object mit User und Passwort.
    */)
-  ident(RequestBuilder)operator(()pre_type(String) ident(user)operator(,) pre_type(String) ident(password)operator(\))operator({)
+  ident(RequestBuilder)operator(()predefined_type(String) ident(user)operator(,) predefined_type(String) ident(password)operator(\))operator({)
     local_variable(this)operator(.)ident(user) operator(=) ident(user)operator(;)
     local_variable(this)operator(.)ident(password) operator(=) ident(Base64)operator(.)ident(encode)operator(()ident(password)operator(\))operator(;)
   operator(})
@@ -42,8 +42,8 @@ directive(public) type(class) class(RequestBuilder) operator({)
    * Ruft den übergeben Closure auf und den Request spezifischen Code in das XML
    * ein zubinden.
    */)
-  directive(private) pre_type(String) ident(buildRequest)operator(()ident(closure)operator(\))operator({)
-    keyword(def) ident(writer) operator(=) keyword(new) pre_type(StringWriter)operator(()operator(\))
+  directive(private) predefined_type(String) ident(buildRequest)operator(()ident(closure)operator(\))operator({)
+    keyword(def) ident(writer) operator(=) keyword(new) predefined_type(StringWriter)operator(()operator(\))
     keyword(def) ident(xml) operator(=) keyword(new) ident(MarkupBuilder)operator(()ident(writer)operator(\))
     ident(xml)operator(.)ident(REQUEST)operator(() key(XMLID)operator(:)string<delimiter(")content(SYSTEM_)delimiter(")>operator(+)ident(newReqID)operator(()operator(\)) operator(\))operator({)
       ident(loginRequest)operator(() ident(xml) operator(\))
@@ -74,7 +74,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * build note method called from varius methods
    */)
-  directive(private) pre_type(String) ident(buildNote)operator(() ident(argprops) operator(\))operator({)
+  directive(private) predefined_type(String) ident(buildNote)operator(() ident(argprops) operator(\))operator({)
     keyword(def) ident(props) operator(=) operator([) key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\)) operator(])
     ident(props)operator(.)ident(putAll)operator(() ident(argprops) operator(\))
     keyword(return) ident(buildRequest)operator(() operator(\))operator({)
@@ -97,7 +97,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * bilde Easy-Documentenschreibweise aus Lagerort und Archiv oder EasyArchivReferenz und Mappe+Version
    */)
-  directive(public) pre_type(String) ident(buildEasyDocRef)operator(()ident(location)operator(,) ident(archiv)operator(=)pre_constant(null)operator(,) ident(mappe)operator(=)pre_constant(null)operator(,) ident(version)operator(=)pre_constant(null)operator(\))operator({)
+  directive(public) predefined_type(String) ident(buildEasyDocRef)operator(()ident(location)operator(,) ident(archiv)operator(=)predefined_constant(null)operator(,) ident(mappe)operator(=)predefined_constant(null)operator(,) ident(version)operator(=)predefined_constant(null)operator(\))operator({)
     keyword(if)operator(()operator(!)ident(mappe) operator(||) operator(!)ident(version)operator(\))operator({)
        keyword(throw) keyword(new) exception(RuntimeException)operator(()string<delimiter(")content(Keine Mappe oder Version angegeben )inline<inline_delimiter(${)ident(mappe)inline_delimiter(})>content(,)inline<inline_delimiter(${)ident(version)inline_delimiter(})>delimiter(")>operator(\))
     operator(}) keyword(else) operator({)
@@ -108,7 +108,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * bilde Easy-Archivschreibweise aus Lagerort und Archiv
    */)
-  directive(public) pre_type(String) ident(buildEasyArchivRef)operator(()ident(location)operator(,) ident(archive)operator(=)pre_constant(null)operator(\))operator({)
+  directive(public) predefined_type(String) ident(buildEasyArchivRef)operator(()ident(location)operator(,) ident(archive)operator(=)predefined_constant(null)operator(\))operator({)
     keyword(def) ident(locarc)
     keyword(if)operator(() ident(archive) operator(\))operator({)
        ident(locarc) operator(=) string<delimiter(")char(\\$)content((#)inline<inline_delimiter(${)ident(location)inline_delimiter(})>content(\))char(\\\\)inline<inline_delimiter(${)ident(archive)inline_delimiter(})>delimiter(")>
@@ -121,7 +121,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Request für die Liste aller Lagerorte
    */)
-  directive(public) pre_type(String) ident(getLocations)operator(()ident(category)operator(=)string<delimiter(")content(ALL)delimiter(")>operator(\))operator({)
+  directive(public) predefined_type(String) ident(getLocations)operator(()ident(category)operator(=)string<delimiter(")content(ALL)delimiter(")>operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
       local_variable(it)operator(.)ident(LOCATIONS)operator(()key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(\))operator({)
         ident(CATEGORY)operator(()ident(category)operator(\))
@@ -132,7 +132,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Request für die Archive eines Lagerortes
    */)
-  directive(public) pre_type(String) ident(getArchives)operator(()ident(location)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getArchives)operator(()ident(location)operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
       local_variable(it)operator(.)ident(ARCHIVES)operator(()key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(LOCATION)operator(:)ident(location)operator(\))
     operator(})
@@ -143,7 +143,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
    * type: INFO || ERROR
    * logclass: EASY || SYSTEM || DEBUG
    */)
-  directive(public) pre_type(String) ident(getLog)operator(() ident(type)operator(,) ident(logclass)operator(,) ident(message) operator(\))operator({)
+  directive(public) predefined_type(String) ident(getLog)operator(() ident(type)operator(,) ident(logclass)operator(,) ident(message) operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({) ident(xml) operator(->)
        ident(getLogEntry)operator(()ident(xml)operator(,) ident(type)operator(,) ident(logclass)operator(,) ident(message)operator(\))
      operator(})
@@ -154,7 +154,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
    * section kann folgende (auch mehrere\) Wert enthalten:
    * FIELDLIST, HITLISTS, SEARCHMASKS, STATISTICS, RIGHTS, BITMAPS, SELLISTS
    */)
-  directive(public) pre_type(String) ident(getArchiveDescription)operator(()ident(section)operator(,) ident(location)operator(,) ident(archive)operator(=)pre_constant(null)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getArchiveDescription)operator(()ident(section)operator(,) ident(location)operator(,) ident(archive)operator(=)predefined_constant(null)operator(\))operator({)
     keyword(def) ident(locarc) operator(=) ident(buildEasyArchivRef)operator(() ident(location)operator(,) ident(archive) operator(\))
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
       local_variable(it)operator(.)ident(ARCDESCRIPTION)operator(() key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(ARCHIVE)operator(:)ident(locarc)operator(,) key(SECTION)operator(:)ident(section) operator(\))
@@ -164,21 +164,21 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Liste die Notizen eine Mappe auf
    */)
-  directive(public) pre_type(String) ident(getNoteList)operator(() ident(easydocref) operator(\))operator({)
+  directive(public) predefined_type(String) ident(getNoteList)operator(() ident(easydocref) operator(\))operator({)
     keyword(return) ident(buildNote)operator(() key(MODE)operator(:)string<delimiter(')content(LIST)delimiter(')>operator(,) key(EASYDOCREF)operator(:)ident(easydocref) operator(\))
   operator(})
 
   comment(/**
    * Liest eine Notiz einer Mappe
    */)
-  directive(public) pre_type(String) ident(getNoteRead)operator(() ident(easydocref)operator(,) ident(noteid) operator(\))operator({)
+  directive(public) predefined_type(String) ident(getNoteRead)operator(() ident(easydocref)operator(,) ident(noteid) operator(\))operator({)
     keyword(return) ident(buildNote)operator(() key(MODE)operator(:)string<delimiter(')content(READ)delimiter(')>operator(,) key(EASYDOCREF)operator(:)ident(easydocref)operator(,) key(NOTEID)operator(:)ident(noteid) operator(\))
   operator(})
 
   comment(/**
    * Abfrage des Gossars eines Archives
    */)
-  directive(public) pre_type(String) ident(getGlossary)operator(()ident(locarc)operator(,) ident(query)operator(,) ident(cnt)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getGlossary)operator(()ident(locarc)operator(,) ident(query)operator(,) ident(cnt)operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
       local_variable(it)operator(.)ident(GLOSSARY)operator(() key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(ARCHIVE)operator(:)ident(locarc)operator(,) key(QUERY)operator(:)ident(query)operator(,) key(COUNT)operator(:)ident(cnt) operator(\))
     operator(})
@@ -187,13 +187,13 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Importtiert eine Mappe inklusive BLOBs in das Archiv
    */)
-  directive(public) pre_type(String) ident(getUpdate)operator(()ident(archivref)operator(,) ident(mappe)operator(,) ident(version)operator(,) ident(fields)operator(,) ident(blobs)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getUpdate)operator(()ident(archivref)operator(,) ident(mappe)operator(,) ident(version)operator(,) ident(fields)operator(,) ident(blobs)operator(\))operator({)
     type(int) ident(cnt) operator(=) ident(fields)operator(.)ident(size)operator(()operator(\)) operator(+) ident(blobs)operator(.)ident(size)operator(()operator(\))
     type(int) ident(id) operator(=) operator(-)integer(1)operator(;)
     type(int) ident(blobid)operator(=)integer(2000)operator(;)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({) ident(xml)operator(->)
       ident(xml)operator(.)ident(IMPORT)operator(() key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(ARCHIVE)operator(:)ident(archivref)operator(,) key(MODE)operator(:)string<delimiter(')content(SYNC)delimiter(')>operator(,) key(FOLDER)operator(:)string<delimiter(')delimiter(')>operator(\))operator({)
-        ident(DOCUMENT)operator(() key(ID)operator(:)string<delimiter(')content(DOCID_1)delimiter(')>operator(,) key(FIELDCOUNT)operator(:)ident(cnt)operator(,) key(EASYDOCREF)operator(:)ident(buildEasyDocRef)operator(()ident(archivref)operator(,) pre_constant(null)operator(,) ident(mappe)operator(,) ident(version) operator(\)) operator(\))operator({)
+        ident(DOCUMENT)operator(() key(ID)operator(:)string<delimiter(')content(DOCID_1)delimiter(')>operator(,) key(FIELDCOUNT)operator(:)ident(cnt)operator(,) key(EASYDOCREF)operator(:)ident(buildEasyDocRef)operator(()ident(archivref)operator(,) predefined_constant(null)operator(,) ident(mappe)operator(,) ident(version) operator(\)) operator(\))operator({)
           ident(fields)operator(.)ident(each)operator(()operator(\))operator({) ident(field) operator(->)
             ident(FIELD)operator(() key(CODE)operator(:)string<delimiter(')content(ANSI)delimiter(')>operator(,) key(TYPE)operator(:)string<delimiter(')content(STRING)delimiter(')>operator(,) key(NAME)operator(:)ident(field)operator(.)ident(key)operator(,) key(ID)operator(:)operator(()ident(id)operator(+=)integer(1)operator(\))operator(,) key(USE)operator(:)string<delimiter(')content(USER)delimiter(')> operator(\))operator({)
               ident(DATA)operator(()operator(\))operator({)
@@ -217,7 +217,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Importtiert eine Mappe inklusive BLOBs in das Archiv
    */)
-  directive(public) pre_type(String) ident(getImport)operator(()ident(archivref)operator(,) ident(fields)operator(,) ident(blobs)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getImport)operator(()ident(archivref)operator(,) ident(fields)operator(,) ident(blobs)operator(\))operator({)
     type(int) ident(cnt) operator(=) ident(fields)operator(.)ident(size)operator(()operator(\)) operator(+) ident(blobs)operator(.)ident(size)operator(()operator(\))
     type(int) ident(id) operator(=) operator(-)integer(1)operator(;)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({) ident(xml)operator(->)
@@ -238,7 +238,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Holt ganzes Dokument aus dem Archiv mit/ohne BLOBs oder einzelne Felder/BLOBs
    */)
-  directive(public) pre_type(String) ident(getDocument)operator(()ident(docref)operator(,) ident(blobdata)operator(,) ident(blobid)operator(,) ident(fieldid)operator(,) ident(intfields) operator(\))operator({)
+  directive(public) predefined_type(String) ident(getDocument)operator(()ident(docref)operator(,) ident(blobdata)operator(,) ident(blobid)operator(,) ident(fieldid)operator(,) ident(intfields) operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
       local_variable(it)operator(.)ident(DOCUMENT)operator(() key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(EASYDOCREF)operator(:)ident(docref)operator(,) key(BLOBID)operator(:)ident(blobid)operator(,) key(BLOBDATA)operator(:)ident(blobdata)operator(,) key(FIELDID)operator(:)ident(fieldid)operator(,) key(INTFIELDS)operator(:)ident(intfields)operator(,) key(RENDERER)operator(:)string<delimiter(')content(0)delimiter(')>operator(,) key(IFRCCODEB64)operator(:)string<delimiter(')content(1)delimiter(')> operator(\))
     operator(})
@@ -247,7 +247,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
   comment(/**
    * Löscht eine mappe anhand Ihrer Easy Referenz
    */)
-  directive(public) pre_type(String) ident(getDelete)operator(()ident(easyref)operator(\))operator({)
+  directive(public) predefined_type(String) ident(getDelete)operator(()ident(easyref)operator(\))operator({)
     keyword(return) ident(buildRequest)operator(()operator(\))operator({)
        local_variable(it)operator(.)ident(DELETE)operator(() key(REQUESTID)operator(:)ident(newReqID)operator(()operator(\))operator(,) key(EASYDOCREF)operator(:)ident(easyref) operator(\))
      operator(})
@@ -257,7 +257,7 @@ directive(public) type(class) class(RequestBuilder) operator({)
    * gibt den letzen Request zurück. Nützlich für die Fehler analyse.
    * Da so der Fehlerhafte Request genauer betrachtet werden kann.
    */)
-  directive(public) pre_type(String) ident(getLastRequest)operator(()operator(\))operator({)
+  directive(public) predefined_type(String) ident(getLastRequest)operator(()operator(\))operator({)
     keyword(return) ident(lastRequest)operator(;)
   operator(})
 
@@ -271,13 +271,13 @@ directive(public) type(class) class(RequestBuilder) operator({)
    * getQueryArchives("arch1", "00001083", "SYSTEM", 20, 0\)
    *
    */)
-  directive(public) pre_type(String) ident(getQuery)operator(()ident(archives)operator(,) ident(queries)operator(,) ident(hitlist)operator(=)string<delimiter(")content(SYSTEM)delimiter(")>operator(,) ident(maxcount)operator(=)string<delimiter(")content(20)delimiter(")>operator(,) ident(hitpos)operator(=)string<delimiter(")content(0)delimiter(")>operator(\))operator({)
+  directive(public) predefined_type(String) ident(getQuery)operator(()ident(archives)operator(,) ident(queries)operator(,) ident(hitlist)operator(=)string<delimiter(")content(SYSTEM)delimiter(")>operator(,) ident(maxcount)operator(=)string<delimiter(")content(20)delimiter(")>operator(,) ident(hitpos)operator(=)string<delimiter(")content(0)delimiter(")>operator(\))operator({)
     keyword(def) ident(querystring)
-    keyword(if)operator(() ident(archives)operator(.)ident(getClass)operator(()operator(\)) operator(==) pre_type(String) operator(\))operator({)
+    keyword(if)operator(() ident(archives)operator(.)ident(getClass)operator(()operator(\)) operator(==) predefined_type(String) operator(\))operator({)
       ident(archives) operator(=) operator([) ident(archives) operator(])operator(;)
     operator(})
     keyword(switch)operator(() ident(queries)operator(.)ident(getClass)operator(()operator(\)) operator(\))operator({)
-      keyword(case) pre_type(LinkedHashMap)operator(:)
+      keyword(case) predefined_type(LinkedHashMap)operator(:)
         ident(querystring) operator(=) ident(queries)operator(.)ident(collect)operator(()operator(\))operator({) string<delimiter(")content((.)inline<inline_delimiter(${)local_variable(it)operator(.)ident(key)inline_delimiter(})>content(=)inline<inline_delimiter(${)local_variable(it)operator(.)ident(value)inline_delimiter(})>content(\))delimiter(")> operator(})operator(.)ident(join)operator(()string<delimiter(')content(&)delimiter(')>operator(\))
       keyword(break)
       keyword(default)operator(:)
@@ -302,8 +302,8 @@ keyword(import) include(it.sauronsoftware.base64.Base64)
 
 directive(public) type(class) class(ResponseParser) operator({)
 
-  directive(private) pre_type(String) ident(lastResponse) operator(=) string<delimiter(")delimiter(")>operator(;)
-  directive(private) pre_type(String) ident(lastError) operator(=) pre_constant(null)operator(;)
+  directive(private) predefined_type(String) ident(lastResponse) operator(=) string<delimiter(")delimiter(")>operator(;)
+  directive(private) predefined_type(String) ident(lastError) operator(=) predefined_constant(null)operator(;)
   directive(static) directive(private) ident(PROPERTIES) operator(=) operator([)operator(:)operator(])
 
   directive(static) operator({)
@@ -333,7 +333,7 @@ directive(public) type(class) class(ResponseParser) operator({)
    * gibt den letzen Request zurück. Nützlich für die Fehler analyse.
    * Da so der Fehlerhafte Request genauer betrachtet werden kann.
    */)
-  directive(public) pre_type(String) ident(getLastResponse)operator(()operator(\))operator({)
+  directive(public) predefined_type(String) ident(getLastResponse)operator(()operator(\))operator({)
     keyword(return) ident(lastResponse)operator(;)
   operator(})
 
@@ -341,7 +341,7 @@ directive(public) type(class) class(ResponseParser) operator({)
    *
    *
    */)
-  directive(private) ident(getProperties)operator(()ident(ln)operator(,) ident(prop)operator(,) ident(desc)operator(=)pre_constant(false)operator(\))operator({)
+  directive(private) ident(getProperties)operator(()ident(ln)operator(,) ident(prop)operator(,) ident(desc)operator(=)predefined_constant(false)operator(\))operator({)
     keyword(def) ident(ret) operator(=) operator([)operator(:)operator(])
     keyword(if)operator(()ident(desc)operator(\)) ident(ret)operator([)string<delimiter(')content(TEXT)delimiter(')>operator(]) operator(=) ident(ln)operator(.)ident(text)operator(()operator(\))
     ident(prop)operator(.)ident(each)operator(()operator(\))operator({) local_variable(it) operator(->)
@@ -355,9 +355,9 @@ directive(public) type(class) class(ResponseParser) operator({)
    * Ist einer oder mehrere Fehler/Error vorhanden
    * wird lastError mit einer Fehlermeldung gesetzt.
    */)
-  keyword(def) method(parse)operator(()pre_type(String) ident(response)operator(\)) directive(throws) ident(ParserException) operator({)
+  keyword(def) method(parse)operator(()predefined_type(String) ident(response)operator(\)) directive(throws) ident(ParserException) operator({)
     ident(lastResponse) operator(=) ident(response)operator(;)
-    ident(lastError) operator(=) pre_constant(null)operator(;)
+    ident(lastError) operator(=) predefined_constant(null)operator(;)
     keyword(def) ident(tmpError) operator(=) type([])operator(;)
 
     keyword(def) ident(xml) operator(=) keyword(new) ident(XmlParser)operator(()operator(\))operator(.)ident(parseText)operator(() ident(response) operator(\))
@@ -368,7 +368,7 @@ directive(public) type(class) class(ResponseParser) operator({)
       operator(})
       ident(lastError) operator(=) ident(tmpError)operator(.)ident(join)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))operator(;)
       keyword(throw)operator(() keyword(new) ident(ParserException)operator(() ident(lastError) operator(\)) operator(\))
-      keyword(return) pre_constant(null)operator(;)
+      keyword(return) predefined_constant(null)operator(;)
     operator(})
 
     keyword(def) ident(suc) operator(=) ident(xml)operator(.)ident(SUCCESS)
@@ -376,7 +376,7 @@ directive(public) type(class) class(ResponseParser) operator({)
     keyword(if)operator(() ident(suc)operator(.)ident(size)operator(()operator(\)) operator(<=) integer(0)  operator(\))operator({)
       ident(lastError) operator(=) string<delimiter(")content(Keine Request Informationen zur Verabeitung vorhanden)delimiter(")>
       keyword(throw)operator(() keyword(new) ident(ParserException)operator(() ident(lastError) operator(\)) operator(\))
-      keyword(return) pre_constant(null)operator(;)
+      keyword(return) predefined_constant(null)operator(;)
     operator(})
 
     keyword(def) ident(ret) operator(=) operator([)operator(:)operator(])
@@ -394,7 +394,7 @@ directive(public) type(class) class(ResponseParser) operator({)
         keyword(case) string<delimiter(')content(ARCHIVES)delimiter(')>operator(:)
         keyword(case) string<delimiter(')content(LOCATIONS)delimiter(')>operator(:)
           ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(]) operator(=) type([])
-          ident(sucNode)operator(.)ident(each)operator(()operator(\))operator({) ident(ln) operator(->) ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(]) operator(<)operator(<) ident(getProperties)operator(() ident(ln)operator(,) ident(PROPERTIES)operator([) ident(ln)operator(.)ident(name)operator(()operator(\)) operator(])operator(,) pre_constant(true) operator(\)) operator(})
+          ident(sucNode)operator(.)ident(each)operator(()operator(\))operator({) ident(ln) operator(->) ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(]) operator(<)operator(<) ident(getProperties)operator(() ident(ln)operator(,) ident(PROPERTIES)operator([) ident(ln)operator(.)ident(name)operator(()operator(\)) operator(])operator(,) predefined_constant(true) operator(\)) operator(})
         keyword(break)operator(;)
         keyword(case) string<delimiter(')content(ARCDESCRIPTION)delimiter(')>operator(:)
           ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(]) operator(=) operator([)operator(:)operator(])
@@ -437,7 +437,7 @@ directive(public) type(class) class(ResponseParser) operator({)
             keyword(def) ident(tmp) operator(=) ident(getProperties)operator(()ident(ln)operator(,) ident(PROPERTIES)operator([)  ident(ln)operator(.)ident(name)operator(()operator(\)) operator(])operator(\))
             ident(tmp)operator([)string<delimiter(')content(TABFIELD)delimiter(')>operator(]) operator(=) type([])
             ident(ln)operator(.)ident(each)operator(()operator(\))operator({) ident(tab) operator(->)
-              ident(tmp)operator([)string<delimiter(')content(TABFIELD)delimiter(')>operator(]) operator(<)operator(<) ident(getProperties)operator(()ident(tab)operator(,) ident(PROPERTIES)operator([)  ident(ln)operator(.)ident(name)operator(()operator(\))operator(+)ident(tab)operator(.)ident(name)operator(()operator(\)) operator(])operator(,) pre_constant(true)operator(\))
+              ident(tmp)operator([)string<delimiter(')content(TABFIELD)delimiter(')>operator(]) operator(<)operator(<) ident(getProperties)operator(()ident(tab)operator(,) ident(PROPERTIES)operator([)  ident(ln)operator(.)ident(name)operator(()operator(\))operator(+)ident(tab)operator(.)ident(name)operator(()operator(\)) operator(])operator(,) predefined_constant(true)operator(\))
             operator(})
             ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(])operator([)string<delimiter(')content(HITLINE)delimiter(')>operator(]) operator(<)operator(<) ident(tmp)
           operator(})
@@ -454,7 +454,7 @@ directive(public) type(class) class(ResponseParser) operator({)
           ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(]) operator(=) ident(getProperties)operator(() ident(sucNode)operator(.)ident(DOCUMENT)operator([)integer(0)operator(])operator(,) ident(PROPERTIES)operator([)string<delimiter(')content(DOCUMENT)delimiter(')>operator(]) operator(\))
           ident(ret)operator([) ident(sucNode)operator(.@)ident(COMMAND) operator(])operator([)string<delimiter(')content(FIELD)delimiter(')>operator(]) operator(=) type([])
           ident(sucNode)operator(.)ident(DOCUMENT)operator([)integer(0)operator(])operator(.)ident(each)operator(()operator(\))operator({) ident(ln) operator(->)
-            keyword(def) ident(tmp) operator(=) ident(getProperties)operator(() ident(ln)operator(,) ident(PROPERTIES)operator([)string<delimiter(')content(DOCUMENTFIELD)delimiter(')>operator(])operator(,) pre_constant(true) operator(\))
+            keyword(def) ident(tmp) operator(=) ident(getProperties)operator(() ident(ln)operator(,) ident(PROPERTIES)operator([)string<delimiter(')content(DOCUMENTFIELD)delimiter(')>operator(])operator(,) predefined_constant(true) operator(\))
             ident(tmp)operator([)string<delimiter(')content(DATA)delimiter(')>operator(]) operator(=) operator([)operator(:)operator(])
             ident(ln)operator(.)ident(each)operator(()operator(\))operator({) ident(dta) operator(->)
               comment(//println tmp['TYPE'])

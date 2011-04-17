@@ -120,7 +120,7 @@ operator(()reserved(defn) ident(span) operator([)ident(c) ident(content)operator
   operator(()reserved(str) string<delimiter(")content(<span class=')delimiter(")> ident(c) string<delimiter(")content('>)delimiter(")> operator(()ident(escape-html) ident(content)operator(\)) string<delimiter(")content(</span>)delimiter(")>operator(\))operator(\))
 
 operator(()reserved(defn) ident(html-to-stream) operator([)ident(stream) ident(root-class) ident(style-map) ident(tokenstream)operator(])
-  operator(()reserved(binding) operator([)pre_constant(*out*) ident(stream)operator(])
+  operator(()reserved(binding) operator([)predefined_constant(*out*) ident(stream)operator(])
     operator(()reserved(print) operator(()reserved(str) string<delimiter(")content(<span class=')delimiter(")> ident(root-class) string<delimiter(")content('>)delimiter(")>operator(\))operator(\))
     operator(()reserved(loop) operator([)operator([)ident(kind) ident(token) ident(&) ident(_)operator(]) operator(()reserved(first) ident(tokenstream)operator(\)) ident(tkns) operator(()reserved(next) ident(tokenstream)operator(\))operator(])
       operator(()reserved(let) operator([)ident(style) operator(()reserved(get) ident(style-map) ident(kind) operator(()reserved(name) ident(kind)operator(\))operator(\))operator(])
@@ -195,7 +195,7 @@ operator(()reserved(ns) ident(clj-highlight.syntax.general)operator(\))
 
 operator(()reserved(def) ident(didgets) string<delimiter(")content(0123456789abcdefghijklmnopqrstuvwxyz)delimiter(")>operator(\))
 
-operator(()reserved(def) ident(*do-profile*) pre_constant(false)operator(\))
+operator(()reserved(def) ident(*do-profile*) predefined_constant(false)operator(\))
 
 operator(()reserved(def) ident(*profile*) operator(()reserved(agent) operator({)operator(})operator(\))operator(\))
 
@@ -224,7 +224,7 @@ operator(()reserved(defmacro) ident(benchmark)
 	  ident(r#)operator(\))operator(\))operator(\))operator(\))
 
 operator(()reserved(defmacro) ident(profiled) operator([)ident(form)operator(])
-  operator(`)operator(()reserved(binding) operator([)ident(*do-profile*) pre_constant(true)operator(])
+  operator(`)operator(()reserved(binding) operator([)ident(*do-profile*) predefined_constant(true)operator(])
      operator(~)ident(form)operator(\))operator(\))
 	   
 

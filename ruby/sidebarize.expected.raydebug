@@ -142,4 +142,4 @@ reserved(def) method(main)
     reserved(end)
 reserved(end)
 
-ident(main) reserved(if) pre_constant(__FILE__) operator(==) global_variable($0)
+ident(main) reserved(if) predefined_constant(__FILE__) operator(==) global_variable($0)

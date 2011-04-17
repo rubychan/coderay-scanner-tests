@@ -129,7 +129,7 @@ reserved(def)  method(initialize) ident(a)operator(=)instance_variable(@p)operat
 reserved(def) method(+@)operator(;)instance_variable(@b)operator(<<)integer(1)operator(;)ident(b2c) reserved(end)operator(;)reserved(def)method(-@)operator(;)instance_variable(@b)operator(<<)integer(0)operator(;)ident(b2c)                   reserved(end)
 reserved(def)  method(b2c)operator(;)reserved(if) instance_variable(@b)operator(.)ident(size)operator(==)integer(8)operator(;)ident(c)operator(=)integer(0)operator(;)instance_variable(@b)operator(.)ident(each)operator({)operator(|)ident(b)operator(|)ident(c)operator(<<)operator(=)integer(1)operator(;)ident(c)operator(|=)ident(b)operator(})operator(;)ident(send)operator(()
      string<delimiter(')content(lave)delimiter(')>operator(.)ident(reverse)operator(,)operator(()instance_variable(@p)operator(.)ident(join)operator(\))operator(\))reserved(if) ident(c)operator(==)integer(0)operator(;)instance_variable(@p)operator(<<)ident(c)operator(.)ident(chr)operator(;)instance_variable(@b)operator(=)operator([)operator(]) reserved(end)
-     pre_constant(self) reserved(end) reserved(end) operator(;) reserved(begin) ident(_) operator(=) constant(NP)operator(.)ident(new)                   reserved(end)
+     predefined_constant(self) reserved(end) reserved(end) operator(;) reserved(begin) ident(_) operator(=) constant(NP)operator(.)ident(new)                   reserved(end)
 ident(c)
 comment(# ^ This is a bug :()
 
@@ -276,7 +276,7 @@ comment(#define when(gun\) /**/)
 comment(#define DATA "p 'Hello embedded world'")
 comment(#define DIRTY(argc,argv\)\\)
 ident(argc)operator(,)ident(argv)operator(,)ident(char)operator(=)ident(eval)operator(()\
-string<delimiter(")inline<inline_delimiter(#{)pre_constant(DATA)operator(.)ident(read)inline_delimiter(})>char(\\n)content([3,2,1])delimiter(")>\
+string<delimiter(")inline<inline_delimiter(#{)predefined_constant(DATA)operator(.)ident(read)inline_delimiter(})>char(\\n)content([3,2,1])delimiter(")>\
 operator(\))operator(;)ident(sun)operator(=)constant(O)operator(.)ident(new)\
 reserved(if)operator(()integer(0)operator(\))
 
@@ -313,7 +313,7 @@ ident(int) ident(main)operator(()ident(int) ident(argc)operator(,) ident(char)op
                 ident(run)operator(()ident(fun)operator(\))operator(;)
         operator(}) reserved(while)operator(()ident(fun)operator(>)integer(0)operator(\))operator(;)
         ident(ruby_init)operator(()operator(\))operator(;)
-        ident(rb_eval_string)operator(()pre_constant(DATA)operator(\))operator(;)
+        ident(rb_eval_string)operator(()predefined_constant(DATA)operator(\))operator(;)
         reserved(return) integer(0)operator(;)
 operator(})
 
@@ -350,7 +350,7 @@ ident(a)operator(.)ident(each)operator({)operator(|)operator(()ident(o)operator(
 constant(Z)operator(\))operator(\))operator(.)ident(to_i)operator(+)ident(i)operator(,)operator(()ident(s)operator(*)operator(()constant(Y)operator(-)constant(Z)operator(\))operator(\))operator(.)ident(to_i)operator(+)ident(i)operator(,)operator([)operator(()integer(1)operator(<<)integer(8)operator(\))operator(-)integer(1)operator(])operator(*)integer(3)operator(\))operator(})operator(;)reserved(end)operator(;)constant(Q)operator(=)constant(Object)operator(;)reserved(class)
 class(Regexp)operator(;)reserved(def) method([]=)operator(()ident(v)operator(,)ident(is)operator(\))operator(;)ident(is)operator(.)ident(each)operator({)operator(|)ident(s)operator(|)constant(Q)operator(.)ident(send)operator(()symbol(:remove_const)operator(,)ident(s)operator(\))reserved(if) constant(Q)operator(.)
 ident(const_defined?) ident(s)operator(;)constant(Q)operator(.)ident(const_set)operator(()ident(s)operator(,)ident(v)operator(\))operator(})operator(;)reserved(end)operator(;)reserved(end)operator(;)reserved(def) method(int)operator(*)ident(ptr)operator(;)integer(666)
-reserved(end)operator(;)reserved(class) class(O)operator(;)reserved(def) method([]=)operator(()ident(a)operator(,)ident(b)operator(=)pre_constant(nil)operator(\))operator(;)global_variable($c)operator(=)ident(a)operator(;)reserved(end)operator(;)reserved(end)operator(;)reserved(alias)symbol(:void)symbol(:goto)
+reserved(end)operator(;)reserved(class) class(O)operator(;)reserved(def) method([]=)operator(()ident(a)operator(,)ident(b)operator(=)predefined_constant(nil)operator(\))operator(;)global_variable($c)operator(=)ident(a)operator(;)reserved(end)operator(;)reserved(end)operator(;)reserved(alias)symbol(:void)symbol(:goto)
 comment(#endif // pretend as if you havn't seen anything)
 operator(=)reserved(end)
 

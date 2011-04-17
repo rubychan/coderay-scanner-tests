@@ -27,12 +27,12 @@ reserved(end)
 
 reserved(class) class(String)
     reserved(def) method(to_bytes)
-        constant(Bytes)operator([)pre_constant(self)operator(])
+        constant(Bytes)operator([)predefined_constant(self)operator(])
     reserved(end)
 reserved(end)
 
 ident(p) string<delimiter(')content(01K)delimiter(')>operator(.)ident(to_bytes)
-ident(p) string<delimiter(')content(%d - %p)delimiter(')> operator(%) operator([)constant(Bytes)operator(.)ident(constants)operator(.)ident(size)operator(,) pre_constant(self)operator(])
+ident(p) string<delimiter(')content(%d - %p)delimiter(')> operator(%) operator([)constant(Bytes)operator(.)ident(constants)operator(.)ident(size)operator(,) predefined_constant(self)operator(])
 
 ident(p) string<delimiter(')content(abc)delimiter(')> operator(/) regexp<delimiter(/)content(([ac]\))delimiter(/)>
 
@@ -62,9 +62,9 @@ reserved(end)
   reserved(end)
   comment(# Rewinds the generator.)
   reserved(def) method(rewind)operator(()operator(\))
-    ident(initialize)operator(()pre_constant(nil)operator(,) operator(&)instance_variable(@block)operator(\)) reserved(if) instance_variable(@index)operator(.)ident(nonzero?)
+    ident(initialize)operator(()predefined_constant(nil)operator(,) operator(&)instance_variable(@block)operator(\)) reserved(if) instance_variable(@index)operator(.)ident(nonzero?)
 
-    pre_constant(self)
+    predefined_constant(self)
   reserved(end)
 
 ident(a) operator(=) operator([)operator(])
@@ -123,7 +123,7 @@ reserved(class) class(Date)
     string<delimiter(')content(nzt)delimiter(')> operator(=)operator(>) integer(12)operator(*)integer(3600)operator(,) string<delimiter(')content(nzst)delimiter(')>operator(=)operator(>) integer(12)operator(*)integer(3600)operator(,) string<delimiter(')content(nzdt)delimiter(')>operator(=)operator(>) integer(13)operator(*)integer(3600)operator(,) string<delimiter(')content(idle)delimiter(')>operator(=)operator(>) integer(12)operator(*)integer(3600)
   operator(})
 
-  reserved(def) pre_constant(self)operator(.)method(__strptime)operator(()ident(str)operator(,) ident(fmt)operator(,) ident(elem)operator(\))
+  reserved(def) predefined_constant(self)operator(.)method(__strptime)operator(()ident(str)operator(,) ident(fmt)operator(,) ident(elem)operator(\))
     ident(fmt)operator(.)ident(scan)operator(()regexp<delimiter(/)content(%[EO]?.|.)delimiter(/)modifier(o)>operator(\)) reserved(do) operator(|)ident(c)operator(|)
       ident(cc) operator(=) ident(c)operator(.)ident(sub)operator(()regexp<delimiter(/)char(\\A)content(%[EO]?(.\))char(\\Z)delimiter(/)modifier(o)>operator(,) string<delimiter(')content(%)char(\\\\)content(1)delimiter(')>operator(\))
       reserved(case) ident(cc)
@@ -297,7 +297,7 @@ comment(=begin
 
   ident(private_class_method) symbol(:__strptime)
 
-  reserved(def) pre_constant(self)operator(.)method(_strptime)operator(()ident(str)operator(,) ident(fmt)operator(=)string<delimiter(')content(%F)delimiter(')>operator(\))
+  reserved(def) predefined_constant(self)operator(.)method(_strptime)operator(()ident(str)operator(,) ident(fmt)operator(=)string<delimiter(')content(%F)delimiter(')>operator(\))
     ident(elem) operator(=) operator({)operator(})
     ident(elem) reserved(if) ident(__strptime)operator(()ident(str)operator(.)ident(dup)operator(,) ident(fmt)operator(,) ident(elem)operator(\))
   reserved(end)
@@ -305,7 +305,7 @@ comment(=begin
   constant(PARSE_MONTHPAT) operator(=) constant(ABBR_MONTHS)operator(.)ident(keys)operator(.)ident(join)operator(()string<delimiter(')content(|)delimiter(')>operator(\))
   constant(PARSE_DAYPAT)   operator(=) constant(ABBR_DAYS)operator(.)  ident(keys)operator(.)ident(join)operator(()string<delimiter(')content(|)delimiter(')>operator(\))
 
-  reserved(def) pre_constant(self)operator(.)method(_parse)operator(()ident(str)operator(,) ident(comp)operator(=)pre_constant(false)operator(\))
+  reserved(def) predefined_constant(self)operator(.)method(_parse)operator(()ident(str)operator(,) ident(comp)operator(=)predefined_constant(false)operator(\))
     ident(str) operator(=) ident(str)operator(.)ident(dup)
 
     ident(str)operator(.)ident(gsub!)operator(()regexp<delimiter(/)content([^-+,.)char(\\/)content(:0-9a-z]+)delimiter(/)modifier(ino)>operator(,) string<delimiter(')content( )delimiter(')>operator(\))
@@ -371,7 +371,7 @@ comment(=begin
       reserved(if) global_variable($3)
     ident(year) operator(=) global_variable($3)operator(.)ident(to_i)
     reserved(if) global_variable($3)operator(.)ident(size) operator(>) integer(2)
-      ident(comp) operator(=) pre_constant(false)
+      ident(comp) operator(=) predefined_constant(false)
     reserved(end)
       reserved(end)
 
@@ -392,7 +392,7 @@ comment(=begin
       reserved(if) global_variable($3)
     ident(year) operator(=) global_variable($3)operator(.)ident(to_i)
     reserved(if) global_variable($3)operator(.)ident(size) operator(>) integer(2)
-      ident(comp) operator(=) pre_constant(false)
+      ident(comp) operator(=) predefined_constant(false)
     reserved(end)
       reserved(end)
 
@@ -403,9 +403,9 @@ comment(=begin
       ident(mday) operator(=) global_variable($3)operator(.)ident(to_i)
 
       reserved(if) global_variable($1)operator(.)ident(size) operator(>) integer(2)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
       reserved(elsif) global_variable($3)operator(.)ident(size) operator(>) integer(2)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
     ident(mday)operator(,) ident(mon)operator(,) ident(year) operator(=) ident(year)operator(,) ident(mon)operator(,) ident(mday)
       reserved(end)
 
@@ -427,10 +427,10 @@ comment(=begin
       ident(year) operator(=) global_variable($3)operator(.)ident(to_i)
 
       reserved(if) global_variable($1)operator(.)ident(size) operator(>) integer(2)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
     ident(year)operator(,) ident(mon)operator(,) ident(mday) operator(=) ident(mday)operator(,) ident(mon)operator(,) ident(year)
       reserved(elsif) global_variable($3)operator(.)ident(size) operator(>) integer(2)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
       reserved(end)
 
     comment(# sla)
@@ -441,12 +441,12 @@ comment(=begin
       reserved(if) global_variable($3)
     ident(year) operator(=) global_variable($3)operator(.)ident(to_i)
     reserved(if) global_variable($3)operator(.)ident(size) operator(>) integer(2)
-      ident(comp) operator(=) pre_constant(false)
+      ident(comp) operator(=) predefined_constant(false)
     reserved(end)
       reserved(end)
 
       reserved(if) global_variable($3) operator(&&) global_variable($1)operator(.)ident(size) operator(>) integer(2)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
     ident(year)operator(,) ident(mon)operator(,) ident(mday) operator(=) ident(mon)operator(,) ident(mday)operator(,) ident(year)
       reserved(end)
 
@@ -485,7 +485,7 @@ comment(=begin
     ident(hour) operator(=) global_variable($2)operator([) integer(8)operator(,) integer(2)operator(])operator(.)ident(to_i) reserved(if) global_variable($2)operator(.)ident(size) operator(>)operator(=) integer(10)
     ident(min)  operator(=) global_variable($2)operator([)integer(10)operator(,) integer(2)operator(])operator(.)ident(to_i) reserved(if) global_variable($2)operator(.)ident(size) operator(>)operator(=) integer(12)
     ident(sec)  operator(=) global_variable($2)operator([)integer(12)operator(,) integer(2)operator(])operator(.)ident(to_i) reserved(if) global_variable($2)operator(.)ident(size) operator(>)operator(=) integer(14)
-    ident(comp) operator(=) pre_constant(false)
+    ident(comp) operator(=) predefined_constant(false)
       reserved(end)
       reserved(if) global_variable($3)
     reserved(case) global_variable($3)operator(.)ident(size)
@@ -534,7 +534,7 @@ comment(=begin
     ident(elem)
   reserved(end)
 
-  reserved(def) pre_constant(self)operator(.)method(zone_to_diff)operator(()ident(str)operator(\))
+  reserved(def) predefined_constant(self)operator(.)method(zone_to_diff)operator(()ident(str)operator(\))
     ident(abb)operator(,) ident(dst) operator(=) ident(str)operator(.)ident(downcase)operator(.)ident(split)operator(()regexp<delimiter(/)char(\\s)content(+)delimiter(/)modifier(o)>operator(,) integer(2)operator(\))
     reserved(if) constant(ZONES)operator(.)ident(include?)operator(()ident(abb)operator(\))
       ident(offset)  operator(=) constant(ZONES)operator([)ident(abb)operator(])
@@ -578,13 +578,13 @@ comment(=begin
       reserved(when) string<delimiter(')content(%r)delimiter(')>operator(;) ident(o) operator(<<) ident(strftime)operator(()string<delimiter(')content(%I:%M:%S %p)delimiter(')>operator(\))            comment(# P2,ID)
       reserved(when) string<delimiter(')content(%S)delimiter(')>operator(;) ident(o) operator(<<) string<delimiter(')content(%02d)delimiter(')> operator(%) ident(sec)
       reserved(when) string<delimiter(')content(%s)delimiter(')>                            comment(# TZ,GL)
-    ident(d) operator(=) ident(ajd) operator(-) pre_constant(self)operator(.)ident(class)operator(.)ident(jd_to_ajd)operator(()pre_constant(self)operator(.)ident(class)operator(.)ident(civil_to_jd)operator(()integer(1970)operator(,)integer(1)operator(,)integer(1)operator(\))operator(,) integer(0)operator(\))
+    ident(d) operator(=) ident(ajd) operator(-) predefined_constant(self)operator(.)ident(class)operator(.)ident(jd_to_ajd)operator(()predefined_constant(self)operator(.)ident(class)operator(.)ident(civil_to_jd)operator(()integer(1970)operator(,)integer(1)operator(,)integer(1)operator(\))operator(,) integer(0)operator(\))
     ident(s) operator(=) operator(()ident(d) operator(*) integer(86400)operator(\))operator(.)ident(to_i)
     ident(o) operator(<<) string<delimiter(')content(%d)delimiter(')> operator(%) ident(s)
       reserved(when) string<delimiter(')content(%T)delimiter(')>operator(;) ident(o) operator(<<) ident(strftime)operator(()string<delimiter(')content(%H:%M:%S)delimiter(')>operator(\))            comment(# P2,ID)
       reserved(when) string<delimiter(')content(%t)delimiter(')>operator(;) ident(o) operator(<<) string<delimiter(")char(\\t)delimiter(")>                    comment(# P2,ID)
       reserved(when) string<delimiter(')content(%U)delimiter(')>operator(,) string<delimiter(')content(%W)delimiter(')>
-    ident(a) operator(=) pre_constant(self)operator(.)ident(class)operator(.)ident(civil_to_jd)operator(()ident(year)operator(,) integer(1)operator(,) integer(1)operator(,) ident(ns?)operator(\)) operator(+) integer(6)
+    ident(a) operator(=) predefined_constant(self)operator(.)ident(class)operator(.)ident(civil_to_jd)operator(()ident(year)operator(,) integer(1)operator(,) integer(1)operator(,) ident(ns?)operator(\)) operator(+) integer(6)
     ident(k) operator(=) reserved(if) ident(c) operator(==) string<delimiter(')content(%U)delimiter(')> reserved(then) integer(0) reserved(else) integer(1) reserved(end)
     ident(w) operator(=) operator(()ident(jd) operator(-) operator(()ident(a) operator(-) operator(()operator(()ident(a) operator(-) ident(k)operator(\)) operator(+) integer(1)operator(\)) operator(%) integer(7)operator(\)) operator(+) integer(7)operator(\)) operator(/) integer(7)
     ident(o) operator(<<) string<delimiter(')content(%02d)delimiter(')> operator(%) ident(w)
@@ -629,7 +629,7 @@ reserved(end)
 
 reserved(class) class(DateTime) operator(<) constant(Date)
 
-  reserved(def) pre_constant(self)operator(.)method(_strptime)operator(()ident(str)operator(,) ident(fmt)operator(=)string<delimiter(')content(%FT%T%Z)delimiter(')>operator(\))
+  reserved(def) predefined_constant(self)operator(.)method(_strptime)operator(()ident(str)operator(,) ident(fmt)operator(=)string<delimiter(')content(%FT%T%Z)delimiter(')>operator(\))
     reserved(super)operator(()ident(str)operator(,) ident(fmt)operator(\))
   reserved(end)
 
@@ -669,7 +669,7 @@ reserved(module) class(Chess)
             reserved(else)
                 ident(raise) constant(ArgumentError)operator(,) string<delimiter(')content(wrong number of arguments(one String or two fixnums\))delimiter(')>
             reserved(end)
-            ident(raise) constant(RuntimeError)operator(,) string<delimiter(')content(%p is out of the chess board)delimiter(')> operator(%) pre_constant(self) reserved(unless) constant(Position)operator(.)ident(valid?) instance_variable(@x)operator(,) instance_variable(@y)
+            ident(raise) constant(RuntimeError)operator(,) string<delimiter(')content(%p is out of the chess board)delimiter(')> operator(%) predefined_constant(self) reserved(unless) constant(Position)operator(.)ident(valid?) instance_variable(@x)operator(,) instance_variable(@y)
         reserved(end)
    
         reserved(def) method(inspect)
@@ -725,7 +725,7 @@ F - i)delimiter(
 EOG3)>
 reserved(end)
 
-global_variable($trace) operator(=) pre_constant(false)
+global_variable($trace) operator(=) predefined_constant(false)
 ident(test_grammars)operator(.)ident(each_with_index) reserved(do) operator(|)ident(g)operator(,) ident(i)operator(|)
     ident(puts) string<delimiter(")content(Grammar )inline<inline_delimiter(#{)ident(i)inline_delimiter(})>content( is )inline<inline_delimiter(#{)string<delimiter(')content(not )delimiter(')> reserved(if) ident(g)operator(.)ident(ll1?)inline_delimiter(})>content(LL(1\).)delimiter(")>
 reserved(end)

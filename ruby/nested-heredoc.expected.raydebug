@@ -13,9 +13,9 @@ ident(this)operator(.)ident(should)operator(.)ident(be)operator(.)ident(plain)
 
 comment(# from Rails)
 reserved(unless) ident(new_record?)
-  ident(connection)operator(.)ident(delete) string<delimiter(<<-end_sql)>operator(,) string<delimiter(")inline<inline_delimiter(#{)pre_constant(self)operator(.)ident(class)operator(.)ident(name)inline_delimiter(})>content( Destroy)delimiter(")>string<content(
-    DELETE FROM )inline<inline_delimiter(#{)pre_constant(self)operator(.)ident(class)operator(.)ident(table_name)inline_delimiter(})>content(
-    WHERE )inline<inline_delimiter(#{)pre_constant(self)operator(.)ident(class)operator(.)ident(primary_key)inline_delimiter(})>content( = )inline<inline_delimiter(#{)ident(quoted_id)inline_delimiter(})>delimiter(
+  ident(connection)operator(.)ident(delete) string<delimiter(<<-end_sql)>operator(,) string<delimiter(")inline<inline_delimiter(#{)predefined_constant(self)operator(.)ident(class)operator(.)ident(name)inline_delimiter(})>content( Destroy)delimiter(")>string<content(
+    DELETE FROM )inline<inline_delimiter(#{)predefined_constant(self)operator(.)ident(class)operator(.)ident(table_name)inline_delimiter(})>content(
+    WHERE )inline<inline_delimiter(#{)predefined_constant(self)operator(.)ident(class)operator(.)ident(primary_key)inline_delimiter(})>content( = )inline<inline_delimiter(#{)ident(quoted_id)inline_delimiter(})>delimiter(
   end_sql)>
 reserved(end)
 

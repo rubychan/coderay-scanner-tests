@@ -127,7 +127,7 @@ change[change(@@)plain( -164,7 +168,8 )change(@@)]
        comment(# The already created +tokens+ object must be used; it can be a)
        comment(# TokenStream or a Tokens object.)
        reserved(def) method(compile) ident(tokens)operator(,) ident(options)
-delete[delete(-)        ident(tokens)operator(.)ident(each)operator(()operator(&)pre_constant(self)operator(\))]
+delete[delete(-)        ident(tokens)operator(.)ident(each)operator(()operator(&)predefined_constant(self)operator(\))]
 insert[insert(+)        ident(tokens)operator(.)ident(each) operator({) operator(|)ident(text)operator(,) ident(kind)operator(|) ident(token) ident(text)operator(,) ident(kind) operator(})  comment(# FIXME for Ruby 1.9?)]
 insert[insert(+)        comment(#tokens.each(&self\))]
        reserved(end)
@@ -146,7 +146,7 @@ delete[delete(-)      instance_variable(@out) operator(=) string<delimiter(')del
        instance_variable(@doc) operator(<<) constant(REXML)operator(::)constant(XMLDecl)operator(.)ident(new)
        instance_variable(@tab_width) operator(=) ident(options)operator([)symbol(:tab_width)operator(])
 change[change(@@)plain( -33,7 +32,7 )change(@@)]
-       instance_variable(@doc)operator(.)ident(write) instance_variable(@out)operator(,) ident(options)operator([)symbol(:pretty)operator(])operator(,) ident(options)operator([)symbol(:transitive)operator(])operator(,) pre_constant(true)
+       instance_variable(@doc)operator(.)ident(write) instance_variable(@out)operator(,) ident(options)operator([)symbol(:pretty)operator(])operator(,) ident(options)operator([)symbol(:transitive)operator(])operator(,) predefined_constant(true)
        instance_variable(@out)
      reserved(end)
 delete[delete(-)eyecatcher<>]
@@ -306,7 +306,7 @@ insert[insert(+)  comment(# or :debug (via inspect\).)]
    comment(# Default: false)
    reserved(class) class(HTML) operator(<) constant(Encoder)
 change[change(@@)plain( -82,7 +86,7 )change(@@)]
-       symbol(:hint) operator(=)operator(>) pre_constant(false)operator(,)
+       symbol(:hint) operator(=)operator(>) predefined_constant(false)operator(,)
      operator(})
  
 delete[delete(-)    ident(helper) symbol(:)eyecatcher<symbol(classes)operator(,) symbol(:)>symbol(output)operator(,) symbol(:css)]
@@ -325,7 +325,7 @@ insert[insert(+)]
      comment(# Generate a hint about the given +classes+ in a +hint+ style.)
      comment(#)
      comment(# +hint+ may be :info, :info_long or :debug.)
-     reserved(def) pre_constant(self)operator(.)method(token_path_to_hint) ident(hint)operator(,) ident(classes)
+     reserved(def) predefined_constant(self)operator(.)method(token_path_to_hint) ident(hint)operator(,) ident(classes)
 delete[delete(-)      reserved(return) string<delimiter(')delimiter(')> reserved(unless) ident(hint)]
        ident(title) operator(=)
          reserved(case) ident(hint)
@@ -360,8 +360,8 @@ delete[delete(-)          reserved(end)]
 delete[delete(-)          ident(c) operator(=) constant(ClassOfKind)operator([)ident(type)operator(])]
 insert[insert(+)          ident(c) operator(=) constant(CodeRay)operator(::)constant(Tokens)operator(::)constant(ClassOfKind)operator([)ident(k)operator(.)ident(first)operator(])]
            reserved(if) ident(c) operator(==) symbol(:NO_HIGHLIGHT) reserved(and) reserved(not) ident(hint)
-delete[delete(-)            ident(h)operator([)ident(k)eyecatcher<>operator(]) operator(=) pre_constant(false)]
-insert[insert(+)            ident(h)operator([)ident(k)eyecatcher<operator(.)ident(dup)>operator(]) operator(=) pre_constant(false)]
+delete[delete(-)            ident(h)operator([)ident(k)eyecatcher<>operator(]) operator(=) predefined_constant(false)]
+insert[insert(+)            ident(h)operator([)ident(k)eyecatcher<operator(.)ident(dup)>operator(]) operator(=) predefined_constant(false)]
            reserved(else)
 delete[delete(-)            ident(title) operator(=) constant(HTML)operator(.)ident(token_path_to_hint) ident(hint)operator(,) operator(()ident(k)operator([)integer(1)operator(..)integer(-1)operator(]) operator(<<) ident(k)operator(.)ident(first)operator(\))]
 delete[delete(-)            ident(h)operator([)ident(k)operator(]) operator(=) string<delimiter(')content(<span%s class="%s">)delimiter(')> operator(%) operator([)ident(title)operator(,) ident(c)operator(])]
@@ -390,7 +390,7 @@ insert[insert(+)          reserved(if) ident(k)operator(.)ident(is_a?) eyecatche
 delete[delete(-)          ident(classes) operator(=) ident(styles)operator(.)ident(map) operator({) operator(|)ident(c)operator(|) eyecatcher<>constant(ClassOfKind)operator([)ident(c)operator(]) operator(})]
 insert[insert(+)          ident(classes) operator(=) ident(styles)operator(.)ident(map) operator({) operator(|)ident(c)operator(|) eyecatcher<constant(Tokens)operator(::)>constant(ClassOfKind)operator([)ident(c)operator(]) operator(})]
            reserved(if) ident(classes)operator(.)ident(first) operator(==) symbol(:NO_HIGHLIGHT) reserved(and) reserved(not) ident(hint)
-             ident(h)operator([)ident(k)operator(]) operator(=) pre_constant(false)
+             ident(h)operator([)ident(k)operator(]) operator(=) predefined_constant(false)
            reserved(else)
 delete[delete(-)            ident(styles)operator(.)ident(shift) reserved(if) eyecatcher<operator([)symbol(:delimiter)operator(,) symbol(:modifier)operator(,) symbol(:content)operator(,) symbol(:escape)operator(])>operator(.)ident(include?) ident(styles)operator(.)ident(first)]
 insert[insert(+)            ident(styles)operator(.)ident(shift) reserved(if) eyecatcher<constant(TRANSPARENT_TOKEN_KINDS)>operator(.)ident(include?) ident(styles)operator(.)ident(first)]
@@ -547,7 +547,7 @@ delete[delete(-)    comment(# +filename+ is a relative or absolute path to a fil
 delete[delete(-)    comment(#)]
 delete[delete(-)    comment(# The file itself is only accessed when +read_shebang+ is set to true.)]
 delete[delete(-)    comment(# That means you can get filetypes from files that don't exist.)]
-delete[delete(-)    reserved(def) method([]) ident(filename)operator(,) ident(read_shebang) operator(=) pre_constant(false)]
+delete[delete(-)    reserved(def) method([]) ident(filename)operator(,) ident(read_shebang) operator(=) predefined_constant(false)]
 delete[delete(-)      ident(name) operator(=) constant(File)operator(.)ident(basename) ident(filename)]
 delete[delete(-)      ident(ext) operator(=) constant(File)operator(.)ident(extname) ident(name)]
 delete[delete(-)      ident(ext)operator(.)ident(sub!)operator(()regexp<delimiter(/)content(^)char(\\.)delimiter(/)>operator(,) string<delimiter(')delimiter(')>operator(\))  comment(# delete the leading dot)]
@@ -569,7 +569,7 @@ delete[delete(-)          ident(first_line) operator(=) ident(f)operator(.)ident
 delete[delete(-)          ident(first_line)operator([)constant(TypeFromShebang)operator(])]
 delete[delete(-)        reserved(end)]
 delete[delete(-)      reserved(rescue) constant(IOError)]
-delete[delete(-)        pre_constant(nil)]
+delete[delete(-)        predefined_constant(nil)]
 delete[delete(-)      reserved(end)]
 delete[delete(-)    reserved(end)]
 delete[delete(-)]
@@ -577,12 +577,12 @@ delete[delete(-)    comment(# This works like Hash#fetch.)]
 delete[delete(-)    comment(#)]
 delete[delete(-)    comment(# If the filetype cannot be found, the +default+ value)]
 delete[delete(-)    comment(# is returned.)]
-delete[delete(-)    reserved(def) method(fetch) ident(filename)operator(,) ident(default) operator(=) pre_constant(nil)operator(,) ident(read_shebang) operator(=) pre_constant(false)]
+delete[delete(-)    reserved(def) method(fetch) ident(filename)operator(,) ident(default) operator(=) predefined_constant(nil)operator(,) ident(read_shebang) operator(=) predefined_constant(false)]
 delete[delete(-)      reserved(if) ident(default) reserved(and) ident(block_given?)]
 delete[delete(-)        ident(warn) string<delimiter(')content(block supersedes default value argument)delimiter(')>]
 delete[delete(-)      reserved(end)]
 delete[delete(-)]
-delete[delete(-)      reserved(unless) ident(type) operator(=) pre_constant(self)operator([)ident(filename)operator(,) ident(read_shebang)operator(])]
+delete[delete(-)      reserved(unless) ident(type) operator(=) predefined_constant(self)operator([)ident(filename)operator(,) ident(read_shebang)operator(])]
 delete[delete(-)        reserved(return) reserved(yield) reserved(if) ident(block_given?)]
 delete[delete(-)        reserved(return) ident(default) reserved(if) ident(default)]
 delete[delete(-)        ident(raise) constant(UnknownFileType)operator(,) string<delimiter(')content(Could not determine type of %p.)delimiter(')> operator(%) ident(filename)]
@@ -617,9 +617,9 @@ delete[delete(-)  operator(})]
 delete[delete(-)]
 delete[delete(-)reserved(end)]
 delete[delete(-)]
-delete[delete(-)reserved(if) global_variable($0) operator(==) pre_constant(__FILE__)]
-delete[delete(-)  global_variable($VERBOSE) operator(=) pre_constant(true)]
-delete[delete(-)  ident(eval) pre_constant(DATA)operator(.)ident(read)operator(,) pre_constant(nil)operator(,) global_variable($0)operator(,) pre_constant(__LINE__)operator(+)integer(4)]
+delete[delete(-)reserved(if) global_variable($0) operator(==) predefined_constant(__FILE__)]
+delete[delete(-)  global_variable($VERBOSE) operator(=) predefined_constant(true)]
+delete[delete(-)  ident(eval) predefined_constant(DATA)operator(.)ident(read)operator(,) predefined_constant(nil)operator(,) global_variable($0)operator(,) predefined_constant(__LINE__)operator(+)integer(4)]
 delete[delete(-)reserved(end)]
 delete[delete(-)]
 delete[delete(-)comment(__END__)]
@@ -729,7 +729,7 @@ insert[insert(+)comment(#  )eyecatcher<comment(CodeRay.)>comment(require_plugin 
  comment(#)
  comment(# Returns the loaded plugin.)
 delete[delete(-)reserved(def) eyecatcher<>method(require_plugin) ident(path)]
-insert[insert(+)reserved(def) eyecatcher<pre_constant(self)operator(.)>method(require_plugin) ident(path)]
+insert[insert(+)reserved(def) eyecatcher<predefined_constant(self)operator(.)>method(require_plugin) ident(path)]
    ident(host_id)operator(,) ident(plugin_id) operator(=) ident(path)operator(.)ident(split) string<delimiter(')content(/)delimiter(')>operator(,) integer(2)
    ident(host) operator(=) constant(PluginHost)operator(.)ident(host_by_id)operator(()ident(host_id)operator(\))
    ident(raise) constant(PluginHost)operator(::)constant(HostNotFound)operator(,)
@@ -778,7 +778,7 @@ insert[insert(+)    comment(# +filename+ is a relative or absolute path to a fil
 insert[insert(+)    comment(#)]
 insert[insert(+)    comment(# The file itself is only accessed when +read_shebang+ is set to true.)]
 insert[insert(+)    comment(# That means you can get filetypes from files that don't exist.)]
-insert[insert(+)    reserved(def) method([]) ident(filename)operator(,) ident(read_shebang) operator(=) pre_constant(false)]
+insert[insert(+)    reserved(def) method([]) ident(filename)operator(,) ident(read_shebang) operator(=) predefined_constant(false)]
 insert[insert(+)      ident(name) operator(=) constant(File)operator(.)ident(basename) ident(filename)]
 insert[insert(+)      ident(ext) operator(=) constant(File)operator(.)ident(extname)operator(()ident(name)operator(\))operator(.)ident(sub)operator(()regexp<delimiter(/)content(^)char(\\.)delimiter(/)>operator(,) string<delimiter(')delimiter(')>operator(\))  comment(# from last dot, delete the leading dot)]
 insert[insert(+)      ident(ext2) operator(=) ident(filename)operator([)regexp<delimiter(/)char(\\.)content((.*\))delimiter(/)>operator(,) integer(1)operator(])  comment(# from first dot)]
@@ -803,7 +803,7 @@ insert[insert(+)            reserved(end)]
 insert[insert(+)          reserved(end)]
 insert[insert(+)        reserved(end)]
 insert[insert(+)      reserved(rescue) constant(IOError)]
-insert[insert(+)        pre_constant(nil)]
+insert[insert(+)        predefined_constant(nil)]
 insert[insert(+)      reserved(end)]
 insert[insert(+)    reserved(end)]
 insert[insert(+)]
@@ -811,12 +811,12 @@ insert[insert(+)    comment(# This works like Hash#fetch.)]
 insert[insert(+)    comment(#)]
 insert[insert(+)    comment(# If the filetype cannot be found, the +default+ value)]
 insert[insert(+)    comment(# is returned.)]
-insert[insert(+)    reserved(def) method(fetch) ident(filename)operator(,) ident(default) operator(=) pre_constant(nil)operator(,) ident(read_shebang) operator(=) pre_constant(false)]
+insert[insert(+)    reserved(def) method(fetch) ident(filename)operator(,) ident(default) operator(=) predefined_constant(nil)operator(,) ident(read_shebang) operator(=) predefined_constant(false)]
 insert[insert(+)      reserved(if) ident(default) reserved(and) ident(block_given?)]
 insert[insert(+)        ident(warn) string<delimiter(')content(block supersedes default value argument)delimiter(')>]
 insert[insert(+)      reserved(end)]
 insert[insert(+)]
-insert[insert(+)      reserved(unless) ident(type) operator(=) pre_constant(self)operator([)ident(filename)operator(,) ident(read_shebang)operator(])]
+insert[insert(+)      reserved(unless) ident(type) operator(=) predefined_constant(self)operator([)ident(filename)operator(,) ident(read_shebang)operator(])]
 insert[insert(+)        reserved(return) reserved(yield) reserved(if) ident(block_given?)]
 insert[insert(+)        reserved(return) ident(default) reserved(if) ident(default)]
 insert[insert(+)        ident(raise) constant(UnknownFileType)operator(,) string<delimiter(')content(Could not determine type of %p.)delimiter(')> operator(%) ident(filename)]
@@ -858,9 +858,9 @@ insert[insert(+)reserved(end)]
 insert[insert(+)]
 insert[insert(+)reserved(end)]
 insert[insert(+)]
-insert[insert(+)reserved(if) global_variable($0) operator(==) pre_constant(__FILE__)]
-insert[insert(+)  global_variable($VERBOSE) operator(=) pre_constant(true)]
-insert[insert(+)  ident(eval) pre_constant(DATA)operator(.)ident(read)operator(,) pre_constant(nil)operator(,) global_variable($0)operator(,) pre_constant(__LINE__)operator(+)integer(4)]
+insert[insert(+)reserved(if) global_variable($0) operator(==) predefined_constant(__FILE__)]
+insert[insert(+)  global_variable($VERBOSE) operator(=) predefined_constant(true)]
+insert[insert(+)  ident(eval) predefined_constant(DATA)operator(.)ident(read)operator(,) predefined_constant(nil)operator(,) global_variable($0)operator(,) predefined_constant(__LINE__)operator(+)integer(4)]
 insert[insert(+)reserved(end)]
 insert[insert(+)]
 insert[insert(+)comment(__END__)]
@@ -943,14 +943,14 @@ insert[insert(+)  reserved(def) method(test_shebang_empty_file)]
 insert[insert(+)    ident(require) string<delimiter(')content(tmpdir)delimiter(')>]
 insert[insert(+)    ident(tmpfile) operator(=) constant(File)operator(.)ident(join)operator(()constant(Dir)operator(.)ident(tmpdir)operator(,) string<delimiter(')content(bla)delimiter(')>operator(\))]
 insert[insert(+)    constant(File)operator(.)ident(open)operator(()ident(tmpfile)operator(,) string<delimiter(')content(w)delimiter(')>operator(\)) operator({) operator(})  comment(# touch)]
-insert[insert(+)    ident(assert_equal) pre_constant(nil)operator(,) constant(FileType)operator([)ident(tmpfile)operator(])]
+insert[insert(+)    ident(assert_equal) predefined_constant(nil)operator(,) constant(FileType)operator([)ident(tmpfile)operator(])]
 insert[insert(+)  reserved(end)]
 insert[insert(+)  ]
 insert[insert(+)  reserved(def) method(test_shebang)]
 insert[insert(+)    ident(require) string<delimiter(')content(tmpdir)delimiter(')>]
 insert[insert(+)    ident(tmpfile) operator(=) constant(File)operator(.)ident(join)operator(()constant(Dir)operator(.)ident(tmpdir)operator(,) string<delimiter(')content(bla)delimiter(')>operator(\))]
 insert[insert(+)    constant(File)operator(.)ident(open)operator(()ident(tmpfile)operator(,) string<delimiter(')content(w)delimiter(')>operator(\)) operator({) operator(|)ident(f)operator(|) ident(f)operator(.)ident(puts) string<delimiter(')content(#!/usr/bin/env ruby)delimiter(')> operator(})]
-insert[insert(+)    ident(assert_equal) symbol(:ruby)operator(,) constant(FileType)operator([)ident(tmpfile)operator(,) pre_constant(true)operator(])]
+insert[insert(+)    ident(assert_equal) symbol(:ruby)operator(,) constant(FileType)operator([)ident(tmpfile)operator(,) predefined_constant(true)operator(])]
 insert[insert(+)  reserved(end)]
 insert[insert(+)]
 insert[insert(+)reserved(end)]
@@ -1008,19 +1008,19 @@ delete[delete(-)  comment(# Create a WordList for the given +words+.)]
 delete[delete(-)  comment(#)]
 delete[delete(-)  comment(# This WordList responds to [] with +true+, if the word is)]
 delete[delete(-)  comment(# in +words+, and with +false+ otherwise.)]
-delete[delete(-)  reserved(def) pre_constant(self)operator(.)method(for) ident(words)]
+delete[delete(-)  reserved(def) predefined_constant(self)operator(.)method(for) ident(words)]
 delete[delete(-)    ident(new)operator(.)ident(add) ident(words)]
 delete[delete(-)  reserved(end)]
 delete[delete(-)]
    comment(# Creates a new WordList with +default+ as default value.)
-delete[delete(-)  reserved(def) method(initialize) ident(default) operator(=) pre_constant(false)operator(,) operator(&)ident(block)]
+delete[delete(-)  reserved(def) method(initialize) ident(default) operator(=) predefined_constant(false)operator(,) operator(&)ident(block)]
 delete[delete(-)    reserved(super) ident(default)operator(,) operator(&)ident(block)]
 insert[insert(+)  comment(# )]
 insert[insert(+)  comment(# You can activate +caching+ to store the results for every [] request.)]
 insert[insert(+)  comment(# )]
 insert[insert(+)  comment(# With caching, methods like +include?+ or +delete+ may no longer behave)]
 insert[insert(+)  comment(# as you expect. Therefore, it is recommended to use the [] method only.)]
-insert[insert(+)  reserved(def) method(initialize) ident(default) operator(=) pre_constant(false)operator(,) ident(caching) operator(=) pre_constant(false)operator(,) operator(&)ident(block)]
+insert[insert(+)  reserved(def) method(initialize) ident(default) operator(=) predefined_constant(false)operator(,) ident(caching) operator(=) predefined_constant(false)operator(,) operator(&)ident(block)]
 insert[insert(+)    reserved(if) ident(block)]
 insert[insert(+)      ident(raise) constant(ArgumentError)operator(,) string<delimiter(')content(Can)char(\\')content(t combine block with caching.)delimiter(')> reserved(if) ident(caching)]
 insert[insert(+)      reserved(super)operator(()operator(&)ident(block)operator(\))]
@@ -1043,9 +1043,9 @@ delete[delete(-)]
    comment(# Add words to the list and associate them with +kind+.)
 insert[insert(+)  comment(# )]
 insert[insert(+)  comment(# Returns +self+, so you can concat add calls.)]
-   reserved(def) method(add) ident(words)operator(,) ident(kind) operator(=) pre_constant(true)
+   reserved(def) method(add) ident(words)operator(,) ident(kind) operator(=) predefined_constant(true)
      ident(words)operator(.)ident(each) reserved(do) operator(|)ident(word)operator(|)
-       pre_constant(self)operator([)ident(word)operator(]) operator(=) ident(kind)
+       predefined_constant(self)operator([)ident(word)operator(]) operator(=) ident(kind)
 change[change(@@)plain( -78,24 +87,30 )change(@@)]
  
  comment(# A CaseIgnoringWordList is like a WordList, only that)
@@ -1061,19 +1061,19 @@ insert[insert(+)comment(# activated explicitely.)]
 delete[delete(-)  comment(# Creates a new WordList with +default+ as default value.)]
 delete[delete(-)  comment(#)]
 delete[delete(-)  comment(# Text case is ignored.)]
-delete[delete(-)  reserved(def) method(initialize) ident(default) operator(=) pre_constant(false)operator(,) operator(&)ident(block)]
+delete[delete(-)  reserved(def) method(initialize) ident(default) operator(=) predefined_constant(false)operator(,) operator(&)ident(block)]
 delete[delete(-)    ident(block) operator(||=) ident(proc) reserved(do) operator(|)ident(h)operator(,) ident(k)operator(|)]
 delete[delete(-)      ident(h)operator([)ident(k)operator(]) operator(=) ident(h)operator(.)ident(fetch) ident(k)operator(.)ident(downcase)operator(,) ident(default)]
 insert[insert(+)  comment(# Creates a new case-insensitive WordList with +default+ as default value.)]
 insert[insert(+)  comment(# )]
 insert[insert(+)  comment(# You can activate caching to store the results for every [] request.)]
-insert[insert(+)  reserved(def) method(initialize) ident(default) operator(=) pre_constant(false)operator(,) ident(caching) operator(=) pre_constant(false)]
+insert[insert(+)  reserved(def) method(initialize) ident(default) operator(=) predefined_constant(false)operator(,) ident(caching) operator(=) predefined_constant(false)]
 insert[insert(+)    reserved(if) ident(caching)]
-insert[insert(+)      reserved(super)operator(()ident(default)operator(,) pre_constant(false)operator(\)) reserved(do) operator(|)ident(h)operator(,) ident(k)operator(|)]
+insert[insert(+)      reserved(super)operator(()ident(default)operator(,) predefined_constant(false)operator(\)) reserved(do) operator(|)ident(h)operator(,) ident(k)operator(|)]
 insert[insert(+)        ident(h)operator([)ident(k)operator(]) operator(=) ident(h)operator(.)ident(fetch) ident(k)operator(.)ident(downcase)operator(,) ident(default)]
 insert[insert(+)      reserved(end)]
 insert[insert(+)    reserved(else)]
-insert[insert(+)      reserved(def) pre_constant(self)operator(.)method([]) ident(key)  comment(# :nodoc:)]
+insert[insert(+)      reserved(def) predefined_constant(self)operator(.)method([]) ident(key)  comment(# :nodoc:)]
 insert[insert(+)        reserved(super)operator(()ident(key)operator(.)ident(downcase)operator(\))]
 insert[insert(+)      reserved(end)]
      reserved(end)
@@ -1087,9 +1087,9 @@ delete[delete(-)  reserved(end)]
 delete[delete(-)]
 delete[delete(-)  comment(# Add words to the list and associate them with +kind+.)]
 insert[insert(+)  comment(# Add +words+ to the list and associate them with +kind+.)]
-   reserved(def) method(add) ident(words)operator(,) ident(kind) operator(=) pre_constant(true)
+   reserved(def) method(add) ident(words)operator(,) ident(kind) operator(=) predefined_constant(true)
      ident(words)operator(.)ident(each) reserved(do) operator(|)ident(word)operator(|)
-       pre_constant(self)operator([)ident(word)operator(.)ident(downcase)operator(]) operator(=) ident(kind)
+       predefined_constant(self)operator([)ident(word)operator(.)ident(downcase)operator(]) operator(=) ident(kind)
 change[change(@@)plain( -104,3 +119,5 )change(@@)]
    reserved(end)
  
@@ -1199,7 +1199,7 @@ change[change(@@)plain( -342,7 +353,7 )change(@@)]
 delete[delete(-)      instance_variable(@callback)operator(.)ident(call)eyecatcher< ident(token)>]
 insert[insert(+)      instance_variable(@callback)operator(.)ident(call)eyecatcher<operator(()operator(*)ident(token)operator(\))>]
        instance_variable(@size) operator(+=) integer(1)
-       pre_constant(self)
+       predefined_constant(self)
      reserved(end)
 change[change(@@)plain( -365,4 +376,8 )change(@@)]
  
@@ -1259,8 +1259,8 @@ insert[insert(+)    comment(#   CodeRay::Duo[{ :ruby => :statistic }, :do => :so
 insert[insert(+)    comment(# )]
 insert[insert(+)    comment(# The options are forwarded to scanner and encoder)]
 insert[insert(+)    comment(# (see CodeRay.get_scanner_options\).)]
-insert[insert(+)    reserved(def) method(initialize) ident(lang) operator(=) pre_constant(nil)operator(,) ident(format) operator(=) pre_constant(nil)operator(,) ident(options) operator(=) operator({)operator(})]
-insert[insert(+)      reserved(if) ident(format) operator(==) pre_constant(nil) reserved(and) ident(lang)operator(.)ident(is_a?) constant(Hash) reserved(and) ident(lang)operator(.)ident(size) operator(==) integer(1)]
+insert[insert(+)    reserved(def) method(initialize) ident(lang) operator(=) predefined_constant(nil)operator(,) ident(format) operator(=) predefined_constant(nil)operator(,) ident(options) operator(=) operator({)operator(})]
+insert[insert(+)      reserved(if) ident(format) operator(==) predefined_constant(nil) reserved(and) ident(lang)operator(.)ident(is_a?) constant(Hash) reserved(and) ident(lang)operator(.)ident(size) operator(==) integer(1)]
 insert[insert(+)        instance_variable(@lang) operator(=) ident(lang)operator(.)ident(keys)operator(.)ident(first)]
 insert[insert(+)        instance_variable(@format) operator(=) ident(lang)operator([)instance_variable(@lang)operator(])]
 insert[insert(+)      reserved(else)]
@@ -1292,7 +1292,7 @@ insert[insert(+)    comment(# Tokenize and highlight the code using +scanner+ an
 insert[insert(+)    comment(#)]
 insert[insert(+)    comment(# If the :stream option is set, the Duo will go into streaming mode,)]
 insert[insert(+)    comment(# saving memory for the cost of time.)]
-insert[insert(+)    reserved(def) method(encode) ident(code)operator(,) ident(options) operator(=) operator({) symbol(:stream) operator(=)operator(>) pre_constant(false) operator(})]
+insert[insert(+)    reserved(def) method(encode) ident(code)operator(,) ident(options) operator(=) operator({) symbol(:stream) operator(=)operator(>) predefined_constant(false) operator(})]
 insert[insert(+)      ident(stream) operator(=) ident(options)operator(.)ident(delete) symbol(:stream)]
 insert[insert(+)      ident(options) operator(=) instance_variable(@options)operator(.)ident(merge) ident(options)]
 insert[insert(+)      reserved(if) ident(stream)]
@@ -1322,7 +1322,7 @@ insert[insert(+)          ident(code)operator(.)ident(force_encoding) string<del
 insert[insert(+)          ident(code)operator(.)ident(to_unix)]
          reserved(end)
 insert[insert(+)        ]
-insert[insert(+)        reserved(def) method(file_extension) ident(extension) operator(=) pre_constant(nil)]
+insert[insert(+)        reserved(def) method(file_extension) ident(extension) operator(=) predefined_constant(nil)]
 insert[insert(+)          reserved(if) ident(extension)]
 insert[insert(+)            instance_variable(@file_extension) operator(=) ident(extension)operator(.)ident(to_s)]
 insert[insert(+)          reserved(else)]
@@ -1351,7 +1351,7 @@ insert[insert(+)      reserved(alias) method(code) method(string)]
 insert[insert(+)      reserved(alias) method(code=) method(string=)]
 insert[insert(+)]
        comment(# Scans the code and returns all tokens in a Tokens object.)
-       reserved(def) method(tokenize) ident(new_string)operator(=)pre_constant(nil)operator(,) ident(options) operator(=) operator({)operator(})
+       reserved(def) method(tokenize) ident(new_string)operator(=)predefined_constant(nil)operator(,) ident(options) operator(=) operator({)operator(})
          ident(options) operator(=) instance_variable(@options)operator(.)ident(merge)operator(()ident(options)operator(\))
 change[change(@@)plain( -148,6 +159,11 )change(@@)]
        reserved(def) method(tokens)
@@ -1415,8 +1415,8 @@ insert[insert(+)  comment(#  require 'rubygems')]
 insert[insert(+)  comment(# before RedCloth is loaded and before calling CodeRay.for_redcloth.)]
 insert[insert(+)  reserved(module) class(ForRedCloth)]
 insert[insert(+)    ]
-insert[insert(+)    reserved(def) pre_constant(self)operator(.)method(install)]
-insert[insert(+)      ident(gem) string<delimiter(')content(RedCloth)delimiter(')>operator(,) string<delimiter(')content(>= 4.0.3)delimiter(')> reserved(rescue) pre_constant(nil)]
+insert[insert(+)    reserved(def) predefined_constant(self)operator(.)method(install)]
+insert[insert(+)      ident(gem) string<delimiter(')content(RedCloth)delimiter(')>operator(,) string<delimiter(')content(>= 4.0.3)delimiter(')> reserved(rescue) predefined_constant(nil)]
 insert[insert(+)      ident(require) string<delimiter(')content(redcloth)delimiter(')>]
 insert[insert(+)      ident(raise) string<delimiter(')content(CodeRay.for_redcloth needs RedCloth 4.0.3 or later.)delimiter(')> reserved(unless) constant(RedCloth)operator(::)constant(VERSION)operator(.)ident(to_s) operator(>)operator(=) string<delimiter(')content(4.0.3)delimiter(')>]
 insert[insert(+)      constant(RedCloth)operator(::)constant(TextileDoc)operator(.)ident(send) symbol(:include)operator(,) constant(ForRedCloth)operator(::)constant(TextileDoc)]
@@ -1432,12 +1432,12 @@ insert[insert(+)          ident(html)operator(.)ident(gsub)operator(()regexp<del
 insert[insert(+)        reserved(end)]
 insert[insert(+)        ident(undef_method) symbol(:code)operator(,) symbol(:bc_open)operator(,) symbol(:bc_close)operator(,) symbol(:escape_pre)]
 insert[insert(+)        reserved(def) method(code)operator(()ident(opts)operator(\))  comment(# :nodoc:)]
-insert[insert(+)          ident(opts)operator([)symbol(:block)operator(]) operator(=) pre_constant(true)]
+insert[insert(+)          ident(opts)operator([)symbol(:block)operator(]) operator(=) predefined_constant(true)]
 insert[insert(+)          reserved(if) ident(opts)operator([)symbol(:lang)operator(]) operator(&&) operator(!)ident(filter_coderay)]
 insert[insert(+)            ident(require) string<delimiter(')content(coderay)delimiter(')>]
-insert[insert(+)            instance_variable(@in_bc) operator(||=) pre_constant(nil)]
+insert[insert(+)            instance_variable(@in_bc) operator(||=) predefined_constant(nil)]
 insert[insert(+)            ident(format) operator(=) instance_variable(@in_bc) operator(?) symbol(:div) operator(:) symbol(:span)]
-insert[insert(+)            ident(highlighted_code) operator(=) constant(CodeRay)operator(.)ident(encode) ident(opts)operator([)symbol(:text)operator(])operator(,) ident(opts)operator([)symbol(:lang)operator(])operator(,) ident(format)operator(,) symbol(:stream) operator(=)operator(>) pre_constant(true)]
+insert[insert(+)            ident(highlighted_code) operator(=) constant(CodeRay)operator(.)ident(encode) ident(opts)operator([)symbol(:text)operator(])operator(,) ident(opts)operator([)symbol(:lang)operator(])operator(,) ident(format)operator(,) symbol(:stream) operator(=)operator(>) predefined_constant(true)]
 insert[insert(+)            ident(highlighted_code)operator(.)ident(sub!)operator(()regexp<delimiter(/)char(\\A)content(<(span|div\))delimiter(/)>operator(\)) operator({) operator(|)ident(m)operator(|) ident(m) operator(+) ident(pba)operator(()instance_variable(@in_bc) operator(||) ident(opts)operator(\)) operator(})]
 insert[insert(+)            ident(highlighted_code) operator(=) ident(unescape)operator(()ident(highlighted_code)operator(\)) reserved(unless) instance_variable(@in_bc)]
 insert[insert(+)            ident(highlighted_code)]
@@ -1446,16 +1446,16 @@ insert[insert(+)            string<delimiter(")content(<code)inline<inline_delim
 insert[insert(+)          reserved(end)]
 insert[insert(+)        reserved(end)]
 insert[insert(+)        reserved(def) method(bc_open)operator(()ident(opts)operator(\))  comment(# :nodoc:)]
-insert[insert(+)          ident(opts)operator([)symbol(:block)operator(]) operator(=) pre_constant(true)]
+insert[insert(+)          ident(opts)operator([)symbol(:block)operator(]) operator(=) predefined_constant(true)]
 insert[insert(+)          instance_variable(@in_bc) operator(=) ident(opts)]
 insert[insert(+)          ident(opts)operator([)symbol(:lang)operator(]) operator(?) string<delimiter(')delimiter(')> operator(:) string<delimiter(")content(<pre)inline<inline_delimiter(#{)ident(pba)operator(()ident(opts)operator(\))inline_delimiter(})>content(>)delimiter(")>]
 insert[insert(+)        reserved(end)]
 insert[insert(+)        reserved(def) method(bc_close)operator(()ident(opts)operator(\))  comment(# :nodoc:)]
-insert[insert(+)          instance_variable(@in_bc) operator(=) pre_constant(nil)]
+insert[insert(+)          instance_variable(@in_bc) operator(=) predefined_constant(nil)]
 insert[insert(+)          ident(opts)operator([)symbol(:lang)operator(]) operator(?) string<delimiter(')delimiter(')> operator(:) string<delimiter(")content(</pre>)char(\\n)delimiter(")>]
 insert[insert(+)        reserved(end)]
 insert[insert(+)        reserved(def) method(escape_pre)operator(()ident(text)operator(\))]
-insert[insert(+)          reserved(if) instance_variable(@in_bc) operator(||=) pre_constant(nil)]
+insert[insert(+)          reserved(if) instance_variable(@in_bc) operator(||=) predefined_constant(nil)]
 insert[insert(+)            ident(text)]
 insert[insert(+)          reserved(else)]
 insert[insert(+)            ident(html_esc)operator(()ident(text)operator(,) symbol(:html_escape_preformatted)operator(\))]
@@ -1494,7 +1494,7 @@ delete[delete(-)    constant(IDENTS_ALLOWING_REGEXP) operator(=) string<delimite
 delete[delete(-)string<content(      and or not while until unless if then elsif when sub sub! gsub gsub!)>]
 delete[delete(-)string<content(      scan slice slice! split)>]
 delete[delete(-)string<content(    )delimiter(])>]
-delete[delete(-)    constant(REGEXP_ALLOWED) operator(=) constant(WordList)operator(.)ident(new)operator(()pre_constant(false)operator(\))operator(.)]
+delete[delete(-)    constant(REGEXP_ALLOWED) operator(=) constant(WordList)operator(.)ident(new)operator(()predefined_constant(false)operator(\))operator(.)]
 delete[delete(-)      ident(add)operator(()constant(IDENTS_ALLOWING_REGEXP)operator(,) symbol(:set)operator(\))]
 delete[delete(-)]
      constant(PREDEFINED_CONSTANTS) operator(=) string<delimiter(%w[)>
@@ -1593,7 +1593,7 @@ delete[delete(-)            reserved(when) integer(?{)]
 insert[insert(+)            reserved(case) ident(peek)operator(()integer(1)operator(\))]
 insert[insert(+)            reserved(when) string<delimiter(')content({)delimiter(')>]
                ident(inline_block_stack) operator(<<) operator([)ident(state)operator(,) ident(depth)operator(,) ident(heredocs)operator(])
-               ident(value_expected) operator(=) pre_constant(true)
+               ident(value_expected) operator(=) predefined_constant(true)
                ident(state) operator(=) symbol(:initial)
                ident(depth) operator(=) integer(1)
                ident(tokens) operator(<<) operator([)symbol(:open)operator(,) symbol(:inline)operator(])
@@ -1616,39 +1616,39 @@ delete[delete(-)              ident(kind) operator(=) symbol(:space)]
 delete[delete(-)            reserved(when) integer(?\\n)operator(,) integer(?\\\\)]
 delete[delete(-)              ident(kind) operator(=) symbol(:space)]
 delete[delete(-)              reserved(if) ident(m) operator(==) integer(?\\n)]
-delete[delete(-)                ident(value_expected) operator(=) pre_constant(true)  comment(# FIXME not quite true)]
+delete[delete(-)                ident(value_expected) operator(=) predefined_constant(true)  comment(# FIXME not quite true)]
 delete[delete(-)                ident(state) operator(=) symbol(:initial) reserved(if) ident(state) operator(==) symbol(:undef_comma_expected)]
 delete[delete(-)              reserved(end)]
 delete[delete(-)              reserved(if) ident(heredocs)]
 delete[delete(-)                ident(unscan)  comment(# heredoc scanning needs \\n at start)]
 delete[delete(-)                ident(state) operator(=) ident(heredocs)operator(.)ident(shift)]
 delete[delete(-)                ident(tokens) operator(<<) operator([)symbol(:open)operator(,) ident(state)operator(.)ident(type)operator(])]
-delete[delete(-)                ident(heredocs) operator(=) pre_constant(nil) reserved(if) ident(heredocs)operator(.)ident(empty?)]
+delete[delete(-)                ident(heredocs) operator(=) predefined_constant(nil) reserved(if) ident(heredocs)operator(.)ident(empty?)]
 delete[delete(-)                reserved(next)]
 delete[delete(-)              reserved(else)]
 delete[delete(-)                ident(match) operator(<<) ident(scan)operator(()regexp<delimiter(/)char(\\s)content(*)delimiter(/)>operator(\)) reserved(unless) ident(eos?)]
 delete[delete(-)              reserved(end)]
 delete[delete(-)            reserved(when) integer(?#)operator(,) integer(?=)operator(,) integer(?_)]
 delete[delete(-)              ident(kind) operator(=) symbol(:comment)]
-delete[delete(-)              ident(value_expected) operator(=) pre_constant(true)]
+delete[delete(-)              ident(value_expected) operator(=) predefined_constant(true)]
 insert[insert(+)          reserved(if) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)content([ )char(\\t)char(\\f)content(]+)delimiter(/)>operator(\))]
 insert[insert(+)            ident(kind) operator(=) symbol(:space)]
 insert[insert(+)            ident(match) operator(<<) ident(scan)operator(()regexp<delimiter(/)char(\\s)content(*)delimiter(/)>operator(\)) reserved(unless) ident(eos?) operator(||) ident(heredocs)]
-insert[insert(+)            ident(value_expected) operator(=) pre_constant(true) reserved(if) ident(match)operator(.)ident(index)operator(()integer(?\\n)operator(\)) comment(# FIXME not quite true)]
+insert[insert(+)            ident(value_expected) operator(=) predefined_constant(true) reserved(if) ident(match)operator(.)ident(index)operator(()integer(?\\n)operator(\)) comment(# FIXME not quite true)]
 insert[insert(+)            ident(tokens) operator(<<) operator([)ident(match)operator(,) ident(kind)operator(])]
 insert[insert(+)            reserved(next)]
 insert[insert(+)            ]
 insert[insert(+)          reserved(elsif) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)char(\\\\)content(?)char(\\n)delimiter(/)>operator(\))]
 insert[insert(+)            ident(kind) operator(=) symbol(:space)]
 insert[insert(+)            reserved(if) ident(match) operator(==) string<delimiter(")char(\\n)delimiter(")>]
-insert[insert(+)              ident(value_expected) operator(=) pre_constant(true)  comment(# FIXME not quite true)]
+insert[insert(+)              ident(value_expected) operator(=) predefined_constant(true)  comment(# FIXME not quite true)]
 insert[insert(+)              ident(state) operator(=) symbol(:initial) reserved(if) ident(state) operator(==) symbol(:undef_comma_expected)]
 insert[insert(+)            reserved(end)]
 insert[insert(+)            reserved(if) ident(heredocs)]
 insert[insert(+)              ident(unscan)  comment(# heredoc scanning needs \\n at start)]
 insert[insert(+)              ident(state) operator(=) ident(heredocs)operator(.)ident(shift)]
 insert[insert(+)              ident(tokens) operator(<<) operator([)symbol(:open)operator(,) ident(state)operator(.)ident(type)operator(])]
-insert[insert(+)              ident(heredocs) operator(=) pre_constant(nil) reserved(if) ident(heredocs)operator(.)ident(empty?)]
+insert[insert(+)              ident(heredocs) operator(=) predefined_constant(nil) reserved(if) ident(heredocs)operator(.)ident(empty?)]
 insert[insert(+)              reserved(next)]
              reserved(else)
 delete[delete(-)              ident(raise_inspect) string<delimiter(')content(else-case _ reached, because case %p was)>]
@@ -1661,7 +1661,7 @@ insert[insert(+)          ]
 insert[insert(+)          reserved(elsif) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)char(\\#)content(.*)delimiter(/)>operator(\)) reserved(or)]
 insert[insert(+)            operator(() ident(bol?) reserved(and) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)ident(patterns)operator(::)constant(RUBYDOC_OR_DATA)inline_delimiter(})>delimiter(/)modifier(o)>operator(\)) operator(\))]
 insert[insert(+)              ident(kind) operator(=) symbol(:comment)]
-insert[insert(+)              ident(value_expected) operator(=) pre_constant(true)]
+insert[insert(+)              ident(value_expected) operator(=) predefined_constant(true)]
 insert[insert(+)              ident(tokens) operator(<<) operator([)ident(match)operator(,) ident(kind)operator(])]
 insert[insert(+)              reserved(next)]
  
@@ -1687,19 +1687,19 @@ insert[insert(+)            reserved(elsif) reserved(not) ident(last_token_dot) 
                  ident(value_expected) operator(=) symbol(:set)
                reserved(end)
 delete[delete(-)              ident(last_token_dot) operator(=) symbol(:set) reserved(if) eyecatcher<ident(match) operator(==) string<delimiter(')content(.)delimiter(')> reserved(or) ident(match) operator(==) string<delimiter(')content(::)delimiter(')>>]
-insert[insert(+)              ident(last_token_dot) operator(=) symbol(:set) reserved(if) eyecatcher<pre_constant(self)operator([)integer(1)operator(])>]
+insert[insert(+)              ident(last_token_dot) operator(=) symbol(:set) reserved(if) eyecatcher<predefined_constant(self)operator([)integer(1)operator(])>]
                ident(kind) operator(=) symbol(:operator)
                reserved(unless) ident(inline_block_stack)operator(.)ident(empty?)
                  reserved(case) ident(match)
 change[change(@@)plain( -210,8 +212,9 )change(@@)]
-               ident(interpreted) operator(=) pre_constant(true)
+               ident(interpreted) operator(=) predefined_constant(true)
                ident(state) operator(=) ident(patterns)operator(::)constant(StringState)operator(.)ident(new) symbol(:regexp)operator(,) ident(interpreted)operator(,) ident(match)
  
 delete[delete(-)            reserved(elsif) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)ident(patterns)operator(::)constant(NUMERIC)inline_delimiter(})>delimiter(/)modifier(o)>operator(\))]
-delete[delete(-)              ident(kind) operator(=) reserved(if) pre_constant(self)operator([)integer(1)operator(]) reserved(then) symbol(:float) reserved(else) symbol(:integer) reserved(end)]
+delete[delete(-)              ident(kind) operator(=) reserved(if) predefined_constant(self)operator([)integer(1)operator(]) reserved(then) symbol(:float) reserved(else) symbol(:integer) reserved(end)]
 insert[insert(+)            comment(# elsif match = scan(/[-+]?#{patterns::NUMERIC}/o\))]
 insert[insert(+)            reserved(elsif) ident(match) operator(=) ident(value_expected) operator(?) ident(scan)operator(()regexp<delimiter(/)content([-+]?)inline<inline_delimiter(#{)ident(patterns)operator(::)constant(NUMERIC)inline_delimiter(})>delimiter(/)modifier(o)>operator(\)) operator(:) ident(scan)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)ident(patterns)operator(::)constant(NUMERIC)inline_delimiter(})>delimiter(/)modifier(o)>operator(\))]
-insert[insert(+)              ident(kind) operator(=) pre_constant(self)operator([)integer(1)operator(]) operator(?) symbol(:float) operator(:) symbol(:integer)]
+insert[insert(+)              ident(kind) operator(=) predefined_constant(self)operator([)integer(1)operator(]) operator(?) symbol(:float) operator(:) symbol(:integer)]
  
              reserved(elsif) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)ident(patterns)operator(::)constant(SYMBOL)inline_delimiter(})>delimiter(/)modifier(o)>operator(\))
                reserved(case) ident(delim) operator(=) ident(match)operator([)integer(1)operator(])
@@ -1728,9 +1728,9 @@ change[change(@@)plain( -306,6 +321,15 )change(@@)]
  
 insert[insert(+)          reserved(elsif) ident(state) operator(==) symbol(:alias_expected)]
 insert[insert(+)            reserved(if) ident(match) operator(=) ident(scan)operator(()regexp<delimiter(/)content(()inline<inline_delimiter(#{)ident(patterns)operator(::)constant(METHOD_NAME_OR_SYMBOL)inline_delimiter(})>content(\)([ )char(\\t)content(]+\)()inline<inline_delimiter(#{)ident(patterns)operator(::)constant(METHOD_NAME_OR_SYMBOL)inline_delimiter(})>content(\))delimiter(/)modifier(o)>operator(\))]
-insert[insert(+)              ident(tokens) operator(<<) operator([)pre_constant(self)operator([)integer(1)operator(])operator(,) operator(()pre_constant(self)operator([)integer(1)operator(])operator([)integer(0)operator(]) operator(==) integer(?:) operator(?) symbol(:symbol) operator(:) symbol(:method)operator(\))operator(])]
-insert[insert(+)              ident(tokens) operator(<<) operator([)pre_constant(self)operator([)integer(2)operator(])operator(,) symbol(:space)operator(])]
-insert[insert(+)              ident(tokens) operator(<<) operator([)pre_constant(self)operator([)integer(3)operator(])operator(,) operator(()pre_constant(self)operator([)integer(3)operator(])operator([)integer(0)operator(]) operator(==) integer(?:) operator(?) symbol(:symbol) operator(:) symbol(:method)operator(\))operator(])]
+insert[insert(+)              ident(tokens) operator(<<) operator([)predefined_constant(self)operator([)integer(1)operator(])operator(,) operator(()predefined_constant(self)operator([)integer(1)operator(])operator([)integer(0)operator(]) operator(==) integer(?:) operator(?) symbol(:symbol) operator(:) symbol(:method)operator(\))operator(])]
+insert[insert(+)              ident(tokens) operator(<<) operator([)predefined_constant(self)operator([)integer(2)operator(])operator(,) symbol(:space)operator(])]
+insert[insert(+)              ident(tokens) operator(<<) operator([)predefined_constant(self)operator([)integer(3)operator(])operator(,) operator(()predefined_constant(self)operator([)integer(3)operator(])operator([)integer(0)operator(]) operator(==) integer(?:) operator(?) symbol(:symbol) operator(:) symbol(:method)operator(\))operator(])]
 insert[insert(+)            reserved(end)]
 insert[insert(+)            ident(state) operator(=) symbol(:initial)]
 insert[insert(+)            reserved(next)]
@@ -1783,8 +1783,8 @@ insert[insert(+)    ident(include) constant(Streamable)]
        string<delimiter(')content(asm)delimiter(')>operator(,) string<delimiter(')content(break)delimiter(')>operator(,) string<delimiter(')content(case)delimiter(')>operator(,) string<delimiter(')content(continue)delimiter(')>operator(,) string<delimiter(')content(default)delimiter(')>operator(,) string<delimiter(')content(do)delimiter(')>operator(,) string<delimiter(')content(else)delimiter(')>operator(,)
 change[change(@@)plain( -42,7 +44,7 )change(@@)]
  
-         ident(kind) operator(=) pre_constant(nil)
-         ident(match) operator(=) pre_constant(nil)
+         ident(kind) operator(=) predefined_constant(nil)
+         ident(match) operator(=) predefined_constant(nil)
 delete[delete(-)eyecatcher<>]
 insert[insert(+)eyecatcher<        >]
          reserved(case) ident(state)
@@ -1870,7 +1870,7 @@ insert[insert(+)        ident(state) operator(=) symbol(:initial)]
 insert[insert(+)        ident(ident_kind) operator(=) constant(IDENT_KIND)]
 insert[insert(+)        ]
 insert[insert(+)        reserved(until) ident(eos?)]
-insert[insert(+)          ident(kind) operator(=) ident(match) operator(=) pre_constant(nil)]
+insert[insert(+)          ident(kind) operator(=) ident(match) operator(=) predefined_constant(nil)]
 insert[insert(+)          ]
 insert[insert(+)          reserved(case) ident(state)]
 insert[insert(+)          reserved(when) symbol(:initial)]
@@ -1947,11 +1947,11 @@ change[change(@@)plain( -29,13 +29,18 )change(@@)]
      operator(])
  
 delete[delete(-)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)eyecatcher<>operator(\))operator(.)]
-insert[insert(+)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)eyecatcher<operator(,) ident(caching)operator(=)pre_constant(true)>operator(\))operator(.)]
+insert[insert(+)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)eyecatcher<operator(,) ident(caching)operator(=)predefined_constant(true)>operator(\))operator(.)]
        ident(add)operator(()constant(RESERVED_WORDS)operator(,) symbol(:reserved)operator(\))operator(.)
        ident(add)operator(()constant(DIRECTIVES)operator(,) symbol(:directive)operator(\))
 insert[insert(+)    ]
-insert[insert(+)    constant(NAME_FOLLOWS) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()pre_constant(false)operator(,) ident(caching)operator(=)pre_constant(true)operator(\))operator(.)]
+insert[insert(+)    constant(NAME_FOLLOWS) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()predefined_constant(false)operator(,) ident(caching)operator(=)predefined_constant(true)operator(\))operator(.)]
 insert[insert(+)      ident(add)operator(()string<delimiter(%w()content(procedure function .)delimiter(\))>operator(\))]
  
 insert[insert(+)  ident(private)]
@@ -2034,19 +2034,19 @@ insert[insert(+)      ident(opened_tokens) operator(=) operator([)operator(])]
 insert[insert(+)]
 insert[insert(+)      reserved(until) ident(eos?)]
 insert[insert(+)]
-insert[insert(+)        ident(kind) operator(=) pre_constant(nil)]
-insert[insert(+)        ident(match) operator(=) pre_constant(nil)]
+insert[insert(+)        ident(kind) operator(=) predefined_constant(nil)]
+insert[insert(+)        ident(match) operator(=) predefined_constant(nil)]
 insert[insert(+)]
 insert[insert(+)          reserved(if) ident(scan)operator(()regexp<delimiter(/)char(\\s)content(+)delimiter(/)>operator(\))]
 insert[insert(+)            ident(tokens) operator(<<) operator([)ident(matched)operator(,) symbol(:space)operator(])]
 insert[insert(+)            reserved(next)]
 insert[insert(+)            ]
 insert[insert(+)          reserved(elsif) ident(scan)operator(()regexp<delimiter(/)content( ()char(\\w)content(+\) )char(\\()content( ( [^)char(\\\))char(\\\\)content(]* ( )char(\\\\)content(. [^)char(\\\))char(\\\\)content(]* \)* \) )char(\\\))content( )delimiter(/)modifier(x)>operator(\))]
-insert[insert(+)            ident(kind) operator(=) pre_constant(self)operator([)integer(1)operator(])operator(.)ident(to_sym)]
-insert[insert(+)            ident(match) operator(=) pre_constant(self)operator([)integer(2)operator(])operator(.)ident(gsub)operator(()regexp<delimiter(/)char(\\\\)content((.\))delimiter(/)>operator(,) string<delimiter(')content(\\1)delimiter(')>operator(\))]
+insert[insert(+)            ident(kind) operator(=) predefined_constant(self)operator([)integer(1)operator(])operator(.)ident(to_sym)]
+insert[insert(+)            ident(match) operator(=) predefined_constant(self)operator([)integer(2)operator(])operator(.)ident(gsub)operator(()regexp<delimiter(/)char(\\\\)content((.\))delimiter(/)>operator(,) string<delimiter(')content(\\1)delimiter(')>operator(\))]
 insert[insert(+)            ]
 insert[insert(+)          reserved(elsif) ident(scan)operator(()regexp<delimiter(/)content( ()char(\\w)content(+\) < )delimiter(/)modifier(x)>operator(\))]
-insert[insert(+)            ident(kind) operator(=) pre_constant(self)operator([)integer(1)operator(])operator(.)ident(to_sym)]
+insert[insert(+)            ident(kind) operator(=) predefined_constant(self)operator([)integer(1)operator(])operator(.)ident(to_sym)]
 insert[insert(+)            ident(opened_tokens) operator(<<) ident(kind)]
 insert[insert(+)            ident(match) operator(=) symbol(:open)]
 insert[insert(+)            ]
@@ -2220,16 +2220,16 @@ change[change(@@)plain( -170,7 +171,7 )change(@@)]
        reserved(if) ident(lang) operator(==) symbol(:auto)
 delete[delete(-)        ident(require) string<delimiter(')content(coderay/helpers/file)>eyecatcher<string<>>string<content(type)delimiter(')>]
 insert[insert(+)        ident(require) string<delimiter(')content(coderay/helpers/file)>eyecatcher<string<content(_)>>string<content(type)delimiter(')>]
-         ident(lang) operator(=) constant(FileType)operator(.)ident(fetch) ident(filename)operator(,) symbol(:plaintext)operator(,) pre_constant(true)
+         ident(lang) operator(=) constant(FileType)operator(.)ident(fetch) ident(filename)operator(,) symbol(:plaintext)operator(,) predefined_constant(true)
        reserved(end)
        ident(scan) ident(file)operator(,) ident(lang)operator(,) ident(options) operator(=) operator({)operator(})operator(,) operator(&)ident(block)
 change[change(@@)plain( -314,6 +315,7 )change(@@)]
  comment(# Run a test script.)
- reserved(if) global_variable($0) operator(==) pre_constant(__FILE__)
+ reserved(if) global_variable($0) operator(==) predefined_constant(__FILE__)
    global_variable($stderr)operator(.)ident(print) string<delimiter(')content(Press key to print demo.)delimiter(')>operator(;) ident(gets)
 delete[delete(-)  ident(code) operator(=) constant(File)operator(.)ident(read)operator(()global_variable($0)operator(\))operator([)regexp<delimiter(/)content(module CodeRay.*)delimiter(/)modifier(m)>operator(])]
 insert[insert(+)  comment(# Just use this file as an example of Ruby code.)]
-insert[insert(+)  ident(code) operator(=) constant(File)operator(.)ident(read)operator(()pre_constant(__FILE__)operator(\))operator([)regexp<delimiter(/)content(module CodeRay.*)delimiter(/)modifier(m)>operator(])]
+insert[insert(+)  ident(code) operator(=) constant(File)operator(.)ident(read)operator(()predefined_constant(__FILE__)operator(\))operator([)regexp<delimiter(/)content(module CodeRay.*)delimiter(/)modifier(m)>operator(])]
    ident(print) constant(CodeRay)operator(.)ident(scan)operator(()ident(code)operator(,) symbol(:ruby)operator(\))operator(.)ident(html)
  reserved(end)
 

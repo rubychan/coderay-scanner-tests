@@ -109,7 +109,7 @@ comment(# you will still want to use defined? in order to test)
 comment(# for scope existence of a given object)
 ident(a) operator(=) reserved(defined?)operator(()ident(b)operator(\)) operator(?) ident(b) operator(:) ident(c)
 
-ident(dir) operator(=) pre_constant(ARGV)operator(.)ident(shift) operator(||) string<delimiter(")content(/tmp)delimiter(")>
+ident(dir) operator(=) predefined_constant(ARGV)operator(.)ident(shift) operator(||) string<delimiter(")content(/tmp)delimiter(")>
 
 
 comment(# @@PLEAC@@_1.3)
@@ -255,7 +255,7 @@ ident(string)operator(.)ident(strip!)
 comment(# @@PLEAC@@_1.15)
 reserved(def) method(parse_csv)operator(()ident(text)operator(\))
     ident(new) operator(=) ident(text)operator(.)ident(scan)operator(()regexp<delimiter(/)content("([^)char(\\")char(\\\\)content(]*(?:)char(\\\\)content(.[^)char(\\")char(\\\\)content(]*\)*\)",?|([^,]+\),?|,)delimiter(/)>operator(\))
-    ident(new) operator(<<) pre_constant(nil) reserved(if) ident(text)operator([)integer(-1)operator(]) operator(==) integer(?,)
+    ident(new) operator(<<) predefined_constant(nil) reserved(if) ident(text)operator([)integer(-1)operator(]) operator(==) integer(?,)
     ident(new)operator(.)ident(flatten)operator(.)ident(compact)
 reserved(end)  
 
@@ -290,7 +290,7 @@ reserved(def) method(login_names)
 reserved(end)
 
 ident(puts) string<delimiter(")content(Lookup user: )delimiter(")>
-ident(user) operator(=) pre_constant(STDIN)operator(.)ident(gets)
+ident(user) operator(=) predefined_constant(STDIN)operator(.)ident(gets)
 ident(user)operator(.)ident(chomp!)
 ident(exit) reserved(unless) ident(user)
 ident(name_code) operator(=) constant(Text)operator(::)constant(Soundex)operator(.)ident(soundex)operator(()ident(user)operator(\))
@@ -416,7 +416,7 @@ reserved(class) class(Integer)
                    operator([)string<delimiter(")content(I)delimiter(")>operator(,)    integer(1)operator(])operator(])
     
     reserved(def) method(to_roman)
-        ident(remains) operator(=) pre_constant(self)
+        ident(remains) operator(=) predefined_constant(self)
         ident(roman) operator(=) string<delimiter(")delimiter(")>
         reserved(for) ident(sym)operator(,) ident(num) reserved(in) class_variable(@@romanlist)
             reserved(while) ident(remains) operator(>)operator(=) ident(num)
@@ -684,7 +684,7 @@ reserved(def) method(printfactorhash)operator(()ident(orig)operator(,) ident(fac
     ident(puts)
 reserved(end)
 
-reserved(for) ident(arg) reserved(in) pre_constant(ARGV)
+reserved(for) ident(arg) reserved(in) predefined_constant(ARGV)
     ident(n) operator(=) ident(arg)operator(.)ident(to_i)
     ident(mfactors) operator(=) ident(factorize)operator(()ident(n)operator(\))
     ident(printfactorhash)operator(()ident(n)operator(,) ident(mfactors)operator(\))
@@ -862,7 +862,7 @@ reserved(class) class(MailHopDelta)
 reserved(end)
 
 global_variable($/) operator(=) string<delimiter(")delimiter(")>
-ident(mail) operator(=) constant(MailHopDelta)operator(.)ident(new)operator(()pre_constant(ARGF)operator(.)ident(gets)operator(\))operator(.)ident(puts_hops)
+ident(mail) operator(=) constant(MailHopDelta)operator(.)ident(new)operator(()predefined_constant(ARGF)operator(.)ident(gets)operator(\))operator(.)ident(puts_hops)
 
 
 comment(# @@PLEAC@@_4.0)
@@ -953,7 +953,7 @@ reserved(end)
 comment(# @@PLEAC@@_4.3)
 comment(#   (note: AFAIK Ruby doesn't allow gory change of Array length\))
 comment(# grow the array by assigning nil to past the end of array)
-ident(ary)operator([)ident(new_size)operator(-)integer(1)operator(]) operator(=) pre_constant(nil)
+ident(ary)operator([)ident(new_size)operator(-)integer(1)operator(]) operator(=) predefined_constant(nil)
 comment(# shrink the array by slicing it down)
 ident(ary)operator(.)ident(slice!)operator(()ident(new_size)operator(..)integer(-1)operator(\))
 comment(# init the array with given size)
@@ -980,8 +980,8 @@ reserved(for) ident(user) reserved(in) ident(bad_users)
     ident(complain)operator(()ident(user)operator(\))
 reserved(end)
 
-reserved(for) ident(var) reserved(in) pre_constant(ENV)operator(.)ident(keys)operator(.)ident(sort)
-    ident(puts) string<delimiter(")inline<inline_delimiter(#{)ident(var)inline_delimiter(})>content(=)inline<inline_delimiter(#{)pre_constant(ENV)operator([)ident(var)operator(])inline_delimiter(})>delimiter(")>
+reserved(for) ident(var) reserved(in) predefined_constant(ENV)operator(.)ident(keys)operator(.)ident(sort)
+    ident(puts) string<delimiter(")inline<inline_delimiter(#{)ident(var)inline_delimiter(})>content(=)inline<inline_delimiter(#{)predefined_constant(ENV)operator([)ident(var)operator(])inline_delimiter(})>delimiter(")>
 reserved(end)
 
 reserved(for) ident(user) reserved(in) ident(all_users)
@@ -1130,7 +1130,7 @@ ident(sorted) operator(=) ident(unsorted)operator(.)ident(sort) operator({) oper
 
 comment(# let's use the list of my own PID's)
 shell<delimiter(`)content(ps ux)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))operator([)integer(1)operator(..)integer(-1)operator(])operator(.)
-    ident(select) operator({) operator(|)ident(i)operator(|) ident(i) operator(=)operator(~) regexp<delimiter(/)content(^)inline<inline_delimiter(#{)pre_constant(ENV)operator([)string<delimiter(')content(USER)delimiter(')>operator(])inline_delimiter(})>delimiter(/)> operator(})operator(.)
+    ident(select) operator({) operator(|)ident(i)operator(|) ident(i) operator(=)operator(~) regexp<delimiter(/)content(^)inline<inline_delimiter(#{)predefined_constant(ENV)operator([)string<delimiter(')content(USER)delimiter(')>operator(])inline_delimiter(})>delimiter(/)> operator(})operator(.)
     ident(collect) operator({) operator(|)ident(i)operator(|) ident(i)operator(.)ident(split)operator([)integer(1)operator(]) operator(})operator(.)
     ident(sort) operator({) operator(|)ident(a)operator(,)ident(b)operator(|) ident(a)operator(.)ident(to_i) operator(<=>) ident(b)operator(.)ident(to_i) operator(})operator(.)ident(each) operator({) operator(|)ident(i)operator(|) ident(puts) ident(i) operator(})
 ident(puts) string<delimiter(")content(Select a process ID to kill:)delimiter(")>
@@ -1313,7 +1313,7 @@ reserved(def) method(permute)operator(()ident(items)operator(,) ident(perms)oper
     reserved(end)
 reserved(end)
 comment(# In ruby the main program must be after all definitions it is using)
-ident(permute)operator(()pre_constant(ARGV)operator(,) operator([)operator(])operator(\))
+ident(permute)operator(()predefined_constant(ARGV)operator(,) operator([)operator(])operator(\))
 
 comment(#---------------------------------------------------------)
 comment(# mjd_permute: permute each word of input)
@@ -1431,7 +1431,7 @@ operator(})
 ident(age) operator(=) operator({)operator(})
 ident(age)operator([)string<delimiter(')content(Toddler)delimiter(')>operator(]) operator(=) integer(3)
 ident(age)operator([)string<delimiter(')content(Unborn)delimiter(')>operator(]) operator(=) integer(0)
-ident(age)operator([)string<delimiter(')content(Phantasm)delimiter(')>operator(]) operator(=) pre_constant(nil)
+ident(age)operator([)string<delimiter(')content(Phantasm)delimiter(')>operator(]) operator(=) predefined_constant(nil)
 
 reserved(for) ident(thing) reserved(in) operator([)string<delimiter(')content(Toddler)delimiter(')>operator(,) string<delimiter(')content(Unborn)delimiter(')>operator(,) string<delimiter(')content(Phantasm)delimiter(')>operator(,) string<delimiter(')content(Relic)delimiter(')>operator(])
     ident(print) string<delimiter(")inline<inline_delimiter(#{)ident(thing)inline_delimiter(})>content(: )delimiter(")>
@@ -1531,7 +1531,7 @@ comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# foodfind - find match for food or color)
 
-ident(given) operator(=) pre_constant(ARGV)operator(.)ident(shift) reserved(or) ident(raise) string<delimiter(")content(usage: foodfind food_or_color)delimiter(")>
+ident(given) operator(=) predefined_constant(ARGV)operator(.)ident(shift) reserved(or) ident(raise) string<delimiter(")content(usage: foodfind food_or_color)delimiter(")>
 
 ident(color) operator(=) operator({)
     string<delimiter(")content(Apple)delimiter(")>  operator(=)operator(>) string<delimiter(")content(red)delimiter(")>operator(,)
@@ -1691,7 +1691,7 @@ reserved(class) class(DuNode)
     reserved(def) method(parent)
         ident(p) operator(=) instance_variable(@name)operator(.)ident(sub)operator(()regexp<delimiter(/)char(\\/)content([^)char(\\/)content(]+$)delimiter(/)>operator(,)string<delimiter(")delimiter(")>operator(\))
         reserved(if) ident(p) operator(==) instance_variable(@name)
-            pre_constant(nil)
+            predefined_constant(nil)
         reserved(else)
             ident(p)
         reserved(end)
@@ -1782,7 +1782,7 @@ reserved(class) class(Dutree)
 reserved(end)
 
 ident(tree) operator(=) constant(Dutree)operator(.)ident(new)
-ident(tree)operator(.)ident(input)operator(()pre_constant(ARGV)operator(\))
+ident(tree)operator(.)ident(input)operator(()predefined_constant(ARGV)operator(\))
 ident(tree)operator(.)ident(get_dots)operator(()ident(tree)operator(.)ident(topdir)operator(\))
 ident(tree)operator(.)ident(output)operator(()ident(tree)operator(.)ident(topdir)operator(\))
 
@@ -1964,7 +1964,7 @@ comment(# @@PLEAC@@_6.6)
 comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# killtags - very bad html killer)
-global_variable($/) operator(=) pre_constant(nil)operator(;)                              comment(# each read is whole file)
+global_variable($/) operator(=) predefined_constant(nil)operator(;)                              comment(# each read is whole file)
 reserved(while) ident(file) operator(=) ident(gets)operator(()operator(\)) reserved(do)
     ident(file)operator(.)ident(gsub!)operator(()regexp<delimiter(/)content(<.*?>)delimiter(/)modifier(m)>operator(,)string<delimiter(')delimiter(')>operator(\))operator(;)           comment(# strip tags (terribly\))
     ident(puts) ident(file)                          comment(# print file to STDOUT)
@@ -1992,8 +1992,8 @@ comment(#% ruby -00pe "gsub!(/\\A(Chapter\\s+\\d+\\s*:.*\)/,'<H1>\\1</H1>'\)" da
 
 doctype(#!/usr/bin/ruby -w)
 comment(#-----------------------------)
-reserved(for) ident(file) reserved(in) pre_constant(ARGV)
-    ident(file) operator(=) constant(File)operator(.)ident(open)operator(()pre_constant(ARGV)operator(.)ident(shift)operator(\))
+reserved(for) ident(file) reserved(in) predefined_constant(ARGV)
+    ident(file) operator(=) constant(File)operator(.)ident(open)operator(()predefined_constant(ARGV)operator(.)ident(shift)operator(\))
     reserved(while) ident(file)operator(.)ident(gets)operator(()string<delimiter(')delimiter(')>operator(\)) reserved(do)             comment(# each read is a paragraph)
         ident(print) string<delimiter(")content(chunk )inline<inline_delimiter(#{)global_variable($.)inline_delimiter(})>content( in $ARGV has <<)inline<inline_delimiter(#{)global_variable($1)inline_delimiter(})>content(>>)char(\\n)delimiter(")> reserved(while) regexp<delimiter(/)content(^START(.*?\)^END)delimiter(/)modifier(m)>
     reserved(end)                                comment(# /m activates the multiline mode)
@@ -2002,12 +2002,12 @@ comment(#-----------------------------)
 
 comment(# @@PLEAC@@_6.7)
 comment(#-----------------------------)
-global_variable($/) operator(=) pre_constant(nil)operator(;)
+global_variable($/) operator(=) predefined_constant(nil)operator(;)
 ident(file) operator(=) constant(File)operator(.)ident(open)operator(()string<delimiter(")content(datafile)delimiter(")>operator(\))
 ident(chunks) operator(=) ident(file)operator(.)ident(gets)operator(.)ident(split)operator(()regexp<delimiter(/)content(pattern)delimiter(/)>operator(\))
 comment(#-----------------------------)
 comment(# .Ch, .Se and .Ss divide chunks of STDIN)
-ident(chunks) operator(=) ident(gets)operator(()pre_constant(nil)operator(\))operator(.)ident(split)operator(()regexp<delimiter(/)content(^)char(\\.)content((Ch|Se|Ss\)$)delimiter(/)>operator(\))
+ident(chunks) operator(=) ident(gets)operator(()predefined_constant(nil)operator(\))operator(.)ident(split)operator(()regexp<delimiter(/)content(^)char(\\.)content((Ch|Se|Ss\)$)delimiter(/)>operator(\))
 ident(print) string<delimiter(")content(I read )inline<inline_delimiter(#{)ident(chunks)operator(.)ident(size)inline_delimiter(})>content( chunks.)char(\\n)delimiter(")>
 comment(#-----------------------------)
 
@@ -2068,12 +2068,12 @@ ident(print) reserved(if) operator(~)regexp<delimiter(/)content(begin)delimiter(
 ident(print) reserved(if) operator(~)regexp<delimiter(/)content(begin)delimiter(/)> operator(...) operator(~)regexp<delimiter(/)content(end)delimiter(/)>operator(;)
 comment(#-----------------------------)
 reserved(while) ident(gets)
-    global_variable($in_header) operator(=) global_variable($.) operator(==) integer(1)  operator(..) operator(~)regexp<delimiter(/)content(^$)delimiter(/)> operator(?) pre_constant(true) operator(:) pre_constant(false)
-    global_variable($in_body)   operator(=) operator(~)regexp<delimiter(/)content(^$)delimiter(/)> operator(..) pre_constant(ARGF)operator(.)ident(eof) operator(?) pre_constant(true) operator(:) pre_constant(false)
+    global_variable($in_header) operator(=) global_variable($.) operator(==) integer(1)  operator(..) operator(~)regexp<delimiter(/)content(^$)delimiter(/)> operator(?) predefined_constant(true) operator(:) predefined_constant(false)
+    global_variable($in_body)   operator(=) operator(~)regexp<delimiter(/)content(^$)delimiter(/)> operator(..) predefined_constant(ARGF)operator(.)ident(eof) operator(?) predefined_constant(true) operator(:) predefined_constant(false)
 reserved(end)
 comment(#-----------------------------)
 ident(seen) operator(=) operator({)operator(})
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     reserved(next) reserved(unless) ident(line) operator(=)operator(~) regexp<delimiter(/)content(^From:?)char(\\s)delimiter(/)modifier(i)> operator(..) ident(line) operator(=)operator(~) regexp<delimiter(/)content(^$)delimiter(/)>operator(;)
     ident(line)operator(.)ident(scan)operator(()regexp<delimiter(%r/)content(([^<>(\),;)char(\\s)content(]+)char(\\@)content([^<>(\),;)char(\\s)content(]+\))delimiter(/)>operator(\))operator(.)ident(each) reserved(do) operator(|)ident(addr)operator(|)
         ident(puts) ident(addr) reserved(unless) ident(seen)operator([)ident(addr)operator(])
@@ -2098,16 +2098,16 @@ reserved(end)
 comment(# @@PLEAC@@_6.10)
 comment(# avoid interpolating patterns like this if the pattern)
 comment(# isn't going to change:)
-ident(pattern) operator(=) pre_constant(ARGV)operator(.)ident(shift)
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+ident(pattern) operator(=) predefined_constant(ARGV)operator(.)ident(shift)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(print) ident(line) reserved(if) ident(line) operator(=)operator(~) regexp<delimiter(/)inline<inline_delimiter(#{)ident(pattern)inline_delimiter(})>delimiter(/)>
 reserved(end)
 
 comment(# the above creates a new regex each iteration. Instead,)
 comment(# use the /o modifier so the regex is compiled only once)
 
-ident(pattern) operator(=) pre_constant(ARGV)operator(.)ident(shift)
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+ident(pattern) operator(=) predefined_constant(ARGV)operator(.)ident(shift)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(print) ident(line) reserved(if) ident(line) operator(=)operator(~) regexp<delimiter(/)inline<inline_delimiter(#{)ident(pattern)inline_delimiter(})>delimiter(/)modifier(o)>
 reserved(end)
 
@@ -2117,7 +2117,7 @@ doctype(#!/usr/bin/ruby)
 comment(# popgrep1 - grep for abbreviations of places that say "pop")
 comment(# version 1: slow but obvious way)
 ident(popstates) operator(=) string<delimiter(%w()content(CO ON MI WI MN)delimiter(\))>
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(popstates)operator(.)ident(each) reserved(do) operator(|)ident(state)operator(|)
         reserved(if) ident(line) operator(=)operator(~) regexp<delimiter(/)char(\\b)inline<inline_delimiter(#{)ident(state)inline_delimiter(})>char(\\b)delimiter(/)>
             ident(print) ident(line)
@@ -2136,7 +2136,7 @@ ident(popstates)operator(.)ident(each) reserved(do) operator(|)ident(state)opera
     ident(code) operator(+=) string<delimiter(")char(\\t)content(if line =~ /)char(\\\\)content(b)inline<inline_delimiter(#{)ident(state)inline_delimiter(})>char(\\\\)content(b/; print(line\); next; end)char(\\n)delimiter(")>
 reserved(end)
 ident(code) operator(+=) string<delimiter(")content(end)char(\\n)delimiter(")>
-ident(print) string<delimiter(")content(CODE IS)char(\\n)content(---)char(\\n)inline<inline_delimiter(#{)ident(code)inline_delimiter(})>char(\\n)content(---)char(\\n)delimiter(")> reserved(if) pre_constant(false) comment(# turn on for debugging)
+ident(print) string<delimiter(")content(CODE IS)char(\\n)content(---)char(\\n)inline<inline_delimiter(#{)ident(code)inline_delimiter(})>char(\\n)content(---)char(\\n)delimiter(")> reserved(if) predefined_constant(false) comment(# turn on for debugging)
 ident(eval) ident(code)
 
 comment(# CODE IS)
@@ -2162,7 +2162,7 @@ ident(popstates)operator(.)ident(each) reserved(do) operator(|)ident(state)opera
     ident(code) operator(+=) string<delimiter(")content(        when /)char(\\\\)content(b)inline<inline_delimiter(#{)ident(state)inline_delimiter(})>char(\\\\)content(b/ : print line)char(\\n)delimiter(")>
 reserved(end)
 ident(code) operator(+=) string<delimiter(")content(    end)char(\\n)content(end)char(\\n)delimiter(")>
-ident(print) string<delimiter(")content(CODE IS)char(\\n)content(---)char(\\n)inline<inline_delimiter(#{)ident(code)inline_delimiter(})>char(\\n)content(---)char(\\n)delimiter(")> reserved(if) pre_constant(false) comment(# turn on for debugging)
+ident(print) string<delimiter(")content(CODE IS)char(\\n)content(---)char(\\n)inline<inline_delimiter(#{)ident(code)inline_delimiter(})>char(\\n)content(---)char(\\n)delimiter(")> reserved(if) predefined_constant(false) comment(# turn on for debugging)
 ident(eval) ident(code)
 
 comment(# CODE IS)
@@ -2189,7 +2189,7 @@ comment(# version3: build a match_any function)
 ident(popstates) operator(=) string<delimiter(%w()content(CO ON MI WI MN)delimiter(\))>
 ident(expr) operator(=) ident(popstates)operator(.)ident(map)operator({)operator(|)ident(e)operator(|)string<delimiter(")content(line =~ /)char(\\\\)content(b)inline<inline_delimiter(#{)ident(e)inline_delimiter(})>char(\\\\)content(b/)delimiter(")>operator(})operator(.)ident(join)operator(()string<delimiter(')content(||)delimiter(')>operator(\))
 ident(eval) string<delimiter(")content(def match_any(line\); )inline<inline_delimiter(#{)ident(expr)inline_delimiter(})>content(;end)delimiter(")>
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(print) ident(line) reserved(if) ident(match_any)operator(()ident(line)operator(\))
 reserved(end)
 comment(#-----------------------------)
@@ -2212,7 +2212,7 @@ reserved(class) class(MultiMatch)
 reserved(end)
 
 ident(mm) operator(=) constant(MultiMatch)operator(.)ident(new)operator(()string<delimiter(')content(foo)delimiter(')>operator(,)string<delimiter(')content(bar)delimiter(')>operator(\))
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(print) ident(line) reserved(if) ident(mm)operator(.)ident(match_all)operator(()ident(line)operator(\))
 reserved(end)
 comment(#-----------------------------)
@@ -2222,7 +2222,7 @@ comment(# popgrep4 - grep for abbreviations of places that say "pop")
 comment(# version4: pretty fast, but simple: compile all re's first:)
 ident(popstates) operator(=) string<delimiter(%w()content(CO ON MI WI MN)delimiter(\))>
 ident(popstates) operator(=) ident(popstates)operator(.)ident(map)operator({)operator(|)ident(re)operator(|) regexp<delimiter(%r/)char(\\b)inline<inline_delimiter(#{)ident(re)inline_delimiter(})>char(\\b)delimiter(/)>operator(})
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(popstates)operator(.)ident(each) reserved(do) operator(|)ident(state_re)operator(|)
         reserved(if) ident(line) operator(=)operator(~) ident(state_re)
             ident(print) ident(line)
@@ -2346,7 +2346,7 @@ regexp<delimiter(%r{)content(
 comment(# @@PLEAC@@_6.16)
 comment(#-----------------------------)
 global_variable($/) operator(=) string<delimiter(")delimiter(")>
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(para)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(para)operator(|)
     ident(para)operator(.)ident(scan) regexp<delimiter(%r/)content(
                   )char(\\b)content(     # start at word boundary
                   ()char(\\S)content(+\)  # find chunk of non-whitespace
@@ -2369,8 +2369,8 @@ reserved(end)
 comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# prime_pattern -- find prime factors of argument using patterns)
-pre_constant(ARGV) operator(<<) integer(180)
-ident(cap) operator(=) string<delimiter(')content(o)delimiter(')> operator(*) pre_constant(ARGV)operator(.)ident(shift)
+predefined_constant(ARGV) operator(<<) integer(180)
+ident(cap) operator(=) string<delimiter(')content(o)delimiter(')> operator(*) predefined_constant(ARGV)operator(.)ident(shift)
 reserved(while) ident(cap) operator(=)operator(~) regexp<delimiter(/)content(^(oo+?\))char(\\1)content(+$)delimiter(/)>
     ident(print) global_variable($1)operator(.)ident(size)operator(,) string<delimiter(")content( )delimiter(")>
     ident(cap)operator(.)ident(gsub!)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)global_variable($1)inline_delimiter(})>delimiter(/)>operator(,)string<delimiter(')content(o)delimiter(')>operator(\))
@@ -2436,8 +2436,8 @@ reserved(end)
 comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# minigrep - trivial grep)
-ident(pat) operator(=) pre_constant(ARGV)operator(.)ident(shift)
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+ident(pat) operator(=) predefined_constant(ARGV)operator(.)ident(shift)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(print) ident(line) reserved(if) ident(line) operator(=)operator(~) regexp<delimiter(/)inline<inline_delimiter(#{)ident(pat)inline_delimiter(})>delimiter(/)modifier(o)>
 reserved(end)
 comment(#-----------------------------)
@@ -2567,8 +2567,8 @@ reserved(def) method(deliver_message)
 reserved(end)
 
 ident(actions) operator(=) operator({)
-    string<delimiter(')content(edit)delimiter(')>  operator(=)operator(>) pre_constant(self)operator(.)ident(method)operator(()symbol(:invoke_editor)operator(\))operator(,)
-    string<delimiter(')content(send)delimiter(')>  operator(=)operator(>) pre_constant(self)operator(.)ident(method)operator(()symbol(:deliver_message)operator(\))operator(,)
+    string<delimiter(')content(edit)delimiter(')>  operator(=)operator(>) predefined_constant(self)operator(.)ident(method)operator(()symbol(:invoke_editor)operator(\))operator(,)
+    string<delimiter(')content(send)delimiter(')>  operator(=)operator(>) predefined_constant(self)operator(.)ident(method)operator(()symbol(:deliver_message)operator(\))operator(,)
     string<delimiter(')content(list)delimiter(')>  operator(=)operator(>) ident(proc) operator({)ident(system)operator(()constant(PAGER)operator(,) ident(file)operator(\))operator(})operator(,)
     string<delimiter(')content(abort)delimiter(')> operator(=)operator(>) ident(proc) operator({)ident(puts) string<delimiter(")content(See ya!)delimiter(")>operator(;) ident(exit)operator(})operator(,)
     string<delimiter(")delimiter(")>      operator(=)operator(>) ident(proc) operator({)ident(puts) string<delimiter(")content(Unknown Command)delimiter(")>operator(})
@@ -2613,7 +2613,7 @@ ident(gunk) operator(=) string<delimiter(')content(/#~:.?+=&%@!)content(\\-)deli
 ident(punc) operator(=) string<delimiter(')content(.:?)content(\\-)delimiter(')>operator(;)
 ident(any)  operator(=) string<delimiter(")inline<inline_delimiter(#{)ident(ltrs)inline_delimiter(})>inline<inline_delimiter(#{)ident(gunk)inline_delimiter(})>inline<inline_delimiter(#{)ident(punc)inline_delimiter(})>delimiter(")>operator(;)
 
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(line)operator(.)ident(gsub!) regexp<delimiter(%r/)content(
         )char(\\b)content(                    # start at word boundary
         (                     # begin $1  {
@@ -2672,9 +2672,9 @@ regexp<delimiter(%r/)content(^([01]?)char(\\d)char(\\d)content(|2[0-4])char(\\d)
 comment(#-----------------------------)
 ident(str)operator(.)ident(sub!)operator(()regexp<delimiter(%r|)content(^.*/)delimiter(|)>operator(,) string<delimiter(')delimiter(')>operator(\))
 comment(#-----------------------------)
-ident(cols) operator(=) operator(() operator(()pre_constant(ENV)operator([)string<delimiter(')content(TERMCAP)delimiter(')>operator(]) operator(||) string<delimiter(")content( )delimiter(")>operator(\)) operator(=)operator(~) regexp<delimiter(/)content(:co#()char(\\d)content(+\):)delimiter(/)> operator(\)) operator(?) global_variable($1) operator(:) integer(80)operator(;)
+ident(cols) operator(=) operator(() operator(()predefined_constant(ENV)operator([)string<delimiter(')content(TERMCAP)delimiter(')>operator(]) operator(||) string<delimiter(")content( )delimiter(")>operator(\)) operator(=)operator(~) regexp<delimiter(/)content(:co#()char(\\d)content(+\):)delimiter(/)> operator(\)) operator(?) global_variable($1) operator(:) integer(80)operator(;)
 comment(#-----------------------------)
-ident(name) operator(=) string<delimiter(")content( )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( )inline<inline_delimiter(#{)pre_constant(ARGV)inline_delimiter(})>delimiter(")>operator(.)ident(gsub)operator(()regexp<delimiter(%r|)content( /)char(\\S)content(+/)delimiter(|)>operator(,) string<delimiter(')content( )delimiter(')>operator(\))
+ident(name) operator(=) string<delimiter(")content( )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( )inline<inline_delimiter(#{)predefined_constant(ARGV)inline_delimiter(})>delimiter(")>operator(.)ident(gsub)operator(()regexp<delimiter(%r|)content( /)char(\\S)content(+/)delimiter(|)>operator(,) string<delimiter(')content( )delimiter(')>operator(\))
 comment(#-----------------------------)
 ident(require) string<delimiter(')content(rbconfig)delimiter(')>
 ident(include) constant(Config)
@@ -2699,7 +2699,7 @@ comment(#-----------------------------)
 
 global_variable($/) operator(=) string<delimiter(")delimiter(")>
 ident(sentences) operator(=) operator([)operator(])
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(para)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(para)operator(|)
     ident(para)operator(.)ident(gsub!)operator(()regexp<delimiter(/)char(\\n)delimiter(/)>operator(,) string<delimiter(')content( )delimiter(')>operator(\))
     ident(para)operator(.)ident(gsub!)operator(()regexp<delimiter(/)content( {3,})delimiter(/)>operator(,)string<delimiter(')content(  )delimiter(')>operator(\))
     ident(sentences) operator(<<) ident(para)operator(.)ident(scan)operator(()regexp<delimiter(/)content(()char(\\S)content(.*?[!?.]\)(?=  |)char(\\Z)content(\))delimiter(/)>operator(\))
@@ -2851,14 +2851,14 @@ ident(tf)operator(.)ident(flush)
 ident(system)operator(()string<delimiter(")content(/usr/bin/dowhatever )inline<inline_delimiter(#{)ident(tf)operator(.)ident(path)inline_delimiter(})>delimiter(")>operator(\))
 
 ident(fh) operator(=) constant(Tempfile)operator(.)ident(new)operator(()string<delimiter(')content(tmp)delimiter(')>operator(\))
-ident(fh)operator(.)ident(sync) operator(=) pre_constant(true)                comment(# autoflushes)
+ident(fh)operator(.)ident(sync) operator(=) predefined_constant(true)                comment(# autoflushes)
 integer(10)operator(.)ident(times) operator({) operator(|)ident(i)operator(|) ident(fh)operator(.)ident(puts) ident(i) operator(})
 ident(fh)operator(.)ident(rewind)
 ident(puts) string<delimiter(')content(Tmp file has: )delimiter(')>operator(,) ident(fh)operator(.)ident(readlines)
 
 
 comment(# @@PLEAC@@_7.6)
-reserved(while) operator(()pre_constant(DATA)operator(.)ident(gets)operator(\)) reserved(do)
+reserved(while) operator(()predefined_constant(DATA)operator(.)ident(gets)operator(\)) reserved(do)
     comment(# process the line  )
 reserved(end)
 comment(__END__
@@ -2867,8 +2867,8 @@ comment(__END__
 
 )comment(#CODE)
 comment(# get info about the script (size, date of last modification\))
-ident(kilosize) operator(=) pre_constant(DATA)operator(.)ident(stat)operator(.)ident(size) operator(/) integer(1024)
-ident(last_modif) operator(=) pre_constant(DATA)operator(.)ident(stat)operator(.)ident(mtime)
+ident(kilosize) operator(=) predefined_constant(DATA)operator(.)ident(stat)operator(.)ident(size) operator(/) integer(1024)
+ident(last_modif) operator(=) predefined_constant(DATA)operator(.)ident(stat)operator(.)ident(mtime)
 ident(puts) string<delimiter(")content(<P>Script size is )inline<inline_delimiter(#{)ident(kilosize)inline_delimiter(})>delimiter(")>
 ident(puts) string<delimiter(")content(<P>Last script update: )inline<inline_delimiter(#{)ident(last_modif)inline_delimiter(})>delimiter(")>
 comment(__END__
@@ -2895,7 +2895,7 @@ reserved(end)
 
 comment(# ARGF may makes this more easy)
 comment(# this is skipped if ARGV.size==0)
-pre_constant(ARGV)operator(.)ident(each) reserved(do) operator(|)ident(filename)operator(|) 
+predefined_constant(ARGV)operator(.)ident(each) reserved(do) operator(|)ident(filename)operator(|) 
     comment(# closing and exception handling are done by the block)
     ident(open)operator(()ident(filename)operator(\)) reserved(do) operator(|)ident(fd)operator(|) 
         ident(fd)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
@@ -2905,19 +2905,19 @@ pre_constant(ARGV)operator(.)ident(each) reserved(do) operator(|)ident(filename)
 reserved(end)
 
 comment(# globbing is done in the Dir module)
-pre_constant(ARGV) operator(=) constant(Dir)operator([)string<delimiter(")content(*.[Cch])delimiter(")>operator(]) reserved(if) pre_constant(ARGV)operator(.)ident(empty?)
+predefined_constant(ARGV) operator(=) constant(Dir)operator([)string<delimiter(")content(*.[Cch])delimiter(")>operator(]) reserved(if) predefined_constant(ARGV)operator(.)ident(empty?)
 
 comment(# note: optparse is the preferred way to handle this)
-reserved(if) operator(()pre_constant(ARGV)operator([)integer(0)operator(]) operator(==) string<delimiter(')content(-c)delimiter(')>operator(\))  
+reserved(if) operator(()predefined_constant(ARGV)operator([)integer(0)operator(]) operator(==) string<delimiter(')content(-c)delimiter(')>operator(\))  
     ident(chop_first) operator(+=) integer(1)
-    pre_constant(ARGV)operator(.)ident(shift)
+    predefined_constant(ARGV)operator(.)ident(shift)
 reserved(end)
 
 
 comment(# processing numerical options)
-reserved(if) pre_constant(ARGV)operator([)integer(0)operator(]) operator(=)operator(~) regexp<delimiter(/)content(^-()char(\\d)content(+\)$)delimiter(/)>
+reserved(if) predefined_constant(ARGV)operator([)integer(0)operator(]) operator(=)operator(~) regexp<delimiter(/)content(^-()char(\\d)content(+\)$)delimiter(/)>
     ident(columns) operator(=) global_variable($1)
-    pre_constant(ARGV)operator(.)ident(shift)
+    predefined_constant(ARGV)operator(.)ident(shift)
 reserved(end)
 
 comment(# again, better to use optparse:)
@@ -2926,28 +2926,28 @@ ident(nostdout) operator(=) integer(0)
 ident(append) operator(=) integer(0)
 ident(unbuffer) operator(=) integer(0)
 ident(ignore_ints) operator(=) integer(0)
-pre_constant(ARGV)operator(.)ident(options) reserved(do) operator(|)ident(opt)operator(|)
+predefined_constant(ARGV)operator(.)ident(options) reserved(do) operator(|)ident(opt)operator(|)
     ident(opt)operator(.)ident(on)operator(()string<delimiter(')content(-n)delimiter(')>operator(\)) operator({) ident(nostdout) operator(+=)integer(1) operator(})
     ident(opt)operator(.)ident(on)operator(()string<delimiter(')content(-a)delimiter(')>operator(\)) operator({) ident(append)   operator(+=)integer(1) operator(})
     ident(opt)operator(.)ident(on)operator(()string<delimiter(')content(-u)delimiter(')>operator(\)) operator({) ident(unbuffer) operator(+=)integer(1) operator(})
     ident(opt)operator(.)ident(on)operator(()string<delimiter(')content(-i)delimiter(')>operator(\)) operator({) ident(ignore_ints) operator(+=)integer(1) operator(})
     ident(opt)operator(.)ident(parse!)
-reserved(end) reserved(or) ident(abort)operator(()string<delimiter(")content(usage: )delimiter(")> operator(+) pre_constant(__FILE__) operator(+) string<delimiter(")content( [-ainu] [filenames])delimiter(")>operator(\))
+reserved(end) reserved(or) ident(abort)operator(()string<delimiter(")content(usage: )delimiter(")> operator(+) predefined_constant(__FILE__) operator(+) string<delimiter(")content( [-ainu] [filenames])delimiter(")>operator(\))
 
 comment(# no need to do undef $/, we have File.read)
-ident(str) operator(=) constant(File)operator(.)ident(read)operator(()pre_constant(ARGV)operator([)integer(0)operator(])operator(\))
+ident(str) operator(=) constant(File)operator(.)ident(read)operator(()predefined_constant(ARGV)operator([)integer(0)operator(])operator(\))
 
 comment(# again we have File.read)
-ident(str) operator(=) constant(File)operator(.)ident(read)operator(()pre_constant(ARGV)operator([)integer(0)operator(])operator(\))
+ident(str) operator(=) constant(File)operator(.)ident(read)operator(()predefined_constant(ARGV)operator([)integer(0)operator(])operator(\))
 
 comment(# not sure what this should do:)
 comment(# I believe open the file, print filename, lineno and line:)
-pre_constant(ARGF)operator(.)ident(each_with_index) reserved(do) operator(|)ident(line)operator(,) ident(idx)operator(|)
-    ident(print) pre_constant(ARGF)operator(.)ident(filename)operator(,) string<delimiter(")content(:)delimiter(")>operator(,) ident(idx)operator(,) string<delimiter(")content(;)delimiter(")>operator(,) ident(line)
+predefined_constant(ARGF)operator(.)ident(each_with_index) reserved(do) operator(|)ident(line)operator(,) ident(idx)operator(|)
+    ident(print) predefined_constant(ARGF)operator(.)ident(filename)operator(,) string<delimiter(")content(:)delimiter(")>operator(,) ident(idx)operator(,) string<delimiter(")content(;)delimiter(")>operator(,) ident(line)
 reserved(end)
 
 comment(# print all the lines in every file passed via command line that contains login)
-pre_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
+predefined_constant(ARGF)operator(.)ident(each) reserved(do) operator(|)ident(line)operator(|)
     ident(puts) ident(line) reserved(if) ident(line) operator(=)operator(~) regexp<delimiter(/)content(login)delimiter(/)>
 reserved(end)
 comment(#)
@@ -2955,7 +2955,7 @@ comment(# even this would fit)
 comment(#%ruby -ne "print if /f/" 2.log)
 comment(#)
 
-pre_constant(ARGF)operator(.)ident(each) operator({) operator(|)ident(l)operator(|) ident(puts) ident(l)operator(.)ident(downcase!) operator(})
+predefined_constant(ARGF)operator(.)ident(each) operator({) operator(|)ident(l)operator(|) ident(puts) ident(l)operator(.)ident(downcase!) operator(})
 
 comment(#------------------)
 doctype(#!/usr/bin/ruby -p)
@@ -2968,7 +2968,7 @@ comment(# perl's version splits on \\w+ while python's on \\w.)
 
 ident(chunks) operator(=) integer(0)
 
-constant(File)operator(.)ident(read)operator(()pre_constant(ARGV)operator([)integer(0)operator(])operator(\))operator(.)ident(split)operator(.)ident(each) reserved(do) operator(|)ident(word)operator(|)
+constant(File)operator(.)ident(read)operator(()predefined_constant(ARGV)operator([)integer(0)operator(])operator(\))operator(.)ident(split)operator(.)ident(each) reserved(do) operator(|)ident(word)operator(|)
     reserved(next) reserved(if) ident(word) operator(=)operator(~) regexp<delimiter(/)content(^#)delimiter(/)>
     reserved(break) reserved(if) operator([)string<delimiter(")content(__DATA__)delimiter(")>operator(,) string<delimiter(")content(__END__)delimiter(")>operator(])operator(.)ident(member?) ident(word)
     ident(chunks) operator(+=) integer(1) 
@@ -3016,11 +3016,11 @@ comment(#-----------------------------)
 comment(#% ruby -pi.orig -e 'gsub!(/DATE/\){Time.now\)')
 
 comment(# effectively becomes:)
-pre_constant(ARGV) operator(<<) string<delimiter(')content(I)delimiter(')>
+predefined_constant(ARGV) operator(<<) string<delimiter(')content(I)delimiter(')>
 ident(oldfile) operator(=) string<delimiter(")delimiter(")>
 reserved(while) ident(gets)
-    reserved(if) pre_constant(ARGF)operator(.)ident(filename) operator(!=) ident(oldfile)
-        ident(newfile) operator(=) pre_constant(ARGF)operator(.)ident(filename)
+    reserved(if) predefined_constant(ARGF)operator(.)ident(filename) operator(!=) ident(oldfile)
+        ident(newfile) operator(=) predefined_constant(ARGF)operator(.)ident(filename)
         constant(File)operator(.)ident(rename)operator(()ident(newfile)operator(,) ident(newfile) operator(+) string<delimiter(")content(.orig)delimiter(")>operator(\))
         global_variable($stdout) operator(=) constant(File)operator(.)ident(open)operator(()ident(newfile)operator(,)string<delimiter(')content(w)delimiter(')>operator(\))
         ident(oldfile) operator(=) ident(newfile)
@@ -3028,7 +3028,7 @@ reserved(while) ident(gets)
     ident(gsub!)operator(()regexp<delimiter(/)content(DATE)delimiter(/)>operator(\))operator({)constant(Time)operator(.)ident(now)operator(})
     ident(print) 
 reserved(end)
-global_variable($stdout) operator(=) pre_constant(STDOUT)
+global_variable($stdout) operator(=) predefined_constant(STDOUT)
 comment(#-----------------------------)
 comment(#% ruby -i.old -pe 'gsub!(%r{\\bhisvar\\b}, 'hervar'\)' *.[Cchy])
 
@@ -3036,14 +3036,14 @@ comment(#-----------------------------)
 comment(# set up to iterate over the *.c files in the current directory,)
 comment(# editing in place and saving the old file with a .orig extension)
 global_variable($-i) operator(=) string<delimiter(')content(.orig)delimiter(')>                       comment(# set up -i mode)
-pre_constant(ARGV)operator(.)ident(replace)operator(()constant(Dir)operator([)string<delimiter(')content(*.[Cchy])delimiter(')>operator(])operator(\))
+predefined_constant(ARGV)operator(.)ident(replace)operator(()constant(Dir)operator([)string<delimiter(')content(*.[Cchy])delimiter(')>operator(])operator(\))
 reserved(while) ident(gets)
     reserved(if) global_variable($.) operator(==) integer(1)
         ident(print) string<delimiter(")content(This line should appear at the top of each file)char(\\n)delimiter(")>
     reserved(end)
     ident(gsub!)operator(()regexp<delimiter(/)char(\\b)content((p\)earl)char(\\b)delimiter(/)modifier(i)>operator(,) string<delimiter(')content(\\1)content(erl)delimiter(')>operator(\))    comment(# Correct typos, preserving case)
     ident(print)
-    pre_constant(ARGF)operator(.)ident(close) reserved(if) pre_constant(ARGF)operator(.)ident(eof)
+    predefined_constant(ARGF)operator(.)ident(close) reserved(if) predefined_constant(ARGF)operator(.)ident(eof)
 reserved(end)
 
 
@@ -3094,27 +3094,27 @@ reserved(end)
 
 
 comment(# @@PLEAC@@_7.12)
-ident(output_handle)operator(.)ident(sync) operator(=) pre_constant(true)
+ident(output_handle)operator(.)ident(sync) operator(=) predefined_constant(true)
 comment(# Please note that like in Perl, $stderr is already unbuffered)
 comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# seeme - demo stdio output buffering)
-global_variable($stdout)operator(.)ident(sync) operator(=) pre_constant(ARGV)operator(.)ident(size) operator(>) integer(0)
+global_variable($stdout)operator(.)ident(sync) operator(=) predefined_constant(ARGV)operator(.)ident(size) operator(>) integer(0)
 ident(print) string<delimiter(")content(Now you don't see it...)delimiter(")>
 ident(sleep) integer(2)
 ident(puts) string<delimiter(")content(now you do)delimiter(")>
 comment(#-----------------------------)
-global_variable($stderr)operator(.)ident(sync) operator(=) pre_constant(true)
-ident(afile)operator(.)ident(sync) operator(=) pre_constant(false)
+global_variable($stderr)operator(.)ident(sync) operator(=) predefined_constant(true)
+ident(afile)operator(.)ident(sync) operator(=) predefined_constant(false)
 comment(#-----------------------------)
 comment(# assume 'remote_con' is an interactive socket handle,)
 comment(# but 'disk_file' is a handle to a regular file.)
-ident(remote_con)operator(.)ident(sync) operator(=) pre_constant(true)       comment(# unbuffer for clarity)
-ident(disk_file)operator(.)ident(sync) operator(=) pre_constant(false)       comment(# buffered for speed)
+ident(remote_con)operator(.)ident(sync) operator(=) predefined_constant(true)       comment(# unbuffer for clarity)
+ident(disk_file)operator(.)ident(sync) operator(=) predefined_constant(false)       comment(# buffered for speed)
 comment(#-----------------------------)
 ident(require) string<delimiter(')content(socket)delimiter(')>
 ident(sock) operator(=) constant(TCPSocket)operator(.)ident(new)operator(()string<delimiter(')content(www.ruby-lang.org)delimiter(')>operator(,) integer(80)operator(\))
-ident(sock)operator(.)ident(sync) operator(=) pre_constant(true)
+ident(sock)operator(.)ident(sync) operator(=) predefined_constant(true)
 ident(sock)operator(.)ident(puts) string<delimiter(")content(GET /en/ HTTP/1.0 )char(\\n)char(\\n)delimiter(")>
 ident(resp) operator(=) ident(sock)operator(.)ident(read)
 ident(print) string<delimiter(")content(DOC IS: )inline<inline_delimiter(#{)ident(resp)inline_delimiter(})>char(\\n)delimiter(")>
@@ -3123,7 +3123,7 @@ ident(print) string<delimiter(")content(DOC IS: )inline<inline_delimiter(#{)iden
 comment(# @@PLEAC@@_7.13)
 comment(#-----------------------------)
 comment(# assumes fh1, fh2, fh2 are oen IO objects)
-ident(nfound) operator(=) ident(select)operator(()operator([)global_variable($stdin)operator(,) ident(fh1)operator(,) ident(fh2)operator(,) ident(fh3)operator(])operator(,) pre_constant(nil)operator(,) pre_constant(nil)operator(,) integer(0)operator(\))
+ident(nfound) operator(=) ident(select)operator(()operator([)global_variable($stdin)operator(,) ident(fh1)operator(,) ident(fh2)operator(,) ident(fh3)operator(])operator(,) predefined_constant(nil)operator(,) predefined_constant(nil)operator(,) integer(0)operator(\))
 ident(nfound)operator([)integer(0)operator(])operator(.)ident(each) reserved(do) operator(|)ident(file)operator(|)
     reserved(case) ident(file)
         reserved(when) ident(fh1)
@@ -3138,7 +3138,7 @@ comment(#-----------------------------)
 ident(input_files) operator(=) operator([)operator(])
 comment(# repeat next line for all in-files to poll)
 ident(input_files) operator(<<) ident(fh1)
-reserved(if) ident(nfound) operator(=) ident(select)operator(()ident(input_files)operator(,) pre_constant(nil)operator(,) pre_constant(nil)operator(,) integer(0)operator(\))
+reserved(if) ident(nfound) operator(=) ident(select)operator(()ident(input_files)operator(,) predefined_constant(nil)operator(,) predefined_constant(nil)operator(,) integer(0)operator(\))
     comment(# input ready on files in nfound[0])
 reserved(end)
 
@@ -3191,9 +3191,9 @@ ident(pos) operator(=) ident(handle)operator(.)ident(sysseek)operator(()integer(
 comment(# @@PLEAC@@_8.1)
 reserved(while) operator(()ident(line) operator(=) ident(fh)operator(.)ident(gets)operator(\))
     ident(line)operator(.)ident(chomp!)
-    ident(nextline) operator(=) pre_constant(nil)
+    ident(nextline) operator(=) predefined_constant(nil)
     ident(line)operator(.)ident(gsub!)operator(()regexp<delimiter(/)char(\\\\)content($)delimiter(/)>operator(\)) operator({) operator(|)ident(match)operator(|) ident(nextline) operator(=) ident(fh)operator(.)ident(gets)operator(;) string<delimiter(')delimiter(')> operator(})
-    reserved(if) operator(()ident(nextline) operator(!=) pre_constant(nil)operator(\))
+    reserved(if) operator(()ident(nextline) operator(!=) predefined_constant(nil)operator(\))
         ident(line) operator(+=) ident(nextline) 
         reserved(redo)
     reserved(end)
@@ -3387,13 +3387,13 @@ comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(## uvi - vi a file without changing it's access times)
 
-reserved(if) pre_constant(ARGV)operator(.)ident(length) operator(!=) integer(1)
+reserved(if) predefined_constant(ARGV)operator(.)ident(length) operator(!=) integer(1)
   ident(puts) string<delimiter(")content(usage: uvi filename)delimiter(")>
   ident(exit)
 reserved(end)
-ident(file) operator(=) pre_constant(ARGV)operator([)integer(0)operator(])
+ident(file) operator(=) predefined_constant(ARGV)operator([)integer(0)operator(])
 ident(atime)operator(,) ident(mtime) operator(=) constant(File)operator(.)ident(stat)operator(()ident(file)operator(\))operator(.)ident(atime)operator(,) constant(File)operator(.)ident(stat)operator(()ident(file)operator(\))operator(.)ident(mtime)
-ident(system)operator(()pre_constant(ENV)operator([)string<delimiter(")content(EDITOR)delimiter(")>operator(]) operator(||) string<delimiter(")content(vi)delimiter(")>operator(,) ident(file)operator(\))
+ident(system)operator(()predefined_constant(ENV)operator([)string<delimiter(")content(EDITOR)delimiter(")>operator(]) operator(||) string<delimiter(")content(vi)delimiter(")>operator(,) ident(file)operator(\))
 constant(File)operator(.)ident(utime)operator(()ident(atime)operator(,) ident(mtime)operator(,) ident(file)operator(\))
 comment(#-----------------------------)
 
@@ -3401,7 +3401,7 @@ comment(#-----------------------------)
 comment(# @@PLEAC@@_9.2)
 constant(File)operator(.)ident(unlink)operator(()constant(FILENAME)operator(\))
 
-ident(err_flg) operator(=) pre_constant(false)
+ident(err_flg) operator(=) predefined_constant(false)
 ident(filenames)operator(.)ident(each) reserved(do) operator(|)ident(file)operator(|)
   reserved(begin)
     constant(File)operator(.)ident(unlink)operator(()ident(file)operator(\))
@@ -3422,7 +3422,7 @@ ident(filenames)operator(.)ident(each) reserved(do) operator(|)ident(file)operat
   reserved(end)
 reserved(end)
 reserved(if) ident(count) operator(!=) ident(filenames)operator(.)ident(length)
-  pre_constant(STDERR)operator(.)ident(puts) string<delimiter(")content(could only delete )inline<inline_delimiter(#{)ident(count)inline_delimiter(})>content( of )inline<inline_delimiter(#{)ident(filenames)operator(.)ident(length)inline_delimiter(})>content( files)delimiter(")>
+  predefined_constant(STDERR)operator(.)ident(puts) string<delimiter(")content(could only delete )inline<inline_delimiter(#{)ident(count)inline_delimiter(})>content( of )inline<inline_delimiter(#{)ident(filenames)operator(.)ident(length)inline_delimiter(})>content( files)delimiter(")>
 reserved(end)
 
 
@@ -3547,13 +3547,13 @@ constant(Find)operator(.)ident(find)operator(()ident(dirlist)operator(\)) reserv
 reserved(end)
 
 ident(require) string<delimiter(')content(find)delimiter(')>
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) pre_constant(ARGV)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) predefined_constant(ARGV)
 constant(Find)operator(.)ident(find)operator(()operator(*)ident(argv)operator(\)) reserved(do) operator(|)ident(file)operator(|)
   ident(print) ident(file)operator(,) operator(()ident(test)operator(()integer(?d)operator(,) ident(file)operator(\)) operator(?) string<delimiter(")content(/)char(\\n)delimiter(")> operator(:) string<delimiter(")char(\\n)delimiter(")>operator(\))
 reserved(end)
 
 ident(require) string<delimiter(')content(find)delimiter(')>
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) pre_constant(ARGV)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) predefined_constant(ARGV)
 ident(sum) operator(=) integer(0)
 constant(Find)operator(.)ident(find)operator(()operator(*)ident(argv)operator(\)) reserved(do) operator(|)ident(file)operator(|)
   ident(size) operator(=) ident(test)operator(()integer(?s)operator(,) ident(file)operator(\)) operator(||) integer(0)
@@ -3562,7 +3562,7 @@ reserved(end)
 ident(puts) string<delimiter(")inline<inline_delimiter(#{)ident(argv)operator(.)ident(join)operator(()string<delimiter(')content( )delimiter(')>operator(\))inline_delimiter(})>content( contains )inline<inline_delimiter(#{)ident(sum)inline_delimiter(})>content( bytes)delimiter(")>
 
 ident(require) string<delimiter(')content(find)delimiter(')>
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) pre_constant(ARGV)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) predefined_constant(ARGV)
 ident(saved_size)operator(,) ident(saved_name) operator(=) integer(-1)operator(,) string<delimiter(")delimiter(")>
 constant(Find)operator(.)ident(find)operator(()operator(*)ident(argv)operator(\)) reserved(do) operator(|)ident(file)operator(|)
   ident(size) operator(=) ident(test)operator(()integer(?s)operator(,) ident(file)operator(\)) operator(||) integer(0)
@@ -3573,8 +3573,8 @@ reserved(end)
 ident(puts) string<delimiter(")content(Biggest file )inline<inline_delimiter(#{)ident(saved_name)inline_delimiter(})>content( in )inline<inline_delimiter(#{)ident(argv)operator(.)ident(join)operator(()string<delimiter(')content( )delimiter(')>operator(\))inline_delimiter(})>content( is )inline<inline_delimiter(#{)ident(saved_size)inline_delimiter(})>delimiter(")>
 
 ident(require) string<delimiter(')content(find)delimiter(')>
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) pre_constant(ARGV)
-ident(age)operator(,) ident(name) operator(=) pre_constant(nil)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) predefined_constant(ARGV)
+ident(age)operator(,) ident(name) operator(=) predefined_constant(nil)
 constant(Find)operator(.)ident(find)operator(()operator(*)ident(argv)operator(\)) reserved(do) operator(|)ident(file)operator(|)
   ident(mtime) operator(=) constant(File)operator(.)ident(stat)operator(()ident(file)operator(\))operator(.)ident(mtime)
   reserved(next) reserved(if) ident(age) operator(&&) ident(age) operator(>) ident(mtime)
@@ -3587,7 +3587,7 @@ comment(#-----------------------------)
 doctype(#!/usr/bin/ruby -w)
 comment(# fdirs - find all directories)
 ident(require) string<delimiter(')content(find)delimiter(')>
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) pre_constant(ARGV)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) string<delimiter(%w{)content(.)delimiter(})> operator(:) predefined_constant(ARGV)
 constant(File)operator(.)ident(find)operator(()operator(*)ident(argv)operator(\)) operator({) operator(|)ident(file)operator(|) ident(puts) ident(file) reserved(if) ident(test)operator(()integer(?d)operator(,) ident(file)operator(\)) operator(})
 comment(#-----------------------------)
 
@@ -3595,8 +3595,8 @@ comment(#-----------------------------)
 comment(# @@PLEAC@@_9.8)
 ident(require) string<delimiter(')content(fileutils)delimiter(')>
 
-ident(puts) string<delimiter(")content(Usage )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( dir ...)delimiter(")> reserved(if) pre_constant(ARGV)operator(.)ident(empty?)
-pre_constant(ARGV)operator(.)ident(each) reserved(do) operator(|)ident(dir)operator(|)
+ident(puts) string<delimiter(")content(Usage )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( dir ...)delimiter(")> reserved(if) predefined_constant(ARGV)operator(.)ident(empty?)
+predefined_constant(ARGV)operator(.)ident(each) reserved(do) operator(|)ident(dir)operator(|)
   constant(FileUtils)operator(.)ident(rmtree)operator(()ident(dir)operator(\))
 reserved(end)
 
@@ -3613,8 +3613,8 @@ ident(names)operator(.)ident(each) reserved(do) operator(|)ident(file)operator(|
 reserved(end)
 
 ident(require) string<delimiter(')content(ftools)delimiter(')>
-ident(op) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) operator(()ident(raise) string<delimiter(")content(Usage: rename expr [files])char(\\n)delimiter(")>operator(\)) operator(:) pre_constant(ARGV)operator(.)ident(shift)
-ident(argv) operator(=) pre_constant(ARGV)operator(.)ident(empty?) operator(?) global_variable($stdin)operator(.)ident(readlines)operator(.)ident(map) operator({) operator(|)ident(f)operator(|) ident(f)operator(.)ident(chomp) operator(}) operator(:) pre_constant(ARGV)
+ident(op) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) operator(()ident(raise) string<delimiter(")content(Usage: rename expr [files])char(\\n)delimiter(")>operator(\)) operator(:) predefined_constant(ARGV)operator(.)ident(shift)
+ident(argv) operator(=) predefined_constant(ARGV)operator(.)ident(empty?) operator(?) global_variable($stdin)operator(.)ident(readlines)operator(.)ident(map) operator({) operator(|)ident(f)operator(|) ident(f)operator(.)ident(chomp) operator(}) operator(:) predefined_constant(ARGV)
 ident(argv)operator(.)ident(each) reserved(do) operator(|)ident(file)operator(|)
   ident(was) operator(=) ident(file)
   ident(file) operator(=) ident(eval)operator(()string<delimiter(")content(file.)inline<inline_delimiter(#{)ident(op)inline_delimiter(})>delimiter(")>operator(\))
@@ -3661,9 +3661,9 @@ comment(# symirror - build spectral forest of symlinks)
 ident(require) string<delimiter(')content(find)delimiter(')>
 ident(require) string<delimiter(')content(fileutils)delimiter(')>
 
-ident(raise) string<delimiter(")content(usage: )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( realdir mirrordir)delimiter(")> reserved(unless) pre_constant(ARGV)operator(.)ident(size) operator(==) integer(2)
+ident(raise) string<delimiter(")content(usage: )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( realdir mirrordir)delimiter(")> reserved(unless) predefined_constant(ARGV)operator(.)ident(size) operator(==) integer(2)
 
-ident(srcdir)operator(,)ident(dstdir) operator(=) pre_constant(ARGV)
+ident(srcdir)operator(,)ident(dstdir) operator(=) predefined_constant(ARGV)
 ident(srcmode) operator(=) constant(File)operator(::)ident(stat)operator(()ident(srcdir)operator(\))operator(.)ident(mode)
 constant(Dir)operator(.)ident(mkdir)operator(()ident(dstdir)operator(,) ident(srcmode) operator(&) integer(07777)operator(\)) reserved(unless) ident(test)operator(()integer(?d)operator(,) ident(dstdir)operator(\))
 
@@ -3721,7 +3721,7 @@ EOPARAM)>
 
 global_variable($sort_criteria) operator(||=) symbol(:mtime)
 ident(files) operator(=) operator({)operator(})
-constant(DIRS) operator(=) ident(opts)operator([)string<delimiter(')content(-i)delimiter(')>operator(]) operator(?) global_variable($stdin)operator(.)ident(readlines)operator(.)ident(map)operator({)operator(|)ident(f)operator(|)ident(f)operator(.)ident(chomp!)operator(}) operator(:) pre_constant(ARGV)
+constant(DIRS) operator(=) ident(opts)operator([)string<delimiter(')content(-i)delimiter(')>operator(]) operator(?) global_variable($stdin)operator(.)ident(readlines)operator(.)ident(map)operator({)operator(|)ident(f)operator(|)ident(f)operator(.)ident(chomp!)operator(}) operator(:) predefined_constant(ARGV)
 constant(DIRS)operator(.)ident(each) reserved(do) operator(|)ident(dir)operator(|)
     constant(Find)operator(.)ident(find)operator(()ident(dir)operator(\)) reserved(do) operator(|)ident(ent)operator(|)
         ident(files)operator([)ident(ent)operator(]) operator(=) constant(File)operator(::)ident(stat)operator(()ident(ent)operator(\))
@@ -3797,7 +3797,7 @@ reserved(def) method(somefunc)
     ident(variable) operator(=) ident(something)  comment(# variable is local by default)
 reserved(end)
 
-ident(name)operator(,) ident(age) operator(=) pre_constant(ARGV)
+ident(name)operator(,) ident(age) operator(=) predefined_constant(ARGV)
 ident(start)     operator(=) ident(fetch_time)
 
 ident(a)operator(,) ident(b) operator(=) ident(pair)               comment(# will succeed if pair is an Array object (like ARGV is\))
@@ -3934,7 +3934,7 @@ ident(h1)operator(,) ident(h2)operator(,) ident(h3)      operator(=) ident(fn)
 comment(# @@PLEAC@@_10.10)
 reserved(return)
 comment(# or (equivalent\))
-reserved(return) pre_constant(nil)
+reserved(return) predefined_constant(nil)
 
 
 comment(# @@PLEAC@@_10.11)
@@ -3995,7 +3995,7 @@ reserved(def) method(local)operator(()ident(var)operator(\))
     ident(result)
 reserved(end)
 
-ident(condition) operator(=) pre_constant(true)
+ident(condition) operator(=) predefined_constant(true)
 global_variable($age) operator(=) integer(18)
 ident(print_age)operator(()operator(\))
 reserved(if) ident(condition)
@@ -4107,14 +4107,14 @@ reserved(class) class(Mailbox) operator(<) constant(Array)
                 reserved(else)
                     ident(mail)operator(.)ident(date) operator(=) constant(DateTime)operator(.)ident(now)
                 reserved(end)
-                pre_constant(self)operator(.)ident(push)operator(()ident(mail)operator(\))
+                predefined_constant(self)operator(.)ident(push)operator(()ident(mail)operator(\))
             reserved(end)
             ident(mail)operator(.)ident(append)operator(()ident(para)operator(\)) reserved(if) ident(mail)
         operator(})
     reserved(end)
 
     reserved(def) method(sort_by_subject_and_no)
-        pre_constant(self)operator(.)ident(sort_by) operator({) operator(|)ident(m)operator(|)
+        predefined_constant(self)operator(.)ident(sort_by) operator({) operator(|)ident(m)operator(|)
             operator([)ident(m)operator(.)ident(subject)operator(,) ident(m)operator(.)ident(no)operator(])
         operator(})
     reserved(end)
@@ -4125,7 +4125,7 @@ reserved(class) class(Mailbox) operator(<) constant(Array)
         comment(# values, they would be compared)
         comment(# from ary[0] to ary[n]t, say:)
         comment(# ['b',1] > ['a',10] > ['a',9])
-        pre_constant(self)operator(.)ident(sort_by) operator({) operator(|)ident(elem)operator(|)
+        predefined_constant(self)operator(.)ident(sort_by) operator({) operator(|)ident(elem)operator(|)
             ident(attrs)operator(.)ident(map) operator({) operator(|)ident(attr)operator(|)
                 ident(elem)operator(.)ident(send)operator(()ident(attr)operator(\))
             operator(})
@@ -4135,7 +4135,7 @@ reserved(class) class(Mailbox) operator(<) constant(Array)
 reserved(end)
 
 ident(mailbox) operator(=) constant(Mailbox)operator(.)ident(new)
-ident(mailbox)operator(.)ident(read)operator(()pre_constant(ARGF)operator(\))
+ident(mailbox)operator(.)ident(read)operator(()predefined_constant(ARGF)operator(\))
 
 comment(# print only subjects sorted by subject and number)
 reserved(for) ident(m) reserved(in) ident(mailbox)operator(.)ident(sort_by_subject_and_no)
@@ -4175,8 +4175,8 @@ comment(# @@PLEAC@@_11.15)
 reserved(class) class(Binary_tree)
     reserved(def) method(initialize)operator(()ident(val)operator(\))
         instance_variable(@value) operator(=) ident(val)
-        instance_variable(@left) operator(=) pre_constant(nil)
-        instance_variable(@right) operator(=) pre_constant(nil)
+        instance_variable(@left) operator(=) predefined_constant(nil)
+        instance_variable(@right) operator(=) predefined_constant(nil)
     reserved(end)
     
     comment(# insert given value into proper point of)
@@ -4235,13 +4235,13 @@ reserved(class) class(Binary_tree)
     comment(# branch, based on current value.)
     reserved(def) method(search)operator(()ident(val)operator(\))
         reserved(if) ident(val) operator(==) instance_variable(@value) reserved(then)
-            reserved(return) pre_constant(self)
+            reserved(return) predefined_constant(self)
         reserved(elsif) ident(val) operator(<) instance_variable(@value) reserved(then)
             reserved(return) instance_variable(@left)operator(.)ident(search)operator(()ident(val)operator(\)) reserved(if) instance_variable(@left)
-            reserved(return) pre_constant(nil)
+            reserved(return) predefined_constant(nil)
         reserved(else)
             reserved(return) instance_variable(@right)operator(.)ident(search)operator(()ident(val)operator(\)) reserved(if) instance_variable(@right)
-            reserved(return) pre_constant(nil)
+            reserved(return) predefined_constant(nil)
         reserved(end)
     reserved(end)
 reserved(end)
@@ -4293,7 +4293,7 @@ reserved(end)
 comment(# @@PLEAC@@_12.1)
 comment(# a module exports all of its functions)
 reserved(module) class(Your_Module)
-    reserved(def) pre_constant(self)operator(.)method(function)
+    reserved(def) predefined_constant(self)operator(.)method(function)
         comment(# this would be called as Your_Module.function)
     reserved(end)
     
@@ -4315,11 +4315,11 @@ reserved(module) class(Alpha)
     instance_variable(@aa) operator(=) integer(10)
     instance_variable(@bb) operator(=) integer(11)
     
-    reserved(def) pre_constant(self)operator(.)method(put_aa)
+    reserved(def) predefined_constant(self)operator(.)method(put_aa)
         ident(puts) instance_variable(@aa)
     reserved(end)
     
-    reserved(def) pre_constant(self)operator(.)method(bb=)operator(()ident(val)operator(\))
+    reserved(def) predefined_constant(self)operator(.)method(bb=)operator(()ident(val)operator(\))
         instance_variable(@bb) operator(=) ident(val)
     reserved(end)
 reserved(end)
@@ -4348,7 +4348,7 @@ reserved(BEGIN) operator({)
 operator(})
 
 reserved(module) class(Logger)
-    reserved(def) pre_constant(self)operator(.)method(logmsg)operator(()ident(msg)operator(\))
+    reserved(def) predefined_constant(self)operator(.)method(logmsg)operator(()ident(msg)operator(\))
         global_variable($LF)operator(.)ident(puts) ident(msg)
     reserved(end)
 
@@ -4395,14 +4395,14 @@ comment(# no equivalent in ruby)
 
 comment(# @@PLEAC@@_12.11)
 reserved(module) class(FineTime)
-    reserved(def) pre_constant(self)operator(.)method(time)
+    reserved(def) predefined_constant(self)operator(.)method(time)
         comment(# to be defined later)
     reserved(end)
 reserved(end)
 
 
 reserved(module) class(FineTime)
-    reserved(def) pre_constant(self)operator(.)method(time)
+    reserved(def) predefined_constant(self)operator(.)method(time)
         string<delimiter(")content(its a fine time)delimiter(")>
     reserved(end)
 reserved(end)
@@ -4460,7 +4460,7 @@ reserved(class) class(Person)
     class_variable(@@person_counter)operator(=)integer(0)
     
     comment(# object constructor)
-    reserved(def) method(initialize)operator(()ident(age)operator(,) ident(name)operator(,) ident(alive) operator(=) pre_constant(true)operator(\))     comment(# Default arg like in C++)
+    reserved(def) method(initialize)operator(()ident(age)operator(,) ident(name)operator(,) ident(alive) operator(=) predefined_constant(true)operator(\))     comment(# Default arg like in C++)
         instance_variable(@age)operator(,) instance_variable(@name)operator(,) instance_variable(@alive) operator(=) ident(age)operator(,) ident(name)operator(,) ident(alive)  comment(# Object attributes are prefixed by '@')
         class_variable(@@person_counter) operator(+=) integer(1)
           comment(# There is no '++' operator in Ruby. The '++'/'--'  operators are in fact )
@@ -4474,7 +4474,7 @@ reserved(class) class(Person)
     
     comment(# methods modifying the receiver object usually have the '!' suffix)
     reserved(def) method(die!)
-        instance_variable(@alive) operator(=) pre_constant(false)
+        instance_variable(@alive) operator(=) predefined_constant(false)
         ident(puts) string<delimiter(")inline<inline_delimiter(#{)instance_variable(@name)inline_delimiter(})>content( has died at the age of )inline<inline_delimiter(#{)instance_variable(@age)inline_delimiter(})>content(.)delimiter(")>
         instance_variable(@alive)
     reserved(end)
@@ -4487,7 +4487,7 @@ reserved(class) class(Person)
     comment(# methods used as queries)
     comment(# usually have the '?' suffix    )
     reserved(def) method(alive?)
-        instance_variable(@alive) operator(&&) pre_constant(true)
+        instance_variable(@alive) operator(&&) predefined_constant(true)
     reserved(end)
     
     reserved(def) method(year_of_birth)
@@ -4503,8 +4503,8 @@ reserved(end)
 comment(# Using the class:)
 comment(# Create objects of class Person)
 ident(lecter) operator(=) constant(Person)operator(.)ident(new)operator(()integer(47)operator(,) string<delimiter(')content(Hannibal)delimiter(')>operator(\))
-ident(starling) operator(=) constant(Person)operator(.)ident(new)operator(()integer(29)operator(,) string<delimiter(')content(Clarice)delimiter(')>operator(,) pre_constant(true)operator(\))
-ident(pazzi) operator(=) constant(Person)operator(.)ident(new)operator(()integer(40)operator(,) string<delimiter(')content(Rinaldo)delimiter(')>operator(,) pre_constant(true)operator(\))
+ident(starling) operator(=) constant(Person)operator(.)ident(new)operator(()integer(29)operator(,) string<delimiter(')content(Clarice)delimiter(')>operator(,) predefined_constant(true)operator(\))
+ident(pazzi) operator(=) constant(Person)operator(.)ident(new)operator(()integer(40)operator(,) string<delimiter(')content(Rinaldo)delimiter(')>operator(,) predefined_constant(true)operator(\))
 
 comment(# Calling a class method)
 ident(print) string<delimiter(")content(There are )delimiter(")>operator(,) constant(Person)operator(.)ident(number_of_people)operator(,) string<delimiter(")content( Person objects)char(\\n)delimiter(")>
@@ -4559,8 +4559,8 @@ comment(# you should do it explicitly.)
 
 reserved(class) class(MyClass)
     reserved(def) method(initialize)
-        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()pre_constant(self)operator(,)
-                                     pre_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
+        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()predefined_constant(self)operator(,)
+                                     predefined_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
     reserved(end)
     reserved(def) constant(MyClass)operator(.)method(finalize)operator(()ident(id)operator(\))
         ident(puts) string<delimiter(")content(Object )inline<inline_delimiter(#{)ident(id)inline_delimiter(})>content( dying at )inline<inline_delimiter(#{)constant(Time)operator(.)ident(new)inline_delimiter(})>delimiter(")>
@@ -4609,8 +4609,8 @@ reserved(class) class(Person)
     reserved(end)
     reserved(def) method(initialize)
         class_variable(@@person_counter) operator(+=) integer(1)
-        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()pre_constant(self)operator(,)
-                                     pre_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
+        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()predefined_constant(self)operator(,)
+                                     predefined_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
     reserved(end)
     reserved(def) constant(Person)operator(.)method(finalize)operator(()ident(id)operator(\))
         class_variable(@@person_counter) operator(-=) integer(1)
@@ -4790,7 +4790,7 @@ reserved(class) class(WeirdString) operator(<) constant(String)
     reserved(end)
     reserved(def) method(+)operator(()ident(anotherObj)operator(\))   comment(# + method in this class is overridden)
         comment(# to return the sum of string lengths)
-        pre_constant(self)operator(.)ident(length) operator(+) ident(anotherObj)operator(.)ident(length)  comment(# 'self' can be omitted)
+        predefined_constant(self)operator(.)ident(length) operator(+) ident(anotherObj)operator(.)ident(length)  comment(# 'self' can be omitted)
     reserved(end)  
 reserved(end)
 comment(#-----------------------------)
@@ -4820,7 +4820,7 @@ reserved(class) class(Person)
         ident(name) operator(=) ident(namesymbol)operator(.)ident(to_s)
         reserved(return) reserved(if) ident(name) operator(=)operator(~) regexp<delimiter(/)content(^A-Z)delimiter(/)>
         reserved(if) ident(name)operator(.)ident(to_s)operator([)integer(-1)operator(]) operator(==) operator(()string<delimiter(')content(=)delimiter(')>operator([)integer(0)operator(])operator(\))       comment(# we have a setter)
-            ident(isSetter) operator(=) pre_constant(true)
+            ident(isSetter) operator(=) predefined_constant(true)
             ident(name)operator(.)ident(sub!)operator(()regexp<delimiter(/)content(=$)delimiter(/)>operator(,) string<delimiter(')delimiter(')>operator(\))
         reserved(end)
         reserved(if) ident(valid_attribute?)operator(()ident(name)operator(\))
@@ -4838,7 +4838,7 @@ reserved(class) class(Person)
 
     reserved(def) method(new)
         ident(kid) operator(=) constant(Person)operator(.)ident(new)
-        ident(kid)operator(.)ident(parent) operator(=) pre_constant(self)
+        ident(kid)operator(.)ident(parent) operator(=) predefined_constant(self)
         ident(kid)
     reserved(end)
 
@@ -4875,8 +4875,8 @@ reserved(class) class(RingNode)
 
     reserved(def) method(initialize)operator(()ident(aName)operator(\))
         instance_variable(@name) operator(=) ident(aName)
-        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()pre_constant(self)operator(,)
-                                     pre_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
+        constant(ObjectSpace)operator(.)ident(define_finalizer)operator(()predefined_constant(self)operator(,)
+                                     predefined_constant(self)operator(.)ident(class)operator(.)ident(method)operator(()symbol(:finalize)operator(\))operator(.)ident(to_proc)operator(\))
     reserved(end)
 
     reserved(def) constant(RingNode)operator(.)method(finalize)operator(()ident(id)operator(\))
@@ -4901,9 +4901,9 @@ reserved(def) method(create_test)
     ident(c)operator(.)ident(prev) operator(=) ident(b)
     ident(b)operator(.)ident(prev) operator(=) ident(a)
 
-    ident(a) operator(=) pre_constant(nil)
-    ident(b) operator(=) pre_constant(nil)
-    ident(c) operator(=) pre_constant(nil)
+    ident(a) operator(=) predefined_constant(nil)
+    ident(b) operator(=) predefined_constant(nil)
+    ident(c) operator(=) predefined_constant(nil)
 reserved(end)
 
 ident(create_test)
@@ -4916,7 +4916,7 @@ constant(RingNode)operator(.)ident(show_all_objects)
 comment(# @@PLEAC@@_13.14)
 reserved(class) class(String)
     reserved(def) method(<=>)operator(()ident(other)operator(\))
-        pre_constant(self)operator(.)ident(casecmp) ident(other)
+        predefined_constant(self)operator(.)ident(casecmp) ident(other)
     reserved(end)
 reserved(end)
 
@@ -5005,7 +5005,7 @@ reserved(class) class(FixNum)
     constant(REGEX) operator(=) regexp<delimiter(/)content(()char(\\.)char(\\d)content(*\))delimiter(/)>
     constant(DEFAULT_PLACES) operator(=) integer(0)
     ident(attr_accessor) symbol(:value)operator(,) symbol(:places)
-    reserved(def) method(initialize)operator(()ident(value)operator(,) ident(places) operator(=) pre_constant(nil)operator(\))
+    reserved(def) method(initialize)operator(()ident(value)operator(,) ident(places) operator(=) predefined_constant(nil)operator(\))
         instance_variable(@value) operator(=) ident(value)
         reserved(if) ident(places)
             instance_variable(@places) operator(=) ident(places)
@@ -5035,7 +5035,7 @@ reserved(class) class(FixNum)
     reserved(end)
 
     reserved(def) method(to_s)
-        ident(sprintf)operator(()string<delimiter(")content(STR%s: %.*f)delimiter(")>operator(,) pre_constant(self)operator(.)ident(class)operator(.)ident(to_s) operator(,) instance_variable(@places)operator(,) instance_variable(@value)operator(\))   comment(#.)
+        ident(sprintf)operator(()string<delimiter(")content(STR%s: %.*f)delimiter(")>operator(,) predefined_constant(self)operator(.)ident(class)operator(.)ident(to_s) operator(,) instance_variable(@places)operator(,) instance_variable(@value)operator(\))   comment(#.)
     reserved(end)  
 
     reserved(def) method(to_str)
@@ -5073,7 +5073,7 @@ reserved(def) method(demo)operator(()operator(\))
     ident(puts) string<delimiter(")content(square of that is  )inline<inline_delimiter(#{)ident(z)operator(*)ident(z)inline_delimiter(})>delimiter(")>
 reserved(end)
 
-reserved(if) pre_constant(__FILE__) operator(==) global_variable($0)
+reserved(if) predefined_constant(__FILE__) operator(==) global_variable($0)
     ident(demo)operator(()operator(\))
 reserved(end)
 
@@ -5111,12 +5111,12 @@ comment(# for the given usernames, call with "ALL" to display all users)
 ident(require) string<delimiter(")content(sdbm)delimiter(")>
 ident(filename) operator(=) string<delimiter(')content(/tmp/userstats.db)delimiter(')>
 constant(SDBM)operator(.)ident(open)operator(()ident(filename)operator(,) integer(0666)operator(\)) operator({) operator(|)ident(dbobj)operator(|)
-    reserved(if) pre_constant(ARGV)operator(.)ident(length) operator(>) integer(0)
-        reserved(if) pre_constant(ARGV)operator([)integer(0)operator(]) operator(==) string<delimiter(")content(ALL)delimiter(")>
+    reserved(if) predefined_constant(ARGV)operator(.)ident(length) operator(>) integer(0)
+        reserved(if) predefined_constant(ARGV)operator([)integer(0)operator(]) operator(==) string<delimiter(")content(ALL)delimiter(")>
             comment(# ARGV is constant, so we need the variable userlist)
             ident(userlist) operator(=) ident(dbobj)operator(.)ident(keys)operator(()operator(\))operator(.)ident(sort)operator(()operator(\))
         reserved(else)
-            ident(userlist) operator(=) pre_constant(ARGV)
+            ident(userlist) operator(=) predefined_constant(ARGV)
         reserved(end)
         ident(userlist)operator(.)ident(each) operator({) operator(|)ident(user)operator(|)
             ident(print) string<delimiter(")inline<inline_delimiter(#{)ident(user)inline_delimiter(})>char(\\t)inline<inline_delimiter(#{)ident(dbobj)operator([)ident(user)operator(])inline_delimiter(})>char(\\n)delimiter(")>
@@ -5161,11 +5161,11 @@ comment(# sdbm2gdbm: converts sdbm database to a gdbm database)
 ident(require) string<delimiter(")content(sdbm)delimiter(")>
 ident(require) string<delimiter(")content(gdbm)delimiter(")>
 
-reserved(unless) pre_constant(ARGV)operator(.)ident(length) operator(==) integer(2)
+reserved(unless) predefined_constant(ARGV)operator(.)ident(length) operator(==) integer(2)
     ident(fail) string<delimiter(")content(usage: sdbm2gdbm infile outfile)delimiter(")>
 reserved(end)
-ident(infile) operator(=) pre_constant(ARGV)operator([)integer(0)operator(])
-ident(outfile) operator(=) pre_constant(ARGV)operator([)integer(1)operator(])
+ident(infile) operator(=) predefined_constant(ARGV)operator([)integer(0)operator(])
+ident(outfile) operator(=) predefined_constant(ARGV)operator([)integer(1)operator(])
 
 ident(sdb) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(infile)operator(\))
 ident(gdb) operator(=) constant(GDBM)operator(.)ident(open)operator(()ident(outfile)operator(,) integer(0666)operator(\))
@@ -5181,15 +5181,15 @@ doctype(#!/usr/bin/ruby -w)
 comment(# dbmmerge: merges two dbm databases)
 ident(require) string<delimiter(")content(sdbm)delimiter(")>
 
-reserved(unless) pre_constant(ARGV)operator(.)ident(length) operator(==) integer(3)
+reserved(unless) predefined_constant(ARGV)operator(.)ident(length) operator(==) integer(3)
     ident(fail) string<delimiter(")content(usage: dbmmerge indb1 indb2 outdb)delimiter(")>
 reserved(end)
-ident(infile1) operator(=) pre_constant(ARGV)operator([)integer(0)operator(])
-ident(infile2) operator(=) pre_constant(ARGV)operator([)integer(0)operator(])
-ident(outfile) operator(=) pre_constant(ARGV)operator([)integer(2)operator(])
+ident(infile1) operator(=) predefined_constant(ARGV)operator([)integer(0)operator(])
+ident(infile2) operator(=) predefined_constant(ARGV)operator([)integer(0)operator(])
+ident(outfile) operator(=) predefined_constant(ARGV)operator([)integer(2)operator(])
 
-ident(in1) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(infile1)operator(,) pre_constant(nil)operator(\))
-ident(in2) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(infile2)operator(,) pre_constant(nil)operator(\))
+ident(in1) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(infile1)operator(,) predefined_constant(nil)operator(\))
+ident(in2) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(infile2)operator(,) predefined_constant(nil)operator(\))
 ident(outdb) operator(=) constant(SDBM)operator(.)ident(open)operator(()ident(outfile)operator(,) integer(0666)operator(\))
 
 operator([)ident(in1)operator(,) ident(in2)operator(])operator(.)ident(each) operator({) operator(|)ident(indb)operator(|)
@@ -5216,7 +5216,7 @@ reserved(class) class(Array)
     reserved(def) method(tie)operator(()ident(filename)operator(,) ident(flags)operator(\))
         constant(File)operator(.)ident(open)operator(()ident(filename)operator(,) ident(flags)operator(\)) operator({) operator(|)ident(f)operator(|)
             ident(f)operator(.)ident(each_line) operator({) operator(|)ident(line)operator(|)
-                pre_constant(self)operator(.)ident(push)operator(()ident(line)operator(.)ident(chomp)operator(\))
+                predefined_constant(self)operator(.)ident(push)operator(()ident(line)operator(.)ident(chomp)operator(\))
             operator(})
             reserved(yield)
             ident(f)operator(.)ident(rewind)
@@ -5454,10 +5454,10 @@ comment(# It uses the optparse library, which is included with ruby 1.8)
 comment(# It handles classic unix style and gnu style options)
 ident(require) string<delimiter(')content(optparse)delimiter(')>
 
-instance_variable(@debugmode) operator(=) pre_constant(false)
-instance_variable(@verbose) operator(=) pre_constant(false)
+instance_variable(@debugmode) operator(=) predefined_constant(false)
+instance_variable(@verbose) operator(=) predefined_constant(false)
 
-pre_constant(ARGV)operator(.)ident(options) reserved(do) operator(|)ident(opts)operator(|)
+predefined_constant(ARGV)operator(.)ident(options) reserved(do) operator(|)ident(opts)operator(|)
     ident(opts)operator(.)ident(banner) operator(=) string<delimiter(")content(Usage: ruby )inline<inline_delimiter(#{)global_variable($0)inline_delimiter(})>content( [OPTIONS] INPUTFILES)delimiter(")>
 
     ident(opts)operator(.)ident(on)operator(()string<delimiter(")content(-h)delimiter(")>operator(,) string<delimiter(")content(--help)delimiter(")>operator(,) string<delimiter(")content(show this message)delimiter(")>operator(\)) operator({)
@@ -5489,7 +5489,7 @@ ident(puts) string<delimiter(")content(Verbose is on)delimiter(")> reserved(if) 
 ident(puts) string<delimiter(")content(Debugmode is on)delimiter(")> reserved(if) instance_variable(@debugmode)
 ident(puts) string<delimiter(")content(Outfile is )inline<inline_delimiter(#{)instance_variable(@outputfile)inline_delimiter(})>delimiter(")> reserved(if) reserved(defined?) instance_variable(@outputfile)
 ident(puts) string<delimiter(")content(Count is )inline<inline_delimiter(#{)instance_variable(@count)inline_delimiter(})>delimiter(")> reserved(if) reserved(defined?) instance_variable(@count)
-pre_constant(ARGV)operator(.)ident(each) operator({) operator(|)ident(param)operator(|)
+predefined_constant(ARGV)operator(.)ident(each) operator({) operator(|)ident(param)operator(|)
     ident(puts) string<delimiter(")content(Got parameter )inline<inline_delimiter(#{)ident(param)inline_delimiter(})>delimiter(")>
 operator(})
 
@@ -5625,7 +5625,7 @@ comment(# @@PLEAC@@_16.5)
 comment(#-----------------------------)
 reserved(def) method(head)operator(()ident(lines) operator(=) integer(20)operator(\))
     ident(pid) operator(=) ident(open)operator(()string<delimiter(")content(|-)delimiter(")>operator(,)string<delimiter(")content(w)delimiter(")>operator(\))
-    reserved(if) ident(pid) operator(==) pre_constant(nil)
+    reserved(if) ident(pid) operator(==) predefined_constant(nil)
         reserved(return)
     reserved(else)
         reserved(while) ident(gets)operator(()operator(\)) reserved(do)
@@ -5663,7 +5663,7 @@ comment(# qnumcat - demo additive output filters)
 
 reserved(def) method(number)operator(()operator(\))
     ident(pid) operator(=) ident(open)operator(()string<delimiter(")content(|-)delimiter(")>operator(,)string<delimiter(")content(w)delimiter(")>operator(\))
-    reserved(if) ident(pid) operator(==) pre_constant(nil)
+    reserved(if) ident(pid) operator(==) predefined_constant(nil)
         reserved(return)
     reserved(else)
         reserved(while) ident(gets)operator(()operator(\)) reserved(do) ident(pid)operator(.)ident(printf)operator(()string<delimiter(")content(%d: %s)delimiter(")>operator(,) global_variable($.)operator(,) global_variable($_)operator(\))operator(;) reserved(end)
@@ -5673,7 +5673,7 @@ reserved(end)
 
 reserved(def) method(quote)operator(()operator(\))
     ident(pid) operator(=) ident(open)operator(()string<delimiter(")content(|-)delimiter(")>operator(,)string<delimiter(")content(w)delimiter(")>operator(\))
-    reserved(if) ident(pid) operator(==) pre_constant(nil)
+    reserved(if) ident(pid) operator(==) predefined_constant(nil)
         reserved(return)
     reserved(else)
         reserved(while) ident(gets)operator(()operator(\)) reserved(do) ident(pid)operator(.)ident(print) string<delimiter(")content(> )inline<inline_delimiter(#{)global_variable($_)inline_delimiter(})>delimiter(")> reserved(end)
@@ -5692,20 +5692,20 @@ ident(exit)
 
 
 comment(# @@PLEAC@@_16.6)
-pre_constant(ARGV)operator(.)ident(map!) operator({) operator(|)ident(arg)operator(|)
+predefined_constant(ARGV)operator(.)ident(map!) operator({) operator(|)ident(arg)operator(|)
     ident(arg) operator(=)operator(~) regexp<delimiter(/)char(\\.)content((gz|Z\)$)delimiter(/)> operator(?) string<delimiter(")content(|gzip -dc )inline<inline_delimiter(#{)ident(arg)inline_delimiter(})>delimiter(")> operator(:) ident(arg)
 operator(})
-reserved(for) ident(file) reserved(in) pre_constant(ARGV)
+reserved(for) ident(file) reserved(in) predefined_constant(ARGV)
     ident(fh) operator(=) ident(open)operator(()ident(file)operator(\))
     reserved(while) ident(fh)operator(.)ident(gets)operator(()operator(\)) reserved(do)
         comment(# .......)
     reserved(end)
 reserved(end)
 comment(#-----------------------------)
-pre_constant(ARGV)operator(.)ident(map!) operator({) operator(|)ident(arg)operator(|)
+predefined_constant(ARGV)operator(.)ident(map!) operator({) operator(|)ident(arg)operator(|)
     ident(arg) operator(=)operator(~) regexp<delimiter(%r#)content(^)char(\\w)content(+://)delimiter(#)> operator(?) string<delimiter(")content(|GET )inline<inline_delimiter(#{)ident(arg)inline_delimiter(})>delimiter(")> operator(:) ident(arg)   comment(#)
 operator(})
-reserved(for) ident(file) reserved(in) pre_constant(ARGV)
+reserved(for) ident(file) reserved(in) predefined_constant(ARGV)
     ident(fh) operator(=) ident(open)operator(()ident(file)operator(\))
     reserved(while) ident(fh)operator(.)ident(gets)operator(()operator(\)) reserved(do)
         comment(# .......)
@@ -5748,7 +5748,7 @@ comment(#-----------------------------)
 ident(fd3) operator(=) ident(fd1) 
 ident(fd1) operator(=) ident(fd2) 
 ident(fd2) operator(=) ident(fd3) 
-ident(fd3) operator(=) pre_constant(nil) 
+ident(fd3) operator(=) predefined_constant(nil) 
 comment(#-----------------------------)
 ident(system)operator(()string<delimiter(")content(prog args 1>tmpfile 2>&1)delimiter(")>operator(\)) 
 ident(system)operator(()string<delimiter(")content(prog args 2>&1 1>tmpfile)delimiter(")>operator(\)) 
@@ -5883,7 +5883,7 @@ reserved(rescue)
 reserved(else)
     comment(# ... do something with the socket)
     ident(t)operator(.)ident(print) string<delimiter(")content(GET / HTTP/1.0)char(\\n)char(\\n)delimiter(")>
-    ident(answer) operator(=) ident(t)operator(.)ident(gets)operator(()pre_constant(nil)operator(\))
+    ident(answer) operator(=) ident(t)operator(.)ident(gets)operator(()predefined_constant(nil)operator(\))
     comment(# and terminate the connection when we're done)
     ident(t)operator(.)ident(close)
 reserved(end)
@@ -6046,7 +6046,7 @@ ident(require) string<delimiter(')content(timeout)delimiter(')>
 reserved(begin) 
     ident(timeout)operator(()integer(30)operator(\))operator({)
         ident(ftp) operator(=) constant(Net)operator(::)constant(FTP)operator(::)ident(new)operator(()string<delimiter(")content(ftp.host.com)delimiter(")>operator(\))
-        ident(ftp)operator(.)ident(debug_mode) operator(=) pre_constant(true)
+        ident(ftp)operator(.)ident(debug_mode) operator(=) predefined_constant(true)
     operator(})
 reserved(rescue) constant(Net)operator(::)constant(FTPError)
     global_variable($stderr)operator(.)ident(puts) string<delimiter(")content(Couldn't connect.)delimiter(")>
@@ -6223,12 +6223,12 @@ comment(# harmful operations further.)
 
 doctype(#!/usr/bin/ruby -T)
 global_variable($SAFE) operator(=) integer(1)
-constant(File)operator(.)ident(open)operator(()pre_constant(ARGV)operator([)integer(0)operator(])operator(,) string<delimiter(")content(w)delimiter(")>operator(\))
+constant(File)operator(.)ident(open)operator(()predefined_constant(ARGV)operator([)integer(0)operator(])operator(,) string<delimiter(")content(w)delimiter(")>operator(\))
 comment(# ruby warns with:)
 comment(# taint1.rb:2:in `initialize': Insecure operation - initialize (SecurityError\))
 
 global_variable($SAFE) operator(=) integer(1)
-ident(file) operator(=) pre_constant(ARGV)operator([)integer(0)operator(])
+ident(file) operator(=) predefined_constant(ARGV)operator([)integer(0)operator(])
 reserved(unless) regexp<delimiter(/)content(^([)char(\\w)content(.-]+\)$)delimiter(/)>operator(.)ident(match)operator(()ident(file)operator(\))
     ident(raise) string<delimiter(")content(filename )inline<inline_delimiter(#{)ident(file)inline_delimiter(})>content( has invalid characters)delimiter(")>
 reserved(end)
@@ -6267,7 +6267,7 @@ doctype(#!/usr/bin/ruby)
 comment(# os_snipe - redirect to a Jargon File entry about current OS)
 ident(dir) operator(=) string<delimiter(')content(http://www.elsewhere.org/jargon/html/entry)delimiter(')>
 
-ident(agent) operator(=) pre_constant(ENV)operator([)string<delimiter(')content(HTTP_USER_AGENT)delimiter(')>operator(])
+ident(agent) operator(=) predefined_constant(ENV)operator([)string<delimiter(')content(HTTP_USER_AGENT)delimiter(')>operator(])
 
 ident(page) operator(=) reserved(case)
     reserved(when) ident(agent) operator(=)operator(~) regexp<delimiter(/)content(Mac)delimiter(/)>operator(:) string<delimiter(')content(Macintrash.html)delimiter(')>

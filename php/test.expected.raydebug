@@ -40,7 +40,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
   *
   *  @return bool|string       Returns either true if the fil is sucessfully created or the content of the zip file
   */)
-  reserved(function) function(out)operator(()local_variable($filename) operator(=) pre_constant(false)operator(\)) operator({)
+  reserved(function) function(out)operator(()local_variable($filename) operator(=) predefined_constant(false)operator(\)) operator({)
     comment(// Empty output)
     local_variable($file_data) operator(=) predefined(array)operator(()operator(\))operator(;) comment(// Data of the file part)
     local_variable($cd_data)   operator(=) predefined(array)operator(()operator(\))operator(;) comment(// Data of the central directory)
@@ -276,17 +276,17 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
   *
   *  @return bool           Returns true if the file was loaded sucessfully
   */)
-  reserved(function) function(load_file)operator(()local_variable($file)operator(,) local_variable($reset) operator(=) pre_constant(true)operator(\)) operator({)
+  reserved(function) function(load_file)operator(()local_variable($file)operator(,) local_variable($reset) operator(=) predefined_constant(true)operator(\)) operator({)
     comment(// Check whether the file exists)
     reserved(if)operator(()operator(!)predefined(file_exists)operator(()local_variable($file)operator(\))operator(\))
-      reserved(return) pre_constant(false)operator(;)
+      reserved(return) predefined_constant(false)operator(;)
 
     comment(// Load the files content)
     local_variable($content) operator(=) exception(@)predefined(file_get_contents)operator(()local_variable($file)operator(\))operator(;)
 
     comment(// Return false if the file cannot be opened)
     reserved(if)operator(()operator(!)local_variable($content)operator(\))
-      reserved(return) pre_constant(false)operator(;)
+      reserved(return) predefined_constant(false)operator(;)
 
     comment(// Read the zip)
     reserved(return) local_variable($this)operator(->)ident(load_string)operator(()local_variable($content)operator(,) local_variable($reset)operator(\))operator(;)
@@ -304,7 +304,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
   *
   *  @return bool            Returns true if the string was loaded sucessfully
   */)
-  reserved(function) function(load_string)operator(()local_variable($string)operator(,) local_variable($reset) operator(=) pre_constant(true)operator(\)) operator({)
+  reserved(function) function(load_string)operator(()local_variable($string)operator(,) local_variable($reset) operator(=) predefined_constant(true)operator(\)) operator({)
     comment(// Reset the zip?)
     reserved(if)operator(()local_variable($reset)operator(\)) operator({)
       local_variable($this)operator(->)ident(dirs)  operator(=) predefined(array)operator(()operator(\))operator(;)
@@ -315,7 +315,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
     local_variable($start) operator(=) predefined(strpos)operator(()local_variable($string)operator(,) string<delimiter(")char(\\x50)char(\\x4b)char(\\x05)char(\\x06)delimiter(")>operator(\))operator(;)
 
     comment(// Error)
-    reserved(if)operator(()local_variable($start) operator(===) pre_constant(false)operator(\))
+    reserved(if)operator(()local_variable($start) operator(===) predefined_constant(false)operator(\))
       predefined(die)operator(()string<delimiter(')content(Could not find the end of central directory record)delimiter(')>operator(\))operator(;)
 
     comment(// Get the ecdr)
@@ -385,7 +385,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
 
       comment(// Valid header?)
       reserved(if)operator(()local_variable($header_info)operator([)string<delimiter(')content(header)delimiter(')>operator(]) operator(!=) integer(33639248)operator(\))
-        reserved(return) pre_constant(false)operator(;)
+        reserved(return) predefined_constant(false)operator(;)
 
       comment(// New position)
       local_variable($pos) operator(+=) integer(46)operator(;)
@@ -414,7 +414,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
 
     comment(// Check whether all entries where read sucessfully)
     reserved(if)operator(()predefined(count)operator(()local_variable($entries)operator(\)) operator(!=) local_variable($cd_entries)operator(\))
-      reserved(return) pre_constant(false)operator(;)
+      reserved(return) predefined_constant(false)operator(;)
 
     comment(// Handle files/dirs)
     reserved(foreach)operator(()local_variable($entries) reserved(as) local_variable($entry)operator(\)) operator({)
@@ -443,7 +443,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
 
       comment(// Valid header?)
       reserved(if)operator(()local_variable($header_info)operator([)string<delimiter(')content(header)delimiter(')>operator(]) operator(!=) integer(67324752)operator(\))
-        reserved(return) pre_constant(false)operator(;)
+        reserved(return) predefined_constant(false)operator(;)
 
       comment(// Get content start position)
       local_variable($start) operator(=) local_variable($entry)operator([)string<delimiter(')content(offset)delimiter(')>operator(]) operator(+) integer(30) operator(+) local_variable($header_info)operator([)string<delimiter(')content(name_length)delimiter(')>operator(]) operator(+) local_variable($header_info)operator([)string<delimiter(')content(extra_length)delimiter(')>operator(])operator(;)
@@ -462,7 +462,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
         comment(// Gzip)
         reserved(case) integer(8)operator(:)
           reserved(if)operator(()operator(!)predefined(function_exists)operator(()string<delimiter(')content(gzinflate)delimiter(')>operator(\))operator(\))
-            reserved(return) pre_constant(false)operator(;)
+            reserved(return) predefined_constant(false)operator(;)
 
           comment(// Uncompress data)
           local_variable($content) operator(=) predefined(gzinflate)operator(()local_variable($data)operator(\))operator(;)
@@ -471,7 +471,7 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
         comment(// Bzip2)
         reserved(case) integer(12)operator(:)
           reserved(if)operator(()operator(!)predefined(function_exists)operator(()string<delimiter(')content(bzdecompress)delimiter(')>operator(\))operator(\))
-            reserved(return) pre_constant(false)operator(;)
+            reserved(return) predefined_constant(false)operator(;)
 
           comment(// Decompress data)
           local_variable($content) operator(=) predefined(bzdecompress)operator(()local_variable($data)operator(\))operator(;)
@@ -479,15 +479,15 @@ reserved(class) class(Zip) reserved(extends) constant(Archive) operator({)
 
         comment(// Compression not supported -> error)
         reserved(default)operator(:)
-          reserved(return) pre_constant(false)operator(;)
+          reserved(return) predefined_constant(false)operator(;)
       operator(})
 
       comment(// Try to add file)
       reserved(if)operator(()operator(!)local_variable($this)operator(->)ident(add_file)operator(()local_variable($entry)operator([)string<delimiter(')content(name)delimiter(')>operator(])operator(,) local_variable($content)operator(\))operator(\))
-        reserved(return) pre_constant(false)operator(;)
+        reserved(return) predefined_constant(false)operator(;)
     operator(})
 
-    reserved(return) pre_constant(true)operator(;)
+    reserved(return) predefined_constant(true)operator(;)
   operator(})
 operator(})
 

@@ -14,10 +14,10 @@ local_variable($position) operator(=) integer(0)operator(;)
 label(hIterator)operator(:) operator({)
 
     local_variable($c) operator(=) integer(0)operator(;)
-    predefined(echo) local_variable($headers)operator([)local_variable($position)operator(]) operator(.) pre_constant(PHP_EOL)operator(;)
+    predefined(echo) local_variable($headers)operator([)local_variable($position)operator(]) operator(.) predefined_constant(PHP_EOL)operator(;)
 
     label(cIterator)operator(:) operator({)
-        predefined(echo) string<delimiter(')content( )delimiter(')> operator(.) local_variable($headers)operator([)local_variable($position)operator(])operator([)local_variable($c)operator(]) operator(.) pre_constant(PHP_EOL)operator(;)
+        predefined(echo) string<delimiter(')content( )delimiter(')> operator(.) local_variable($headers)operator([)local_variable($position)operator(])operator([)local_variable($c)operator(]) operator(.) predefined_constant(PHP_EOL)operator(;)
 
         reserved(if)operator(()operator(!)predefined(isset)operator(()local_variable($headers)operator([)local_variable($position)operator(])operator([)operator(++)local_variable($c)operator(])operator(\))operator(\)) operator({)
             reserved(goto) ident(cIteratorExit)operator(;)

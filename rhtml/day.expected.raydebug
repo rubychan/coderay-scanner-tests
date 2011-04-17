@@ -21,6 +21,6 @@ tag(<tr>)
 tag(</tr>)
 
 inline<inline_delimiter(<%)
-	ident(day) operator(=) pre_constant(nil)
+	ident(day) operator(=) predefined_constant(nil)
 	reserved(end) 
 inline_delimiter(-%>)>

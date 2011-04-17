@@ -576,7 +576,7 @@ predefined(echo) string<delimiter(")content(number)char(\\t)content(int)char(\\t
 
 reserved(foreach)operator(()predefined(array)operator(()float(3.3)operator(,) float(3.5)operator(,) float(3.7)operator(,) operator(-)float(3.3)operator(\)) reserved(as) local_variable($number)operator(\))
 operator({)
-  predefined(printf)operator(()string<delimiter(")content(%.1f)char(\\t)content(%.1f)char(\\t)content(%.1f)char(\\t)content(%.1f)char(\\n)delimiter(")>operator(,) local_variable($number)operator(,) operator(()pre_type(int)operator(\)) local_variable($number)operator(,) predefined(floor)operator(()local_variable($number)operator(\))operator(,) predefined(ceil)operator(()local_variable($number)operator(\))operator(\))operator(;)
+  predefined(printf)operator(()string<delimiter(")content(%.1f)char(\\t)content(%.1f)char(\\t)content(%.1f)char(\\t)content(%.1f)char(\\n)delimiter(")>operator(,) local_variable($number)operator(,) operator(()predefined_type(int)operator(\)) local_variable($number)operator(,) predefined(floor)operator(()local_variable($number)operator(\))operator(,) predefined(ceil)operator(()local_variable($number)operator(\))operator(\))operator(;)
 operator(})
 
 comment(// @@PLEAC@@_2.4)
@@ -658,9 +658,9 @@ comment(// PHP sports a large number of C Standard Library routines including th
 comment(// function, used to re-seed the RNG used with calls to the 'rand' function. Thus,)
 comment(// as per Perl example:)
 
-reserved(while) operator(()pre_constant(TRUE)operator(\))
+reserved(while) operator(()predefined_constant(TRUE)operator(\))
 operator({)
-  local_variable($seed) operator(=) operator(()pre_type(int)operator(\)) predefined(fgets)operator(()constant(STDIN)operator(\))operator(;)
+  local_variable($seed) operator(=) operator(()predefined_type(int)operator(\)) predefined(fgets)operator(()constant(STDIN)operator(\))operator(;)
   reserved(if) operator(()operator(!)predefined(empty)operator(()local_variable($seed)operator(\))operator(\)) reserved(break)operator(;)
 operator(})
 
@@ -687,7 +687,7 @@ comment(// approximate the generation of a 'truly random value')
 local_variable($truly_random_value) operator(=) ident(mt_rand)operator(()operator(\))operator(;)
 
 comment(// @@PLEAC@@_2.10)
-reserved(function) function(random)operator(()operator(\)) operator({) reserved(return) operator(()pre_type(float)operator(\)) predefined(rand)operator(()operator(\)) operator(/) operator(()pre_type(float)operator(\)) predefined(getrandmax)operator(()operator(\))operator(;) operator(})
+reserved(function) function(random)operator(()operator(\)) operator({) reserved(return) operator(()predefined_type(float)operator(\)) predefined(rand)operator(()operator(\)) operator(/) operator(()predefined_type(float)operator(\)) predefined(getrandmax)operator(()operator(\))operator(;) operator(})
 
 reserved(function) function(gaussian_rand)operator(()operator(\))
 operator({)
@@ -714,8 +714,8 @@ predefined(printf)operator(()string<delimiter(")content(You have been hired at: 
 comment(// @@PLEAC@@_2.11)
 comment(// 'deg2rad' and 'rad2deg' are actually PHP built-ins, but here is how you might implement)
 operator(/)  ident(them) reserved(if) ident(needed)
-reserved(function) function(deg2rad_)operator(()local_variable($deg)operator(\)) operator({) reserved(return) operator(()local_variable($deg) operator(/) float(180.0)operator(\)) operator(*) pre_constant(M_PI)operator(;) operator(})
-reserved(function) function(rad2deg_)operator(()local_variable($rad)operator(\)) operator({) reserved(return) operator(()local_variable($rad) operator(/) pre_constant(M_PI)operator(\)) operator(*) float(180.0)operator(;) operator(})
+reserved(function) function(deg2rad_)operator(()local_variable($deg)operator(\)) operator({) reserved(return) operator(()local_variable($deg) operator(/) float(180.0)operator(\)) operator(*) predefined_constant(M_PI)operator(;) operator(})
+reserved(function) function(rad2deg_)operator(()local_variable($rad)operator(\)) operator({) reserved(return) operator(()local_variable($rad) operator(/) predefined_constant(M_PI)operator(\)) operator(*) float(180.0)operator(;) operator(})
 
 comment(// ------------)
 
@@ -957,7 +957,7 @@ operator(})
 reserved(function) function(dateInterval)operator(()local_variable($intvltype)operator(,) local_variable($timevalue)operator(\))
 operator({)
   reserved(static) local_variable($tbl) operator(=) predefined(array)operator(()string<delimiter(')content(sec)delimiter(')> operator(=>) integer(1)operator(,) string<delimiter(')content(min)delimiter(')> operator(=>) integer(60)operator(,) string<delimiter(')content(hou)delimiter(')> operator(=>) integer(3600)operator(,) string<delimiter(')content(day)delimiter(')> operator(=>) integer(86400)operator(,) string<delimiter(')content(wee)delimiter(')> operator(=>) integer(604800)operator(\))operator(;)
-  reserved(return) operator(()pre_type(int)operator(\)) predefined(round)operator(()local_variable($timevalue) operator(/) local_variable($tbl)operator([)predefined(strtolower)operator(()predefined(substr)operator(()local_variable($intvltype)operator(,) integer(0)operator(,) integer(3)operator(\))operator(\))operator(])operator(\))operator(;)
+  reserved(return) operator(()predefined_type(int)operator(\)) predefined(round)operator(()local_variable($timevalue) operator(/) local_variable($tbl)operator([)predefined(strtolower)operator(()predefined(substr)operator(()local_variable($intvltype)operator(,) integer(0)operator(,) integer(3)operator(\))operator(\))operator(])operator(\))operator(;)
 operator(})
 
 comment(// ----------------------------)
@@ -970,7 +970,7 @@ comment(// Extract indexed, and associative arrays, respectively, from 'localtim
 local_variable($today) operator(=) predefined(localtime)operator(()operator(\))operator(;)
 predefined(printf)operator(()string<delimiter(")content(Today is day %d of the current year)char(\\n)delimiter(")>operator(,) local_variable($today)operator([)integer(7)operator(])operator(\))operator(;)
 
-local_variable($today) operator(=) predefined(localtime)operator(()predefined(time)operator(()operator(\))operator(,) pre_constant(TRUE)operator(\))operator(;)
+local_variable($today) operator(=) predefined(localtime)operator(()predefined(time)operator(()operator(\))operator(,) predefined_constant(TRUE)operator(\))operator(;)
 predefined(printf)operator(()string<delimiter(")content(Today is day %d of the current year)char(\\n)delimiter(")>operator(,) local_variable($today)operator([)string<delimiter(')content(tm_yday)delimiter(')>operator(])operator(\))operator(;)
 
 comment(// @@PLEAC@@_3.1)
@@ -993,7 +993,7 @@ predefined(echo) string<delimiter(')content(Current date is: )delimiter(')> oper
 
 comment(// ------------)
 
-local_variable($today) operator(=) predefined(localtime)operator(()predefined(time)operator(()operator(\))operator(,) pre_constant(TRUE)operator(\))operator(;)
+local_variable($today) operator(=) predefined(localtime)operator(()predefined(time)operator(()operator(\))operator(,) predefined_constant(TRUE)operator(\))operator(;)
 
 local_variable($day) operator(=) local_variable($today)operator([)string<delimiter(')content(tm_mday)delimiter(')>operator(])operator(;)
 local_variable($month) operator(=) local_variable($today)operator([)string<delimiter(')content(tm_mon)delimiter(')>operator(]) operator(+) integer(1)operator(;)
@@ -1089,7 +1089,7 @@ local_variable($hr) operator(=) integer(3)operator(;) local_variable($min) opera
 local_variable($yroff) operator(=) integer(0)operator(;) local_variable($monoff) operator(=) integer(0)operator(;) local_variable($dayoff) operator(=) integer(55)operator(;) local_variable($hroff) operator(=) integer(2)operator(;) local_variable($minoff) operator(=) integer(17)operator(;) local_variable($secoff) operator(=) integer(5)operator(;)
 
 comment(// Base date)
-local_variable($birthtime) operator(=) predefined(mktime)operator(()local_variable($hr)operator(,) local_variable($min)operator(,) local_variable($sec)operator(,) local_variable($mon)operator(,) local_variable($day)operator(,) local_variable($year)operator(,) pre_constant(TRUE)operator(\))operator(;)
+local_variable($birthtime) operator(=) predefined(mktime)operator(()local_variable($hr)operator(,) local_variable($min)operator(,) local_variable($sec)operator(,) local_variable($mon)operator(,) local_variable($day)operator(,) local_variable($year)operator(,) predefined_constant(TRUE)operator(\))operator(;)
 
 local_variable($year) operator(=) predefined(date)operator(()string<delimiter(')content(Y)delimiter(')>operator(,) local_variable($birthtime)operator(\)) operator(+) local_variable($yroff)operator(;)
 local_variable($mon) operator(=) predefined(date)operator(()string<delimiter(')content(m)delimiter(')>operator(,) local_variable($birthtime)operator(\)) operator(+) local_variable($monoff)operator(;)
@@ -1100,7 +1100,7 @@ local_variable($min) operator(=) predefined(date)operator(()string<delimiter(')c
 local_variable($sec) operator(=) predefined(date)operator(()string<delimiter(')content(s)delimiter(')>operator(,) local_variable($birthtime)operator(\)) operator(+) local_variable($secoff)operator(;)
 
 comment(// Offset date)
-local_variable($then) operator(=) predefined(mktime)operator(()local_variable($hr)operator(,) local_variable($min)operator(,) local_variable($sec)operator(,) local_variable($mon)operator(,) local_variable($day)operator(,) local_variable($year)operator(,) pre_constant(TRUE)operator(\))operator(;)
+local_variable($then) operator(=) predefined(mktime)operator(()local_variable($hr)operator(,) local_variable($min)operator(,) local_variable($sec)operator(,) local_variable($mon)operator(,) local_variable($day)operator(,) local_variable($year)operator(,) predefined_constant(TRUE)operator(\))operator(;)
 
 predefined(printf)operator(()string<delimiter(")content(Birthtime is: %s)char(\\n)content(then is:      %s)char(\\n)delimiter(")>operator(,) predefined(date)operator(()constant(DATE_RFC1123)operator(,) local_variable($birthtime)operator(\))operator(,) predefined(date)operator(()constant(DATE_RFC1123)operator(,) local_variable($then)operator(\))operator(\))operator(;)
 
@@ -1142,8 +1142,8 @@ local_variable($bree) operator(=) predefined(strtotime)operator(()string<delimit
 local_variable($nat) operator(=) predefined(strtotime)operator(()string<delimiter(')content(18 Jan 1973, 3:45:50)delimiter(')>operator(\))operator(;)
 
 comment(// ... or, with daylight saving adjustment)
-local_variable($bree) operator(=) predefined(mktime)operator(()integer(4)operator(,) integer(35)operator(,) integer(25)operator(,) integer(6)operator(,) integer(16)operator(,) integer(1981)operator(,) pre_constant(TRUE)operator(\))operator(;)
-local_variable($nat) operator(=) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(1973)operator(,) pre_constant(TRUE)operator(\))operator(;)
+local_variable($bree) operator(=) predefined(mktime)operator(()integer(4)operator(,) integer(35)operator(,) integer(25)operator(,) integer(6)operator(,) integer(16)operator(,) integer(1981)operator(,) predefined_constant(TRUE)operator(\))operator(;)
+local_variable($nat) operator(=) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(1973)operator(,) predefined_constant(TRUE)operator(\))operator(;)
 
 local_variable($difference) operator(=) local_variable($bree) operator(-) local_variable($nat)operator(;)
 
@@ -1166,7 +1166,7 @@ local_variable($weekday) operator(=) local_variable($today)operator([)string<del
 local_variable($monthday) operator(=) local_variable($today)operator([)string<delimiter(')content(mday)delimiter(')>operator(])operator(;)
 local_variable($yearday) operator(=) local_variable($today)operator([)string<delimiter(')content(yday)delimiter(')>operator(])operator(;)
 
-local_variable($weeknumber) operator(=) operator(()pre_type(int)operator(\)) predefined(round)operator(()local_variable($yearday) operator(/) float(7.0)operator(\))operator(;)
+local_variable($weeknumber) operator(=) operator(()predefined_type(int)operator(\)) predefined(round)operator(()local_variable($yearday) operator(/) float(7.0)operator(\))operator(;)
 
 comment(// Safter method of obtaining week number)
 local_variable($weeknumber) operator(=) predefined(strftime)operator(()string<delimiter(')content(%U)delimiter(')>operator(\)) operator(+) integer(1)operator(;)
@@ -1187,7 +1187,7 @@ local_variable($weekday) operator(=) local_variable($date)operator([)string<deli
 local_variable($monthday) operator(=) local_variable($date)operator([)string<delimiter(')content(mday)delimiter(')>operator(])operator(;)
 local_variable($yearday) operator(=) local_variable($date)operator([)string<delimiter(')content(yday)delimiter(')>operator(])operator(;)
 
-local_variable($weeknumber) operator(=) operator(()pre_type(int)operator(\)) predefined(round)operator(()local_variable($yearday) operator(/) float(7.0)operator(\))operator(;)
+local_variable($weeknumber) operator(=) operator(()predefined_type(int)operator(\)) predefined(round)operator(()local_variable($yearday) operator(/) float(7.0)operator(\))operator(;)
 
 local_variable($weeknumber) operator(=) predefined(strftime)operator(()string<delimiter(')content(%U)delimiter(')>operator(,) local_variable($timestamp)operator(\)) operator(+) integer(1)operator(;)
 
@@ -1264,7 +1264,7 @@ predefined(strftime)operator(()string<delimiter(')content(%Y/%m/%d)delimiter(')>
 comment(// ----------------------------)
 
 comment(// 'mktime' creates a local time timestamp)
-local_variable($t) operator(=) predefined(strftime)operator(()string<delimiter(')content(%a %b %e %H:%M:%S %z %Y)delimiter(')>operator(,) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(73)operator(,) pre_constant(TRUE)operator(\))operator(\))operator(;)
+local_variable($t) operator(=) predefined(strftime)operator(()string<delimiter(')content(%a %b %e %H:%M:%S %z %Y)delimiter(')>operator(,) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(73)operator(,) predefined_constant(TRUE)operator(\))operator(\))operator(;)
 predefined(echo) string<delimiter(")inline<delimiter({)local_variable($t)delimiter(})>char(\\n)delimiter(")>operator(;)
 
 comment(// 'gmmktime' creates a GMT time timestamp)
@@ -1278,7 +1278,7 @@ local_variable($t) operator(=) predefined(strftime)operator(()string<delimiter('
 predefined(echo) string<delimiter(")inline<delimiter({)local_variable($t)delimiter(})>char(\\n)delimiter(")>operator(;)
 
 comment(// This should generate output identical to previous example)
-local_variable($t) operator(=) predefined(strftime)operator(()string<delimiter(')content(%A %D)delimiter(')>operator(,) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(73)operator(,) pre_constant(TRUE)operator(\))operator(\))operator(;)
+local_variable($t) operator(=) predefined(strftime)operator(()string<delimiter(')content(%A %D)delimiter(')>operator(,) predefined(mktime)operator(()integer(3)operator(,) integer(45)operator(,) integer(50)operator(,) integer(1)operator(,) integer(18)operator(,) integer(73)operator(,) predefined_constant(TRUE)operator(\))operator(\))operator(;)
 predefined(echo) string<delimiter(")inline<delimiter({)local_variable($t)delimiter(})>char(\\n)delimiter(")>operator(;)
 
 comment(// @@PLEAC@@_3.9)
@@ -1312,7 +1312,7 @@ operator({)
   local_variable($total_time) operator(+=) local_variable($elapsed)operator(;)
 operator(})
 
-predefined(printf)operator(()string<delimiter(")content(On average, sorting %d random numbers takes %.5f seconds)char(\\n)delimiter(")>operator(,) constant(SIZE)operator(,) local_variable($total_time) operator(/) operator(()pre_type(float)operator(\)) constant(NUMBER_OF_TIMES)operator(\))operator(;)
+predefined(printf)operator(()string<delimiter(")content(On average, sorting %d random numbers takes %.5f seconds)char(\\n)delimiter(")>operator(,) constant(SIZE)operator(,) local_variable($total_time) operator(/) operator(()predefined_type(float)operator(\)) constant(NUMBER_OF_TIMES)operator(\))operator(;)
 
 comment(// @@PLEAC@@_3.10)
 comment(// Low-resolution: sleep time specified in seconds)
@@ -1409,7 +1409,7 @@ reserved(function) function(commify_series)operator(()local_variable($list)opera
 operator({)
   local_variable($n) operator(=) predefined(str_word_count)operator(()local_variable($list)operator(\))operator(;) local_variable($series) operator(=) predefined(str_word_count)operator(()local_variable($list)operator(,) integer(1)operator(\))operator(;)
 
-  reserved(if) operator(()local_variable($n) operator(==) integer(0)operator(\)) reserved(return) pre_constant(NULL)operator(;)
+  reserved(if) operator(()local_variable($n) operator(==) integer(0)operator(\)) reserved(return) predefined_constant(NULL)operator(;)
   reserved(if) operator(()local_variable($n) operator(==) integer(1)operator(\)) reserved(return) local_variable($series)operator([)integer(0)operator(])operator(;)
   reserved(if) operator(()local_variable($n) operator(==) integer(2)operator(\)) reserved(return) local_variable($series)operator([)integer(0)operator(]) operator(.) string<delimiter(')content( and )delimiter(')> operator(.) local_variable($series)operator([)integer(1)operator(])operator(;)
   
@@ -1433,11 +1433,11 @@ operator({)
 
   reserved(foreach)operator(()local_variable($arr) reserved(as) local_variable($str)operator(\))
   operator({)
-    reserved(if) operator(()predefined(strpos)operator(()local_variable($str)operator(,) string<delimiter(')content(,)delimiter(')>operator(\)) operator(===) pre_constant(false)operator(\)) reserved(continue)operator(;)
+    reserved(if) operator(()predefined(strpos)operator(()local_variable($str)operator(,) string<delimiter(')content(,)delimiter(')>operator(\)) operator(===) predefined_constant(false)operator(\)) reserved(continue)operator(;)
     local_variable($sepchar) operator(=) string<delimiter(')content(;)delimiter(')>operator(;) reserved(break)operator(;) 
   operator(})
 
-  reserved(if) operator(()local_variable($n) operator(==) integer(0)operator(\)) reserved(return) pre_constant(NULL)operator(;)
+  reserved(if) operator(()local_variable($n) operator(==) integer(0)operator(\)) reserved(return) predefined_constant(NULL)operator(;)
   reserved(if) operator(()local_variable($n) operator(==) integer(1)operator(\)) reserved(return) local_variable($arr)operator([)integer(0)operator(])operator(;)
   reserved(if) operator(()local_variable($n) operator(==) integer(2)operator(\)) reserved(return) local_variable($arr)operator([)integer(0)operator(]) operator(.) string<delimiter(')content( and )delimiter(')> operator(.) local_variable($arr)operator([)integer(1)operator(])operator(;)
   
@@ -1640,7 +1640,7 @@ reserved(foreach)operator(()local_variable($list) reserved(as) local_variable($i
 operator({)
   reserved(if) operator(()operator(!)predefined(isset)operator(()local_variable($seen)operator([)local_variable($item)operator(])operator(\))operator(\))
   operator({)
-    local_variable($seen)operator([)local_variable($item)operator(]) operator(=) pre_constant(TRUE)operator(;)
+    local_variable($seen)operator([)local_variable($item)operator(]) operator(=) predefined_constant(TRUE)operator(;)
     local_variable($unique)operator([)operator(]) operator(=) local_variable($item)operator(;)
   operator(})
 operator(})
@@ -1855,7 +1855,7 @@ comment(//   means of terminating the search once a match has been found. It wou
 comment(//   function were to have a third parameter, a Boolean flag indicating whether to traverse)
 comment(//   the whole array, or quit after first match [next version, maybe :\) ?])
 
-local_variable($found) operator(=) pre_constant(FALSE)operator(;)
+local_variable($found) operator(=) predefined_constant(FALSE)operator(;)
 
 reserved(foreach)operator(()local_variable($array) reserved(as) local_variable($item)operator(\))
 operator({)
@@ -1864,7 +1864,7 @@ operator({)
 
   comment(// Found - save and leave)
   local_variable($match) operator(=) local_variable($item)operator(;)
-  local_variable($found) operator(=) pre_constant(TRUE)operator(;)
+  local_variable($found) operator(=) predefined_constant(TRUE)operator(;)
   reserved(break)operator(;)  
 operator(})
 
@@ -1881,8 +1881,8 @@ comment(// ------------)
 
 reserved(function) function(predicate)operator(()local_variable($element)operator(\))
 operator({)
-  reserved(if) operator(()ident(criterion)operator(\)) reserved(return) pre_constant(TRUE)operator(;)
-  reserved(return) pre_constant(FALSE)operator(;)
+  reserved(if) operator(()ident(criterion)operator(\)) reserved(return) predefined_constant(TRUE)operator(;)
+  reserved(return) predefined_constant(FALSE)operator(;)
 operator(})
 
 local_variable($match) operator(=) predefined(array_slice)operator(()predefined(array_filter)operator(()local_variable($array)operator(,) string<delimiter(')content(predicate)delimiter(')>operator(\))operator(,) integer(0)operator(,) integer(1)operator(\))operator(;)
@@ -1956,8 +1956,8 @@ comment(// function)
 
 reserved(function) function(predicate)operator(()local_variable($element)operator(\))
 operator({)
-  reserved(if) operator(()ident(criterion)operator(\)) reserved(return) pre_constant(TRUE)operator(;)
-  reserved(return) pre_constant(FALSE)operator(;)
+  reserved(if) operator(()ident(criterion)operator(\)) reserved(return) predefined_constant(TRUE)operator(;)
+  reserved(return) predefined_constant(FALSE)operator(;)
 operator(})
 
 local_variable($matching) operator(=) predefined(array_filter)operator(()local_variable($list)operator(,) string<delimiter(')content(predicate)delimiter(')>operator(\))operator(;)
@@ -2313,7 +2313,7 @@ comment(// ------------)
 
 local_variable($processes) operator(=) predefined(array)operator(()integer(1)operator(,) integer(2)operator(,) integer(3)operator(,) integer(4)operator(,) integer(5)operator(\))operator(;)
 
-reserved(while) operator(()pre_constant(TRUE)operator(\))
+reserved(while) operator(()predefined_constant(TRUE)operator(\))
 operator({)
   local_variable($process) operator(=) ident(grab_and_rotate)operator(()local_variable($processes)operator(\))operator(;)
   predefined(echo) string<delimiter(")content(Handling process )inline<delimiter({)local_variable($process)delimiter(})>char(\\n)delimiter(")>operator(;)
@@ -2440,7 +2440,7 @@ operator(})
 
 comment(// ----------------------------)
 
-local_variable($age) operator(=) predefined(array)operator(()string<delimiter(')content(Toddler)delimiter(')> operator(=>) integer(3)operator(,) string<delimiter(')content(Unborn)delimiter(')> operator(=>) integer(0)operator(,) string<delimiter(')content(Phantasm)delimiter(')> operator(=>) pre_constant(NULL)operator(\))operator(;)
+local_variable($age) operator(=) predefined(array)operator(()string<delimiter(')content(Toddler)delimiter(')> operator(=>) integer(3)operator(,) string<delimiter(')content(Unborn)delimiter(')> operator(=>) integer(0)operator(,) string<delimiter(')content(Phantasm)delimiter(')> operator(=>) predefined_constant(NULL)operator(\))operator(;)
 
 reserved(foreach)operator(()predefined(array)operator(()string<delimiter(')content(Toddler)delimiter(')>operator(,) string<delimiter(')content(Unborn)delimiter(')>operator(,) string<delimiter(')content(Phantasm)delimiter(')>operator(,) string<delimiter(')content(Relic)delimiter(')>operator(\)) reserved(as) local_variable($thing)operator(\))
 operator({)
@@ -2492,7 +2492,7 @@ local_variable($food_colour) operator(=) predefined(array)operator(()string<deli
 predefined(echo) string<delimiter(")content(Initially:)char(\\n)delimiter(")>operator(;) ident(print_foods)operator(()operator(\))operator(;)
 
 comment(// Nullify an entry)
-local_variable($food_colour)operator([)string<delimiter(')content(Banana)delimiter(')>operator(]) operator(=) pre_constant(NULL)operator(;)
+local_variable($food_colour)operator([)string<delimiter(')content(Banana)delimiter(')>operator(]) operator(=) predefined_constant(NULL)operator(;)
 predefined(echo) string<delimiter(")char(\\n)content(With 'Banana' nullified)char(\\n)delimiter(")>operator(;)
 ident(print_foods)operator(()operator(\))operator(;)
 
@@ -2924,7 +2924,7 @@ local_variable($name) operator(=) predefined(trim)operator(()predefined(fgets)op
 
 reserved(while) operator(()operator(!)predefined(feof)operator(()constant(STDIN)operator(\))operator(\))
 operator({)
-  reserved(while) operator(()pre_constant(TRUE)operator(\))
+  reserved(while) operator(()predefined_constant(TRUE)operator(\))
   operator({)
     predefined(echo) string<delimiter(")local_variable($name)char(\\n)delimiter(")>operator(;)
 
@@ -3024,13 +3024,13 @@ comment(// function that searches for a newline could be implemented. Not exactl
 comment(// foolproof, but very simple, low overhead, no installation headaches ...)
 reserved(function) function(containsText)operator(()local_variable($file)operator(\))
 operator({)
-  local_variable($status) operator(=) pre_constant(FALSE)operator(;)
+  local_variable($status) operator(=) predefined_constant(FALSE)operator(;)
 
   reserved(if) operator(()operator(()local_variable($fp) operator(=) predefined(fopen)operator(()local_variable($file)operator(,) string<delimiter(')content(r)delimiter(')>operator(\))operator(\))operator(\))
   operator({)
-    reserved(while) operator(()pre_constant(FALSE) operator(!==) operator(()local_variable($char) operator(=) predefined(fgetc)operator(()local_variable($fp)operator(\))operator(\))operator(\))
+    reserved(while) operator(()predefined_constant(FALSE) operator(!==) operator(()local_variable($char) operator(=) predefined(fgetc)operator(()local_variable($fp)operator(\))operator(\))operator(\))
     operator({)
-      reserved(if) operator(()local_variable($char) operator(==) string<delimiter(")char(\\n)delimiter(")>operator(\)) operator({) local_variable($status) operator(=) pre_constant(TRUE)operator(;) reserved(break)operator(;) operator(})
+      reserved(if) operator(()local_variable($char) operator(==) string<delimiter(")char(\\n)delimiter(")>operator(\)) operator({) local_variable($status) operator(=) predefined_constant(TRUE)operator(;) reserved(break)operator(;) operator(})
     operator(})
 
     predefined(fclose)operator(()local_variable($fp)operator(\))operator(;)
@@ -3070,7 +3070,7 @@ local_variable($dirname) operator(=) string<delimiter(')content(/usr/bin/)delimi
 
 operator(()local_variable($dirhdl) operator(=) predefined(opendir)operator(()local_variable($dirname)operator(\))operator(\)) operator(||) predefined(die)operator(()string<delimiter(")content(Couldn't open )inline<delimiter({)local_variable($dirname)delimiter(})>char(\\n)delimiter(")>operator(\))operator(;)
 
-reserved(while) operator(()operator(()local_variable($file) operator(=) predefined(readdir)operator(()local_variable($dirhdl)operator(\))operator(\)) operator(!==) pre_constant(FALSE)operator(\))
+reserved(while) operator(()operator(()local_variable($file) operator(=) predefined(readdir)operator(()local_variable($dirhdl)operator(\))operator(\)) operator(!==) predefined_constant(FALSE)operator(\))
 operator({)
   predefined(printf)operator(()string<delimiter(")content(Inside %s is something called: %s)char(\\n)delimiter(")>operator(,) local_variable($dirname)operator(,) local_variable($file)operator(\))operator(;)
 operator(})
@@ -3157,10 +3157,10 @@ exception(@)predefined(unlink)operator(()local_variable($filename)operator(\)) o
 comment(// ------------)
 
 local_variable($files) operator(=) predefined(glob)operator(()string<delimiter(')content(...)delimiter(')>operator(\))operator(;)
-local_variable($problem) operator(=) pre_constant(FALSE)operator(;)
+local_variable($problem) operator(=) predefined_constant(FALSE)operator(;)
 
 comment(// Could simply use a foreach loop)
-reserved(foreach)operator(()local_variable($files) reserved(as) local_variable($filename)operator(\)) operator({) exception(@)predefined(unlink)operator(()local_variable($filename)operator(\)) operator(||) local_variable($problem) operator(=) pre_constant(TRUE)operator(;) operator(})
+reserved(foreach)operator(()local_variable($files) reserved(as) local_variable($filename)operator(\)) operator({) exception(@)predefined(unlink)operator(()local_variable($filename)operator(\)) operator(||) local_variable($problem) operator(=) predefined_constant(TRUE)operator(;) operator(})
 
 comment(//)
 comment(// Alternatively, an applicative approach could be used, one closer in spirit to)
@@ -3265,7 +3265,7 @@ comment(// as the rest of the code is platform independant)
 comment(// @@PLEAC@@_9.4)
 reserved(function) function(makeDevInodePair)operator(()local_variable($filename)operator(\))
 operator({)
-  reserved(if) operator(()operator(!)operator(()local_variable($fs) operator(=) exception(@)predefined(stat)operator(()local_variable($filename)operator(\))operator(\))operator(\)) reserved(return) pre_constant(FALSE)operator(;)
+  reserved(if) operator(()operator(!)operator(()local_variable($fs) operator(=) exception(@)predefined(stat)operator(()local_variable($filename)operator(\))operator(\))operator(\)) reserved(return) predefined_constant(FALSE)operator(;)
   reserved(return) predefined(strval)operator(()local_variable($fs)operator([)string<delimiter(')content(dev)delimiter(')>operator(]) operator(.) local_variable($fs)operator([)string<delimiter(')content(ino)delimiter(')>operator(])operator(\))operator(;)
 operator(})
 
@@ -3391,7 +3391,7 @@ local_variable($dirname) operator(=) string<delimiter(')content(/usr/bin/)delimi
 
 operator(()local_variable($dirhdl) operator(=) predefined(opendir)operator(()local_variable($dirname)operator(\))operator(\)) operator(||) predefined(die)operator(()string<delimiter(")content(Couldn't open )inline<delimiter({)local_variable($dirname)delimiter(})>char(\\n)delimiter(")>operator(\))operator(;)
 
-reserved(while) operator(()operator(()local_variable($file) operator(=) predefined(readdir)operator(()local_variable($dirhdl)operator(\))operator(\)) operator(!==) pre_constant(FALSE)operator(\))
+reserved(while) operator(()operator(()local_variable($file) operator(=) predefined(readdir)operator(()local_variable($dirhdl)operator(\))operator(\)) operator(!==) predefined_constant(FALSE)operator(\))
 operator({)
   operator(;) comment(// ... do something with $dirname/$file)
     comment(// ...)
@@ -3525,10 +3525,10 @@ operator(})
 
 reserved(function) function(process_directory)operator(()local_variable($op)operator(,) local_variable($dir)operator(\))
 operator({)
-  reserved(if) operator(()operator(!)predefined(is_dir)operator(()local_variable($dir)operator(\))operator(\)) reserved(return) pre_constant(FALSE)operator(;)
+  reserved(if) operator(()operator(!)predefined(is_dir)operator(()local_variable($dir)operator(\))operator(\)) reserved(return) predefined_constant(FALSE)operator(;)
   local_variable($func_args) operator(=) predefined(array_slice)operator(()predefined(func_get_args)operator(()operator(\))operator(,) integer(1)operator(\))operator(;)
   ident(process_directory_)operator(()local_variable($op)operator(,) local_variable($func_args)operator(\))operator(;)
-  reserved(return) pre_constant(TRUE)operator(;)
+  reserved(return) predefined_constant(TRUE)operator(;)
 operator(})
 
 comment(// ----------------------------)
@@ -3678,7 +3678,7 @@ operator({)
 
   reserved(if) operator(()local_variable($dh) operator(=) predefined(opendir)operator(()local_variable($dir)operator(\))operator(\))
   operator({)
-    reserved(while) operator(()pre_constant(FALSE) operator(!==) operator(()local_variable($item) operator(=) predefined(readdir)operator(()local_variable($dh)operator(\))operator(\))operator(\))
+    reserved(while) operator(()predefined_constant(FALSE) operator(!==) operator(()local_variable($item) operator(=) predefined(readdir)operator(()local_variable($dh)operator(\))operator(\))operator(\))
     operator({)
       reserved(if) operator(()local_variable($item) operator(!=) string<delimiter(')content(.)delimiter(')> operator(&&) local_variable($item) operator(!=) string<delimiter(')content(..)delimiter(')>operator(\))
       operator({)
@@ -3702,7 +3702,7 @@ operator({)
     ident(rmtree_)operator(()local_variable($dir)operator(\))operator(;) reserved(return) operator(!)predefined(is_dir)operator(()local_variable($dir)operator(\))operator(;)
   operator(})
 
-  reserved(return) pre_constant(FALSE)operator(;)
+  reserved(return) predefined_constant(FALSE)operator(;)
 operator(})
 
 comment(// ------------)
@@ -3898,7 +3898,7 @@ operator(})
 comment(// Pass-by-reference)
 reserved(function) function(trunc_em)operator(()operator(&)local_variable($n)operator(\))
 operator({)
-  reserved(foreach) operator(()local_variable($n) reserved(as) operator(&)local_variable($value)operator(\)) local_variable($value) operator(=) operator(()pre_type(int)operator(\)) local_variable($value)operator(;)
+  reserved(foreach) operator(()local_variable($n) reserved(as) operator(&)local_variable($value)operator(\)) local_variable($value) operator(=) operator(()predefined_type(int)operator(\)) local_variable($value)operator(;)
 operator(})
 
 comment(// ------------)
@@ -4322,7 +4322,7 @@ comment(// value on success, and FALSE on exit. Whilst it is possible to return 
 comment(// one of the recognised 'empty' values [e.g. '' or 0 or an empty array etc],)
 comment(// FALSE actually seems to be the preferred means of indicating failure)
 
-reserved(function) function(a_func)operator(()operator(\)) operator({) reserved(return) pre_constant(FALSE)operator(;) operator(})
+reserved(function) function(a_func)operator(()operator(\)) operator({) reserved(return) predefined_constant(FALSE)operator(;) operator(})
 
 ident(a_func)operator(()operator(\)) operator(||) predefined(die)operator(()string<delimiter(")content(Function failed)char(\\n)delimiter(")>operator(\))operator(;)
 
@@ -4387,7 +4387,7 @@ comment(// of their respective languages. A simple, canonical example follows:)
 
 comment(// Usual to derive new exception classes from the built-in, 'Exception',)
 comment(// class)
-reserved(class) class(MyException) reserved(extends) pre_constant(Exception)
+reserved(class) class(MyException) reserved(extends) predefined_constant(Exception)
 operator({)
   comment(// ...)
 operator(})
@@ -4408,7 +4408,7 @@ operator(})
 
 comment(// ----------------------------)
 
-reserved(class) class(FullMoonException) reserved(extends) pre_constant(Exception)
+reserved(class) class(FullMoonException) reserved(extends) predefined_constant(Exception)
 operator({)
   comment(// ...)
 operator(})
@@ -4743,7 +4743,7 @@ comment(// Handle each line in the output of a process.)
 local_variable($readme) operator(=) predefined(popen)operator(()string<delimiter(')content(program arguments)delimiter(')>operator(,) string<delimiter(')content(r)delimiter(')>operator(\))operator(;)
 reserved(while) operator(()operator(!)predefined(feof)operator(()local_variable($readme)operator(\))operator(\)) operator({)
     local_variable($line) operator(=) predefined(fgets)operator(()local_variable($readme)operator(\))operator(;)
-    reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+    reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
     comment(// ...)
 operator(})
 predefined(pclose)operator(()local_variable($readme)operator(\))operator(;)
@@ -4772,13 +4772,13 @@ comment(// -----------------------------)
 comment(// Output buffering callback that sends output to the pager.)
 reserved(function) function(ob_pager)operator(()local_variable($output)operator(,) local_variable($mode)operator(\)) operator({)
     reserved(static) local_variable($pipe)operator(;)
-    reserved(if) operator(()local_variable($mode) operator(&) pre_constant(PHP_OUTPUT_HANDLER_START)operator(\)) operator({)
+    reserved(if) operator(()local_variable($mode) operator(&) predefined_constant(PHP_OUTPUT_HANDLER_START)operator(\)) operator({)
         local_variable($pager) operator(=) predefined(getenv)operator(()string<delimiter(')content(PAGER)delimiter(')>operator(\))operator(;)
         reserved(if) operator(()operator(!)local_variable($pager)operator(\)) local_variable($pager) operator(=) string<delimiter(')content(/usr/bin/less)delimiter(')>operator(;)  comment(// XXX: might not exist)
         local_variable($pipe) operator(=) predefined(popen)operator(()local_variable($pager)operator(,) string<delimiter(')content(w)delimiter(')>operator(\))operator(;)
     operator(})
     predefined(fwrite)operator(()local_variable($pipe)operator(,) local_variable($output)operator(\))operator(;)
-    reserved(if) operator(()local_variable($mode) operator(&) pre_constant(PHP_OUTPUT_HANDLER_END)operator(\)) operator({)
+    reserved(if) operator(()local_variable($mode) operator(&) predefined_constant(PHP_OUTPUT_HANDLER_END)operator(\)) operator({)
         predefined(pclose)operator(()local_variable($pipe)operator(\))operator(;)
     operator(})
 operator(})
@@ -4863,7 +4863,7 @@ ident(ob_start)operator(()predefined(array)operator(()reserved(new) constant(Quo
 comment(// Act like /bin/cat.)
 reserved(while) operator(()operator(!)predefined(feof)operator(()constant(STDIN)operator(\))operator(\)) operator({)
     local_variable($line) operator(=) predefined(fgets)operator(()constant(STDIN)operator(\))operator(;)
-    reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+    reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
     predefined(echo) local_variable($line)operator(;)
 operator(})
 
@@ -4891,7 +4891,7 @@ reserved(foreach) operator(()local_variable($filenames) reserved(as) local_varia
     reserved(if) operator(()local_variable($handle)operator(\)) operator({)
         reserved(while) operator(()operator(!)predefined(feof)operator(()local_variable($handle)operator(\))operator(\)) operator({)
             local_variable($line) operator(=) predefined(fgets)operator(()local_variable($handle)operator(\))operator(;)
-            reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+            reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
             comment(// ...)
         operator(})
         predefined(fclose)operator(()local_variable($handle)operator(\))operator(;)
@@ -4928,7 +4928,7 @@ comment(// -----------------------------)
 local_variable($fd3) operator(=) local_variable($fd1)operator(;)
 local_variable($fd1) operator(=) local_variable($fd2)operator(;)
 local_variable($fd2) operator(=) local_variable($fd3)operator(;)
-local_variable($fd3) operator(=) pre_constant(null)operator(;)
+local_variable($fd3) operator(=) predefined_constant(null)operator(;)
 comment(// -----------------------------)
 predefined(exec)operator(()string<delimiter(')content(prog args 1>tmpfile 2>&1)delimiter(')>operator(\))operator(;)
 predefined(exec)operator(()string<delimiter(')content(prog args 2>&1 1>tmpfile)delimiter(')>operator(\))operator(;)
@@ -4964,7 +4964,7 @@ local_variable($errlines) operator(=) predefined(array)operator(()operator(\))op
 predefined(exec)operator(()string<delimiter(")content(( )local_variable($cmd)content( | sed -e 's/^/stdout: /' \) 2>&1)delimiter(")>operator(,) local_variable($all)operator(\))operator(;)
 reserved(foreach) operator(()local_variable($all) reserved(as) local_variable($line)operator(\)) operator({)
     local_variable($pos) operator(=) predefined(strpos)operator(()local_variable($line)operator(,) string<delimiter(')content(stdout: )delimiter(')>operator(\))operator(;)
-    reserved(if) operator(()local_variable($pos) operator(!==) pre_constant(false) operator(&&) local_variable($pos) operator(==) integer(0)operator(\)) operator({)
+    reserved(if) operator(()local_variable($pos) operator(!==) predefined_constant(false) operator(&&) local_variable($pos) operator(==) integer(0)operator(\)) operator({)
         local_variable($outlines)operator([)operator(]) operator(=) predefined(substr)operator(()local_variable($line)operator(,) integer(8)operator(\))operator(;)
     operator(}) reserved(else) operator({)
         local_variable($errlines)operator([)operator(]) operator(=) local_variable($line)operator(;)
@@ -4992,7 +4992,7 @@ reserved(if) operator(()predefined(is_resource)operator(()local_variable($proc)o
     local_variable($outlines) operator(=) predefined(array)operator(()operator(\))operator(;)
     reserved(while) operator(()operator(!)predefined(feof)operator(()local_variable($pipes)operator([)integer(1)operator(])operator(\))operator(\)) operator({)
         local_variable($line) operator(=) predefined(fgets)operator(()local_variable($pipes)operator([)integer(1)operator(])operator(\))operator(;)
-        reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+        reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
         local_variable($outlines)operator([)operator(]) operator(=) predefined(rtrim)operator(()local_variable($line)operator(\))operator(;)
     operator(})
 
@@ -5000,7 +5000,7 @@ reserved(if) operator(()predefined(is_resource)operator(()local_variable($proc)o
     local_variable($errlines) operator(=) predefined(array)operator(()operator(\))operator(;)
     reserved(while) operator(()operator(!)predefined(feof)operator(()local_variable($pipes)operator([)integer(2)operator(])operator(\))operator(\)) operator({)
         local_variable($line) operator(=) predefined(fgets)operator(()local_variable($pipes)operator([)integer(2)operator(])operator(\))operator(;)
-        reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+        reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
         local_variable($errlines)operator([)operator(]) operator(=) predefined(rtrim)operator(()local_variable($line)operator(\))operator(;)
     operator(})
 
@@ -5032,12 +5032,12 @@ reserved(if) operator(()predefined(is_resource)operator(()local_variable($proc)o
 
     local_variable($readers) operator(=) predefined(array)operator(()local_variable($pipes)operator([)integer(1)operator(])operator(,) local_variable($pipes)operator([)integer(2)operator(])operator(\))operator(;)
     reserved(while) operator(()ident(stream_select)operator(()local_variable($read)operator(=)local_variable($readers)operator(,)
-                         local_variable($write)operator(=)pre_constant(null)operator(,)
-                         local_variable($except)operator(=)pre_constant(null)operator(,)
+                         local_variable($write)operator(=)predefined_constant(null)operator(,)
+                         local_variable($except)operator(=)predefined_constant(null)operator(,)
                          integer(0)operator(,) integer(200000)operator(\)) operator(>) integer(0)operator(\)) operator({)
         reserved(foreach) operator(()local_variable($read) reserved(as) local_variable($stream)operator(\)) operator({)
             local_variable($line) operator(=) predefined(fgets)operator(()local_variable($stream)operator(\))operator(;)
-            reserved(if) operator(()local_variable($line) operator(!==) pre_constant(false)operator(\)) operator({)
+            reserved(if) operator(()local_variable($line) operator(!==) predefined_constant(false)operator(\)) operator({)
                 reserved(if) operator(()local_variable($stream) operator(===) local_variable($pipes)operator([)integer(1)operator(])operator(\)) operator({)
                     predefined(print) string<delimiter(")content(STDOUT: )local_variable($line)delimiter(")>operator(;)
                 operator(}) reserved(else) operator({)
@@ -5169,10 +5169,10 @@ comment(// % mkfifo /path/to/named.pipe)
 comment(// -----------------------------)
 
 local_variable($fifo) operator(=) predefined(fopen)operator(()string<delimiter(')content(/path/to/named.pipe)delimiter(')>operator(,) string<delimiter(')content(r)delimiter(')>operator(\))operator(;)
-reserved(if) operator(()local_variable($fifo) operator(!==) pre_constant(false)operator(\)) operator({)
+reserved(if) operator(()local_variable($fifo) operator(!==) predefined_constant(false)operator(\)) operator({)
     reserved(while) operator(()operator(!)predefined(feof)operator(()local_variable($fifo)operator(\))operator(\)) operator({)
         local_variable($line) operator(=) predefined(fgets)operator(()local_variable($fifo)operator(\))operator(;)
-        reserved(if) operator(()local_variable($line) operator(===) pre_constant(false)operator(\)) reserved(break)operator(;)
+        reserved(if) operator(()local_variable($line) operator(===) predefined_constant(false)operator(\)) reserved(break)operator(;)
         predefined(echo) string<delimiter(")content(Got: )local_variable($line)delimiter(")>operator(;)
     operator(})
     predefined(fclose)operator(()local_variable($fifo)operator(\))operator(;)
@@ -5183,7 +5183,7 @@ operator(})
 comment(// -----------------------------)
 
 local_variable($fifo) operator(=) predefined(fopen)operator(()string<delimiter(')content(/path/to/named.pipe)delimiter(')>operator(,) string<delimiter(')content(w)delimiter(')>operator(\))operator(;)
-reserved(if) operator(()local_variable($fifo) operator(!==) pre_constant(false)operator(\)) operator({)
+reserved(if) operator(()local_variable($fifo) operator(!==) predefined_constant(false)operator(\)) operator({)
     predefined(fwrite)operator(()local_variable($fifo)operator(,) string<delimiter(")content(Smoke this.)char(\\n)delimiter(")>operator(\))operator(;)
     predefined(fclose)operator(()local_variable($fifo)operator(\))operator(;)
 operator(}) reserved(else) operator({)
@@ -5196,10 +5196,10 @@ comment(// % mknod  ~/.plan p                  #  in case you don't have mkfifo)
 comment(// -----------------------------)
 
 comment(// dateplan - place current date and time in .plan file)
-reserved(while) operator(()pre_constant(true)operator(\)) operator({)
+reserved(while) operator(()predefined_constant(true)operator(\)) operator({)
     local_variable($home) operator(=) predefined(getenv)operator(()string<delimiter(')content(HOME)delimiter(')>operator(\))operator(;)
     local_variable($fifo) operator(=) predefined(fopen)operator(()string<delimiter(")local_variable($home)content(/.plan)delimiter(")>operator(,) string<delimiter(')content(w)delimiter(')>operator(\))operator(;)
-    reserved(if) operator(()local_variable($fifo) operator(===) pre_constant(false)operator(\)) operator({)
+    reserved(if) operator(()local_variable($fifo) operator(===) predefined_constant(false)operator(\)) operator({)
         predefined(die)operator(()string<delimiter(")content(Couldn't open )local_variable($home)content(/.plan for writing.)char(\\n)delimiter(")>operator(\))operator(;)
     operator(})
     predefined(fwrite)operator(()local_variable($fifo)operator(,)
@@ -5214,7 +5214,7 @@ comment(// -----------------------------)
 
 comment(// fifolog - read and record log msgs from fifo)
 
-local_variable($fifo) operator(=) pre_constant(null)operator(;)
+local_variable($fifo) operator(=) predefined_constant(null)operator(;)
 
 reserved(declare)operator(()ident(ticks) operator(=) integer(1)operator(\))operator(;)
 reserved(function) function(handle_alarm)operator(()local_variable($signal)operator(\)) operator({)
@@ -5223,20 +5223,20 @@ reserved(function) function(handle_alarm)operator(()local_variable($signal)opera
 operator(})
 predefined(pcntl_signal)operator(()constant(SIGALRM)operator(,) string<delimiter(')content(handle_alarm)delimiter(')>operator(\))operator(;)
 
-reserved(while) operator(()pre_constant(true)operator(\)) operator({)
+reserved(while) operator(()predefined_constant(true)operator(\)) operator({)
     predefined(pcntl_alarm)operator(()integer(0)operator(\))operator(;)             comment(// turn off alarm for blocking open)
     local_variable($fifo) operator(=) predefined(fopen)operator(()string<delimiter(')content(/tmp/log)delimiter(')>operator(,) string<delimiter(')content(r)delimiter(')>operator(\))operator(;)
-    reserved(if) operator(()local_variable($fifo) operator(===) pre_constant(false)operator(\)) operator({)
+    reserved(if) operator(()local_variable($fifo) operator(===) predefined_constant(false)operator(\)) operator({)
         predefined(die)operator(()string<delimiter(")content(can't open /tmp/log)delimiter(")>operator(\))operator(;)
     operator(})
     predefined(pcntl_alarm)operator(()integer(1)operator(\))operator(;)             comment(// you have 1 second to log)
 
     local_variable($service) operator(=) predefined(fgets)operator(()local_variable($fifo)operator(\))operator(;)
-    reserved(if) operator(()local_variable($service) operator(===) pre_constant(false)operator(\)) reserved(continue)operator(;) comment(// interrupt or nothing logged)
+    reserved(if) operator(()local_variable($service) operator(===) predefined_constant(false)operator(\)) reserved(continue)operator(;) comment(// interrupt or nothing logged)
     local_variable($service) operator(=) predefined(rtrim)operator(()local_variable($service)operator(\))operator(;)
 
     local_variable($message) operator(=) predefined(fgets)operator(()local_variable($fifo)operator(\))operator(;)
-    reserved(if) operator(()local_variable($message) operator(===) pre_constant(false)operator(\)) reserved(continue)operator(;) comment(// interrupt or nothing logged)
+    reserved(if) operator(()local_variable($message) operator(===) predefined_constant(false)operator(\)) reserved(continue)operator(;) comment(// interrupt or nothing logged)
     local_variable($message) operator(=) predefined(rtrim)operator(()local_variable($message)operator(\))operator(;)
 
     predefined(pcntl_alarm)operator(()integer(0)operator(\))operator(;)             comment(// turn off alarms for message processing)
@@ -5246,7 +5246,7 @@ reserved(while) operator(()pre_constant(true)operator(\)) operator({)
     operator(}) reserved(elseif) operator(()local_variable($service) operator(==) string<delimiter(')content(login)delimiter(')>operator(\)) operator({)
         comment(// log to /var/log/login)
         local_variable($log) operator(=) predefined(fopen)operator(()string<delimiter(')content(/var/log/login)delimiter(')>operator(,) string<delimiter(')content(a)delimiter(')>operator(\))operator(;)
-        reserved(if) operator(()local_variable($log) operator(!==) pre_constant(false)operator(\)) operator({)
+        reserved(if) operator(()local_variable($log) operator(!==) predefined_constant(false)operator(\)) operator({)
             predefined(fwrite)operator(()local_variable($log)operator(,)
                    predefined(strftime)operator(()string<delimiter(')content(%a, %d %b %Y %H:%M:%S %z)delimiter(')>operator(\))
                    operator(.) string<delimiter(")content( )local_variable($service)content( )local_variable($message)char(\\n)delimiter(")>operator(\))operator(;)
@@ -5261,7 +5261,7 @@ operator(})
 comment(// @@PLEAC@@_16.12)
 comment(// sharetest - test shared variables across forks)
 
-local_variable($SHM_KEY) operator(=) predefined(ftok)operator(()pre_constant(__FILE__)operator(,) predefined(chr)operator(()integer(1)operator(\))operator(\))operator(;)
+local_variable($SHM_KEY) operator(=) predefined(ftok)operator(()predefined_constant(__FILE__)operator(,) predefined(chr)operator(()integer(1)operator(\))operator(\))operator(;)
 local_variable($handle) operator(=) ident(sem_get)operator(()local_variable($SHM_KEY)operator(\))operator(;)
 local_variable($buffer) operator(=) ident(shm_attach)operator(()local_variable($handle)operator(,) integer(1024)operator(\))operator(;)
 
@@ -5281,7 +5281,7 @@ reserved(for) operator(()local_variable($i) operator(=) integer(0)operator(;) lo
     operator(})
 operator(})
 
-reserved(while) operator(()pre_constant(true)operator(\)) operator({)
+reserved(while) operator(()predefined_constant(true)operator(\)) operator({)
     predefined(print) string<delimiter(')content(Buffer is )delimiter(')> operator(.) ident(shm_get_var)operator(()local_variable($buffer)operator(,) integer(1)operator(\)) operator(.) string<delimiter(")char(\\n)delimiter(")>operator(;)
     predefined(sleep)operator(()integer(1)operator(\))operator(;)
 operator(})
@@ -5292,7 +5292,7 @@ reserved(function) function(squabble)operator(()operator(\)) operator({)
     reserved(global) local_variable($buffer)operator(;)
     local_variable($i) operator(=) integer(0)operator(;)
     local_variable($pid) operator(=) predefined(getmypid)operator(()operator(\))operator(;)
-    reserved(while) operator(()pre_constant(true)operator(\)) operator({)
+    reserved(while) operator(()predefined_constant(true)operator(\)) operator({)
         reserved(if) operator(()predefined(preg_match)operator(()string<delimiter(")content(/^)local_variable($pid)char(\\\\)content(b/)delimiter(")>operator(,) ident(shm_get_var)operator(()local_variable($buffer)operator(,) integer(1)operator(\))operator(\))operator(\)) reserved(continue)operator(;)
         ident(sem_acquire)operator(()local_variable($handle)operator(\))operator(;)
         local_variable($i)operator(++)operator(;)
@@ -5406,8 +5406,8 @@ reserved(function) function(get_name)operator(()operator(\)) operator({)
 
     predefined(echo) string<delimiter(")content(Kindly Stranger, please enter your name: )delimiter(")>operator(;)
     reserved(while) operator(()operator(!)exception(@)ident(stream_select)operator(()local_variable($read)operator(=)predefined(array)operator(()constant(STDIN)operator(\))operator(,)
-                           local_variable($write)operator(=)pre_constant(null)operator(,)
-                           local_variable($except)operator(=)pre_constant(null)operator(,)
+                           local_variable($write)operator(=)predefined_constant(null)operator(,)
+                           local_variable($except)operator(=)predefined_constant(null)operator(,)
                            integer(1)operator(\))operator(\)) operator({)
         comment(// allow signals to be observed)
     operator(})
@@ -5430,16 +5430,16 @@ predefined(pcntl_signal)operator(()constant(SIGINT)operator(,) string<delimiter(
 comment(// -----------------------------)
 
 reserved(declare)operator(()ident(ticks) operator(=) integer(1)operator(\))operator(;)
-local_variable($interrupted) operator(=) pre_constant(false)operator(;)
+local_variable($interrupted) operator(=) predefined_constant(false)operator(;)
 
 reserved(function) function(got_int)operator(()local_variable($signal)operator(\)) operator({)
     reserved(global) local_variable($interrupted)operator(;)
-    local_variable($interrupted) operator(=) pre_constant(true)operator(;)
+    local_variable($interrupted) operator(=) predefined_constant(true)operator(;)
     comment(// The third argument to pcntl_signal(\) determines if system calls)
     comment(// should be restarted after a signal. It defaults to true.)
-    predefined(pcntl_signal)operator(()constant(SIGINT)operator(,) string<delimiter(')content(got_int)delimiter(')>operator(,) pre_constant(false)operator(\))operator(;)  comment(// or SIG_IGN)
+    predefined(pcntl_signal)operator(()constant(SIGINT)operator(,) string<delimiter(')content(got_int)delimiter(')>operator(,) predefined_constant(false)operator(\))operator(;)  comment(// or SIG_IGN)
 operator(})
-predefined(pcntl_signal)operator(()constant(SIGINT)operator(,) string<delimiter(')content(got_int)delimiter(')>operator(,) pre_constant(false)operator(\))operator(;)
+predefined(pcntl_signal)operator(()constant(SIGINT)operator(,) string<delimiter(')content(got_int)delimiter(')>operator(,) predefined_constant(false)operator(\))operator(;)
 
 comment(// ... long-running code that you don't want to restart)
 
@@ -5500,11 +5500,11 @@ comment(// PHP does not support sigprocmask(\).)
 
 comment(// @@PLEAC@@_16.21)
 reserved(declare)operator(()ident(ticks) operator(=) integer(1)operator(\))operator(;)
-local_variable($aborted) operator(=) pre_constant(false)operator(;)
+local_variable($aborted) operator(=) predefined_constant(false)operator(;)
 
 reserved(function) function(handle_alarm)operator(()local_variable($signal)operator(\)) operator({)
     reserved(global) local_variable($aborted)operator(;)
-    local_variable($aborted) operator(=) pre_constant(true)operator(;)
+    local_variable($aborted) operator(=) predefined_constant(true)operator(;)
 operator(})
 predefined(pcntl_signal)operator(()constant(SIGALRM)operator(,) string<delimiter(')content(handle_alarm)delimiter(')>operator(\))operator(;)
 

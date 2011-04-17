@@ -149,13 +149,13 @@ operator(()ident(map) ident(proc)
      operator(()ident(string->list) ident(str)operator(\))operator(\))
 
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-1)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(unique chars are: ~A)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(unique chars are: ~A)content(\\n)delimiter(")>
         operator(()ident(apply) ident(string) operator(()ident(sort) operator(()ident(delete-duplicates)
                              operator(()ident(string->list) string<delimiter(")content(an apple a day)delimiter(")>operator(\))operator(\)) ident(char<?)operator(\))operator(\))operator(\))
 
 operator(()reserved(let*) operator(()operator(()ident(str) string<delimiter(")content(an apple a day)delimiter(")>operator(\))
        operator(()ident(sum) operator(()ident(apply) ident(+) operator(()ident(map) ident(char->integer) operator(()ident(string->list) ident(str)operator(\))operator(\))operator(\))operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(sum is ~A)content(\\n)delimiter(")> ident(sum)operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(sum is ~A)content(\\n)delimiter(")> ident(sum)operator(\))operator(\))
 
 comment(;;; or use string-fold/string-map/string-for-each from SRFI-13)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\))operator(\))
@@ -163,7 +163,7 @@ operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\))o
 operator(()reserved(let*) operator(()operator(()ident(str) string<delimiter(")content(an apple a day)delimiter(")>operator(\))
        operator(()ident(sum) operator(()ident(string-fold) operator(()reserved(lambda) operator(()ident(c) ident(acc)operator(\)) operator(()ident(+) ident(acc) operator(()ident(char->integer) ident(c)operator(\))operator(\))operator(\))
                          integer(0) ident(str)operator(\))operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(sum is ~A)content(\\n)delimiter(")> ident(sum)operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(sum is ~A)content(\\n)delimiter(")> ident(sum)operator(\))operator(\))
 
 error(#)ident(!/usr/local/bin/guile) ident(-)ident(s)
 ident(!)error(#)
@@ -172,7 +172,7 @@ operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\))o
 operator(()reserved(define) operator(()ident(checksum) ident(p)operator(\))
   operator(()reserved(let) ident(loop) operator(()operator(()ident(line) operator(()ident(read-line) ident(p) operator(')ident(concat)operator(\))operator(\)) operator(()ident(sum) integer(0)operator(\))operator(\))
     operator(()reserved(if) operator(()ident(eof-object?) ident(line)operator(\))
-      operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> ident(sum) operator(()ident(port-filename) ident(p)operator(\))operator(\))
+      operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> ident(sum) operator(()ident(port-filename) ident(p)operator(\))operator(\))
       operator(()reserved(let) operator(()operator(()ident(line-sum) operator(()ident(string-fold) operator(()reserved(lambda) operator(()ident(c) ident(acc)operator(\))
                                      operator(()ident(+) ident(acc) operator(()ident(char->integer) ident(c)operator(\))operator(\))operator(\))
                                    integer(0) ident(line)operator(\))operator(\))operator(\))
@@ -227,7 +227,7 @@ comment(;; guile --use-srfi=13 -c '(with-input-from-file "/usr/share/dict/words"
 comment(;; @@PLEAC@@_1.7)
 comment(;; Use regexp-substitute/global)
 operator(()ident(regexp-substitute/global)
- pre_constant(#f) string<delimiter(")content(([^)content(\\t)content(]*\)()content(\\t)content(+\))delimiter(")> ident(str)
+ predefined_constant(#f) string<delimiter(")content(([^)content(\\t)content(]*\)()content(\\t)content(+\))delimiter(")> ident(str)
  operator(()reserved(lambda) operator(()ident(m)operator(\))
    operator(()reserved(let*) operator(()operator(()ident(pre-string) operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))
           operator(()ident(pre-len) operator(()ident(string-length) ident(pre-string)operator(\))operator(\))
@@ -243,25 +243,25 @@ operator(()ident(regexp-substitute/global)
 comment(;; @@PLEAC@@_1.8)
 comment(;; just interpolate $abc in strings:)
 operator(()reserved(define) operator(()ident(varsubst) ident(str)operator(\))
-  operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content(\\\\)content($()content(\\\\)content(w+\))delimiter(")> ident(str)
+  operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content(\\\\)content($()content(\\\\)content(w+\))delimiter(")> ident(str)
    operator(')ident(pre) operator(()reserved(lambda) operator(()ident(m)operator(\)) operator(()ident(eval) operator(()ident(string->symbol) operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))
                           operator(()ident(current-module)operator(\))operator(\))operator(\))
    operator(')ident(post)operator(\))operator(\))
 
 comment(;; interpolate $abc with error messages:)
 operator(()reserved(define) operator(()ident(safe-varsubst) ident(str)operator(\))
-  operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content(\\\\)content($()content(\\\\)content(w+\))delimiter(")> ident(str)
+  operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content(\\\\)content($()content(\\\\)content(w+\))delimiter(")> ident(str)
    operator(')ident(pre) operator(()reserved(lambda) operator(()ident(m)operator(\))
-          operator(()ident(catch) pre_constant(#t)
+          operator(()ident(catch) predefined_constant(#t)
             operator(()reserved(lambda) operator(()operator(\)) operator(()ident(eval) operator(()ident(string->symbol) operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))
                              operator(()ident(current-module)operator(\))operator(\))operator(\))
             operator(()reserved(lambda) ident(args)
-              operator(()ident(format) pre_constant(#f) string<delimiter(")content([NO VARIABLE: ~A])delimiter(")> operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))operator(\))operator(\))operator(\))
+              operator(()ident(format) predefined_constant(#f) string<delimiter(")content([NO VARIABLE: ~A])delimiter(")> operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))operator(\))operator(\))operator(\))
    operator(')ident(post)operator(\))operator(\))
 
 comment(;; interpolate ${(any (scheme expression\)\)} in strings:)
 operator(()reserved(define) operator(()ident(interpolate) ident(str)operator(\))
-  operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content(\\\\)content(${([^{}]+\)})delimiter(")> ident(str)
+  operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content(\\\\)content(${([^{}]+\)})delimiter(")> ident(str)
    operator(')ident(pre) operator(()reserved(lambda) operator(()ident(m)operator(\)) operator(()ident(eval-string) operator(()ident(match:substring) ident(m) integer(1)operator(\))operator(\))operator(\)) operator(')ident(post)operator(\))operator(\))
 
 comment(;; @@PLEAC@@_1.9)
@@ -300,7 +300,7 @@ comment(;; (actually far more powerful\) , but if you keep in mind that we use)
 comment(;; ~ instead of %, and , instead of . for the prefix characters, you)
 comment(;; won't have trouble getting used to Guile's format.)
 
-operator(()ident(format) pre_constant(#f) string<delimiter(")content(I have ~A guanacos.)delimiter(")> ident(n)operator(\))
+operator(()ident(format) predefined_constant(#f) string<delimiter(")content(I have ~A guanacos.)delimiter(")> ident(n)operator(\))
 
 comment(;; @@PLEAC@@_1.11)
 operator(()reserved(define) ident(var) string<delimiter(")content(
@@ -308,7 +308,7 @@ operator(()reserved(define) ident(var) string<delimiter(")content(
         goes here)delimiter(")>operator(\))
 
 operator(()ident(use-modules) operator(()ident(ice-9) ident(regexp)operator(\))operator(\))
-operator(()reserved(set!) ident(var) operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content(\\n)content( +)delimiter(")> ident(var) operator(')ident(pre) string<delimiter(")content(\\n)delimiter(")> operator(')ident(post)operator(\))operator(\))
+operator(()reserved(set!) ident(var) operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content(\\n)content( +)delimiter(")> ident(var) operator(')ident(pre) string<delimiter(")content(\\n)delimiter(")> operator(')ident(post)operator(\))operator(\))
 
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\))operator(\))
 operator(()reserved(set!) ident(var) operator(()ident(string-join) operator(()ident(map) ident(string-trim) operator(()ident(string-tokenize) ident(var) char(#\\newline)operator(\))operator(\)) string<delimiter(")content(\\n)delimiter(")>operator(\))operator(\))
@@ -322,7 +322,7 @@ operator(()reserved(define) operator(()ident(dequote) ident(str)operator(\))
                operator(()reserved(cond) operator(()operator(()ident(string=) ident(leader) string<delimiter(")delimiter(")>operator(\))
                       operator(()reserved(let) operator(()operator(()ident(pos) operator(()reserved(or) operator(()ident(string-skip) operator(()ident(car) ident(lines)operator(\))
                                                   ident(char-set:whitespace)operator(\)) integer(0)operator(\))operator(\))operator(\))
-                        operator(()ident(make-regexp) operator(()ident(format) pre_constant(#f) string<delimiter(")content(^[ )content(\\\\)content(t]{1,~A})delimiter(")> ident(pos)operator(\))
+                        operator(()ident(make-regexp) operator(()ident(format) predefined_constant(#f) string<delimiter(")content(^[ )content(\\\\)content(t]{1,~A})delimiter(")> ident(pos)operator(\))
                                      ident(regexp/newline)operator(\))operator(\))operator(\))
                      operator(()operator(()ident(null?) ident(lst)operator(\))
                       operator(()ident(make-regexp) operator(()ident(string-append) string<delimiter(")content(^[ )content(\\\\)content(t]*)delimiter(")>
@@ -331,7 +331,7 @@ operator(()reserved(define) operator(()ident(dequote) ident(str)operator(\))
                      operator(()ident(else)
                       operator(()reserved(let) operator(()operator(()ident(pos) operator(()reserved(or) operator(()ident(string-prefix-length) ident(leader) operator(()ident(car) ident(lst)operator(\))operator(\)) integer(0)operator(\))operator(\))operator(\))
                         operator(()ident(loop) operator(()ident(substring) ident(leader) integer(0) ident(pos)operator(\)) operator(()ident(cdr) ident(lst)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
-    operator(()ident(regexp-substitute/global) pre_constant(#f) ident(rx) ident(str) operator(')ident(pre) operator(')ident(post)operator(\))operator(\))operator(\))
+    operator(()ident(regexp-substitute/global) predefined_constant(#f) ident(rx) ident(str) operator(')ident(pre) operator(')ident(post)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_1.12)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\))operator(\))
@@ -366,12 +366,12 @@ operator(()ident(display) operator(()ident(wrap) ident(text) integer(20)operator
 
 comment(;; @@PLEAC@@_1.13)
 operator(()reserved(define) ident(str) string<delimiter(")content(Mom said, )content(\\")content(Don't do that.)content(\\")delimiter(")>operator(\))
-operator(()reserved(set!) ident(str) operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content([')content(\\")content(])delimiter(")> ident(str) operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
+operator(()reserved(set!) ident(str) operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content([')content(\\")content(])delimiter(")> ident(str) operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
                                     ident(match:substring) operator(')ident(post)operator(\))operator(\))
-operator(()reserved(set!) ident(str) operator(()ident(regexp-substitute/global) pre_constant(#f) string<delimiter(")content([^A-Z])delimiter(")> ident(str) operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
+operator(()reserved(set!) ident(str) operator(()ident(regexp-substitute/global) predefined_constant(#f) string<delimiter(")content([^A-Z])delimiter(")> ident(str) operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
                                     ident(match:substring) operator(')ident(post)operator(\))operator(\))
 operator(()reserved(set!) ident(str) operator(()ident(string-append) string<delimiter(")content(this )delimiter(")> operator(()ident(regexp-substitute/global)
-                                  pre_constant(#f) string<delimiter(")content(\\W)delimiter(")> string<delimiter(")content(is a test!)delimiter(")> operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
+                                  predefined_constant(#f) string<delimiter(")content(\\W)delimiter(")> string<delimiter(")content(is a test!)delimiter(")> operator(')ident(pre) string<delimiter(")content(\\\\)delimiter(")>
                                   ident(match:substring) operator(')ident(post)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_1.14)
@@ -407,7 +407,7 @@ operator(()reserved(define) ident(line) string<delimiter(")content(XYZZY,)conten
 operator(()reserved(do) operator(()operator(()ident(i) integer(0) operator(()integer(1)ident(+) ident(i)operator(\))operator(\))
      operator(()ident(fields) operator(()ident(parse-csv) ident(line)operator(\)) operator(()ident(cdr) ident(fields)operator(\))operator(\))operator(\))
     operator(()operator(()ident(null?) ident(fields)operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(~D : ~A)content(\\n)delimiter(")> ident(i) operator(()ident(car) ident(fields)operator(\))operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~D : ~A)content(\\n)delimiter(")> ident(i) operator(()ident(car) ident(fields)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_1.16)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-13)operator(\)) operator(()ident(srfi) ident(srfi-14)operator(\))operator(\))
@@ -515,7 +515,7 @@ operator(()reserved(define) operator(()ident(approx-equal?) ident(num1) ident(nu
 
 operator(()reserved(define) ident(wage) integer(536)operator(\))                     comment(;; $5.36/hour)
 operator(()reserved(define) ident(week) operator(()ident(*) integer(40) ident(wage)operator(\))operator(\))             comment(;; $214.40)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(One week's wage is: $~$)content(\\n)delimiter(")> operator(()ident(/) ident(week) integer(100.0)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(One week's wage is: $~$)content(\\n)delimiter(")> operator(()ident(/) ident(week) integer(100.0)operator(\))operator(\))
 
 comment(;; @@PLEAC@@_2.3)
 operator(()ident(round) ident(num)operator(\))                           comment(;; rounds to inexact whole number)
@@ -531,14 +531,14 @@ operator(()ident(use-modules) operator(()ident(ice-9) ident(format)operator(\))o
 
 operator(()reserved(define) ident(a) integer(0.255)operator(\))
 operator(()reserved(define) ident(b) operator(()ident(/) operator(()ident(round) operator(()ident(*) integer(100.0) ident(a)operator(\))operator(\)) integer(100.0)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Unrounded: ~F)content(\\n)content(Rounded: ~F)content(\\n)delimiter(")> ident(a) ident(b)operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Unrounded: ~F)content(\\n)content(Rounded: ~,2F)content(\\n)delimiter(")> ident(a) ident(a)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Unrounded: ~F)content(\\n)content(Rounded: ~F)content(\\n)delimiter(")> ident(a) ident(b)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Unrounded: ~F)content(\\n)content(Rounded: ~,2F)content(\\n)delimiter(")> ident(a) ident(a)operator(\))
 
 operator(()reserved(define) ident(a) operator(')operator(()integer(3.3) integer(3.5) integer(3.7) ident(-)integer(3.3)operator(\))operator(\))
 operator(()ident(display) string<delimiter(")content(number)content(\\t)content(int)content(\\t)content(floor)content(\\t)content(ceil)content(\\n)delimiter(")>operator(\))
 operator(()ident(for-each)
  operator(()reserved(lambda) operator(()ident(n)operator(\))
-   operator(()ident(format) pre_constant(#t) string<delimiter(")content(~,1F)content(\\t)content(~,1F)content(\\t)content(~,1F)content(\\t)content(~,1F)content(\\n)delimiter(")>
+   operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~,1F)content(\\t)content(~,1F)content(\\t)content(~,1F)content(\\t)content(~,1F)content(\\n)delimiter(")>
            ident(n) operator(()ident(round) ident(n)operator(\)) operator(()ident(floor) ident(n)operator(\)) operator(()ident(ceiling) ident(n)operator(\))operator(\))operator(\))
  ident(a)operator(\))
 
@@ -579,20 +579,20 @@ operator(()reserved(let) ident(loop) operator(()operator(()ident(i) ident(x)oper
 operator(()ident(display) string<delimiter(")content(Infancy is: )delimiter(")>operator(\))
 operator(()reserved(do) operator(()operator(()ident(i) integer(0) operator(()integer(1)ident(+) ident(i)operator(\))operator(\))operator(\))
     operator(()operator(()ident(>) ident(i) integer(2)operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))operator(\))
 operator(()ident(newline)operator(\))
 
 operator(()ident(display) string<delimiter(")content(Toddling is: )delimiter(")>operator(\))
 operator(()reserved(let) operator(()operator(()ident(i) integer(3)operator(\))operator(\))
   operator(()ident(while) operator(()ident(<=) ident(i) integer(4)operator(\))
-         operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))
+         operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))
          operator(()reserved(set!) ident(i) operator(()integer(1)ident(+) ident(i)operator(\))operator(\))operator(\))operator(\))
 operator(()ident(newline)operator(\))
 
 operator(()ident(display) string<delimiter(")content(Childhood is: )delimiter(")>operator(\))
 operator(()reserved(let) ident(loop) operator(()operator(()ident(i) integer(5)operator(\))operator(\))
   operator(()reserved(cond) operator(()operator(()ident(<=) ident(i) integer(12)operator(\))
-         operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))
+         operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A )delimiter(")> ident(i)operator(\))
          operator(()ident(loop) operator(()integer(1)ident(+) ident(i)operator(\))operator(\))operator(\))operator(\))operator(\))
 operator(()ident(newline)operator(\))
 
@@ -601,7 +601,7 @@ comment(;; format can output roman numerals - use ~:@R)
 
 operator(()ident(use-modules) operator(()ident(ice-9) ident(format)operator(\))operator(\))
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Roman for ~R is ~:@R)content(\\n)delimiter(")> integer(15) integer(15)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Roman for ~R is ~:@R)content(\\n)delimiter(")> integer(15) integer(15)operator(\))
 
 comment(;; @@PLEAC@@_2.7)
 operator(()ident(random) integer(5)operator(\))        comment(; an integer from 0 to 4)
@@ -745,7 +745,7 @@ comment(;; a 3D matrix of reals)
 operator(()reserved(define) ident(b) operator(()ident(make-array) integer(0.0) ident(x) ident(y) ident(z)operator(\))operator(\))
 
 comment(;; a literal boolean truth table for logical and)
-operator(')error(#)integer(2)operator(()operator(()pre_constant(#f) pre_constant(#f)operator(\)) operator(()pre_constant(#f) pre_constant(#t)operator(\))operator(\))
+operator(')error(#)integer(2)operator(()operator(()predefined_constant(#f) predefined_constant(#f)operator(\)) operator(()predefined_constant(#f) predefined_constant(#t)operator(\))operator(\))
 
 comment(;; simple matrix multiplication)
 
@@ -804,13 +804,13 @@ operator(()reserved(define) ident(number) operator(()ident(string->number) ident
 
 comment(;; format will also output in different radixes:)
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~B ~O ~D ~X)content(\\n)delimiter(")> ident(num) ident(num) ident(num) ident(num)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~B ~O ~D ~X)content(\\n)delimiter(")> ident(num) ident(num) ident(num) ident(num)operator(\))
 
 comment(;; converting Unix file permissions read from stdin:)
 
 operator(()reserved(let) ident(loop) operator(()operator(()ident(perm) operator(()ident(read-line)operator(\))operator(\))operator(\))
   operator(()reserved(cond) operator(()operator(()ident(not) operator(()ident(eof-object?) ident(perm)operator(\))operator(\))
-         operator(()ident(format) pre_constant(#t) string<delimiter(")content(The decimal value is ~D)content(\\n)delimiter(")> operator(()ident(string->number) ident(perm) integer(8)operator(\))operator(\))
+         operator(()ident(format) predefined_constant(#t) string<delimiter(")content(The decimal value is ~D)content(\\n)delimiter(")> operator(()ident(string->number) ident(perm) integer(8)operator(\))operator(\))
          operator(()ident(loop) operator(()ident(read-line)operator(\))operator(\))operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_2.17)
@@ -819,12 +819,12 @@ operator(()ident(use-modules) operator(()ident(ice-9) ident(format)operator(\))o
 
 comment(;; the : prefix to the D directive causes commas to be output every)
 comment(;; three digits.)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~:D)content(\\n)delimiter(")> operator(()ident(random) integer(10000000000000000)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~:D)content(\\n)delimiter(")> operator(()ident(random) integer(10000000000000000)operator(\))operator(\))
 comment(; => 2,301,267,079,619,540)
 
 comment(;; the third prefix arg to the D directive is the separator character)
 comment(;; to use instead of a comma, useful for European style numbers:)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~,,'.:D)content(\\n)delimiter(")> operator(()ident(random) integer(10000000000000000)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~,,'.:D)content(\\n)delimiter(")> operator(()ident(random) integer(10000000000000000)operator(\))operator(\))
 comment(; => 6.486.470.447.356.534)
 
 comment(;; the F directive, however, does not support grouping by commas.  to)
@@ -833,9 +833,9 @@ comment(;; separately:)
 operator(()reserved(define) operator(()ident(commify) ident(num)operator(\))
   operator(()reserved(let) operator(()operator(()ident(int) operator(()ident(inexact->exact) operator(()ident(truncate) ident(num)operator(\))operator(\))operator(\))operator(\))
     operator(()reserved(if) operator(()ident(=) ident(num) ident(int)operator(\))
-      operator(()ident(format) pre_constant(#f) string<delimiter(")content(~:D)delimiter(")> ident(int)operator(\))
-      operator(()ident(string-append) operator(()ident(format) pre_constant(#f) string<delimiter(")content(~:D)delimiter(")> ident(int)operator(\))
-                     operator(()reserved(let) operator(()operator(()ident(str) operator(()ident(format) pre_constant(#f) string<delimiter(")content(~F)delimiter(")> ident(num)operator(\))operator(\))operator(\))
+      operator(()ident(format) predefined_constant(#f) string<delimiter(")content(~:D)delimiter(")> ident(int)operator(\))
+      operator(()ident(string-append) operator(()ident(format) predefined_constant(#f) string<delimiter(")content(~:D)delimiter(")> ident(int)operator(\))
+                     operator(()reserved(let) operator(()operator(()ident(str) operator(()ident(format) predefined_constant(#f) string<delimiter(")content(~F)delimiter(")> ident(num)operator(\))operator(\))operator(\))
                        operator(()ident(substring) ident(str) operator(()reserved(or) operator(()ident(string-index) ident(str) char(#\\.)operator(\))
                                           operator(()ident(string-length) ident(str)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
@@ -843,9 +843,9 @@ comment(;; @@PLEAC@@_2.18)
 comment(;; format can handle simple 's' plurals with ~p, and 'y/ies' plurals)
 comment(;; with the @ prefix:)
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(It took ~D hour~P)content(\\n)delimiter(")> ident(hours) ident(hours)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(It took ~D hour~P)content(\\n)delimiter(")> ident(hours) ident(hours)operator(\))
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(It took ~D centur~@P)content(\\n)delimiter(")> ident(centuries) ident(centuries)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(It took ~D centur~@P)content(\\n)delimiter(")> ident(centuries) ident(centuries)operator(\))
 
 operator(()reserved(define) ident(noun-plural)
   operator(()reserved(let*) operator(()operator(()ident(suffixes) operator(')operator(()operator(()string<delimiter(")content(ss)delimiter(")>  operator(.) string<delimiter(")content(sses)delimiter(")>operator(\))
@@ -867,7 +867,7 @@ operator(()reserved(define) ident(noun-plural)
     operator(()reserved(lambda) operator(()ident(noun)operator(\))
       operator(()reserved(let) operator(()operator(()ident(m) operator(()ident(regexp-exec) ident(suffix-rx) ident(noun)operator(\))operator(\))operator(\))
         operator(()reserved(if) ident(m)
-          operator(()ident(string-append) operator(()ident(regexp-substitute) pre_constant(#f) ident(m) operator(')ident(pre)operator(\))
+          operator(()ident(string-append) operator(()ident(regexp-substitute) predefined_constant(#f) ident(m) operator(')ident(pre)operator(\))
                          operator(()ident(cdr) operator(()ident(assoc) operator(()ident(match:substring) ident(m)operator(\)) ident(suffixes)operator(\))operator(\))operator(\))
           operator(()ident(string-append) ident(noun) string<delimiter(")content(s)delimiter(")>operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
@@ -904,15 +904,15 @@ comment(;; pretty print a term of a factor)
 operator(()reserved(define) operator(()ident(pp-term) ident(pair)operator(\))
   operator(()reserved(if) operator(()ident(=) operator(()ident(cdr) ident(pair)operator(\)) integer(1)operator(\))
     operator(()ident(number->string) operator(()ident(car) ident(pair)operator(\))operator(\))
-    operator(()ident(format) pre_constant(#f) string<delimiter(")content(~A^~A)delimiter(")> operator(()ident(car) ident(pair)operator(\)) operator(()ident(cdr) ident(pair)operator(\))operator(\))operator(\))operator(\))
+    operator(()ident(format) predefined_constant(#f) string<delimiter(")content(~A^~A)delimiter(")> operator(()ident(car) ident(pair)operator(\)) operator(()ident(cdr) ident(pair)operator(\))operator(\))operator(\))operator(\))
 
 comment(;; factor each number given on the command line)
 operator(()ident(for-each)
  operator(()reserved(lambda) operator(()ident(n)operator(\))
    operator(()reserved(let) operator(()operator(()ident(factors) operator(()ident(factor) ident(n)operator(\))operator(\))operator(\))
-     operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A = ~A)delimiter(")> ident(n) operator(()ident(pp-term) operator(()ident(car) ident(factors)operator(\))operator(\))operator(\))
+     operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A = ~A)delimiter(")> ident(n) operator(()ident(pp-term) operator(()ident(car) ident(factors)operator(\))operator(\))operator(\))
      operator(()ident(for-each)
-      operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) pre_constant(#t) string<delimiter(")content( * ~A)delimiter(")> operator(()ident(pp-term) ident(x)operator(\))operator(\))operator(\))
+      operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) predefined_constant(#t) string<delimiter(")content( * ~A)delimiter(")> operator(()ident(pp-term) ident(x)operator(\))operator(\))operator(\))
       operator(()ident(cdr) ident(factors)operator(\))operator(\))
      operator(()ident(newline)operator(\))operator(\))operator(\))
  operator(()ident(map) ident(string->number) operator(()ident(cdr) operator(()ident(command-line)operator(\))operator(\))operator(\))operator(\))
@@ -947,7 +947,7 @@ operator(()ident(tm:gmtoff) ident(time)operator(\)) operator(()ident(set-tm:gmto
 operator(()ident(tm:zone) ident(time)operator(\))   operator(()ident(set-tm:zone) ident(time) ident(zone)operator(\))   comment(; Time zone label (a string\),)
                                            comment(; not necessarily unique.)
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Today is day ~A of the current year.)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Today is day ~A of the current year.)content(\\n)delimiter(")>
         operator(()ident(tm:yday) operator(()ident(localtime) operator(()ident(current-time)operator(\))operator(\))operator(\))operator(\))
 
 comment(;; Or use SRFI-19 - Time and Date Procedures)
@@ -968,20 +968,20 @@ operator(()ident(date-week-number) ident(now) ident(start)operator(\)) comment(;
                              comment(; start is the first day of week as above)
 operator(()ident(date-zone-offset) ident(now)operator(\))       comment(; integer number of seconds east of GMT)
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Today is day ~A of the current year.)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Today is day ~A of the current year.)content(\\n)delimiter(")>
         operator(()ident(date-year-day) operator(()ident(current-date)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_3.1)
 comment(;; using format and POSIX time components)
 operator(()ident(use-modules) operator(()ident(ice-9) ident(format)operator(\))operator(\))
 operator(()reserved(let) operator(()operator(()ident(now) operator(()ident(localtime) operator(()ident(current-time)operator(\))operator(\))operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(The current date is ~4'0D ~2'0D ~2'0D)content(\\n)delimiter(")>
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(The current date is ~4'0D ~2'0D ~2'0D)content(\\n)delimiter(")>
           operator(()ident(+) integer(1900) operator(()ident(tm:year) ident(now)operator(\))operator(\)) operator(()ident(tm:mon) ident(now)operator(\)) operator(()ident(tm:mday) ident(now)operator(\))operator(\))operator(\))
 
 comment(;; using format and SRFI-19 time components)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-19)operator(\)) operator(()ident(ice-9) ident(format)operator(\))operator(\))
 operator(()reserved(let) operator(()operator(()ident(now) operator(()ident(current-date)operator(\))operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(The current date is ~4'0d-~2'0D-~2'0D)content(\\n)delimiter(")>
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(The current date is ~4'0d-~2'0D-~2'0D)content(\\n)delimiter(")>
           operator(()ident(date-year) ident(now)operator(\)) operator(()ident(date-month) ident(now)operator(\)) operator(()ident(date-day) ident(now)operator(\))operator(\))operator(\))
 
 comment(;; using POSIX strftime with a libc time format string)
@@ -1004,7 +1004,7 @@ comment(;; @@PLEAC@@_3.3)
 comment(;; use localtime or gmtime with the accessors mentioned in the)
 comment(;; introduction to this chapter)
 operator(()reserved(let) operator(()operator(()ident(time) operator(()ident(localtime) ident(seconds)operator(\))operator(\))operator(\))  comment(; or gmtime)
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(Dateline: ~2'0d:~2'0d:~2'0d-~4'0d/~2'0d/~2'0d)content(\\n)delimiter(")>
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Dateline: ~2'0d:~2'0d:~2'0d-~4'0d/~2'0d/~2'0d)content(\\n)delimiter(")>
           operator(()ident(tm:hour) ident(time)operator(\)) operator(()ident(tm:min) ident(time)operator(\)) operator(()ident(tm:sec) ident(time)operator(\))
           operator(()ident(+) integer(1900) operator(()ident(tm:year) ident(time)operator(\))operator(\)) operator(()integer(1)ident(+) operator(()ident(tm:mon) ident(time)operator(\))operator(\)) operator(()ident(tm:mday) ident(time)operator(\))operator(\))operator(\))
 
@@ -1026,14 +1026,14 @@ operator(()reserved(define) ident(interval) operator(()ident(+) integer(5)      
                     operator(()ident(*) integer(2) integer(60) integer(60)operator(\))        comment(; 2 hours)
                     operator(()ident(*) integer(55) integer(60) integer(60) integer(24)operator(\))operator(\))operator(\))  comment(; and 55 days)
 operator(()reserved(define) ident(then) operator(()ident(+) ident(birthtime) ident(interval)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Then is ~A)content(\\n)delimiter(")> operator(()ident(strftime) string<delimiter(")content(%a %b %d %T %Y)delimiter(")> operator(()ident(localtime) ident(then)operator(\))operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Then is ~A)content(\\n)delimiter(")> operator(()ident(strftime) string<delimiter(")content(%a %b %d %T %Y)delimiter(")> operator(()ident(localtime) ident(then)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_3.5)
 comment(;; subtract the epoch seconds:)
 operator(()reserved(define) ident(bree) integer(361535725)operator(\))
 operator(()reserved(define) ident(nat) integer(96201950)operator(\))
 operator(()reserved(define) ident(difference) operator(()ident(-) ident(bree) ident(nat)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(There were ~A seconds between Nat and Bree)content(\\n)delimiter(")> ident(difference)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(There were ~A seconds between Nat and Bree)content(\\n)delimiter(")> ident(difference)operator(\))
 
 comment(;; or use SRFI-19's time arithmetic procedures:)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-19)operator(\))operator(\))
@@ -1054,22 +1054,22 @@ operator(()ident(date-week-number) ident(date) ident(start-day-of-week)operator(
 comment(;; @@PLEAC@@_3.7)
 comment(;; use the strptime function:)
 operator(()reserved(define) ident(time-pair) operator(()ident(strptime) string<delimiter(")content(%Y-%m-%d)delimiter(")> string<delimiter(")content(1998-06-03)delimiter(")>operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Time is ~A)content(\\n)content(.)delimiter(")> operator(()ident(strftime) string<delimiter(")content(%b %d, %Y)delimiter(")> operator(()ident(car) ident(time-pair)operator(\))operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Time is ~A)content(\\n)content(.)delimiter(")> operator(()ident(strftime) string<delimiter(")content(%b %d, %Y)delimiter(")> operator(()ident(car) ident(time-pair)operator(\))operator(\))operator(\))
 
 comment(;; or use SRFI-19's string->date:)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-19)operator(\))operator(\))
 operator(()reserved(define) ident(date) operator(()ident(string->date) string<delimiter(")content(1998-06-03)delimiter(")> string<delimiter(")content(~Y-~m-~d)delimiter(")>operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Time is ~A.)content(\\n)delimiter(")> operator(()ident(date->string) ident(date)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Time is ~A.)content(\\n)delimiter(")> operator(()ident(date->string) ident(date)operator(\))operator(\))
 
 comment(;; @@PLEAC@@_3.8)
 comment(;; use the already seen strftime:)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(strftime gives: ~A)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(strftime gives: ~A)content(\\n)delimiter(")>
         operator(()ident(strftime) string<delimiter(")content(%A %D)delimiter(")> operator(()ident(localtime) operator(()ident(current-time)operator(\))operator(\))operator(\))operator(\))
 
 comment(;; or SRFI-19's date->string:)
 operator(()ident(use-modules) operator(()ident(srfi) ident(srfi-19)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(default date->string gives: ~A)content(\\n)delimiter(")> operator(()ident(date->string) operator(()ident(current-date)operator(\))operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(date->string gives: ~A)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(default date->string gives: ~A)content(\\n)delimiter(")> operator(()ident(date->string) operator(()ident(current-date)operator(\))operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(date->string gives: ~A)content(\\n)delimiter(")>
         operator(()ident(date->string) operator(()ident(current-date)operator(\)) string<delimiter(")content(~a ~b ~e ~H:~M:~S ~z ~Y)delimiter(")>operator(\))operator(\))
 
 comment(;; @@PLEAC@@_3.9)
@@ -1077,7 +1077,7 @@ comment(;; gettimeofday will return seconds and microseconds:)
 operator(()reserved(define) ident(t0) operator(()ident(gettimeofday)operator(\))operator(\))
 comment(;; do your work here)
 operator(()reserved(define) ident(t1) operator(()ident(gettimeofday)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(You took ~A seconds and ~A microseconds)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(You took ~A seconds and ~A microseconds)content(\\n)delimiter(")>
         operator(()ident(-) operator(()ident(car) ident(t1)operator(\)) operator(()ident(car) ident(t0)operator(\))operator(\)) operator(()ident(-) operator(()ident(cdr) ident(t1)operator(\)) operator(()ident(cdr) ident(t0)operator(\))operator(\))operator(\))
 
 comment(;; you can also get more detailed info about the real and processor)
@@ -1137,7 +1137,7 @@ operator(()reserved(define) ident(name) string<delimiter(")content(Gandalf)delim
 operator(()reserved(define) ident(banner)
   operator(()ident(string-append) string<delimiter(")content(Speak, )delimiter(")> ident(name) string<delimiter(")content(, and enter!)delimiter(")>operator(\))operator(\))
 operator(()reserved(define) ident(banner)
-  operator(()ident(format) pre_constant(#f) string<delimiter(")content(Speak, ~A, and welcome!)delimiter(")> ident(name)operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#f) string<delimiter(")content(Speak, ~A, and welcome!)delimiter(")> ident(name)operator(\))operator(\))
 
 comment(;; Advanced shell-like function is provided by guile-scsh, the Guile)
 comment(;; port of SCSH, the Scheme shell.  Here we roll our own using the)
@@ -1159,9 +1159,9 @@ operator(()reserved(define) operator(()ident(qx) ident(pipeline)operator(\))
     ident(output)operator(\))operator(\))
 
 operator(()reserved(define) ident(his-host) string<delimiter(")content(www.perl.com)delimiter(")>operator(\))
-operator(()reserved(define) ident(host-info) operator(()ident(qx) operator(()ident(format) pre_constant(#f) string<delimiter(")content(nslookup ~A)delimiter(")> ident(his-host)operator(\))operator(\))operator(\))
+operator(()reserved(define) ident(host-info) operator(()ident(qx) operator(()ident(format) predefined_constant(#f) string<delimiter(")content(nslookup ~A)delimiter(")> ident(his-host)operator(\))operator(\))operator(\))
 
-operator(()reserved(define) ident(perl-info) operator(()ident(qx) operator(()ident(format) pre_constant(#f) string<delimiter(")content(ps ~A)delimiter(")> operator(()ident(getpid)operator(\))operator(\))operator(\))operator(\))
+operator(()reserved(define) ident(perl-info) operator(()ident(qx) operator(()ident(format) predefined_constant(#f) string<delimiter(")content(ps ~A)delimiter(")> operator(()ident(getpid)operator(\))operator(\))operator(\))operator(\))
 operator(()reserved(define) ident(shell-info) operator(()ident(qx) string<delimiter(")content(ps $$)delimiter(")>operator(\))operator(\))
 
 operator(()reserved(define) ident(banner) operator(')operator(()string<delimiter(")content(Costs)delimiter(")> string<delimiter(")content(only)delimiter(")> string<delimiter(")content($4.95)delimiter(")>operator(\))operator(\))
@@ -1254,9 +1254,9 @@ operator(()reserved(define) operator(()ident(set-element) ident(list) ident(i) i
 
 operator(()reserved(define) operator(()ident(what-about) ident(list)operator(\))
   operator(()reserved(let) operator(()operator(()ident(len) operator(()ident(length) ident(list)operator(\))operator(\))operator(\))
-    operator(()ident(format) pre_constant(#t) string<delimiter(")content(The array now has ~A elements.)content(\\n)delimiter(")> ident(len)operator(\))
-    operator(()ident(format) pre_constant(#t) string<delimiter(")content(The index of the last element is ~A.)content(\\n)delimiter(")> operator(()ident(-) ident(len) integer(1)operator(\))operator(\))
-    operator(()ident(format) pre_constant(#t) string<delimiter(")content(Element #3 is `~A'.)content(\\n)delimiter(")> operator(()reserved(if) operator(()ident(>) ident(len) integer(3)operator(\))
+    operator(()ident(format) predefined_constant(#t) string<delimiter(")content(The array now has ~A elements.)content(\\n)delimiter(")> ident(len)operator(\))
+    operator(()ident(format) predefined_constant(#t) string<delimiter(")content(The index of the last element is ~A.)content(\\n)delimiter(")> operator(()ident(-) ident(len) integer(1)operator(\))operator(\))
+    operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Element #3 is `~A'.)content(\\n)delimiter(")> operator(()reserved(if) operator(()ident(>) ident(len) integer(3)operator(\))
                                            operator(()ident(element) ident(list) integer(3)operator(\))
                                            string<delimiter(")delimiter(")>operator(\))operator(\))operator(\))operator(\))
 
@@ -1605,7 +1605,7 @@ comment(; Use hash to filter out unique items)
 operator(()ident(for-each)
   operator(()reserved(lambda) operator(()ident(item)operator(\))
     operator(()reserved(if) operator(()ident(not) operator(()ident(assoc-ref) ident(*seen*) ident(item)operator(\))operator(\))
-      operator(()reserved(set!) ident(*seen*) operator(()ident(assoc-set!) ident(*seen*) ident(item) pre_constant(#t)operator(\))operator(\))operator(\))operator(\))
+      operator(()reserved(set!) ident(*seen*) operator(()ident(assoc-set!) ident(*seen*) ident(item) predefined_constant(#t)operator(\))operator(\))operator(\))operator(\))
   ident(*list*)operator(\))
 
 comment(; Generate list of unique items)
@@ -1711,21 +1711,21 @@ comment(;; ------------)
 
 comment(; Union and intersection)
 operator(()ident(for-each)
-  operator(()reserved(lambda) operator(()ident(item)operator(\)) operator(()reserved(set!) ident(*union*) operator(()ident(assoc-set!) ident(*union*) ident(item) pre_constant(#t)operator(\))operator(\))operator(\))
+  operator(()reserved(lambda) operator(()ident(item)operator(\)) operator(()reserved(set!) ident(*union*) operator(()ident(assoc-set!) ident(*union*) ident(item) predefined_constant(#t)operator(\))operator(\))operator(\))
   ident(*a*)operator(\))
 
 operator(()ident(for-each)
   operator(()reserved(lambda) operator(()ident(item)operator(\))
     operator(()reserved(if) operator(()ident(assoc-ref) ident(*union*) ident(item)operator(\))
-      operator(()reserved(set!) ident(*isect*) operator(()ident(assoc-set!) ident(*isect*) ident(item) pre_constant(#t)operator(\))operator(\))operator(\))
-    operator(()reserved(set!) ident(*union*) operator(()ident(assoc-set!) ident(*union*) ident(item) pre_constant(#t)operator(\))operator(\))operator(\))
+      operator(()reserved(set!) ident(*isect*) operator(()ident(assoc-set!) ident(*isect*) ident(item) predefined_constant(#t)operator(\))operator(\))operator(\))
+    operator(()reserved(set!) ident(*union*) operator(()ident(assoc-set!) ident(*union*) ident(item) predefined_constant(#t)operator(\))operator(\))operator(\))
   ident(*b*)operator(\))
 
 comment(; Difference *a* and *b*)
 operator(()ident(for-each)
   operator(()reserved(lambda) operator(()ident(item)operator(\))
     operator(()reserved(if) operator(()ident(not) operator(()ident(assoc-ref) ident(*isect*) ident(item)operator(\))operator(\))
-      operator(()reserved(set!) ident(*diff*) operator(()ident(assoc-set!) ident(*diff*) ident(item) pre_constant(#t)operator(\))operator(\))operator(\))operator(\))
+      operator(()reserved(set!) ident(*diff*) operator(()ident(assoc-set!) ident(*diff*) ident(item) predefined_constant(#t)operator(\))operator(\))operator(\))operator(\))
   ident(*a*)operator(\))
 
 operator(()reserved(set!) ident(*union*)
@@ -1825,7 +1825,7 @@ operator(()reserved(define) operator(()ident(vector-replace!) ident(vec) ident(p
 
 operator(()reserved(define) operator(()ident(vector-delete) ident(vec) ident(pos) ident(len)operator(\))
   operator(()reserved(let*) operator(()operator(()ident(new-vec-len) operator(()ident(-) operator(()ident(vector-length) ident(vec)operator(\)) ident(len)operator(\))operator(\))
-         operator(()ident(new-vec) pre_constant(#f)operator(\))
+         operator(()ident(new-vec) predefined_constant(#f)operator(\))
          operator(()ident(pos) operator(()reserved(if) operator(()ident(<) ident(pos) integer(0)operator(\)) operator(()ident(+) operator(()ident(vector-length) ident(vec)operator(\)) ident(pos)operator(\)) ident(pos)operator(\))operator(\))operator(\))
     operator(()reserved(cond)
       operator(()operator(()ident(<) ident(new-vec-len) integer(0)operator(\)) ident(vec)operator(\))
@@ -1977,7 +1977,7 @@ operator(()reserved(define) operator(()ident(vector-first-idx) ident(pred) ident
   operator(()reserved(let) operator(()operator(()ident(vec-len) operator(()ident(vector-length) ident(vec)operator(\))operator(\))operator(\))
     operator(()reserved(let) ident(loop) operator(()operator(()ident(idx) integer(0)operator(\))operator(\))
       operator(()reserved(cond)
-        operator(()operator(()ident(=) ident(idx) ident(vec-len)operator(\)) pre_constant(#f)operator(\))
+        operator(()operator(()ident(=) ident(idx) ident(vec-len)operator(\)) predefined_constant(#f)operator(\))
         operator(()ident(else)
           operator(()reserved(if) operator(()ident(pred) operator(()ident(vector-ref) ident(vec) ident(idx)operator(\))operator(\))
             ident(idx)
@@ -1988,7 +1988,7 @@ comment(; Return #f, or first index for which 'pred' returns true)
 operator(()reserved(define) operator(()ident(list-first-idx) ident(pred) ident(list)operator(\))
   operator(()reserved(let) ident(loop) operator(()operator(()ident(idx) integer(0)operator(\)) operator(()ident(list) ident(list)operator(\))operator(\))
     operator(()reserved(cond)
-      operator(()operator(()ident(null?) ident(list)operator(\)) pre_constant(#f)operator(\))
+      operator(()operator(()ident(null?) ident(list)operator(\)) predefined_constant(#f)operator(\))
       operator(()ident(else)
         operator(()reserved(if) operator(()ident(pred) operator(()ident(car) ident(list)operator(\))operator(\))
           ident(idx)
@@ -2303,7 +2303,7 @@ operator(()reserved(let) operator(()operator(()ident(port) operator(()ident(open
           operator(()ident(assoc-set!)
             ident(*users*)
             operator(()ident(car) operator(()ident(string-split) operator(()ident(car) ident(line&terminator)operator(\)) char(#\\:)operator(\))operator(\))
-            pre_constant(#t)operator(\))operator(\))
+            predefined_constant(#t)operator(\))operator(\))
         operator(()ident(loop) operator(()ident(read-line) ident(port) operator(')ident(split)operator(\))operator(\)) operator(\))operator(\))operator(\)) 
   operator(()ident(close-input-port) ident(port)operator(\))operator(\))
 
@@ -2809,7 +2809,7 @@ operator(()reserved(define) operator(()ident(multi-hash-delete) ident(hash) iden
     operator(()reserved(if) ident(value-found)
       operator(()ident(assoc-ref) ident(hash) ident(key)
         operator(()ident(regexp-substitute/global)
-          pre_constant(#f) operator(()ident(string-match) ident(value) ident(value-found)operator(\)) operator(')ident(pre) string<delimiter(")delimiter(")> operator(')ident(post) string<delimiter(")delimiter(")>operator(\))operator(\))operator(\))operator(\))operator(\))
+          predefined_constant(#f) operator(()ident(string-match) ident(value) ident(value-found)operator(\)) operator(')ident(pre) string<delimiter(")delimiter(")> operator(')ident(post) string<delimiter(")delimiter(")>operator(\))operator(\))operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_5.8)
 comment(; Alternate implementatons of a hash inversion function; both assume)
@@ -3218,7 +3218,7 @@ operator(()reserved(let) ident(loop) operator(()operator(()ident(line) operator(
            comment(;; writes to stderr)
            operator(()ident(display) string<delimiter(")content(No digit found.)content(\\n)delimiter(")> operator(()ident(current-error-port)operator(\))operator(\))
            comment(;; writes to stdout)
-           operator(()ident(format) pre_constant(#t) string<delimiter(")content(Read: ~A)content(\\n)delimiter(")> ident(line)operator(\))operator(\))
+           operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Read: ~A)content(\\n)delimiter(")> ident(line)operator(\))operator(\))
          operator(()ident(loop) operator(()ident(read-line)operator(\))operator(\))operator(\))operator(\))operator(\))
 
 comment(;; use open-output-file)
@@ -3436,7 +3436,7 @@ operator(()reserved(define) operator(()ident(count-chunks)operator(\))
        operator(()ident(chunks) integer(0)operator(\))operator(\))
       operator(()operator(()reserved(or) operator(()ident(eof-object?) ident(line)operator(\))
            operator(()ident(string=?) ident(line) string<delimiter(")content(__DATA__)delimiter(")>operator(\)) operator(()ident(string=?) ident(line) string<delimiter(")content(__END__)delimiter(")>operator(\))operator(\))
-       operator(()ident(format) pre_constant(#t) string<delimiter(")content(Found ~A chunks)content(\\n)delimiter(")> ident(chunks)operator(\))operator(\))
+       operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Found ~A chunks)content(\\n)delimiter(")> ident(chunks)operator(\))operator(\))
     operator(()reserved(let) operator(()operator(()ident(tokens)
            operator(()ident(string-tokenize) operator(()ident(string-take) ident(line) operator(()reserved(or) operator(()ident(string-index) ident(line) char(#\\#)operator(\))
                                                   operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
@@ -3537,11 +3537,11 @@ operator(()reserved(let*) operator(()operator(()ident(nfound) operator(()ident(s
        operator(()ident(inputs) operator(()ident(car) ident(nfound)operator(\))operator(\))operator(\))
   operator(()reserved(if) operator(()ident(not) operator(()ident(null?) ident(inputs)operator(\))operator(\))
       operator(()reserved(let) operator(()operator(()ident(line) operator(()ident(read-line) ident(inport)operator(\))operator(\))operator(\))
-        operator(()ident(format) pre_constant(#t) string<delimiter(")content(I read ~A)content(\\n)delimiter(")> ident(line)operator(\))operator(\))operator(\))operator(\))
+        operator(()ident(format) predefined_constant(#t) string<delimiter(")content(I read ~A)content(\\n)delimiter(")> ident(line)operator(\))operator(\))operator(\))operator(\))
 
 comment(;; or use char-ready? if you only need a single character)
 operator(()reserved(if) operator(()ident(char-ready?) ident(p)operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(I read ~A)content(\\n)delimiter(")> operator(()ident(read-char) ident(p)operator(\))operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(I read ~A)content(\\n)delimiter(")> operator(()ident(read-char) ident(p)operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_7.14)
 comment(;; use the O_NONBLOCK option with open)
@@ -3609,7 +3609,7 @@ comment(;; open the file and loop through the port with read-line:)
 operator(()reserved(let) operator(()operator(()ident(p) operator(()ident(open-input-file) ident(file)operator(\))operator(\))operator(\))
   operator(()reserved(do) operator(()operator(()ident(line) operator(()ident(read-line) ident(p)operator(\)) operator(()ident(read-line) ident(p)operator(\))operator(\))operator(\))
       operator(()operator(()ident(eof-object?) ident(line)operator(\))operator(\))
-    operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\))
+    operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\))
   operator(()ident(close) ident(p)operator(\))operator(\))
 
 comment(;; you can use with-input-from-file to temporarily rebind stdin:)
@@ -3617,7 +3617,7 @@ operator(()ident(with-input-from-file) ident(file)
   operator(()reserved(lambda) operator(()operator(\))
     operator(()reserved(do) operator(()operator(()ident(line) operator(()ident(read-line)operator(\)) operator(()ident(read-line)operator(\))operator(\))operator(\))
         operator(()operator(()ident(eof-object?) ident(line)operator(\))operator(\))
-      operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\))operator(\))operator(\))
+      operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\))operator(\))operator(\))
 
 comment(;; or define a utility procedure to do this)
 operator(()reserved(define) operator(()ident(for-each-line) ident(proc) ident(file)operator(\))
@@ -3626,7 +3626,7 @@ operator(()reserved(define) operator(()ident(for-each-line) ident(proc) ident(fi
       operator(()reserved(do) operator(()operator(()ident(line) operator(()ident(read-line)operator(\)) operator(()ident(read-line)operator(\))operator(\))operator(\))
           operator(()operator(()ident(eof-object?) ident(line)operator(\))operator(\))
         operator(()ident(proc) ident(line)operator(\))operator(\))operator(\))operator(\))operator(\))
-operator(()ident(for-each-line) operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\)) ident(file)operator(\))
+operator(()ident(for-each-line) operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A)content(\\n)delimiter(")> operator(()ident(string-length) ident(line)operator(\))operator(\))operator(\)) ident(file)operator(\))
 
 comment(;; read in the file as a list of lines)
 operator(()reserved(define) operator(()ident(read-lines) ident(file)operator(\))
@@ -3665,7 +3665,7 @@ operator(()ident(truncate-file) ident(port)operator(\))         comment(; trunca
 
 comment(;; ftell)
 operator(()reserved(define) ident(pos) operator(()ident(ftell) ident(port)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(I'm ~A bytes from the start of DATAFILE.)content(\\n)delimiter(")> ident(pos)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(I'm ~A bytes from the start of DATAFILE.)content(\\n)delimiter(")> ident(pos)operator(\))
 
 comment(;; seek)
 operator(()ident(seek) ident(log-port) integer(0) ident(SEEK_END)operator(\))      comment(; seek to end)
@@ -3723,13 +3723,13 @@ operator(()reserved(let) operator(()operator(()ident(table) operator(()ident(mak
             operator(()reserved(lambda) operator(()ident(w)operator(\)) operator(()ident(hash-set!) ident(table) ident(w) operator(()integer(1)ident(+) operator(()ident(hash-ref) ident(table) ident(w) integer(0)operator(\))operator(\))operator(\))operator(\))
             operator(()ident(string-tokenize) ident(line)operator(\))operator(\))
            operator(()ident(loop) operator(()ident(read-line) ident(p)operator(\))operator(\))operator(\))operator(\))operator(\))
-  operator(()ident(hash-fold) operator(()reserved(lambda) operator(()ident(k) ident(v) ident(p)operator(\)) operator(()ident(format) pre_constant(#t) string<delimiter(")content(~5D ~A)content(\\n)delimiter(")> ident(v) ident(k)operator(\))operator(\)) pre_constant(#f) ident(table)operator(\))operator(\))
+  operator(()ident(hash-fold) operator(()reserved(lambda) operator(()ident(k) ident(v) ident(p)operator(\)) operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~5D ~A)content(\\n)delimiter(")> ident(v) ident(k)operator(\))operator(\)) predefined_constant(#f) ident(table)operator(\))operator(\))
 
 comment(;; @@PLEAC@@_8.4)
 comment(;; build up the list the reverse it or fold over it:)
 operator(()reserved(define) ident(lines) operator(()ident(read-lines) ident(file)operator(\))operator(\))
 operator(()ident(for-each) operator(()reserved(lambda) operator(()ident(word)operator(\)) ident(do-something-with-word)operator(\)) operator(()ident(reverse) ident(lines)operator(\))operator(\))
-operator(()ident(fold) operator(()reserved(lambda) operator(()ident(word) ident(acc)operator(\)) ident(do-something-with-word)operator(\)) pre_constant(#f) ident(lines)operator(\))
+operator(()ident(fold) operator(()reserved(lambda) operator(()ident(word) ident(acc)operator(\)) ident(do-something-with-word)operator(\)) predefined_constant(#f) ident(lines)operator(\))
 
 comment(;; @@PLEAC@@_8.5)
 comment(;; save the current position and reseek to it)
@@ -3748,7 +3748,7 @@ operator(()reserved(define) operator(()ident(tail) ident(file)operator(\))
         operator(()ident(loop) operator(()ident(read-line) ident(p)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
 comment(;; @@PLEAC@@_8.6)
-operator(()reserved(let) operator(()operator(()ident(rand-line) pre_constant(#f)operator(\))operator(\))
+operator(()reserved(let) operator(()operator(()ident(rand-line) predefined_constant(#f)operator(\))operator(\))
   operator(()reserved(let) ident(loop) operator(()operator(()ident(line) operator(()ident(read-line) ident(p)operator(\))operator(\))operator(\))
     operator(()reserved(cond) operator(()operator(()ident(not) operator(()ident(eof-object?) ident(line)operator(\))operator(\))
            operator(()reserved(if) operator(()ident(=) integer(0) operator(()ident(random) operator(()ident(port-line) ident(p)operator(\))operator(\))operator(\))
@@ -3846,7 +3846,7 @@ operator(()ident(call-with-input-file) ident(file)
     operator(()ident(for-each)
      operator(()reserved(lambda) operator(()ident(addr)operator(\))
        operator(()ident(seek) ident(p) ident(addr) ident(SEEK_SET)operator(\))
-       operator(()ident(format) pre_constant(#t) string<delimiter(")content(~X ~O ~D ~S)content(\\n)delimiter(")> ident(addr) ident(addr) ident(addr)
+       operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~X ~O ~D ~S)content(\\n)delimiter(")> ident(addr) ident(addr) ident(addr)
                operator(()ident(read-delimited) ident(delims) ident(p)operator(\))operator(\))operator(\))
      ident(addrs)operator(\))operator(\))operator(\))
 
@@ -3873,7 +3873,7 @@ comment(; })
 operator(()reserved(define) ident(dir) operator(()ident(opendir) string<delimiter(")content(/usr/bin)delimiter(")>operator(\))operator(\))
 operator(()reserved(do) operator(()operator(()ident(filename) operator(()ident(readdir) ident(dir)operator(\)) operator(()ident(readdir) ident(dir)operator(\))operator(\))operator(\))
     operator(()operator(()ident(eof-object?) ident(filename)operator(\))operator(\))
-  operator(()ident(format) pre_constant(#t) string<delimiter(")content(Inside /usr/bin is something called ~A)content(\\n)delimiter(")> ident(filename)operator(\))operator(\))
+  operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Inside /usr/bin is something called ~A)content(\\n)delimiter(")> ident(filename)operator(\))operator(\))
 operator(()ident(closedir) ident(dir)operator(\))
 
 comment(;; @@PLEAC@@_9.1)
@@ -3912,9 +3912,9 @@ operator(()ident(delete-file) ident(file)operator(\))
 operator(()reserved(let) operator(()operator(()ident(count) integer(0)operator(\))operator(\))
   operator(()ident(for-each)
    operator(()reserved(lambda) operator(()ident(x)operator(\))
-     operator(()ident(catch) pre_constant(#t)
+     operator(()ident(catch) predefined_constant(#t)
        operator(()reserved(lambda) operator(()operator(\)) operator(()ident(delete-file) ident(x)operator(\)) operator(()reserved(set!) ident(count) operator(()integer(1)ident(+) ident(count)operator(\))operator(\))operator(\))
-       operator(()reserved(lambda) operator(()ident(err) operator(.) ident(args)operator(\)) pre_constant(#f)operator(\))operator(\))operator(\))
+       operator(()reserved(lambda) operator(()ident(err) operator(.) ident(args)operator(\)) predefined_constant(#f)operator(\))operator(\))operator(\))
    ident(file-list)operator(\))
   operator(()reserved(if) operator(()ident(not) operator(()ident(=) ident(count) operator(()ident(length) ident(file-list)operator(\))operator(\))operator(\))
     operator(()ident(format) operator(()ident(current-error-port)operator(\)) string<delimiter(")content(could only delete ~A of ~A files)delimiter(")>
@@ -4009,7 +4009,7 @@ comment(;; @@PLEAC@@_9.6)
 operator(()reserved(define) operator(()ident(glob->regexp) ident(pat)operator(\))
   operator(()reserved(let) operator(()operator(()ident(len) operator(()ident(string-length) ident(pat)operator(\))operator(\))
         operator(()ident(ls) operator(')operator(()string<delimiter(")content(^)delimiter(")>operator(\))operator(\))
-        operator(()ident(in-brace?) pre_constant(#f)operator(\))operator(\))
+        operator(()ident(in-brace?) predefined_constant(#f)operator(\))operator(\))
     operator(()reserved(do) operator(()operator(()ident(i) integer(0) operator(()integer(1)ident(+) ident(i)operator(\))operator(\))operator(\))
         operator(()operator(()ident(=) ident(i) ident(len)operator(\))operator(\))
       operator(()reserved(let) operator(()operator(()ident(char) operator(()ident(string-ref) ident(pat) ident(i)operator(\))operator(\))operator(\))
@@ -4051,7 +4051,7 @@ operator(()reserved(define) operator(()ident(find) ident(proc) operator(.) ident
                              operator(()ident(directory-files) operator(()ident(car) ident(dirs)operator(\))operator(\))operator(\))operator(\))
          operator(()ident(apply) ident(find) ident(proc) operator(()ident(cdr) ident(dirs)operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()ident(find) operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A~A)content(\\n)delimiter(")> ident(x)
+operator(()ident(find) operator(()reserved(lambda) operator(()ident(x)operator(\)) operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A~A)content(\\n)delimiter(")> ident(x)
                           operator(()reserved(if) operator(()ident(equal?) operator(()ident(stat:type) operator(()ident(stat) ident(x)operator(\))operator(\)) operator(')ident(directory)operator(\))
                             string<delimiter(")content(/)delimiter(")> string<delimiter(")delimiter(")>operator(\))operator(\))operator(\)) string<delimiter(")content(.)delimiter(")>operator(\))
 
@@ -4065,7 +4065,7 @@ operator(()reserved(define) operator(()ident(biggest) ident(file)operator(\))
                operator(()reserved(set!) ident(saved-size) ident(size)operator(\))
                operator(()reserved(set!) ident(saved-name) ident(file)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 operator(()ident(apply) ident(find) ident(biggest) operator(()ident(cdr) operator(()ident(command-line)operator(\))operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Biggest file ~A in ~A is ~A bytes long.)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Biggest file ~A in ~A is ~A bytes long.)content(\\n)delimiter(")>
         ident(saved-name) operator(()ident(cdr) operator(()ident(command-line)operator(\))operator(\)) ident(saved-size)operator(\))
 
 error(#)ident(!/usr/local/bin/guile) ident(-)ident(s)
@@ -4087,10 +4087,10 @@ operator(()reserved(define) operator(()ident(finddepth) ident(proc) operator(.) 
                              operator(()ident(directory-files) operator(()ident(car) ident(dirs)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 operator(()reserved(define) operator(()ident(zap) ident(f)operator(\))
   operator(()reserved(let) operator(()operator(()ident(rm) operator(()reserved(if) operator(()ident(eq?) operator(()ident(stat:type) operator(()ident(stat) ident(f)operator(\))operator(\)) operator(')ident(directory)operator(\)) ident(rmdir) ident(delete-file)operator(\))operator(\))operator(\))
-    operator(()ident(format) pre_constant(#t) string<delimiter(")content(deleting ~A)content(\\n)delimiter(")> ident(f)operator(\))
-    operator(()ident(catch) pre_constant(#t)
+    operator(()ident(format) predefined_constant(#t) string<delimiter(")content(deleting ~A)content(\\n)delimiter(")> ident(f)operator(\))
+    operator(()ident(catch) predefined_constant(#t)
       operator(()reserved(lambda) operator(()operator(\)) operator(()ident(rm) ident(f)operator(\))operator(\))
-      operator(()reserved(lambda) ident(args) operator(()ident(format) pre_constant(#t) string<delimiter(")content(couldn't delete ~A)content(\\n)delimiter(")> ident(f)operator(\))operator(\))operator(\))operator(\))operator(\))
+      operator(()reserved(lambda) ident(args) operator(()ident(format) predefined_constant(#t) string<delimiter(")content(couldn't delete ~A)content(\\n)delimiter(")> ident(f)operator(\))operator(\))operator(\))operator(\))operator(\))
 operator(()reserved(let) operator(()operator(()ident(args) operator(()ident(cdr) operator(()ident(command-line)operator(\))operator(\))operator(\))operator(\))
   operator(()reserved(if) operator(()ident(null?) ident(args)operator(\))
     operator(()ident(error) string<delimiter(")content(usage: rmtree dir ..)content(\\n)delimiter(")>operator(\))
@@ -4100,7 +4100,7 @@ comment(;; @@PLEAC@@_9.9)
 operator(()ident(for-each)
  operator(()reserved(lambda) operator(()ident(file)operator(\))
    operator(()reserved(let) operator(()operator(()ident(newname) operator(()ident(function-of) ident(file)operator(\))operator(\))operator(\))
-     operator(()ident(catch) pre_constant(#t)
+     operator(()ident(catch) predefined_constant(#t)
        operator(()reserved(lambda) operator(()operator(\)) operator(()ident(rename-file) ident(file) ident(newname)operator(\))operator(\))
        operator(()reserved(lambda) ident(args) operator(()ident(format) operator(()ident(current-error-port)operator(\))
                             string<delimiter(")content(couldn't rename ~A to ~A)content(\\n)delimiter(")> ident(file) ident(newname)operator(\))operator(\))operator(\))operator(\))operator(\))
@@ -4117,7 +4117,7 @@ operator(()ident(for-each)
  operator(()reserved(lambda) operator(()ident(old)operator(\))
    operator(()reserved(let) operator(()operator(()ident(new) operator(()ident(proc) ident(old)operator(\))operator(\))operator(\))
      operator(()reserved(if) operator(()ident(not) operator(()ident(string=?) ident(old) ident(new)operator(\))operator(\))
-       operator(()ident(catch) pre_constant(#t)
+       operator(()ident(catch) predefined_constant(#t)
          operator(()reserved(lambda) operator(()operator(\)) operator(()ident(rename-file) ident(old) ident(new)operator(\))operator(\))
          operator(()reserved(lambda) ident(args) operator(()ident(format) operator(()ident(current-error-port)operator(\))
                               string<delimiter(")content(couldn't rename ~A to ~A)content(\\n)delimiter(")> ident(old) ident(new)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
@@ -4139,7 +4139,7 @@ operator(()reserved(define) ident(path) string<delimiter(")content(/usr/lib/libc
 operator(()reserved(define) ident(file) operator(()ident(basename) ident(path)operator(\))operator(\))
 operator(()reserved(define) ident(dir) operator(()ident(dirname) ident(path)operator(\))operator(\))
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(dir is ~A, file is ~A)content(\\n)delimiter(")> ident(dir) ident(file)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(dir is ~A, file is ~A)content(\\n)delimiter(")> ident(dir) ident(file)operator(\))
 
 operator(()ident(basename) ident(path) string<delimiter(")content(.a)delimiter(")>operator(\)) comment(; libc)
 
@@ -4435,7 +4435,7 @@ operator(()ident(use-modules) operator(()ident(ice-9) ident(debug)operator(\))op
 operator(()reserved(define) operator(()ident(child) ident(num)operator(\))
   comment(; Create stack [i.e. activation record] object, discarding)
   comment(; irrelevant frames)
-  operator(()reserved(let) operator(()operator(()ident(s) operator(()ident(make-stack) pre_constant(#t) integer(3) integer(1)operator(\))operator(\))
+  operator(()reserved(let) operator(()operator(()ident(s) operator(()ident(make-stack) predefined_constant(#t) integer(3) integer(1)operator(\))operator(\))
         operator(()ident(trace-string-port) operator(()ident(open-output-string)operator(\))operator(\))
         operator(()ident(parent-name) string<delimiter(")delimiter(")>operator(\))operator(\))
 
@@ -4653,7 +4653,7 @@ operator(()reserved(define) operator(()ident(look-for-something)operator(\))
     ident(something)
   comment(;else)
     comment(; Not found, indicate failure)
-    pre_constant(#f)
+    predefined_constant(#f)
   operator(\))operator(\))
 
 comment(;; ----)
@@ -4673,7 +4673,7 @@ comment(; returning #f. See example in section on Exception Handling below.)
 
 comment(;; ------------)
 
-operator(()reserved(define) operator(()ident(ioctl)operator(\)) ident(...) pre_constant(#f)operator(\))
+operator(()reserved(define) operator(()ident(ioctl)operator(\)) ident(...) predefined_constant(#f)operator(\))
 
 operator(()reserved(or) operator(()ident(ioctl)operator(\)) operator(()reserved(begin) operator(()ident(print) string<delimiter(")content(can't ioctl)delimiter(")>operator(\)) operator(()ident(exit) integer(1)operator(\))operator(\))operator(\))
 
@@ -4712,7 +4712,7 @@ operator(()ident(throw) operator(')ident(some-exception)operator(\))
 
 comment(; Invalid attempts - these, themselves force a 'wrong-type-arg)
 comment(; exception to be thrown)
-operator(()ident(throw) pre_constant(#t)operator(\))
+operator(()ident(throw) predefined_constant(#t)operator(\))
 operator(()ident(throw) string<delimiter(")content(my message)delimiter(")>operator(\))
 operator(()ident(throw) integer(1)operator(\))
 
@@ -4721,9 +4721,9 @@ comment(;; ------------)
 comment(; Example of a 'catch all' handler - 'proc' is executed, and any)
 comment(; exception thrown is handled, in this case by simply returning false)
 operator(()reserved(define) operator(()ident(false-if-exception) ident(proc)operator(\))
-  operator(()ident(catch) pre_constant(#t)
+  operator(()ident(catch) predefined_constant(#t)
     ident(proc)
-    operator(()reserved(lambda) operator(()ident(key) operator(.) ident(args)operator(\)) pre_constant(#f)operator(\))operator(\))operator(\))
+    operator(()reserved(lambda) operator(()ident(key) operator(.) ident(args)operator(\)) predefined_constant(#f)operator(\))operator(\))operator(\))
 
 operator(()reserved(define) operator(()ident(func)operator(\))
   operator(()ident(print) string<delimiter(")content(Starting 'func' ...)delimiter(")>operator(\))
@@ -4878,7 +4878,7 @@ comment(; One might think it would be feasable, however, to use exception)
 comment(; handling to provide roughly similar functionality:)
 
 comment(; Catch all exceptions)
-operator(()ident(catch) pre_constant(#t)
+operator(()ident(catch) predefined_constant(#t)
   comment(; Undefined procedure, 'x')
   ident(x)
   comment(; Exception handler could load missing code ?)
@@ -4919,9 +4919,9 @@ operator(()ident(define-class) ident(<data-encoder>) operator(()operator(\))oper
 operator(()reserved(define) ident(obj) operator(()ident(make) ident(<data-encoder>)operator(\))operator(\))
 
 operator(()reserved(define) ident(obj) operator(#()integer(3) integer(5)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> operator(()ident(class-of) ident(obj)operator(\)) operator(()ident(array-ref) ident(obj) integer(1)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> operator(()ident(class-of) ident(obj)operator(\)) operator(()ident(array-ref) ident(obj) integer(1)operator(\))operator(\))
 operator(()ident(change-class) ident(v) ident(<human-cannibal>)operator(\)) comment(; has to be defined)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(obj) ident(stomach)operator(\)) operator(()ident(slot-ref) ident(obj) ident(name)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A ~A)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(obj) ident(stomach)operator(\)) operator(()ident(slot-ref) ident(obj) ident(name)operator(\))operator(\))
 
 operator(()ident(slot-ref) ident(obj) operator(')ident(stomach)operator(\))
 operator(()ident(slot-set!) ident(obj) operator(')ident(stomach) string<delimiter(")content(Empty)delimiter(")>operator(\))
@@ -5001,7 +5001,7 @@ operator(()reserved(do) operator(()operator(()ident(i) integer(1) operator(()int
     operator(()operator(()ident(>) ident(i) integer(10)operator(\))operator(\))
   operator(()reserved(set!) ident(people) operator(()reserved(cons) operator(()ident(make) ident(<person>)operator(\)) ident(people)operator(\))operator(\))operator(\))
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(There are ~A people alive.)content(\\n)delimiter(")> ident(body-count)operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(There are ~A people alive.)content(\\n)delimiter(")> ident(body-count)operator(\))
 
 operator(()reserved(define) ident(him) operator(()ident(make) ident(<person>)operator(\))operator(\))
 operator(()ident(slot-set!) ident(him) operator(')ident(gender) string<delimiter(")content(male)delimiter(")>operator(\))
@@ -5012,12 +5012,12 @@ operator(()ident(slot-set!) ident(her) operator(')ident(gender) string<delimiter
 comment(;; use the :class allocation method)
 operator(()ident(slot-set!) operator(()ident(make) ident(<fixed-array>)operator(\)) operator(')ident(max-bounds) integer(100)operator(\)) comment(; set for whole class)
 operator(()reserved(define) ident(alpha) operator(()ident(make) ident(<fixed-array>)operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Bound on alpha is ~D)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(alpha) operator(')ident(max-bounds)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Bound on alpha is ~D)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(alpha) operator(')ident(max-bounds)operator(\))operator(\))
 comment(;; 100)
 
 operator(()reserved(define) ident(beta) operator(()ident(make) ident(<fixed-array>)operator(\))operator(\))
 operator(()ident(slot-set!) ident(beta) operator(')ident(max-bounds) integer(50)operator(\))          comment(; still sets for whole class)
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(Bound on alpha is ~D)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(alpha) operator(')ident(max-bounds)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(Bound on alpha is ~D)content(\\n)delimiter(")> operator(()ident(slot-ref) ident(alpha) operator(')ident(max-bounds)operator(\))operator(\))
 comment(;; 50)
 
 comment(;; defined simply as)
@@ -5035,7 +5035,7 @@ operator(()reserved(define) ident(p) operator(()ident(make) ident(<person>)opera
 operator(()ident(slot-set!) ident(p) operator(')ident(name) string<delimiter(")content(Jason Smythe)delimiter(")>operator(\))
 operator(()ident(slot-set!) ident(p) operator(')ident(age) integer(13)operator(\))
 operator(()ident(slot-set!) ident(p) operator(')ident(peers) operator(')operator(()string<delimiter(")content(Wilbur)delimiter(")> string<delimiter(")content(Ralph)delimiter(")> string<delimiter(")content(Fred)delimiter(")>operator(\))operator(\))
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(At age ~D, ~A's first friend is ~A.)content(\\n)delimiter(")>
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(At age ~D, ~A's first friend is ~A.)content(\\n)delimiter(")>
         operator(()ident(slot-ref) ident(p) operator(')ident(age)operator(\)) operator(()ident(slot-ref) ident(p) operator(')ident(name)operator(\)) operator(()ident(car) operator(()ident(slot-ref) ident(p) operator(')ident(peers)operator(\))operator(\))operator(\))
 
 comment(;; For type-checking and field validation, define the setters)
@@ -5062,7 +5062,7 @@ operator(()reserved(define) ident(dad) operator(()ident(head) ident(folks)operat
 operator(()reserved(set!) operator(()ident(name) ident(dad)operator(\)) string<delimiter(")content(John)delimiter(")>operator(\))
 operator(()reserved(set!) operator(()ident(age) ident(dad)operator(\)) integer(34)operator(\))
 
-operator(()ident(format) pre_constant(#t) string<delimiter(")content(~A's age is ~D)content(\\n)delimiter(")> operator(()ident(name) ident(dad)operator(\)) operator(()ident(age) ident(dad)operator(\))operator(\))
+operator(()ident(format) predefined_constant(#t) string<delimiter(")content(~A's age is ~D)content(\\n)delimiter(")> operator(()ident(name) ident(dad)operator(\)) operator(()ident(age) ident(dad)operator(\))operator(\))
 
 comment(;; Macros are the usual way to add syntactic sugar)
 

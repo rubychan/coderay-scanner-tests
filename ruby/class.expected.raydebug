@@ -1,4 +1,4 @@
-global_variable($:) operator(<<) constant(File)operator(.)ident(dirname)operator(()pre_constant(__FILE__)operator(\)) operator(+) string<delimiter(')content(/..)delimiter(')>
+global_variable($:) operator(<<) constant(File)operator(.)ident(dirname)operator(()predefined_constant(__FILE__)operator(\)) operator(+) string<delimiter(')content(/..)delimiter(')>
 ident(require) string<delimiter(')content(coderay)delimiter(')>
 constant(CodeRay)operator(::)constant(Encoders)operator([)symbol(:tokens)operator(])
 constant(CodeRay)operator(::)constant(Encoders)operator([)symbol(:html)operator(])
@@ -8,7 +8,7 @@ ident(include) constant(Test)operator(::)constant(Unit)
 
 reserved(class) class(CodeRaySuite) operator(<) constant(TestCase)
 	
-	reserved(def) pre_constant(self)operator(.)method(dir) operator(&)ident(block)
+	reserved(def) predefined_constant(self)operator(.)method(dir) operator(&)ident(block)
 		instance_variable(@dir) operator(||=) constant(File)operator(.)ident(dirname)operator(()instance_variable(@file)operator(\))
 		reserved(if) ident(block)
 			constant(Dir)operator(.)ident(chdir) instance_variable(@dir)operator(,) operator(&)ident(block)
@@ -17,15 +17,15 @@ reserved(class) class(CodeRaySuite) operator(<) constant(TestCase)
 	reserved(end)
 	
 	reserved(def) method(dir) operator(&)ident(block)
-		pre_constant(self)operator(.)ident(class)operator(.)ident(dir) operator(&)ident(block)
+		predefined_constant(self)operator(.)ident(class)operator(.)ident(dir) operator(&)ident(block)
 	reserved(end)
 	
 	reserved(def) method(extension)
-		string<delimiter(')content(in.)delimiter(')> operator(+) pre_constant(self)operator(.)ident(class)operator(::)constant(EXTENSION)
+		string<delimiter(')content(in.)delimiter(')> operator(+) predefined_constant(self)operator(.)ident(class)operator(::)constant(EXTENSION)
 	reserved(end)
 
 	reserved(def) method(lang)
-		pre_constant(self)operator(.)ident(class)operator(::)constant(LANG)
+		predefined_constant(self)operator(.)ident(class)operator(::)constant(LANG)
 	reserved(end)
 
 	reserved(def) method(test_ALL)
@@ -66,14 +66,14 @@ reserved(def) method(load_suite) ident(name)
 	reserved(rescue) constant(LoadError)
 		global_variable($stderr)operator(.)ident(puts) string<delimiter(<<-ERR)>string<content(
 
-!! Folder )inline<inline_delimiter(#{)constant(File)operator(.)ident(split)operator(()pre_constant(__FILE__)operator(\))operator(.)ident(first) operator(+) string<delimiter(')content(/)delimiter(')> operator(+) ident(name)inline_delimiter(})>content( not found
+!! Folder )inline<inline_delimiter(#{)constant(File)operator(.)ident(split)operator(()predefined_constant(__FILE__)operator(\))operator(.)ident(first) operator(+) string<delimiter(')content(/)delimiter(')> operator(+) ident(name)inline_delimiter(})>content( not found
 		)delimiter(
 		ERR)>
-		pre_constant(false)
+		predefined_constant(false)
 	reserved(end)
 reserved(end)
 
-reserved(if) ident(subsuite) operator(=) pre_constant(ARGV)operator(.)ident(first)
+reserved(if) ident(subsuite) operator(=) predefined_constant(ARGV)operator(.)ident(first)
 	ident(load_suite)operator(()ident(subsuite)operator(\)) reserved(or) ident(exit)
 reserved(else)
 	constant(Dir)operator([)string<delimiter(')content(*/)delimiter(')>operator(])operator(.)ident(each) operator({) operator(|)ident(suite)operator(|) ident(load_suite) ident(suite) operator(})

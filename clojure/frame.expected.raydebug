@@ -82,4 +82,4 @@ operator(()reserved(defmacro) ident(frame) operator([)ident(&) ident(args)operat
 	      operator(~@)operator(()reserved(if) operator(()symbol(:pack) ident(opts)operator(\))
 		  operator([)operator(`)operator(()reserved(.)ident(pack)operator(\))operator(])operator(\))
 	      operator(~@)operator(()reserved(if) operator(()symbol(:show) ident(opts)operator(\))
-		  operator([)operator(`)operator(()reserved(.)ident(setVisible) pre_constant(true)operator(\))operator(])operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
+		  operator([)operator(`)operator(()reserved(.)ident(setVisible) predefined_constant(true)operator(\))operator(])operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))

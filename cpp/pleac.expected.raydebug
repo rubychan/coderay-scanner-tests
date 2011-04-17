@@ -52,37 +52,37 @@ comment(// use single quotes. )
 comment(//-----------------------------)
 comment(// String variables must be declared -- if no value is given it's)
 comment(// value is the empty string (""\). )
-ident(std)operator(::)pre_type(string) ident(s)operator(;)
+ident(std)operator(::)predefined_type(string) ident(s)operator(;)
 
 comment(//-----------------------------)
 comment(// To insert special characters, quote the character with \\
 std::string s1 = "\\\\n";                     // Two characters, \\ and n)
-ident(std)operator(::)pre_type(string) ident(s2) operator(=) string<delimiter(")content(Jon )char(\\")content(Maddog)char(\\")content( Orwant)delimiter(")>operator(;)   comment(// Literal double quotes)
+ident(std)operator(::)predefined_type(string) ident(s2) operator(=) string<delimiter(")content(Jon )char(\\")content(Maddog)char(\\")content( Orwant)delimiter(")>operator(;)   comment(// Literal double quotes)
 
 comment(//-----------------------------)
 comment(// Strings can be declared in one of two ways)
-ident(std)operator(::)pre_type(string) ident(s1) operator(=) string<delimiter(")content(assignment syntax)delimiter(")>operator(;)
-ident(std)operator(::)pre_type(string) ident(s2)operator(()string<delimiter(")content(constructor syntax)delimiter(")>operator(\);)
+ident(std)operator(::)predefined_type(string) ident(s1) operator(=) string<delimiter(")content(assignment syntax)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(s2)operator(()string<delimiter(")content(constructor syntax)delimiter(")>operator(\);)
 
 comment(//-----------------------------)
 comment(// Multi-line strings.)
 comment(// There is no equivalent to perl's "here" documents in c++)
-ident(std)operator(::)pre_type(string) ident(s1) operator(=) string<delimiter(")content(
+ident(std)operator(::)predefined_type(string) ident(s1) operator(=) string<delimiter(")content(
 This is a multiline string started and finished with double 
 quotes that spans 4 lines (it contains 3 newline characters\).
 )delimiter(")>operator(;)
 
-ident(std)operator(::)pre_type(string) ident(s2) operator(=) string<delimiter(")content(This is a multiline string started and finished with double 
+ident(std)operator(::)predefined_type(string) ident(s2) operator(=) string<delimiter(")content(This is a multiline string started and finished with double 
 quotes that spans 2 lines (it contains 1 newline character\).)delimiter(")>operator(;)
 comment(//-----------------------------)
 
 
 comment(// @@PLEAC@@_1.1)
-ident(std)operator(::)pre_type(string) ident(s) operator(=) string<delimiter(")content(some string)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(s) operator(=) string<delimiter(")content(some string)delimiter(")>operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(value1) operator(=) ident(s)operator(.)ident(substr)operator(()ident(offset)operator(,) ident(length)operator(\);)  
-ident(std)operator(::)pre_type(string) ident(value2) operator(=) ident(s)operator(.)ident(substr)operator(()ident(offset)operator(\);)
+ident(std)operator(::)predefined_type(string) ident(value1) operator(=) ident(s)operator(.)ident(substr)operator(()ident(offset)operator(,) ident(length)operator(\);)  
+ident(std)operator(::)predefined_type(string) ident(value2) operator(=) ident(s)operator(.)ident(substr)operator(()ident(offset)operator(\);)
 
 comment(// Unlike perl, the substr function returns a copy of the substring)
 comment(// rather than a reference to the existing substring, thus using substr)
@@ -100,24 +100,24 @@ comment(// Instead, one can use C structures to import/export binary data)
 
 comment(//-----------------------------)
 preprocessor(#include) include(<string>)
-pre_type(string) ident(s) operator(=) string<delimiter(")content(This is what you have)delimiter(")>operator(;)
+predefined_type(string) ident(s) operator(=) string<delimiter(")content(This is what you have)delimiter(")>operator(;)
 
-ident(std)operator(::)pre_type(string) ident(first)  operator(=) ident(s)operator(.)ident(substr)operator(()integer(0)operator(,) integer(1)operator(\);)          comment(// "T")
-ident(std)operator(::)pre_type(string) ident(second) operator(=) ident(s)operator(.)ident(substr)operator(()integer(5)operator(,) integer(2)operator(\);)          comment(// "is")
-ident(std)operator(::)pre_type(string) ident(rest)   operator(=) ident(s)operator(.)ident(substr)operator(()integer(13)operator(\);)            comment(// "you have")
+ident(std)operator(::)predefined_type(string) ident(first)  operator(=) ident(s)operator(.)ident(substr)operator(()integer(0)operator(,) integer(1)operator(\);)          comment(// "T")
+ident(std)operator(::)predefined_type(string) ident(second) operator(=) ident(s)operator(.)ident(substr)operator(()integer(5)operator(,) integer(2)operator(\);)          comment(// "is")
+ident(std)operator(::)predefined_type(string) ident(rest)   operator(=) ident(s)operator(.)ident(substr)operator(()integer(13)operator(\);)            comment(// "you have")
 
 comment(// C++ strings do not support backwards indexing as perl does but )
 comment(// you can fake it out by subtracting the negative index from the)
 comment(// string length)
-ident(std)operator(::)pre_type(string) ident(last)   operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(1)operator(\);)    comment(// "e")
-ident(std)operator(::)pre_type(string) ident(end)    operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(4)operator(\);)    comment(// "have")
-ident(std)operator(::)pre_type(string) ident(piece)  operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(8)operator(,) integer(3)operator(\);) comment(// "you")
+ident(std)operator(::)predefined_type(string) ident(last)   operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(1)operator(\);)    comment(// "e")
+ident(std)operator(::)predefined_type(string) ident(end)    operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(4)operator(\);)    comment(// "have")
+ident(std)operator(::)predefined_type(string) ident(piece)  operator(=) ident(s)operator(.)ident(substr)operator(()ident(s)operator(.)ident(size)operator((\)-)integer(8)operator(,) integer(3)operator(\);) comment(// "you")
 
 comment(//-----------------------------)
 preprocessor(#include) include(<string>)
 preprocessor(#include) include(<iostream>)
 
-pre_type(string) ident(s)operator(()string<delimiter(")content(This is what you have)delimiter(")>operator(\);)
+predefined_type(string) ident(s)operator(()string<delimiter(")content(This is what you have)delimiter(")>operator(\);)
 ident(std)operator(::)ident(cout) operator(<<) ident(s) operator(<<) ident(std)operator(::)ident(endl)operator(;) 
 comment(// This is what you have)
 
@@ -150,10 +150,10 @@ comment(// MISSING: substr($string, 0, 5\) =~ s/is/at/g;)
 
 comment(//-----------------------------)
 comment(// exchange the first and last letters in a string using substr and replace)
-pre_type(string) ident(a) operator(=) string<delimiter(")content(make a hat)delimiter(")>operator(;)
+predefined_type(string) ident(a) operator(=) string<delimiter(")content(make a hat)delimiter(")>operator(;)
 
-ident(std)operator(::)pre_type(string) ident(first) operator(=) ident(a)operator(.)ident(substr)operator(()integer(0)operator(,)integer(1)operator(\);)
-ident(std)operator(::)pre_type(string) ident(last)  operator(=) ident(a)operator(.)ident(substr)operator(()ident(a)operator(.)ident(size)operator((\)-)integer(1)operator(\);)
+ident(std)operator(::)predefined_type(string) ident(first) operator(=) ident(a)operator(.)ident(substr)operator(()integer(0)operator(,)integer(1)operator(\);)
+ident(std)operator(::)predefined_type(string) ident(last)  operator(=) ident(a)operator(.)ident(substr)operator(()ident(a)operator(.)ident(size)operator((\)-)integer(1)operator(\);)
 
 ident(a)operator(.)ident(replace)operator(()integer(0)operator(,)integer(1)operator(,) ident(last)operator(\);)
 ident(a)operator(.)ident(replace)operator(()ident(a)operator(.)ident(size)operator((\)-)integer(1)operator(,) integer(1)operator(,) ident(first)operator(\);)
@@ -188,23 +188,23 @@ comment(// the following code surrounds the following examples that deal)
 comment(// with argv.  Also, arguments to a program start at argv[1] -- argv[0])
 comment(// is the name of the executable that's running.)
 preprocessor(#include) include(<string.h>)
-pre_type(int) ident(main)operator(()pre_type(int) ident(argc)operator(,) pre_type(char) operator(*)ident(argv)operator([]\)) operator({)
-   pre_type(char) operator(**)ident(args) operator(=) ident(argv)operator(+)integer(1)operator(;) comment(// +1 skips argv[0], the name of the executable)
+predefined_type(int) ident(main)operator(()predefined_type(int) ident(argc)operator(,) predefined_type(char) operator(*)ident(argv)operator([]\)) operator({)
+   predefined_type(char) operator(**)ident(args) operator(=) ident(argv)operator(+)integer(1)operator(;) comment(// +1 skips argv[0], the name of the executable)
    comment(// examples)
 operator(})
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(dir) operator(=) operator((*)ident(args)operator(\)) operator(?) operator(*)ident(argv)operator(++) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(dir) operator(=) operator((*)ident(args)operator(\)) operator(?) operator(*)ident(argv)operator(++) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(dir) operator(=) ident(argv)operator([)integer(1)operator(]) operator(?) ident(argv)operator([)integer(1)operator(]) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(dir) operator(=) ident(argv)operator([)integer(1)operator(]) operator(?) ident(argv)operator([)integer(1)operator(]) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(dir) operator(=) operator(()ident(argc)operator(-)integer(1)operator(\)) operator(?) ident(argv)operator([)integer(1)operator(]) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(dir) operator(=) operator(()ident(argc)operator(-)integer(1)operator(\)) operator(?) ident(argv)operator([)integer(1)operator(]) operator(:) string<delimiter(")content(/tmp)delimiter(")>operator(;)
 
 comment(//-----------------------------)
 preprocessor(#include) include(<map>)
-ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,)pre_type(int)operator(>) ident(count)operator(;)
+ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,)predefined_type(int)operator(>) ident(count)operator(;)
 
 ident(count)operator([)ident(shell)operator(.)ident(size)operator((\)) operator(?) ident(shell) operator(:) string<delimiter(")content(/bin/sh)delimiter(")>operator(]++;) 
 
@@ -216,8 +216,8 @@ preprocessor(#include) include(<unistd.h>)
 preprocessor(#include) include(<pwd.h>)
 preprocessor(#include) include("boost/lexical_cast.hpp")
 
-ident(std)operator(::)pre_type(string) ident(user)operator(;)
-pre_type(char)       operator(*)ident(msg) operator(=) integer(0)operator(;)
+ident(std)operator(::)predefined_type(string) ident(user)operator(;)
+predefined_type(char)       operator(*)ident(msg) operator(=) integer(0)operator(;)
 ident(passwd)     operator(*)ident(pwd) operator(=) integer(0)operator(;)
 
 reserved(if) operator(() operator(()ident(msg) operator(=) ident(getenv)operator(()string<delimiter(")content(USER)delimiter(")>operator(\)\))    operator(||)
@@ -227,7 +227,7 @@ reserved(if) operator(() operator(()ident(msg) operator(=) ident(getenv)operator
 reserved(else) reserved(if) operator(()ident(pwd) operator(=) ident(getpwuid)operator(()ident(getuid)operator((\)\)\))
   ident(user) operator(=) ident(pwd)operator(->)ident(pw_name)operator(;)
 reserved(else)
-  ident(user) operator(=) string<delimiter(")content(Unknown uid number )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)ident(std)operator(::)pre_type(string)operator(>()ident(getuid)operator((\)\);)
+  ident(user) operator(=) string<delimiter(")content(Unknown uid number )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)ident(std)operator(::)predefined_type(string)operator(>()ident(getuid)operator((\)\);)
 
 comment(//-----------------------------)
 reserved(if) operator(()ident(starting_point)operator(.)ident(is_empty)operator((\)\)) ident(starting_point) operator(=) string<delimiter(")content(Greenwich)delimiter(")>operator(;)
@@ -235,7 +235,7 @@ reserved(if) operator(()ident(starting_point)operator(.)ident(is_empty)operator(
 comment(//-----------------------------)
 comment(// Example using list.  Other C++ STL containers work similarly.)
 preprocessor(#include) include(<list>)
-ident(list)operator(<)pre_type(int)operator(>) ident(a)operator(,) ident(b)operator(;)
+ident(list)operator(<)predefined_type(int)operator(>) ident(a)operator(,) ident(b)operator(;)
 reserved(if) operator(()ident(a)operator(.)ident(is_empty)operator((\)\)) ident(a) operator(=) ident(b)operator(;)     comment(// copy only if a is empty)
 ident(a) operator(=) operator((!)ident(b)operator(.)ident(is_empty)operator((\)\)) operator(?) ident(b) operator(:) ident(c)operator(;) comment(// asign b if b nonempty, else c)
 comment(//-----------------------------)
@@ -252,8 +252,8 @@ ident(a)    operator(=) ident(b)operator(;)
 ident(b)    operator(=) ident(temp)operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(a)operator(()string<delimiter(")content(alpha)delimiter(")>operator(\);)
-ident(std)operator(::)pre_type(string) ident(b)operator(()string<delimiter(")content(omega)delimiter(")>operator(\);)
+ident(std)operator(::)predefined_type(string) ident(a)operator(()string<delimiter(")content(alpha)delimiter(")>operator(\);)
+ident(std)operator(::)predefined_type(string) ident(b)operator(()string<delimiter(")content(omega)delimiter(")>operator(\);)
 ident(std)operator(::)ident(swap)operator(()ident(a)operator(,)ident(b)operator(\);)
 
 comment(//-----------------------------)
@@ -276,8 +276,8 @@ comment(// @@PLEAC@@_1.4)
 comment(//-----------------------------)
 comment(// There are several ways to convert between characters)
 comment(// and integers.  The examples assume the following declarations:)
-pre_type(char) ident(ch)operator(;)
-pre_type(int)  ident(num)operator(;)
+predefined_type(char) ident(ch)operator(;)
+predefined_type(int)  ident(num)operator(;)
 
 comment(//-----------------------------)
 comment(// Using implicit conversion)
@@ -286,13 +286,13 @@ ident(ch)  operator(=) ident(num)operator(;)
 
 comment(//-----------------------------)
 comment(// New-style C++ casts)
-ident(ch)  operator(=) reserved(static_cast)operator(<)pre_type(char)operator(>()ident(num)operator(\);)
-ident(num) operator(=) reserved(static_cast)operator(<)pre_type(int)operator(>()ident(ch)operator(\);)
+ident(ch)  operator(=) reserved(static_cast)operator(<)predefined_type(char)operator(>()ident(num)operator(\);)
+ident(num) operator(=) reserved(static_cast)operator(<)predefined_type(int)operator(>()ident(ch)operator(\);)
 
 comment(//-----------------------------)
 comment(// Old-style C casts)
-ident(ch)  operator(=) operator(()pre_type(char)operator(\))ident(num)operator(;)
-ident(num) operator(=) operator(()pre_type(int)operator(\))ident(ch)operator(;)
+ident(ch)  operator(=) operator(()predefined_type(char)operator(\))ident(num)operator(;)
+ident(num) operator(=) operator(()predefined_type(int)operator(\))ident(ch)operator(;)
 
 comment(//-----------------------------)
 comment(// Using the C++ stringstream class)
@@ -307,13 +307,13 @@ ident(a) operator(>>) ident(ch)operator(;)                 comment(// Output num
 
 comment(//-----------------------------)
 comment(// Using sprintf, printf)
-pre_type(char) ident(str)operator([)integer(2)operator(];)             comment(// Has to be length 2 to have room for NULL character)
+predefined_type(char) ident(str)operator([)integer(2)operator(];)             comment(// Has to be length 2 to have room for NULL character)
 ident(sprintf)operator(()ident(str)operator(,) string<delimiter(")content(%c)delimiter(")>operator(,) ident(num)operator(\);)
 ident(printf)operator(()string<delimiter(")content(Number %d is character %c)char(\\n)delimiter(")>operator(,) ident(num)operator(,) ident(num)operator(\);)
 
 comment(//-----------------------------)
-pre_type(int)  ident(ascii_value) operator(=) char('e')operator(;)   comment(// now 101)
-pre_type(char) ident(character)   operator(=) integer(101)operator(;)   comment(// now 'e')
+predefined_type(int)  ident(ascii_value) operator(=) char('e')operator(;)   comment(// now 101)
+predefined_type(char) ident(character)   operator(=) integer(101)operator(;)   comment(// now 'e')
 
 comment(//-----------------------------)
 ident(printf)operator(()string<delimiter(")content(Number %d is character %c)char(\\n)delimiter(")>operator(,) integer(101)operator(,) integer(101)operator(\);)
@@ -323,8 +323,8 @@ comment(// Convert from HAL to IBM, character by character)
 preprocessor(#include) include(<string>)
 preprocessor(#include) include(<iostream>)
 
-ident(std)operator(::)pre_type(string) ident(ibm)operator(,) ident(hal) operator(=) string<delimiter(")content(HAL)delimiter(")>operator(;)
-reserved(for) operator(()pre_type(unsigned) pre_type(int) ident(i)operator(=)integer(0)operator(;) ident(i)operator(<)ident(hal)operator(.)ident(size)operator((\);) operator(++)ident(i)operator(\))
+ident(std)operator(::)predefined_type(string) ident(ibm)operator(,) ident(hal) operator(=) string<delimiter(")content(HAL)delimiter(")>operator(;)
+reserved(for) operator(()predefined_type(unsigned) predefined_type(int) ident(i)operator(=)integer(0)operator(;) ident(i)operator(<)ident(hal)operator(.)ident(size)operator((\);) operator(++)ident(i)operator(\))
     ident(ibm) operator(+=) ident(hal)operator([)ident(i)operator(]+)integer(1)operator(;)          comment(// Add one to each ascii value)
 ident(std)operator(::)ident(cout) operator(<<) ident(ibm) operator(<<) ident(std)operator(::)ident(endl)operator(;)          comment(// prints "IBM")
 
@@ -335,9 +335,9 @@ preprocessor(#include) include(<iostream>)
 preprocessor(#include) include(<functional>)         comment(// For bind1st and plus<>)
 preprocessor(#include) include(<algorithm>)          comment(// For transform )
 
-ident(std)operator(::)pre_type(string) ident(hal) operator(=) string<delimiter(")content(HAL)delimiter(")>operator(;)   
+ident(std)operator(::)predefined_type(string) ident(hal) operator(=) string<delimiter(")content(HAL)delimiter(")>operator(;)   
 ident(transform)operator(()ident(hal)operator(.)ident(begin)operator((\),) ident(hal)operator(.)ident(end)operator((\),) ident(hal)operator(.)ident(begin)operator((\),)
-          ident(bind1st)operator(()ident(plus)operator(<)pre_type(char)operator(>(\),)integer(1)operator(\)\);)
+          ident(bind1st)operator(()ident(plus)operator(<)predefined_type(char)operator(>(\),)integer(1)operator(\)\);)
 ident(std)operator(::)ident(cout) operator(<<) ident(hal) operator(<<) ident(std)operator(::)ident(endl)operator(;)          comment(// prints "IBM")
 comment(//-----------------------------)
 
@@ -348,34 +348,34 @@ comment(// Since C++ strings can be accessed one character at a time,)
 comment(// there's no need to do any processing on the string to convert)
 comment(// it into an array of characters.  )
 preprocessor(#include) include(<string>)
-ident(std)operator(::)pre_type(string) ident(s)operator(;)
+ident(std)operator(::)predefined_type(string) ident(s)operator(;)
 
 comment(// Accessing characters using for loop and integer offsets)
-reserved(for) operator(()pre_type(unsigned) pre_type(int) ident(i)operator(=)integer(0)operator(;) ident(i)operator(<)ident(s)operator(.)ident(size)operator((\);) operator(++)ident(i)operator(\)) operator({)
+reserved(for) operator(()predefined_type(unsigned) predefined_type(int) ident(i)operator(=)integer(0)operator(;) ident(i)operator(<)ident(s)operator(.)ident(size)operator((\);) operator(++)ident(i)operator(\)) operator({)
     comment(// do something with s[i])
 operator(})
 
 comment(// Accessing characters using iterators)
-reserved(for) operator(()ident(std)operator(::)pre_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(s)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(s)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\)) operator({)
+reserved(for) operator(()ident(std)operator(::)predefined_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(s)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(s)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\)) operator({)
     comment(// do something with *i)
 operator(})
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string)        ident(str)  operator(=) string<delimiter(")content(an apple a day)delimiter(")>operator(;)
-ident(std)operator(::)ident(map)operator(<)pre_type(char)operator(,)pre_type(int)operator(>) ident(seen)operator(;)
+ident(std)operator(::)predefined_type(string)        ident(str)  operator(=) string<delimiter(")content(an apple a day)delimiter(")>operator(;)
+ident(std)operator(::)ident(map)operator(<)predefined_type(char)operator(,)predefined_type(int)operator(>) ident(seen)operator(;)
 
-reserved(for) operator(()ident(std)operator(::)pre_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(str)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(str)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
+reserved(for) operator(()ident(std)operator(::)predefined_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(str)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(str)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
    ident(seen)operator([*)ident(i)operator(]++;)
 
 ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(unique chars are: )delimiter(")>operator(;)
-reserved(for) operator(()ident(std)operator(::)ident(map)operator(<)pre_type(char)operator(,)pre_type(int)operator(>::)ident(iterator) ident(i)operator(=)ident(seen)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(seen)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
+reserved(for) operator(()ident(std)operator(::)ident(map)operator(<)predefined_type(char)operator(,)predefined_type(int)operator(>::)ident(iterator) ident(i)operator(=)ident(seen)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(seen)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
     ident(std)operator(::)ident(cout) operator(<<) ident(i)operator(->)ident(first)operator(;)
 ident(std)operator(::)ident(cout) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 comment(// unique chars are:  adelnpy)
 
 comment(//-----------------------------)
-pre_type(int) ident(sum) operator(=) integer(0)operator(;)
-reserved(for) operator(()ident(std)operator(::)pre_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(str)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(str)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
+predefined_type(int) ident(sum) operator(=) integer(0)operator(;)
+reserved(for) operator(()ident(std)operator(::)predefined_type(string)operator(::)ident(iterator) ident(i)operator(=)ident(str)operator(.)ident(begin)operator((\);) ident(i)operator(!=)ident(str)operator(.)ident(end)operator((\);) operator(++)ident(i)operator(\))
     ident(sum) operator(+=) operator(*)ident(i)operator(;)
 ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(sum is )delimiter(")> operator(<<) ident(sum) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 comment(// prints "sum is 1248" if str was "an appla a day")
@@ -390,12 +390,12 @@ preprocessor(#include) include(<sys/time.h>)
 preprocessor(#include) include(<iostream>)
 preprocessor(#include) include(<fstream>)
 
-pre_type(int) ident(main)operator(()pre_type(int) ident(argc)operator(,) pre_type(char) operator(*)ident(argv)operator([]\)) operator({)
+predefined_type(int) ident(main)operator(()predefined_type(int) ident(argc)operator(,) predefined_type(char) operator(*)ident(argv)operator([]\)) operator({)
   ident(timeval) ident(delay) operator(=) operator({) integer(0)operator(,) integer(50000) operator(};)   comment(// Delay in { seconds, nanoseconds })
-  pre_type(char) operator(**)ident(arg) operator(=) ident(argv)operator(+)integer(1)operator(;)   
+  predefined_type(char) operator(**)ident(arg) operator(=) ident(argv)operator(+)integer(1)operator(;)   
   reserved(while) operator((*)ident(arg)operator(\)) operator({)                  comment(// For each file)
     ident(std)operator(::)ident(ifstream) ident(file)operator((*)ident(arg)operator(++\);)
-    pre_type(char) ident(c)operator(;)
+    predefined_type(char) ident(c)operator(;)
     reserved(while) operator(()ident(file)operator(.)ident(get)operator(()ident(c)operator(\)\)) operator({)
       ident(std)operator(::)ident(cout)operator(.)ident(put)operator(()ident(c)operator(\);)
       ident(std)operator(::)ident(cout)operator(.)ident(flush)operator((\);)
@@ -410,7 +410,7 @@ comment(// @@PLEAC@@_1.6)
 comment(//-----------------------------)
 preprocessor(#include) include(<string>)
 preprocessor(#include) include(<algorithm>)                  comment(// For reverse)
-ident(std)operator(::)pre_type(string) ident(s)operator(;)
+ident(std)operator(::)predefined_type(string) ident(s)operator(;)
 
 ident(reverse)operator(()ident(s)operator(.)ident(begin)operator((\),) ident(s)operator(.)ident(end)operator((\)\);)
 
@@ -419,46 +419,46 @@ preprocessor(#include) include(<vector>)                    comment(// For std::
 preprocessor(#include) include(<sstream>)                   comment(// On older compilers, use <strstream>)
 preprocessor(#include) include("boost/regex.hpp")           comment(// For boost::regex_split)
 
-ident(std)operator(::)pre_type(string) ident(str)operator(;)
-ident(std)operator(::)ident(vector)operator(<)ident(std)operator(::)pre_type(string)operator(>) ident(words)operator(;)
+ident(std)operator(::)predefined_type(string) ident(str)operator(;)
+ident(std)operator(::)ident(vector)operator(<)ident(std)operator(::)predefined_type(string)operator(>) ident(words)operator(;)
 ident(boost)operator(::)ident(regex_split)operator(()ident(std)operator(::)ident(back_inserter)operator(()ident(words)operator(\),) ident(str)operator(\);)
 ident(reverse)operator(()ident(words)operator(.)ident(begin)operator((\),) ident(words)operator(.)ident(end)operator((\)\);) comment(// Reverse the order of the words)
 
 ident(std)operator(::)ident(stringstream) ident(revwords)operator(;)          comment(// On older compilers, use strstream)
-ident(copy)operator(()ident(words)operator(.)ident(begin)operator((\),) ident(words)operator(.)ident(end)operator((\),) ident(ostream_inserter)operator(<)pre_type(string)operator(>()ident(revwords)operator(,)string<delimiter(")content( )delimiter(")>operator(\);)
+ident(copy)operator(()ident(words)operator(.)ident(begin)operator((\),) ident(words)operator(.)ident(end)operator((\),) ident(ostream_inserter)operator(<)predefined_type(string)operator(>()ident(revwords)operator(,)string<delimiter(")content( )delimiter(")>operator(\);)
 ident(std)operator(::)ident(cout) operator(<<) ident(revwards)operator(.)ident(str)operator((\)) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(rts) operator(=) ident(str)operator(;)
+ident(std)operator(::)predefined_type(string) ident(rts) operator(=) ident(str)operator(;)
 ident(reverse)operator(()ident(rts)operator(.)ident(begin)operator((\),) ident(rts)operator(.)ident(end)operator((\)\);)     comment(// Reverses letters in rts)
 
 comment(//-----------------------------)
-ident(std)operator(::)ident(vector)operator(<)pre_type(string)operator(>) ident(words)operator(;)                  
+ident(std)operator(::)ident(vector)operator(<)predefined_type(string)operator(>) ident(words)operator(;)                  
 ident(reverse)operator(()ident(words)operator(.)ident(begin)operator((\),) ident(words)operator(.)ident(end)operator((\)\);) comment(// Reverses words in container)
 
 comment(//-----------------------------)
 comment(// Reverse word order)
-ident(std)operator(::)pre_type(string) ident(s) operator(=) string<delimiter(")content(Yoda said, 'can you see this?')delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(s) operator(=) string<delimiter(")content(Yoda said, 'can you see this?')delimiter(")>operator(;)
 
-ident(std)operator(::)ident(vector)operator(<)ident(std)operator(::)pre_type(string)operator(>) ident(allwords)operator(;)
+ident(std)operator(::)ident(vector)operator(<)ident(std)operator(::)predefined_type(string)operator(>) ident(allwords)operator(;)
 ident(boost)operator(::)ident(regex_split)operator(()ident(std)operator(::)ident(back_inserter)operator(()ident(allwords)operator(\),) ident(s)operator(\);)
 
 ident(reverse)operator(()ident(allwords)operator(.)ident(begin)operator((\),) ident(allwords)operator(.)ident(end)operator((\)\);)
     
 ident(std)operator(::)ident(stringstream) ident(revwords)operator(;)          comment(// On older compilers, use strstream)
-ident(copy)operator(()ident(allwords)operator(.)ident(begin)operator((\),) ident(allwords)operator(.)ident(end)operator((\),) ident(ostream_inserter)operator(<)pre_type(string)operator(>()ident(revwords)operator(,)string<delimiter(")content( )delimiter(")>operator(\)\);)
+ident(copy)operator(()ident(allwords)operator(.)ident(begin)operator((\),) ident(allwords)operator(.)ident(end)operator((\),) ident(ostream_inserter)operator(<)predefined_type(string)operator(>()ident(revwords)operator(,)string<delimiter(")content( )delimiter(")>operator(\)\);)
 ident(std)operator(::)ident(cout) operator(<<) ident(revwards)operator(.)ident(str)operator((\)) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 comment(// this?' see you 'can said, Yoda)
 
 comment(//-----------------------------)
-ident(std)operator(::)pre_type(string) ident(word)  operator(=) string<delimiter(")content(reviver)delimiter(")>operator(;)
-pre_type(bool) ident(is_palindrome) operator(=) ident(equal)operator(()ident(word)operator(.)ident(begin)operator((\),) ident(word)operator(.)ident(end)operator((\),) ident(word)operator(.)ident(rbegin)operator((\)\);)
+ident(std)operator(::)predefined_type(string) ident(word)  operator(=) string<delimiter(")content(reviver)delimiter(")>operator(;)
+predefined_type(bool) ident(is_palindrome) operator(=) ident(equal)operator(()ident(word)operator(.)ident(begin)operator((\),) ident(word)operator(.)ident(end)operator((\),) ident(word)operator(.)ident(rbegin)operator((\)\);)
 
 comment(//-----------------------------)
 preprocessor(#include) include(<ifstream>)
 
 ident(std)operator(::)ident(ifstream) ident(dict)operator(()string<delimiter(")content(/usr/dict/words)delimiter(")>operator(\);)
-ident(std)operator(::)pre_type(string)   ident(word)operator(;)
+ident(std)operator(::)predefined_type(string)   ident(word)operator(;)
 reserved(while)operator(()ident(getline)operator(()ident(dict)operator(,)ident(word)operator(\)\)) operator({)
     reserved(if) operator(()ident(equal)operator(()ident(word)operator(.)ident(begin)operator((\),) ident(word)operator(.)ident(end)operator((\),) ident(word)operator(.)ident(rbegin)operator((\)\)) operator(&&)
         ident(word)operator(.)ident(size)operator((\)) operator(>) integer(5)operator(\))
@@ -471,9 +471,9 @@ comment(// @@PLEAC@@_1.7)
 comment(//-----------------------------)
 preprocessor(#include) include(<string>)
 
-ident(std)operator(::)pre_type(string)operator(::)ident(size_type) ident(pos)operator(;)
-reserved(while) operator((()ident(pos) operator(=) ident(str)operator(.)ident(find)operator(()string<delimiter(")char(\\t)delimiter(")>operator(\)\)) operator(!=) ident(std)operator(::)pre_type(string)operator(::)ident(npos)operator(\))
-    ident(str)operator(.)ident(replace)operator(()ident(pos)operator(,) integer(1)operator(,) pre_type(string)operator(()char(' ')operator(,)integer(8)operator(-)ident(pos)operator(%)integer(8)operator(\)\);)
+ident(std)operator(::)predefined_type(string)operator(::)ident(size_type) ident(pos)operator(;)
+reserved(while) operator((()ident(pos) operator(=) ident(str)operator(.)ident(find)operator(()string<delimiter(")char(\\t)delimiter(")>operator(\)\)) operator(!=) ident(std)operator(::)predefined_type(string)operator(::)ident(npos)operator(\))
+    ident(str)operator(.)ident(replace)operator(()ident(pos)operator(,) integer(1)operator(,) predefined_type(string)operator(()char(' ')operator(,)integer(8)operator(-)ident(pos)operator(%)integer(8)operator(\)\);)
 comment(//-----------------------------)
 
 
@@ -490,7 +490,7 @@ comment(// TODO:  Modify/add code to do this with locales)
 preprocessor(#include) include(<string>)
 preprocessor(#include) include(<algorithm>)
 
-ident(std)operator(::)pre_type(string) ident(phrase) operator(=) string<delimiter(")content(bo peep)delimiter(")>operator(;)
+ident(std)operator(::)predefined_type(string) ident(phrase) operator(=) string<delimiter(")content(bo peep)delimiter(")>operator(;)
 ident(transform)operator(()ident(phrase)operator(.)ident(begin)operator((\),) ident(phrase)operator(.)ident(end)operator((\),) ident(phrase)operator(.)ident(begin)operator((\),) ident(toupper)operator(\);)
 comment(// "BO PEEP")
 ident(transform)operator(()ident(phrase)operator(.)ident(begin)operator((\),) ident(phrase)operator(.)ident(end)operator((\),) ident(phrase)operator(.)ident(begin)operator((\),) ident(tolower)operator(\);)
@@ -505,17 +505,17 @@ comment(// concatenation must be used instead.)
 
 preprocessor(#include) include(<string>)
 
-ident(std)operator(::)pre_type(string) ident(var1)operator(,) ident(var2)operator(;)
-ident(std)operator(::)pre_type(string) ident(answer) operator(=) ident(var1) operator(+) ident(func)operator((\)) operator(+) ident(var2)operator(;)  comment(// func returns string or char *)
+ident(std)operator(::)predefined_type(string) ident(var1)operator(,) ident(var2)operator(;)
+ident(std)operator(::)predefined_type(string) ident(answer) operator(=) ident(var1) operator(+) ident(func)operator((\)) operator(+) ident(var2)operator(;)  comment(// func returns string or char *)
 
 comment(//-----------------------------)
 preprocessor(#include) include("boost/lexical_cast.hpp")
 
-pre_type(int) ident(n) operator(=) integer(4)operator(;)
-ident(std)operator(::)pre_type(string) ident(phrase) operator(=) string<delimiter(")content(I have )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)pre_type(string)operator(>()ident(n)operator(+)integer(1)operator(\)) operator(+) string<delimiter(")content( guanacos.)delimiter(")>operator(;)
+predefined_type(int) ident(n) operator(=) integer(4)operator(;)
+ident(std)operator(::)predefined_type(string) ident(phrase) operator(=) string<delimiter(")content(I have )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)predefined_type(string)operator(>()ident(n)operator(+)integer(1)operator(\)) operator(+) string<delimiter(")content( guanacos.)delimiter(")>operator(;)
 
 comment(//-----------------------------)
-ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(I have )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)pre_type(string)operator(>()ident(n)operator(+)integer(1)operator(\)) operator(+) string<delimiter(")content( guanacos.)delimiter(")> operator(<<) ident(std)operator(::)ident(endl)operator(;)
+ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(I have )delimiter(")> operator(+) ident(boost)operator(::)ident(lexical_cast)operator(<)predefined_type(string)operator(>()ident(n)operator(+)integer(1)operator(\)) operator(+) string<delimiter(")content( guanacos.)delimiter(")> operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
 
 comment(// @@PLEAC@@_1.11)
@@ -525,7 +525,7 @@ comment(// TODO: Lots more.)
 preprocessor(#include) include(<string>)
 preprocessor(#include) include("boost/regex.hpp")
 
-ident(std)operator(::)pre_type(string) ident(var) operator(=) string<delimiter(")content(
+ident(std)operator(::)predefined_type(string) ident(var) operator(=) string<delimiter(")content(
    your text
    goes here.
 )delimiter(")>operator(;)
@@ -560,18 +560,18 @@ comment(//)
 comment(// The effect is similar to using the 'static' keyword, in this same context, in the C)
 comment(// language.)
 
-pre_type(int) ident(greeted) operator(=) integer(0)operator(;)
+predefined_type(int) ident(greeted) operator(=) integer(0)operator(;)
 
-pre_type(int) ident(howManyGreetings)operator((\);)
+predefined_type(int) ident(howManyGreetings)operator((\);)
 directive(void) ident(hello)operator((\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   ident(hello)operator((\);)
 
-  pre_type(int) ident(greetings) operator(=) ident(howManyGreetings)operator((\);)
+  predefined_type(int) ident(greetings) operator(=) ident(howManyGreetings)operator((\);)
 
   ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(bye there!, there have been )delimiter(")>
             operator(<<) ident(greetings)
@@ -581,7 +581,7 @@ operator(})
 
 comment(// ----)
 
-pre_type(int) ident(howManyGreetings)operator((\))
+predefined_type(int) ident(howManyGreetings)operator((\))
 operator({)
   comment(// Access 'greeted' identifier in the global namespace using the scope resolution)
   comment(// operator. Use of this operator is only necessary if a similarly-named identifier)
@@ -606,18 +606,18 @@ comment(// parameter list, as shown here )
 
 preprocessor(#include) include(<cmath>)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) pre_type(double) ident(side2)operator(\);)
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) predefined_type(double) ident(side2)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  pre_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
+  predefined_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
 operator(})
 
 comment(// ----)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) pre_type(double) ident(side2)operator(\))
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) predefined_type(double) ident(side2)operator(\))
 operator({)
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()ident(side1)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()ident(side2)operator(,) float(2)float(.0)operator(\)\);)
 operator(})
@@ -637,23 +637,23 @@ comment(//   the format string / variable arguments of 'printf')
 preprocessor(#include) include(<cmath>)
 preprocessor(#include) include(<cstdarg>)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) operator(.)operator(.)operator(.)operator(\);)
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) operator(.)operator(.)operator(.)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  pre_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
+  predefined_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
 operator(})
 
 comment(// ----)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) operator(.)operator(.)operator(.)operator(\))
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) operator(.)operator(.)operator(.)operator(\))
 operator({)
   comment(// More details available in the corresponding section of PLEAC-C/Posix/GNU)
   ident(va_list) ident(ap)operator(;)
   ident(va_start)operator(()ident(ap)operator(,) ident(side1)operator(\);)
-  pre_type(double) ident(side2) operator(=) ident(va_arg)operator(()ident(ap)operator(,) pre_type(double)operator(\);)
+  predefined_type(double) ident(side2) operator(=) ident(va_arg)operator(()ident(ap)operator(,) predefined_type(double)operator(\);)
   ident(va_end)operator(()ident(ap)operator(\);)
 
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()ident(side1)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()ident(side2)operator(,) float(2)float(.0)operator(\)\);)
@@ -670,14 +670,14 @@ comment(// Note: This may be done in either of the declaration or the definition
 comment(// makes more sense to do so in the declaration since these are usually placed in header files)
 comment(// which may be included in several source files. The default argument values would need to be)
 comment(// known in all those locations)
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1) operator(=) float(3)float(.0)operator(,) pre_type(double) ident(side2) operator(=) float(4)float(.0)operator(\);)
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1) operator(=) float(3)float(.0)operator(,) predefined_type(double) ident(side2) operator(=) float(4)float(.0)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// All arguments specified)
-  pre_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
+  predefined_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
 
   comment(// Both calls utilise default argument value(s\))
   ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(\);)
@@ -687,7 +687,7 @@ operator(})
 
 comment(// ----)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) pre_type(double) ident(side2)operator(\))
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) predefined_type(double) ident(side2)operator(\))
 operator({)
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()ident(side1)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()ident(side2)operator(,) float(2)float(.0)operator(\)\);)
 operator(})
@@ -698,16 +698,16 @@ comment(// A [very contrived, not very practical] example using function overloa
 
 preprocessor(#include) include(<cmath>)
 
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) pre_type(double) ident(side2)operator(\);)
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(\);)
-pre_type(double) ident(hypotenuse)operator((\);)
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) predefined_type(double) ident(side2)operator(\);)
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(\);)
+predefined_type(double) ident(hypotenuse)operator((\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Call version (1\))
-  pre_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
+  predefined_type(double) ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(,) float(4)float(.0)operator(\);)
 
   comment(// Call version (2\))
   ident(diag) operator(=) ident(hypotenuse)operator(()float(3)float(.0)operator(\);)
@@ -719,19 +719,19 @@ operator(})
 comment(// ----)
 
 comment(// (1\))
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(,) pre_type(double) ident(side2)operator(\))
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(,) predefined_type(double) ident(side2)operator(\))
 operator({)
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()ident(side1)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()ident(side2)operator(,) float(2)float(.0)operator(\)\);)
 operator(})
 
 comment(// (2\))
-pre_type(double) ident(hypotenuse)operator(()pre_type(double) ident(side1)operator(\))
+predefined_type(double) ident(hypotenuse)operator(()predefined_type(double) ident(side1)operator(\))
 operator({)
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()ident(side1)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()float(4)float(.0)operator(,) float(2)float(.0)operator(\)\);)
 operator(})
 
 comment(// (3\))
-pre_type(double) ident(hypotenuse)operator((\))
+predefined_type(double) ident(hypotenuse)operator((\))
 operator({)
   reserved(return) ident(std)operator(::)ident(sqrt)operator(()ident(std)operator(::)ident(pow)operator(()float(3)float(.0)operator(,) float(2)float(.0)operator(\)) operator(+) ident(std)operator(::)ident(pow)operator(()float(4)float(.0)operator(,) float(2)float(.0)operator(\)\);)
 operator(})
@@ -741,34 +741,34 @@ comment(// ----------------------------)
 preprocessor(#include) include(<cstddef>)
 preprocessor(#include) include(<vector>)
 
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(int_all)operator(()directive(const) pre_type(double) ident(arr)operator([],) ident(size_t) ident(arrsize)operator(\);)
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(int_all)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>&) ident(arr)operator(\);)
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(int_all)operator(()directive(const) predefined_type(double) ident(arr)operator([],) ident(size_t) ident(arrsize)operator(\);)
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(int_all)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>&) ident(arr)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Load vectors from built-in arrays, or use Boost 'assign' library)
-  directive(const) pre_type(double) ident(nums)operator([]) operator(=) operator({)float(1)float(.4)operator(,) float(3)float(.5)operator(,) float(6)float(.7)operator(};)
+  directive(const) predefined_type(double) ident(nums)operator([]) operator(=) operator({)float(1)float(.4)operator(,) float(3)float(.5)operator(,) float(6)float(.7)operator(};)
   directive(const) ident(size_t) ident(arrsize) operator(=) reserved(sizeof)operator(()ident(nums)operator(\)) operator(/) reserved(sizeof)operator(()ident(nums)operator([)integer(0)operator(]\);)
 
   comment(// Conversion effected at vector creation time)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(ints) operator(=) ident(int_all)operator(()ident(nums)operator(,) ident(arrsize)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(ints) operator(=) ident(int_all)operator(()ident(nums)operator(,) ident(arrsize)operator(\);)
 
   comment(// Vector -> vector copy / conversion )
-  ident(ints) operator(=) ident(int_all)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>()ident(nums)operator(,) ident(nums) operator(+) ident(arrsize)operator(\)\);)
+  ident(ints) operator(=) ident(int_all)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>()ident(nums)operator(,) ident(nums) operator(+) ident(arrsize)operator(\)\);)
 operator(})
 
 comment(// ----)
 
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(int_all)operator(()directive(const) pre_type(double) ident(arr)operator([],) ident(size_t) ident(arrsize)operator(\))
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(int_all)operator(()directive(const) predefined_type(double) ident(arr)operator([],) ident(size_t) ident(arrsize)operator(\))
 operator({)
-  reserved(return) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>()ident(arr)operator(,) ident(arr) operator(+) ident(arrsize)operator(\);)
+  reserved(return) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>()ident(arr)operator(,) ident(arr) operator(+) ident(arrsize)operator(\);)
 operator(})
 
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(int_all)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>&) ident(arr)operator(\))
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(int_all)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>&) ident(arr)operator(\))
 operator({)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(r)operator(;)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(r)operator(;)
   ident(r)operator(.)ident(assign)operator(()ident(arr)operator(.)ident(begin)operator((\),) ident(arr)operator(.)ident(end)operator((\)\);)  comment(// Type safe element copying )
   reserved(return) ident(r)operator(;)
 operator(})
@@ -781,24 +781,24 @@ preprocessor(#include) include(<vector>)
 preprocessor(#include) include(<cmath>)
 preprocessor(#include) include(<cstddef>)
 
-directive(void) ident(trunc_em)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>&) ident(arr)operator(\);)
+directive(void) ident(trunc_em)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>&) ident(arr)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Load vectors from built-in arrays, or use Boost 'assign' library)
-  directive(const) pre_type(double) ident(nums)operator([]) operator(=) operator({)float(1)float(.4)operator(,) float(3)float(.5)operator(,) float(6)float(.7)operator(};)
+  directive(const) predefined_type(double) ident(nums)operator([]) operator(=) operator({)float(1)float(.4)operator(,) float(3)float(.5)operator(,) float(6)float(.7)operator(};)
   directive(const) ident(size_t) ident(arrsize) operator(=) reserved(sizeof)operator(()ident(nums)operator(\)) operator(/) reserved(sizeof)operator(()ident(nums)operator([)integer(0)operator(]\);)
 
-  ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>) ident(numsv)operator(()ident(nums)operator(,) ident(nums) operator(+) ident(arrsize)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>) ident(numsv)operator(()ident(nums)operator(,) ident(nums) operator(+) ident(arrsize)operator(\);)
 
   ident(trunc_em)operator(()ident(numsv)operator(\);)
 operator(})
 
 comment(// ----)
 
-directive(void) ident(trunc_em)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(double)operator(>&) ident(arr)operator(\))
+directive(void) ident(trunc_em)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(double)operator(>&) ident(arr)operator(\))
 operator({)
   comment(// Replace each element with the value returned by applying 'floor' to that element)
   ident(std)operator(::)ident(transform)operator(()ident(arr)operator(.)ident(begin)operator((\),) ident(arr)operator(.)ident(end)operator((\),) ident(arr)operator(.)ident(begin)operator((\),) ident(floor)operator(\);)
@@ -817,9 +817,9 @@ preprocessor(#include) include(<vector>)
 directive(void) ident(somefunc)operator((\))
 operator({)
   comment(// All these variables are local to this function)
-  pre_type(int) ident(variable)operator(,) ident(another)operator(;)
+  predefined_type(int) ident(variable)operator(,) ident(another)operator(;)
 
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(vec)operator(()integer(5)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(vec)operator(()integer(5)operator(\);)
 
   operator(;) comment(// ...)
 operator(})
@@ -834,7 +834,7 @@ preprocessor(#include) include(<string>)
 
 reserved(class) class(bad_conversion) operator({};)
 
-reserved(template)operator(<)reserved(typename) ident(T)operator(>) ident(T) ident(fromString)operator(()directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(s)operator(\))
+reserved(template)operator(<)reserved(typename) ident(T)operator(>) ident(T) ident(fromString)operator(()directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(s)operator(\))
 operator({)
   ident(std)operator(::)ident(istringstream) ident(iss)operator(()ident(s)operator(\);)
   ident(T) ident(t)operator(;) ident(iss) operator(>>) ident(t)operator(;)
@@ -842,12 +842,12 @@ operator({)
   reserved(return) ident(t)operator(;)
 operator(})
 
-reserved(template)operator(<)reserved(typename) ident(T)operator(>) ident(std)operator(::)pre_type(string) ident(toString)operator(()directive(const) ident(T)operator(&) ident(t)operator(\))
+reserved(template)operator(<)reserved(typename) ident(T)operator(>) ident(std)operator(::)predefined_type(string) ident(toString)operator(()directive(const) ident(T)operator(&) ident(t)operator(\))
 operator({)
   ident(std)operator(::)ident(ostringstream) ident(oss)operator(;)
   ident(oss) operator(<<) ident(t) operator(<<) ident(std)operator(::)ident(ends)operator(;)
   reserved(if) operator((!)ident(oss)operator(\)) reserved(throw) ident(bad_conversion)operator((\);)
-  reserved(return) ident(std)operator(::)pre_type(string)operator(()ident(oss)operator(.)ident(str)operator((\)\);)
+  reserved(return) ident(std)operator(::)predefined_type(string)operator(()ident(oss)operator(.)ident(str)operator((\)\);)
 operator(})
 
 comment(// ------------)
@@ -857,25 +857,25 @@ preprocessor(#include) include(<string>)
 comment(// File scope variables)
 reserved(namespace) 
 operator({)
-  ident(std)operator(::)pre_type(string) ident(name)operator(;)
-  pre_type(int) ident(age)operator(,) ident(c)operator(,) ident(condition)operator(;)
+  ident(std)operator(::)predefined_type(string) ident(name)operator(;)
+  predefined_type(int) ident(age)operator(,) ident(c)operator(,) ident(condition)operator(;)
 operator(})
 
 directive(void) ident(run_check)operator((\);)
-directive(void) ident(check_x)operator(()pre_type(int) ident(x)operator(\);)
+directive(void) ident(check_x)operator(()predefined_type(int) ident(x)operator(\);)
 
 comment(// ----)
 
 comment(// An alternative, C++-specific approach, to command-line handling and type conversion)
 comment(// may be seen at: http://www.boost.org/libs/conversion/lexical_cast.htm)
 
-pre_type(int) ident(main)operator(()pre_type(int) ident(argc)operator(,) pre_type(char)operator(*) ident(argv)operator([]\))
+predefined_type(int) ident(main)operator(()predefined_type(int) ident(argc)operator(,) predefined_type(char)operator(*) ident(argv)operator([]\))
 operator({)
   ident(name)operator(.)ident(assign)operator(()ident(argv)operator([)integer(1)operator(]\);)
 
   reserved(try)
   operator({)  
-    ident(age) operator(=) ident(fromString)operator(<)pre_type(int)operator(>()ident(argv)operator([)integer(2)operator(]\);)
+    ident(age) operator(=) ident(fromString)operator(<)predefined_type(int)operator(>()ident(argv)operator([)integer(2)operator(]\);)
   operator(})
 
   reserved(catch) operator(()directive(const) ident(bad_conversion)operator(&) ident(e)operator(\))
@@ -895,10 +895,10 @@ operator({)
   comment(// ...)
 operator(})
 
-directive(void) ident(check_x)operator(()pre_type(int) ident(x)operator(\))
+directive(void) ident(check_x)operator(()predefined_type(int) ident(x)operator(\))
 operator({)
   comment(// Full access to file scope variables)
-  ident(std)operator(::)pre_type(string) ident(y)operator(()string<delimiter(")content(whatever)delimiter(")>operator(\);)
+  ident(std)operator(::)predefined_type(string) ident(y)operator(()string<delimiter(")content(whatever)delimiter(")>operator(\);)
 
   ident(run_check)operator((\);)
 
@@ -930,7 +930,7 @@ comment(// ----)
 comment(// File: 'mysubs.cpp')
 reserved(namespace)
 operator({)
-  pre_type(int) ident(variable) operator(=) integer(1)operator(;)
+  predefined_type(int) ident(variable) operator(=) integer(1)operator(;)
 operator(})
 
 directive(void) ident(mysub)operator(()directive(void)operator(\))
@@ -945,7 +945,7 @@ comment(// ----)
 comment(// File: 'test.cpp')
 preprocessor(#include) include("mysubs.h")
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// 'variable' is not accessable here)
 
@@ -966,8 +966,8 @@ comment(// qualification, or a 'using' declaration or directive])
 comment(// File: 'counter.h')
 reserved(namespace) ident(cnt)
 operator({)
-  pre_type(int) ident(increment)operator((\);)
-  pre_type(int) ident(decrement)operator((\);)
+  predefined_type(int) ident(increment)operator((\);)
+  predefined_type(int) ident(decrement)operator((\);)
 operator(})
 
 comment(// ----)
@@ -976,12 +976,12 @@ comment(// File: 'counter.cpp')
 reserved(namespace) ident(cnt)
 operator({)
   comment(// Ensures 'counter' is visible only within the current source file)
-  reserved(namespace) operator({) pre_type(int) ident(counter) operator(=) integer(0)operator(;) operator(})
+  reserved(namespace) operator({) predefined_type(int) ident(counter) operator(=) integer(0)operator(;) operator(})
 
-  directive(void) ident(reset)operator(()pre_type(int) ident(v) operator(=) integer(0)operator(\)) operator({) ident(counter) operator(=) ident(v)operator(;) operator(})
+  directive(void) ident(reset)operator(()predefined_type(int) ident(v) operator(=) integer(0)operator(\)) operator({) ident(counter) operator(=) ident(v)operator(;) operator(})
 
-  pre_type(int) ident(increment)operator((\)) operator({) reserved(return) operator(++)ident(counter)operator(;) operator(})
-  pre_type(int) ident(decrement)operator((\)) operator({) reserved(return) operator(--)ident(counter)operator(;) operator(})
+  predefined_type(int) ident(increment)operator((\)) operator({) reserved(return) operator(++)ident(counter)operator(;) operator(})
+  predefined_type(int) ident(decrement)operator((\)) operator({) reserved(return) operator(--)ident(counter)operator(;) operator(})
 operator(})
 
 comment(// ----)
@@ -990,12 +990,12 @@ comment(// File: 'test.cpp')
 preprocessor(#include) include(<iostream>)
 preprocessor(#include) include("counter.h")
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Following line is illegal because 'cnt::counter' is private to the 'counter.cpp' file)
   comment(// int c = cnt::counter;)
   
-  pre_type(int) ident(a) operator(=) ident(cnt)operator(::)ident(increment)operator((\);)
+  predefined_type(int) ident(a) operator(=) ident(cnt)operator(::)ident(increment)operator((\);)
   ident(std)operator(::)ident(cout) operator(<<) ident(a) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
   ident(a) operator(=) ident(cnt)operator(::)ident(decrement)operator((\);)
@@ -1015,10 +1015,10 @@ comment(// File: 'counter.h')
 reserved(class) class(Counter)
 operator({)
 directive(public)operator(:)
-  directive(static) pre_type(int) ident(increment)operator((\);)
-  directive(static) pre_type(int) ident(decrement)operator((\);)
+  directive(static) predefined_type(int) ident(increment)operator((\);)
+  directive(static) predefined_type(int) ident(decrement)operator((\);)
 directive(private)operator(:)
-  directive(static) pre_type(int) ident(counter)operator(;)
+  directive(static) predefined_type(int) ident(counter)operator(;)
 operator(};)
 
 comment(// ----)
@@ -1026,10 +1026,10 @@ comment(// ----)
 comment(// File: 'counter.cpp')
 preprocessor(#include) include("counter.h")
 
-pre_type(int) ident(Counter)operator(::)ident(increment)operator((\)) operator({) reserved(return) operator(++)ident(counter)operator(;) operator(})
-pre_type(int) ident(Counter)operator(::)ident(decrement)operator((\)) operator({) reserved(return) operator(--)ident(counter)operator(;) operator(})
+predefined_type(int) ident(Counter)operator(::)ident(increment)operator((\)) operator({) reserved(return) operator(++)ident(counter)operator(;) operator(})
+predefined_type(int) ident(Counter)operator(::)ident(decrement)operator((\)) operator({) reserved(return) operator(--)ident(counter)operator(;) operator(})
 
-pre_type(int) ident(Counter)operator(::)ident(counter) operator(=) integer(0)operator(;)
+predefined_type(int) ident(Counter)operator(::)ident(counter) operator(=) integer(0)operator(;)
 
 comment(// ----)
 
@@ -1037,9 +1037,9 @@ comment(// File: 'test.cpp')
 preprocessor(#include) include(<iostream>)
 preprocessor(#include) include("counter.h")
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  pre_type(int) ident(a) operator(=) ident(Counter)operator(::)ident(increment)operator((\);)
+  predefined_type(int) ident(a) operator(=) ident(Counter)operator(::)ident(increment)operator((\);)
   ident(std)operator(::)ident(cout) operator(<<) ident(a) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
   ident(a) operator(=) ident(Counter)operator(::)ident(decrement)operator((\);)
@@ -1088,19 +1088,19 @@ comment(//     void array_diff(std::vector<const int>& arr1, std::vector<const i
 comment(// * Allow replacement / alteration)
 comment(//     void array_diff(std::vector<int>& arr1, std::vector<int>& arr2\);)
 
-directive(void) ident(array_diff)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr2)operator(\);)
+directive(void) ident(array_diff)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr2)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Load vectors from built-in arrays, or use Boost 'assign' library)
-  directive(const) pre_type(int) ident(arr1)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(,) integer(3)operator(},) ident(arr2)operator([]) operator(=) operator({)integer(4)operator(,) integer(5)operator(,) integer(6)operator(};)
+  directive(const) predefined_type(int) ident(arr1)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(,) integer(3)operator(},) ident(arr2)operator([]) operator(=) operator({)integer(4)operator(,) integer(5)operator(,) integer(6)operator(};)
   directive(const) ident(size_t) ident(arrsize) operator(=) integer(3)operator(;)
 
   comment(// Function call is the same whether 'array_diff' is declared to be 'pass-by-value')
   comment(// or 'pass-by-reference')
-  ident(array_diff)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>()ident(arr1)operator(,) ident(arr1) operator(+) ident(arrsize)operator(\),) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>()ident(arr2)operator(,) ident(arr2) operator(+) ident(arrsize)operator(\)\);)
+  ident(array_diff)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>()ident(arr1)operator(,) ident(arr1) operator(+) ident(arrsize)operator(\),) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>()ident(arr2)operator(,) ident(arr2) operator(+) ident(arrsize)operator(\)\);)
 operator(})
 
 comment(// ----)
@@ -1110,7 +1110,7 @@ comment(// {)
 comment(//  ; // 'arr1' and 'arr2' are copies of the originals)
 comment(// })
 
-directive(void) ident(array_diff)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr2)operator(\))
+directive(void) ident(array_diff)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr2)operator(\))
 operator({)
   operator(;) comment(// 'arr1' and 'arr2' are references to the originals)
 operator(})
@@ -1123,27 +1123,27 @@ preprocessor(#include) include(<algorithm>)
 preprocessor(#include) include(<functional>)
 preprocessor(#include) include(<vector>)
 
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(add_vecpair)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr2)operator(\);)
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(add_vecpair)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr2)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Load vectors from built-in arrays, or use Boost 'assign' library)
-  directive(const) pre_type(int) ident(aa)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(},) ident(ba)operator([]) operator(=) operator({)integer(5)operator(,) integer(8)operator(};)
+  directive(const) predefined_type(int) ident(aa)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(},) ident(ba)operator([]) operator(=) operator({)integer(5)operator(,) integer(8)operator(};)
   ident(size_t) ident(arrsize) operator(=) integer(2)operator(;)
 
-  directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(a)operator(()ident(aa)operator(,) ident(aa) operator(+) ident(arrsize)operator(\),) ident(b)operator(()ident(ba)operator(,) ident(ba) operator(+) ident(arrsize)operator(\);)  
+  directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(a)operator(()ident(aa)operator(,) ident(aa) operator(+) ident(arrsize)operator(\),) ident(b)operator(()ident(ba)operator(,) ident(ba) operator(+) ident(arrsize)operator(\);)  
 
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(c) operator(=) ident(add_vecpair)operator(()ident(a)operator(,) ident(b)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(c) operator(=) ident(add_vecpair)operator(()ident(a)operator(,) ident(b)operator(\);)
 operator(})
 
 comment(// ----)
 
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(add_vecpair)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>&) ident(arr2)operator(\))
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(add_vecpair)operator(()directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr1)operator(,) directive(const) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>&) ident(arr2)operator(\))
 operator({)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(retvec)operator(;) ident(retvec)operator(.)ident(reserve)operator(()ident(arr1)operator(.)ident(size)operator((\)\);)
-  ident(std)operator(::)ident(transform)operator(()ident(arr1)operator(.)ident(begin)operator((\),) ident(arr1)operator(.)ident(end)operator((\),) ident(arr2)operator(.)ident(begin)operator((\),) ident(back_inserter)operator(()ident(retvec)operator(\),) ident(std)operator(::)ident(plus)operator(<)pre_type(int)operator(>(\)\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(retvec)operator(;) ident(retvec)operator(.)ident(reserve)operator(()ident(arr1)operator(.)ident(size)operator((\)\);)
+  ident(std)operator(::)ident(transform)operator(()ident(arr1)operator(.)ident(begin)operator((\),) ident(arr1)operator(.)ident(end)operator((\),) ident(arr2)operator(.)ident(begin)operator((\),) ident(back_inserter)operator(()ident(retvec)operator(\),) ident(std)operator(::)ident(plus)operator(<)predefined_type(int)operator(>(\)\);)
   reserved(return) ident(retvec)operator(;)
 operator(})
 
@@ -1166,21 +1166,21 @@ reserved(template) operator(<)reserved(typename) ident(T)operator(>) ident(T) id
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// 1. Type information inferred by compiler)
-  pre_type(int) ident(i) operator(=) ident(mysub)operator(()integer(5)operator(\);)
+  predefined_type(int) ident(i) operator(=) ident(mysub)operator(()integer(5)operator(\);)
 
-  pre_type(double) ident(d) operator(=) ident(mysub)operator(()float(7)float(.6)operator(\);)
+  predefined_type(double) ident(d) operator(=) ident(mysub)operator(()float(7)float(.6)operator(\);)
 
-  directive(const) pre_type(int) ident(arr)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(,) integer(3)operator(};)
+  directive(const) predefined_type(int) ident(arr)operator([]) operator(=) operator({)integer(1)operator(,) integer(2)operator(,) integer(3)operator(};)
   directive(const) ident(size_t) ident(arrsize) operator(=) reserved(sizeof)operator(()ident(arr)operator(\)) operator(/) reserved(sizeof)operator(()ident(arr)operator([)integer(0)operator(]\);)
 
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(v) operator(=) ident(mysub)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>()ident(arr)operator(,) ident(arr) operator(+) ident(arrsize)operator(\)\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(v) operator(=) ident(mysub)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>()ident(arr)operator(,) ident(arr) operator(+) ident(arrsize)operator(\)\);)
 
   comment(// 2. Type information provided by user)
   comment(// Pass a 'const char*' argument and specify type information in the call)
-  ident(std)operator(::)pre_type(string) ident(s) operator(=) ident(mysub)operator(<)ident(std)operator(::)pre_type(string)operator(>()string<delimiter(")content(xyz)delimiter(")>operator(\);)
+  ident(std)operator(::)predefined_type(string) ident(s) operator(=) ident(mysub)operator(<)ident(std)operator(::)predefined_type(string)operator(>()string<delimiter(")content(xyz)delimiter(")>operator(\);)
 
   comment(// Could avoid specifying type information by passing a 'std::string' argument  )
   comment(// std::string s = mysub(std::string("xyz"\)\);)
@@ -1200,22 +1200,22 @@ reserved(template) operator(<)reserved(typename) ident(T)operator(>) ident(boost
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   ident(std)operator(::)ident(vector)operator(<)ident(boost)operator(::)ident(any)operator(>) ident(any)operator(;)
 
   comment(// Add various types [encapsulated in 'any' objects] to the container)
   ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()integer(5)operator(\)\);)
   ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()float(7)float(.6)operator(\)\);)
-  ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>()integer(5)operator(,) integer(5)operator(\)\)\);)
-  ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()ident(std)operator(::)pre_type(string)operator(()string<delimiter(")content(xyz)delimiter(")>operator(\)\)\);)
+  ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>()integer(5)operator(,) integer(5)operator(\)\)\);)
+  ident(any)operator(.)ident(push_back)operator(()ident(mysub)operator(()ident(std)operator(::)predefined_type(string)operator(()string<delimiter(")content(xyz)delimiter(")>operator(\)\)\);)
 
   comment(// Extract the various types from the container by appropriately casting the relevant)
   comment(// 'any' object)
-  pre_type(int) ident(i) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)pre_type(int)operator(>()ident(any)operator([)integer(0)operator(]\);)
-  pre_type(double) ident(d) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)pre_type(double)operator(>()ident(any)operator([)integer(1)operator(]\);)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(v) operator(=) ident(boost)operator(::)ident(any_cast)operator(<) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) operator(>()ident(any)operator([)integer(2)operator(]\);)
-  ident(std)operator(::)pre_type(string) ident(s) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)ident(std)operator(::)pre_type(string)operator(>()ident(any)operator([)integer(3)operator(]\);)
+  predefined_type(int) ident(i) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)predefined_type(int)operator(>()ident(any)operator([)integer(0)operator(]\);)
+  predefined_type(double) ident(d) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)predefined_type(double)operator(>()ident(any)operator([)integer(1)operator(]\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(v) operator(=) ident(boost)operator(::)ident(any_cast)operator(<) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) operator(>()ident(any)operator([)integer(2)operator(]\);)
+  ident(std)operator(::)predefined_type(string) ident(s) operator(=) ident(boost)operator(::)ident(any_cast)operator(<)ident(std)operator(::)predefined_type(string)operator(>()ident(any)operator([)integer(3)operator(]\);)
 operator(})
 
 comment(// @@PLEAC@@_10.7)
@@ -1234,24 +1234,24 @@ preprocessor(#include) include(<map>)
 reserved(class) class(TimeEntry)
 operator({)
 directive(public)operator(:)
-  directive(explicit) ident(TimeEntry)operator(()pre_type(int) ident(value) operator(=) integer(0)operator(,) pre_type(char) ident(dim) operator(=) char('s')operator(\);)
+  directive(explicit) ident(TimeEntry)operator(()predefined_type(int) ident(value) operator(=) integer(0)operator(,) predefined_type(char) ident(dim) operator(=) char('s')operator(\);)
 
-  pre_type(bool) directive(operator)operator(<()directive(const) ident(TimeEntry)operator(&) ident(right)operator(\)) directive(const)operator(;)
+  predefined_type(bool) directive(operator)operator(<()directive(const) ident(TimeEntry)operator(&) ident(right)operator(\)) directive(const)operator(;)
 
   directive(friend) ident(std)operator(::)ident(ostream)operator(&) directive(operator)operator(<<()ident(std)operator(::)ident(ostream)operator(&) ident(out)operator(,) directive(const) ident(TimeEntry)operator(&) ident(t)operator(\);)
 
 directive(private)operator(:)
-  pre_type(int) ident(value_)operator(;)
-  pre_type(char) ident(dim_)operator(;)
+  predefined_type(int) ident(value_)operator(;)
+  predefined_type(char) ident(dim_)operator(;)
 operator(};)
 
-reserved(typedef) ident(std)operator(::)ident(pair)operator(<)directive(const) pre_type(int)operator(,) ident(TimeEntry)operator(>) ident(TENTRY)operator(;)
-reserved(typedef) ident(std)operator(::)ident(map)operator(<)directive(const) pre_type(int)operator(,) ident(TimeEntry)operator(>) ident(TIMETBL)operator(;)
+reserved(typedef) ident(std)operator(::)ident(pair)operator(<)directive(const) predefined_type(int)operator(,) ident(TimeEntry)operator(>) ident(TENTRY)operator(;)
+reserved(typedef) ident(std)operator(::)ident(map)operator(<)directive(const) predefined_type(int)operator(,) ident(TimeEntry)operator(>) ident(TIMETBL)operator(;)
 
 reserved(class) class(RaceTime)
 operator({)
 directive(public)operator(:)
-  directive(const) directive(static) pre_type(int) ident(START_TIME)operator(,) ident(FINISH_TIME)operator(,) ident(INCR_TIME)operator(;)
+  directive(const) directive(static) predefined_type(int) ident(START_TIME)operator(,) ident(FINISH_TIME)operator(,) ident(INCR_TIME)operator(;)
 
 directive(public)operator(:)
   directive(explicit) ident(RaceTime)operator((\);)
@@ -1266,13 +1266,13 @@ directive(private)operator(:)
   ident(TIMETBL) ident(timetbl_)operator(;)
 operator(};)
 
-directive(const) pre_type(int) ident(RaceTime)operator(::)ident(START_TIME) operator(=) integer(0)operator(,) ident(RaceTime)operator(::)ident(FINISH_TIME) operator(=) integer(1)operator(,) ident(RaceTime)operator(::)ident(INCR_TIME) operator(=) integer(2)operator(;)
+directive(const) predefined_type(int) ident(RaceTime)operator(::)ident(START_TIME) operator(=) integer(0)operator(,) ident(RaceTime)operator(::)ident(FINISH_TIME) operator(=) integer(1)operator(,) ident(RaceTime)operator(::)ident(INCR_TIME) operator(=) integer(2)operator(;)
 
 directive(void) ident(the_func)operator(()directive(const) ident(RaceTime)operator(&) ident(r)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   ident(the_func)operator(()ident(RaceTime)operator((\))operator(.)ident(start_time)operator(()ident(TimeEntry)operator(()integer(20)operator(,) char('s')operator(\)\))operator(.)ident(finish_time)operator(()ident(TimeEntry)operator(()integer(5)operator(,) char('m')operator(\)\))operator(.)ident(incr_time)operator(()ident(TimeEntry)operator(()integer(5)operator(,) char('s')operator(\)\)\);)
 
@@ -1299,9 +1299,9 @@ operator({)
   reserved(return) ident(out)operator(;)
 operator(})
 
-ident(TimeEntry)operator(::)ident(TimeEntry)operator(()pre_type(int) ident(value)operator(,) pre_type(char) ident(dim)operator(\)) operator(:) ident(value_)operator(()ident(value)operator(\),) ident(dim_)operator(()ident(dim)operator(\)) operator({})
+ident(TimeEntry)operator(::)ident(TimeEntry)operator(()predefined_type(int) ident(value)operator(,) predefined_type(char) ident(dim)operator(\)) operator(:) ident(value_)operator(()ident(value)operator(\),) ident(dim_)operator(()ident(dim)operator(\)) operator({})
 
-pre_type(bool) ident(TimeEntry)operator(::)directive(operator)operator(<()directive(const) ident(TimeEntry)operator(&) ident(right)operator(\)) directive(const)
+predefined_type(bool) ident(TimeEntry)operator(::)directive(operator)operator(<()directive(const) ident(TimeEntry)operator(&) ident(right)operator(\)) directive(const)
 operator({)
   reserved(return) operator(()ident(dim_) operator(==) ident(right)operator(.)ident(dim_)operator(\)) operator(?) operator(()ident(value_) operator(<) ident(right)operator(.)ident(value_)operator(\)) operator(:) operator(!()ident(dim_) operator(<) ident(right)operator(.)ident(dim_)operator(\);)
 operator(})
@@ -1348,15 +1348,15 @@ preprocessor(#include) include(<iostream>)
 
 preprocessor(#include) include(<boost/tuple/tuple.hpp>)
 
-reserved(typedef) ident(boost)operator(::)ident(tuple)operator(<)pre_type(int)operator(,) pre_type(int)operator(,) pre_type(int)operator(>) ident(T3)operator(;)
+reserved(typedef) ident(boost)operator(::)ident(tuple)operator(<)predefined_type(int)operator(,) predefined_type(int)operator(,) predefined_type(int)operator(>) ident(T3)operator(;)
 
 ident(T3) ident(func)operator((\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  pre_type(int) ident(a) operator(=) integer(6)operator(,) ident(b) operator(=) integer(7)operator(,) ident(c) operator(=) integer(8)operator(;)
+  predefined_type(int) ident(a) operator(=) integer(6)operator(,) ident(b) operator(=) integer(7)operator(,) ident(c) operator(=) integer(8)operator(;)
   ident(std)operator(::)ident(cout) operator(<<) ident(a) operator(<<) char(',') operator(<<) ident(b) operator(<<) char(',') operator(<<) ident(c) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
   comment(// A tuple of references to the referred variables is created; the values)
@@ -1400,14 +1400,14 @@ preprocessor(#include) include(<boost/assign/std/vector.hpp>)
 preprocessor(#include) include(<boost/assign/list_inserter.hpp>)
 
 reserved(typedef) ident(std)operator(::)ident(vector)operator(<)ident(boost)operator(::)ident(any)operator(>) ident(ARRAY)operator(;)
-reserved(typedef) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,) ident(boost)operator(::)ident(any)operator(>) ident(HASH)operator(;)
+reserved(typedef) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,) ident(boost)operator(::)ident(any)operator(>) ident(HASH)operator(;)
 reserved(typedef) ident(boost)operator(::)ident(tuple)operator(<)ident(ARRAY)operator(,) ident(HASH)operator(>) ident(ARRAY_HASH)operator(;)
 
 ident(ARRAY_HASH) ident(some_func)operator(()directive(const) ident(ARRAY)operator(&) ident(array)operator(,) directive(const) ident(HASH)operator(&) ident(hash)operator(\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Load containers using Boost 'assign' Library )
   directive(using) reserved(namespace) ident(boost)operator(::)ident(assign)operator(;)
@@ -1462,13 +1462,13 @@ comment(// Exception Handling Example)
 
 reserved(class) class(XYZ_exception) operator({};)
 
-pre_type(int) ident(func)operator((\);)
+predefined_type(int) ident(func)operator((\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  pre_type(int) ident(valid_value) operator(=) integer(0)operator(;)
+  predefined_type(int) ident(valid_value) operator(=) integer(0)operator(;)
 
   reserved(try)
   operator({)
@@ -1487,10 +1487,10 @@ operator(})
 
 comment(// ----)
 
-pre_type(int) ident(func)operator((\))
+predefined_type(int) ident(func)operator((\))
 operator({)
-  pre_type(bool) ident(error_detected) operator(=) pre_constant(false)operator(;)
-  pre_type(int) ident(valid_value)operator(;)
+  predefined_type(bool) ident(error_detected) operator(=) predefined_constant(false)operator(;)
+  predefined_type(int) ident(valid_value)operator(;)
 
   operator(;) comment(// ...)
 
@@ -1529,7 +1529,7 @@ ident(Value)operator(*) ident(func)operator((\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Error checking is performed within 'func'. However, regardless of the outcome, an)
   comment(// object of 'Value' type is returned which possesses similar behaviour, though appropriate)
@@ -1556,7 +1556,7 @@ operator(})
 
 ident(Value)operator(*) ident(func)operator((\))
 operator({)
-  pre_type(bool) ident(error_detected) operator(=) pre_constant(true)operator(;)
+  predefined_type(bool) ident(error_detected) operator(=) predefined_constant(true)operator(;)
 
   operator(;) comment(// ...)
 
@@ -1587,36 +1587,36 @@ preprocessor(#include) include(<boost/optional/optional.hpp>)
 reserved(class) class(func_fail)
 operator({)
 directive(public)operator(:)
-  directive(explicit) ident(func_fail)operator(()directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(msg)operator(\)) operator(:) ident(msg_)operator(()ident(msg)operator(\)) operator({})
-  directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(msg)operator((\)) directive(const) operator({) reserved(return) ident(msg_)operator(;) operator(}) 
+  directive(explicit) ident(func_fail)operator(()directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(msg)operator(\)) operator(:) ident(msg_)operator(()ident(msg)operator(\)) operator({})
+  directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(msg)operator((\)) directive(const) operator({) reserved(return) ident(msg_)operator(;) operator(}) 
 directive(private)operator(:)
-  directive(const) ident(std)operator(::)pre_type(string) ident(msg_)operator(;)
+  directive(const) ident(std)operator(::)predefined_type(string) ident(msg_)operator(;)
 operator(};)
 
 comment(// ----)
 
-directive(void) ident(die)operator(()directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(msg)operator(\);)
+directive(void) ident(die)operator(()directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(msg)operator(\);)
 
-ident(boost)operator(::)ident(optional)operator(<)pre_type(int)operator(>) ident(sfunc)operator((\);)
-ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) operator(>) ident(afunc)operator((\);)
-ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,) pre_type(int)operator(>) operator(>) ident(hfunc)operator((\);)
+ident(boost)operator(::)ident(optional)operator(<)predefined_type(int)operator(>) ident(sfunc)operator((\);)
+ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) operator(>) ident(afunc)operator((\);)
+ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,) predefined_type(int)operator(>) operator(>) ident(hfunc)operator((\);)
 
 comment(// ------------)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   reserved(try)
   operator({)
-    ident(boost)operator(::)ident(optional)operator(<)pre_type(int)operator(>) ident(s)operator(;)
-    ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) operator(>) ident(a)operator(;)
-    ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,) pre_type(int)operator(>) operator(>) ident(h)operator(;)
+    ident(boost)operator(::)ident(optional)operator(<)predefined_type(int)operator(>) ident(s)operator(;)
+    ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) operator(>) ident(a)operator(;)
+    ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,) predefined_type(int)operator(>) operator(>) ident(h)operator(;)
 
     reserved(if) operator((!()ident(s) operator(=) ident(sfunc)operator((\)\)\)) reserved(throw) ident(func_fail)operator(()string<delimiter(")content('sfunc' failed)delimiter(")>operator(\);)
     reserved(if) operator((!()ident(a) operator(=) ident(afunc)operator((\)\)\)) reserved(throw) ident(func_fail)operator(()string<delimiter(")content('afunc' failed)delimiter(")>operator(\);)
     reserved(if) operator((!()ident(h) operator(=) ident(hfunc)operator((\)\)\)) reserved(throw) ident(func_fail)operator(()string<delimiter(")content('hfunc' failed)delimiter(")>operator(\);)
 
     operator(;) comment(// ... do stuff with 's', 'a', and 'h' ...)
-    pre_type(int) ident(scalar) operator(=) operator(*)ident(s)operator(;)
+    predefined_type(int) ident(scalar) operator(=) operator(*)ident(s)operator(;)
 
     operator(;) comment(// ...)
   operator(})
@@ -1631,7 +1631,7 @@ operator(})
 
 comment(// ------------)
 
-directive(void) ident(die)operator(()directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(msg)operator(\))
+directive(void) ident(die)operator(()directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(msg)operator(\))
 operator({)
   ident(std)operator(::)ident(cerr) operator(<<) ident(msg) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
@@ -1641,35 +1641,35 @@ operator(})
 
 comment(// ----)
 
-ident(boost)operator(::)ident(optional)operator(<)pre_type(int)operator(>) ident(sfunc)operator((\))
+ident(boost)operator(::)ident(optional)operator(<)predefined_type(int)operator(>) ident(sfunc)operator((\))
 operator({)
-  pre_type(bool) ident(error_detected) operator(=) pre_constant(true)operator(;)
+  predefined_type(bool) ident(error_detected) operator(=) predefined_constant(true)operator(;)
 
-  pre_type(int) ident(valid_int_value)operator(;)
+  predefined_type(int) ident(valid_int_value)operator(;)
 
   operator(;) comment(// ...)
 
-  reserved(if) operator(()ident(error_detected)operator(\)) reserved(return) ident(boost)operator(::)ident(optional)operator(<)pre_type(int)operator(>(\);)
+  reserved(if) operator(()ident(error_detected)operator(\)) reserved(return) ident(boost)operator(::)ident(optional)operator(<)predefined_type(int)operator(>(\);)
 
   operator(;) comment(// ...)
   
-  reserved(return) ident(boost)operator(::)ident(optional)operator(<)pre_type(int)operator(>()ident(valid_int_value)operator(\);)
+  reserved(return) ident(boost)operator(::)ident(optional)operator(<)predefined_type(int)operator(>()ident(valid_int_value)operator(\);)
 operator(})
 
-ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) operator(>) ident(afunc)operator((\))
+ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) operator(>) ident(afunc)operator((\))
 operator({)
   comment(// ... code not shown ...)
  
-  reserved(return) ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) operator(>(\);)
+  reserved(return) ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) operator(>(\);)
 
   comment(// ... code not shown)
 operator(})
 
-ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,) pre_type(int)operator(>) operator(>) ident(hfunc)operator((\))
+ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,) predefined_type(int)operator(>) operator(>) ident(hfunc)operator((\))
 operator({)
   comment(// ... code not shown ...)
 
-  reserved(return) ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)pre_type(string)operator(,) pre_type(int)operator(>) operator(>(\);)
+  reserved(return) ident(boost)operator(::)ident(optional)operator(<) ident(std)operator(::)ident(map)operator(<)ident(std)operator(::)predefined_type(string)operator(,) predefined_type(int)operator(>) operator(>(\);)
 
   comment(// ... code not shown ...)
 operator(})
@@ -1688,15 +1688,15 @@ preprocessor(#include) include(<iostream>)
 preprocessor(#include) include(<vector>)
 
 comment(// Function Declaration)
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(myfunc)operator(()pre_type(int) ident(arg1)operator(,) pre_type(int) ident(arg2)operator(\);) comment(// Also possible: std::vector<int> myfunc(int, int\);)
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(myfunc)operator(()predefined_type(int) ident(arg1)operator(,) predefined_type(int) ident(arg2)operator(\);) comment(// Also possible: std::vector<int> myfunc(int, int\);)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Call function with all required arguments; this is the only calling method)
   comment(// [except for calling via function pointer which still needs all arguments supplied])
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(results) operator(=) ident(myfunc)operator(()integer(3)operator(,) integer(5)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(results) operator(=) ident(myfunc)operator(()integer(3)operator(,) integer(5)operator(\);)
 
   comment(// Let's look at our return array's contents)
   ident(std)operator(::)ident(cout) operator(<<) ident(results)operator([)integer(0)operator(]) operator(<<) char(':') operator(<<) ident(results)operator([)integer(1)operator(]) operator(<<) ident(std)operator(::)ident(endl)operator(;)
@@ -1705,9 +1705,9 @@ operator(})
 comment(// ----)
 
 comment(// Function Definition)
-ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(myfunc)operator(()pre_type(int) ident(arg1)operator(,) pre_type(int) ident(arg2)operator(\))
+ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(myfunc)operator(()predefined_type(int) ident(arg1)operator(,) predefined_type(int) ident(arg2)operator(\))
 operator({)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(r)operator(;)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(r)operator(;)
 
   ident(std)operator(::)ident(back_inserter)operator(()ident(r)operator(\)) operator(=) ident(arg1)operator(;)
   ident(std)operator(::)ident(back_inserter)operator(()ident(r)operator(\)) operator(=) ident(arg2)operator(;)
@@ -1728,9 +1728,9 @@ reserved(template) operator(<)reserved(class) class(T)operator(>) ident(std)oper
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
-  ident(std)operator(::)ident(vector)operator(<)pre_type(int)operator(>) ident(results) operator(=) ident(myfunc)operator(()integer(3)operator(,) integer(5)operator(\);)
+  ident(std)operator(::)ident(vector)operator(<)predefined_type(int)operator(>) ident(results) operator(=) ident(myfunc)operator(()integer(3)operator(,) integer(5)operator(\);)
 
   ident(std)operator(::)ident(cout) operator(<<) ident(results)operator([)integer(0)operator(]) operator(<<) char(':') operator(<<) ident(results)operator([)integer(1)operator(]) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 operator(})
@@ -1779,19 +1779,19 @@ preprocessor(#include) include(<string>)
 reserved(class) class(FullmoonException)
 operator({)
 directive(public)operator(:)
-  directive(explicit) ident(FullmoonException)operator(()directive(const) ident(std)operator(::)pre_type(string)operator(&) ident(msg)operator(\)) operator(:) ident(msg_)operator(()ident(msg)operator(\)) operator({})
+  directive(explicit) ident(FullmoonException)operator(()directive(const) ident(std)operator(::)predefined_type(string)operator(&) ident(msg)operator(\)) operator(:) ident(msg_)operator(()ident(msg)operator(\)) operator({})
 
   directive(friend) ident(std)operator(::)ident(ostream)operator(&) directive(operator)operator(<<()ident(std)operator(::)ident(ostream)operator(&) ident(out)operator(,) directive(const) ident(FullmoonException)operator(&) ident(e)operator(\))
   operator({)
     ident(out) operator(<<) ident(e)operator(.)ident(msg_)operator(;) reserved(return) ident(out)operator(;)
   operator(})
 directive(private)operator(:)
-  directive(const) ident(std)operator(::)pre_type(string) ident(msg_)operator(;)
+  directive(const) ident(std)operator(::)predefined_type(string) ident(msg_)operator(;)
 operator(};)
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   ident(std)operator(::)ident(cout) operator(<<) string<delimiter(")content(main - entry)delimiter(")> operator(<<) ident(std)operator(::)ident(endl)operator(;)
 
@@ -1843,7 +1843,7 @@ comment(//   and still comprise a single, logical sub-system)
 comment(// * Anonymous namespaces avoid use of the 'static' keyword in creating file scope globals)
 
 comment(// Global variable)
-pre_type(int) ident(age) operator(=) integer(18)operator(;)
+predefined_type(int) ident(age) operator(=) integer(18)operator(;)
 
 comment(// ----)
 
@@ -1855,12 +1855,12 @@ operator(})
 
 comment(// ------------)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// A local variable named, 'age' will act to 'shadow' the globally)
   comment(// defined version, thus any changes to, 'age', will not affect)
   comment(// the global version)
-  pre_type(int) ident(age) operator(=) integer(5)operator(;)
+  predefined_type(int) ident(age) operator(=) integer(5)operator(;)
 
   comment(// Prints 18, the current value of the global version)
   ident(print_age)operator((\);)
@@ -1875,7 +1875,7 @@ operator(})
 comment(// ----------------------------)
 
 comment(// Global variable)
-pre_type(int) ident(age) operator(=) integer(18)operator(;)
+predefined_type(int) ident(age) operator(=) integer(18)operator(;)
 
 comment(// ----)
 
@@ -1887,7 +1887,7 @@ operator(})
 
 comment(// ------------)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Here no local version declared: any changes affect global version)
   ident(age) operator(=) integer(5)operator(;)
@@ -1905,7 +1905,7 @@ operator(})
 comment(// ----------------------------)
 
 comment(// Global variable)
-pre_type(int) ident(age) operator(=) integer(18)operator(;)
+predefined_type(int) ident(age) operator(=) integer(18)operator(;)
 
 comment(// ----)
 
@@ -1917,10 +1917,10 @@ operator(})
 
 comment(// ------------)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   comment(// Global version value saved into local version)
-  pre_type(int) ident(age) operator(=) operator(::)ident(age)operator(;)
+  predefined_type(int) ident(age) operator(=) operator(::)ident(age)operator(;)
 
   comment(// Prints 18, the new value of the global version)
   ident(print_age)operator((\);)
@@ -1970,14 +1970,14 @@ int outer(int arg\)
 
 comment(// The problem may, of course, be solved by defining two functions using parameter passing)
 comment(// where appropriate, but this is contrary to the intent of the original Perl code)
-pre_type(int) ident(inner)operator(()pre_type(int) ident(x)operator(\))
+predefined_type(int) ident(inner)operator(()predefined_type(int) ident(x)operator(\))
 operator({)
   reserved(return) ident(x) operator(*) integer(19)operator(;)
 operator(})
 
-pre_type(int) ident(outer)operator(()pre_type(int) ident(arg)operator(\))
+predefined_type(int) ident(outer)operator(()predefined_type(int) ident(arg)operator(\))
 operator({)
-  pre_type(int) ident(x) operator(=) ident(arg) operator(+) integer(35)operator(;)
+  predefined_type(int) ident(x) operator(=) ident(arg) operator(+) integer(35)operator(;)
   reserved(return) ident(x) operator(+) ident(inner)operator(()ident(x)operator(\);)
 operator(})
 
@@ -1987,26 +1987,26 @@ preprocessor(#include) include(<iostream>)
 
 reserved(namespace) ident(nst)
 operator({)
-  pre_type(int) ident(x)operator(;)
-  pre_type(int) ident(inner)operator((\);)
-  pre_type(int) ident(outer)operator(()pre_type(int) ident(arg)operator(\);)
+  predefined_type(int) ident(x)operator(;)
+  predefined_type(int) ident(inner)operator((\);)
+  predefined_type(int) ident(outer)operator(()predefined_type(int) ident(arg)operator(\);)
 operator(})
 
 comment(// ----)
 
-pre_type(int) ident(main)operator((\))
+predefined_type(int) ident(main)operator((\))
 operator({)
   ident(std)operator(::)ident(cout) operator(<<) ident(nst)operator(::)ident(outer)operator(()integer(3)operator(\)) operator(<<) ident(std)operator(::)ident(endl)operator(;)
 operator(})
 
 comment(// ----)
 
-pre_type(int) ident(nst)operator(::)ident(inner)operator((\))
+predefined_type(int) ident(nst)operator(::)ident(inner)operator((\))
 operator({)
   reserved(return) ident(nst)operator(::)ident(x) operator(*) integer(19)operator(;)
 operator(})
 
-pre_type(int) ident(nst)operator(::)ident(outer)operator(()pre_type(int) ident(arg)operator(\))
+predefined_type(int) ident(nst)operator(::)ident(outer)operator(()predefined_type(int) ident(arg)operator(\))
 operator({)
   ident(nst)operator(::)ident(x) operator(=) ident(arg) operator(+) integer(35)operator(;)
   reserved(return) ident(nst)operator(::)ident(x) operator(+) ident(nst)operator(::)ident(inner)operator((\);)
@@ -2017,9 +2017,9 @@ comment(// create a local type and instantiate an object passing any required en
 comment(// to the constructor. Then, what appears as a parameterless nested function call, can be)
 comment(// effected using 'operator(\)'. This approach most closely matches the original Perl code)
 
-pre_type(int) ident(outer)operator(()pre_type(int) ident(arg)operator(\))
+predefined_type(int) ident(outer)operator(()predefined_type(int) ident(arg)operator(\))
 operator({)
-  pre_type(int) ident(x) operator(=) ident(arg) operator(+) integer(35)operator(;)
+  predefined_type(int) ident(x) operator(=) ident(arg) operator(+) integer(35)operator(;)
 
   comment(// 'Inner' is what is known as a Functor or Function Object [or Command Design Pattern]; it)
   comment(// allows objects that capture state / context to be instantiated, and that state / context)
@@ -2027,9 +2027,9 @@ operator({)
   comment(// provide extensive support these constructs)
   reserved(struct) ident(Inner)
   operator({)
-    pre_type(int) ident(n_)operator(;)
-    directive(explicit) ident(Inner)operator(()pre_type(int) ident(n)operator(\)) operator(:) ident(n_)operator(()ident(n)operator(\)) operator({})
-    pre_type(int) directive(operator)operator((\)(\)) directive(const) operator({) reserved(return) ident(n_) operator(*) integer(19)operator(;) operator(})
+    predefined_type(int) ident(n_)operator(;)
+    directive(explicit) ident(Inner)operator(()predefined_type(int) ident(n)operator(\)) operator(:) ident(n_)operator(()ident(n)operator(\)) operator({})
+    predefined_type(int) directive(operator)operator((\)(\)) directive(const) operator({) reserved(return) ident(n_) operator(*) integer(19)operator(;) operator(})
   operator(}) ident(inner)operator(()ident(x)operator(\);)
 
   reserved(return) ident(x) operator(+) ident(inner)operator((\);)

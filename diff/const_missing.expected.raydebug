@@ -50,7 +50,7 @@ insert[insert(+)		      ident(const_missing_rescue)operator(,) operator(()ident(
 insert[insert(+)		      ident(rb_eNoConstantError)operator(,) operator(()ident(VALUE)operator(\))integer(0)operator(\);)]
  operator(})
  
-change<change(@@)plain( -1598,5 +1620,21 )change(@@)> ident(rb_const_get_0)operator(()ident(VALUE) ident(klass)operator(,) ident(ID) ident(id)operator(,) pre_type(int) ident(e)
+change<change(@@)plain( -1598,5 +1620,21 )change(@@)> ident(rb_const_get_0)operator(()ident(VALUE) ident(klass)operator(,) ident(ID) ident(id)operator(,) predefined_type(int) ident(e)
      operator(})
  
 delete[delete(-)    ident(value) operator(=) ident(const_missing)operator(()ident(klass)operator(,) ident(id)operator(\);)]
