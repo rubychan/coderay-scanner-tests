@@ -156,8 +156,8 @@ tag(<html) attribute_name(lang)operator(=)string<delimiter(")content(en)delimite
                  
                 comment(<!--[if !IE]><!-->) 
                 tag(<script) attribute_name(defer)operator(=)string<delimiter(")content(defer)delimiter(")>tag(>) 
-                inline<ident(document)operator(.)ident(write)operator(()ident(unescape)operator(()string<delimiter(')content(%3Cscript src="http://adn.fusionads.net/www/pull/get.php?zoneid=93&charset=UTF-8&withtext=1&cb=)delimiter(')> operator(+) ident(Math)operator(.)ident(floor)operator(()ident(Math)operator(.)ident(random)operator(()operator(\)) operator(*) integer(99999999999)operator(\)) operator(+) string<delimiter(')content("%3E%3C/script%3E)delimiter(')>operator(\)\))operator(;)>plain(
-                )tag(</script>) 
+inline<                ident(document)operator(.)ident(write)operator(()ident(unescape)operator(()string<delimiter(')content(%3Cscript src="http://adn.fusionads.net/www/pull/get.php?zoneid=93&charset=UTF-8&withtext=1&cb=)delimiter(')> operator(+) ident(Math)operator(.)ident(floor)operator(()ident(Math)operator(.)ident(random)operator(()operator(\)) operator(*) integer(99999999999)operator(\)) operator(+) string<delimiter(')content("%3E%3C/script%3E)delimiter(')>operator(\)\))operator(;)>
+                tag(</script>) 
                 comment(<!--<![endif]-->)
                 
                 tag(<br) tag(/>)
@@ -217,8 +217,8 @@ tag(<html) attribute_name(lang)operator(=)string<delimiter(")content(en)delimite
               tag(<div) attribute_name(id)operator(=)string<delimiter(")content(social)delimiter(")>tag(>)
                 tag(<h4) attribute_name(style)operator(=)string<delimiter(")content(padding-top: 20px;)delimiter(")>tag(>)plain(Scoreboard)tag(</h4>)
                   tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
-                       inline<keyword(var) ident(topsy_order) operator(=) string<delimiter(")content(retweet,count,badge)delimiter(")>operator(;)>plain(
-                  )tag(</script>)
+inline<                       keyword(var) ident(topsy_order) operator(=) string<delimiter(")content(retweet,count,badge)delimiter(")>operator(;)>
+                  tag(</script>)
                   tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")> attribute_name(src)operator(=)string<delimiter(")content(http://cdn.topsy.com/button.js)delimiter(")>tag(>)tag(</script>)
                   tag(<br) tag(/>)
                   tag(<a) attribute_name(name)operator(=)string<delimiter(")content(fb_share)delimiter(")> attribute_name(type)operator(=)string<delimiter(")content(button_count)delimiter(")> attribute_name(href)operator(=)string<delimiter(")content(http://www.facebook.com/sharer.php)delimiter(")>tag(>)plain(Share)tag(</a>)tag(<script) attribute_name(src)operator(=)string<delimiter(")content(http://static.ak.fbcdn.net/connect.php/js/FB.Share)delimiter(")> attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)tag(</script>)
@@ -287,8 +287,8 @@ tag(<html) attribute_name(lang)operator(=)string<delimiter(")content(en)delimite
 
 tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
 inline<keyword(var) ident(gaJsHost) operator(=) operator((()string<delimiter(")content(https:)delimiter(")> operator(==) ident(document)operator(.)ident(location)operator(.)ident(protocol)operator(\)) operator(?) string<delimiter(")content(https://ssl.)delimiter(")> operator(:) string<delimiter(")content(http://www.)delimiter(")>operator(\))operator(;)
-ident(document)operator(.)ident(write)operator(()ident(unescape)operator(()string<delimiter(")content(%3Cscript src=')delimiter(")> operator(+) ident(gaJsHost) operator(+) string<delimiter(")content(google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E)delimiter(")>operator(\)\))operator(;)>plain(
-)tag(</script>)
+ident(document)operator(.)ident(write)operator(()ident(unescape)operator(()string<delimiter(")content(%3Cscript src=')delimiter(")> operator(+) ident(gaJsHost) operator(+) string<delimiter(")content(google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E)delimiter(")>operator(\)\))operator(;)>
+tag(</script>)
 tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
 inline<keyword(try) operator({)
 keyword(var) ident(pageTracker) operator(=) ident(_gat)operator(.)ident(_getTracker)operator(()string<delimiter(")content(UA-98891-15)delimiter(")>operator(\))operator(;)
@@ -298,7 +298,7 @@ operator(}) keyword(catch)operator(()ident(err)operator(\)) operator({)operator(
 tag(<script) attribute_name(src)operator(=)string<delimiter(")content(/mint/?js)delimiter(")> attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)tag(</script>)
 
 tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/javascript)delimiter(")>tag(>)
-    inline<ident(__compete_code) operator(=) string<delimiter(')content(21513159bc5584a0c54bc76be94f5b56)delimiter(')>operator(;)
+inline<    ident(__compete_code) operator(=) string<delimiter(')content(21513159bc5584a0c54bc76be94f5b56)delimiter(')>operator(;)
     operator(()keyword(function) operator(()operator(\)) operator({)
         keyword(var) ident(s) operator(=) ident(document)operator(.)ident(createElement)operator(()string<delimiter(')content(script)delimiter(')>operator(\))operator(,)
             ident(d) operator(=) ident(document)operator(.)ident(getElementsByTagName)operator(()string<delimiter(')content(head)delimiter(')>operator(\))operator([)integer(0)operator(]) operator(||)
@@ -310,8 +310,8 @@ tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/java
         ident(s)operator(.)ident(type) operator(=) string<delimiter(')content(text/javascript)delimiter(')>operator(;)
         ident(s)operator(.)ident(async) operator(=) string<delimiter(')content(async)delimiter(')>operator(;) 
         keyword(if) operator(()ident(d)operator(\)) operator({) ident(d)operator(.)ident(appendChild)operator(()ident(s)operator(\))operator(;) operator(})
-    operator(})operator(()operator(\)\))operator(;)>plain(
-)tag(</script>)
+    operator(})operator(()operator(\)\))operator(;)>
+tag(</script>)
   
 
     tag(</div>)

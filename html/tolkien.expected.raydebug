@@ -28,8 +28,8 @@ tag(<script) attribute_name(type)operator(=)string<delimiter(")content(text/java
 comment(<!--)inline<
 keyword(if)operator(()ident(top)operator(.)ident(frames)operator(.)ident(length) operator(>) integer(0)operator(\))
 ident(top)operator(.)ident(location)operator(.)ident(href)operator(=)ident(self)operator(.)ident(location)operator(;)
-comment(//)>comment(-->)plain(
-)tag(</script>)
+comment(//)>comment(-->)
+tag(</script>)
 tag(</head>)
 tag(<body>)
 tag(<div) attribute_name(id)operator(=)string<delimiter(")content(kopf)delimiter(")> attribute_name(title)operator(=)string<delimiter(")content(Anmerkungen zu den Bildern und )entity(&copy;) content(in dem Styleswitch-Bereich)delimiter(")>tag(>)
@@ -48,8 +48,8 @@ ident(i)operator(=)ident(s)operator(.)ident(length)operator(-)integer(1)operator
 ident(path)operator(+=)string<delimiter(")content(<a href=)char(\\")delimiter(")>operator(+)ident(href)operator(.)ident(substring)operator(()integer(0)operator(,)ident(href)operator(.)ident(indexOf)operator(()ident(s)operator([)ident(i)operator(]\))operator(+)ident(s)operator([)ident(i)operator(])operator(.)ident(length)operator(\))operator(+)string<delimiter(")char(\\")content(>)delimiter(")>operator(+)ident(s)operator([)ident(i)operator(])operator(+)string<delimiter(")content(</a>)delimiter(")>operator(;)
 keyword(var) ident(url) operator(=) comment(/* window.location.protocol + "//" + */) ident(path)operator(;)
 ident(document)operator(.)ident(writeln)operator(()ident(url)operator(\))operator(;)
-comment(// ende )>comment(-->)plain(
-)tag(</script>)
+comment(// ende )>comment(-->)
+tag(</script>)
 
 tag(</div>)
 tag(<h1>)plain(Faszination Tolkien - Herr der Ringe )entity(&amp;) plain(Co.)tag(</h1>)
