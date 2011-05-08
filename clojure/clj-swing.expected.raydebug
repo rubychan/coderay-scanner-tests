@@ -1,15 +1,15 @@
-operator(()reserved(ns) ident(clj-swing.button)
+operator(()reserved(ns) namespace(clj-swing.button)
   operator(()symbol(:use) operator([)ident(clj-swing.core) symbol(:only) operator([)ident(add-action-listener) ident(icon-setters) ident(auto-setters)operator(])operator(])operator(\))
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JButton) ident(JCheckBox) ident(JCheckBoxMenuItem) ident(JRadioButton) ident(JRadioButtonMenuItem) ident(JToggleButton) ident(ButtonGroup)operator(\))operator(\))operator(\))
 
 
-operator(()reserved(def) ident(*button-icon-keys*) 
+operator(()reserved(def) function(*button-icon-keys*) 
      operator([)symbol(:icon) symbol(:disabled-icon) symbol(:selected-icon) symbol(:pressed-icon) symbol(:disabled-selected-icon) symbol(:rollover-icon) symbol(:rollover-selected-icon) operator(])operator(\))
-operator(()reserved(def) ident(*button-known-keys*)
+operator(()reserved(def) function(*button-known-keys*)
      operator(()reserved(concat) operator([)symbol(:action) symbol(:caption) symbol(:name)operator(]) ident(*button-icon-keys*)operator(\))operator(\))
 
 
-operator(()reserved(defmacro) ident(general-button) operator([)ident(cl) operator({)ident(caption) symbol(:caption) ident(action) symbol(:action) reserved(name) symbol(:name) symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(general-button) operator([)ident(cl) operator({)ident(caption) symbol(:caption) ident(action) symbol(:action) reserved(name) symbol(:name) symbol(:as) ident(opts)operator(})operator(])
   operator(()reserved(let) operator([)ident(b) operator(()reserved(or) reserved(name) operator(()reserved(gensym) string<delimiter(")content(btn)delimiter(")>operator(\))operator(\))operator(])
     operator(`)operator(()reserved(let) operator([)operator(~)ident(b)  operator(()reserved(new) operator(~)ident(cl)operator(\))operator(])
        operator(()reserved(doto) operator(~)ident(b)
@@ -20,36 +20,36 @@ operator(()reserved(defmacro) ident(general-button) operator([)ident(cl) operato
 	 operator(~@)operator(()ident(icon-setters) ident(*button-icon-keys*)  ident(opts)operator(\))
 	 operator(~@)operator(()ident(auto-setters) ident(JButton) ident(*button-known-keys*) ident(opts)operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(button) operator([)ident(caption) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(button) operator([)ident(caption) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JButton) operator(~)operator(()reserved(assoc) ident(opts) symbol(:caption) ident(caption)operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(check-box) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(check-box) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JCheckBox) operator(~)ident(opts)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(check-box-menu-item) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(check-box-menu-item) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JCheckBoxMenuItem) operator(~)ident(opts)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(radio-button) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(radio-button) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JRadioButton) operator(~)ident(opts)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(radio-button-menu-item) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(radio-button-menu-item) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JRadioButtonMenuItem) operator(~)ident(opts)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(toggle-button) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(toggle-button) operator([) ident(&) operator({)symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()ident(general-button) ident(JToggleButton) operator(~)ident(opts)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(button-group) operator([)ident(&) ident(buttons)operator(])
+operator(()reserved(defmacro) function(button-group) operator([)ident(&) ident(buttons)operator(])
   operator(`)operator(()reserved(doto) operator(()ident(ButtonGroup.)operator(\))
      operator(~@)operator(()reserved(map) operator(()reserved(fn) operator([)ident(btn)operator(])
-	      operator(`)operator(()reserved(.)ident(add) operator(~)ident(btn)operator(\))operator(\)) ident(buttons)operator(\))operator(\))operator(\))operator(()reserved(ns) ident(clj-swing.combo-box)
+	      operator(`)operator(()reserved(.)ident(add) operator(~)ident(btn)operator(\))operator(\)) ident(buttons)operator(\))operator(\))operator(\))operator(()reserved(ns) namespace(clj-swing.combo-box)
   operator(()symbol(:use) operator([)ident(clj-swing.core)operator(])
 	operator([)ident(clojure.contrib.swing-utils) symbol(:only) operator([)ident(do-swing)operator(])operator(])operator(\))
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JComboBox) ident(ComboBoxModel) ident(MutableComboBoxModel)operator(\))
 	   operator(()ident(javax.swing.event) ident(ListDataEvent) ident(ListDataListener)operator(\))operator(\))operator(\))
 
-operator(()reserved(def) ident(*cb-known-keys*) operator([)symbol(:action)operator(])operator(\))
+operator(()reserved(def) function(*cb-known-keys*) operator([)symbol(:action)operator(])operator(\))
 
-operator(()reserved(defmacro) ident(commbo-box-model) operator([)ident(&) operator({)ident(mutable) symbol(:mutable)
+operator(()reserved(defmacro) function(commbo-box-model) operator([)ident(&) operator({)ident(mutable) symbol(:mutable)
 			       operator([)operator([)operator(]) ident(&) ident(size-code)operator(]) symbol(:size)
 			       operator([)operator([)ident(get-idx)operator(]) ident(&) ident(get-code)operator(]) symbol(:get)
 			       operator([)operator([)ident(a-l-l)operator(]) ident(&) ident(add-listener-code)operator(]) symbol(:add-listener)
@@ -94,18 +94,18 @@ comment(;; Code for mutable combobox model)
 	operator(`)operator(()ident(removeElementAt) operator([)operator(~)ident(remove-idx)operator(]) 
 		     operator(~@)ident(remove-at-code)operator(\))operator(])operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(seq-ref-combobox-model) operator([)ident(seq-ref) ident(&) operator([)ident(selected)operator(])operator(])
-  operator(()reserved(let) operator([)ident(selected) operator(()reserved(or) ident(selected) operator(()reserved(atom) ident(nil)operator(\))operator(\))
+operator(()reserved(defn) function(seq-ref-combobox-model) operator([)ident(seq-ref) ident(&) operator([)ident(selected)operator(])operator(])
+  operator(()reserved(let) operator([)ident(selected) operator(()reserved(or) ident(selected) operator(()reserved(atom) predefined_constant(nil)operator(\))operator(\))
 	ident(listeners) operator(()reserved(atom) operator(#{)operator(})operator(\))
 	reserved(key) operator(()reserved(gensym) string<delimiter(")content(seq-ref-combobox-model-watch)delimiter(")>operator(\))
 	ident(m) operator(()ident(commbo-box-model)
 	   symbol(:mutable) predefined_constant(true)
 	   symbol(:size) operator(()operator([)operator(]) operator(()reserved(count) operator(@)ident(seq-ref)operator(\))operator(\))
-	   symbol(:get-selected-item) operator(()operator([)operator(]) operator(()reserved(dosync) operator(()reserved(if) operator(()reserved(and) operator(@)ident(selected) operator(()reserved(some) operator(#()reserved(=) operator(@)ident(selected) ident(%)operator(\)) operator(@)ident(seq-ref)operator(\))operator(\)) operator(@)ident(selected) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) ident(nil)operator(\))operator(\))operator(\))operator(\))operator(\))
-	   symbol(:set-selected-item) operator(()operator([)ident(i)operator(]) operator(()reserved(dosync) operator(()reserved(if) operator(()reserved(and) ident(i) operator(()reserved(some) operator(#()reserved(=) ident(i) ident(%)operator(\)) operator(@)ident(seq-ref)operator(\))operator(\)) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) ident(i)operator(\))operator(\)) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) ident(nil)operator(\))operator(\))operator(\))operator(\))operator(\))
+	   symbol(:get-selected-item) operator(()operator([)operator(]) operator(()reserved(dosync) operator(()reserved(if) operator(()reserved(and) operator(@)ident(selected) operator(()reserved(some) operator(#()reserved(=) operator(@)ident(selected) ident(%)operator(\)) operator(@)ident(seq-ref)operator(\))operator(\)) operator(@)ident(selected) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) predefined_constant(nil)operator(\))operator(\))operator(\))operator(\))operator(\))
+	   symbol(:set-selected-item) operator(()operator([)ident(i)operator(]) operator(()reserved(dosync) operator(()reserved(if) operator(()reserved(and) ident(i) operator(()reserved(some) operator(#()reserved(=) ident(i) ident(%)operator(\)) operator(@)ident(seq-ref)operator(\))operator(\)) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) ident(i)operator(\))operator(\)) operator(()reserved(swap!) ident(selected) operator(()reserved(constantly) predefined_constant(nil)operator(\))operator(\))operator(\))operator(\))operator(\))
 	   symbol(:add-listener) operator(()operator([)ident(l)operator(]) operator(()reserved(swap!) ident(listeners) reserved(conj) ident(l)operator(\))operator(\))
 	   symbol(:remove-listener) operator(()operator([)ident(l)operator(]) operator(()reserved(swap!) ident(listeners) reserved(disj) ident(l)operator(\))operator(\))
-	   symbol(:get) operator(()operator([)ident(i)operator(]) operator(()reserved(if) operator(()ident(has-index?) operator(@)ident(seq-ref) ident(i)operator(\)) operator(()reserved(nth) operator(@)ident(seq-ref) ident(i)operator(\)) ident(nil)operator(\))operator(\))
+	   symbol(:get) operator(()operator([)ident(i)operator(]) operator(()reserved(if) operator(()ident(has-index?) operator(@)ident(seq-ref) ident(i)operator(\)) operator(()reserved(nth) operator(@)ident(seq-ref) ident(i)operator(\)) predefined_constant(nil)operator(\))operator(\))
 	   symbol(:add) operator(()operator([)ident(itm)operator(]) operator(()reserved(dosync) operator(()reserved(alter) ident(seq-ref) reserved(conj) ident(itm)operator(\))operator(\))operator(\))
 	   symbol(:add-at) operator(()operator([)ident(itm) ident(idx)operator(]) operator(()reserved(dosync) 
 			       operator(()reserved(if) operator(()reserved(vector?) operator(@)ident(seq-ref)operator(\))
@@ -130,14 +130,14 @@ operator(()reserved(defn) ident(seq-ref-combobox-model) operator([)ident(seq-ref
      
 
 
-operator(()reserved(defmacro) ident(combo-box) operator([)operator([)ident(&) ident(items)operator(]) ident(&) operator({)ident(action) symbol(:action) symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(combo-box) operator([)operator([)ident(&) ident(items)operator(]) ident(&) operator({)ident(action) symbol(:action) symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()reserved(doto) operator(()ident(JComboBox.)operator(\))
      operator(~@)operator(()reserved(if) ident(action)  
 	 operator([)operator(`)operator(()ident(add-action-listener) operator(~)ident(action)operator(\))operator(])operator(\))
      operator(~@)operator(()ident(auto-setters) ident(JComboBox) ident(*cb-known-keys*) ident(opts)operator(\))
      operator(~@)operator(()reserved(map) operator(#()reserved(list) operator(')reserved(.)ident(addItem) ident(%)operator(\)) ident(items)operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(selected-item) operator([)ident(obj)operator(])
+operator(()reserved(defn) function(selected-item) operator([)ident(obj)operator(])
   operator(()reserved(.)ident(getSelectedItem) ident(obj)operator(\))operator(\))
 
 
@@ -146,30 +146,30 @@ comment(;; TODO Add list cell renderer proxy stuff(ns clj-swing.core)
 	   operator(()ident(javax.swing) ident(ImageIcon)operator(\))operator(\))
   operator(()symbol(:require) operator([)ident(clojure.contrib.string) symbol(:as) ident(st)operator(])operator(\))operator(\))
 
-operator(()reserved(defn) ident(kw-to-setter) operator([)ident(kw)operator(])
+operator(()reserved(defn) function(kw-to-setter) operator([)ident(kw)operator(])
   operator(()reserved(symbol) operator(()reserved(apply) reserved(str) string<delimiter(")content(set)delimiter(")> operator(()reserved(map) ident(st/capitalize) operator(()ident(st/split) regexp<delimiter(#")content(-)delimiter(")> operator(()reserved(name) ident(kw)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(group-container-args) operator([)ident(args)operator(])
+operator(()reserved(defn) function(group-container-args) operator([)ident(args)operator(])
   operator(()reserved(reduce) 
    operator(()reserved(fn) operator([)operator({)ident(options) symbol(:options) ident(kw) symbol(:kw) ident(state) symbol(:state) symbol(:as) ident(r)operator(}) ident(arg)operator(])
      operator(()reserved(cond)
       operator(()reserved(=) ident(state) symbol(:forms)operator(\))
       operator(()reserved(update-in) ident(r) operator([)symbol(:forms)operator(]) reserved(conj) ident(arg)operator(\))
       ident(kw)
-      operator(()reserved(assoc) ident(r) symbol(:options) operator(()reserved(assoc) ident(options) ident(kw) ident(arg)operator(\)) symbol(:kw) ident(nil)operator(\))
+      operator(()reserved(assoc) ident(r) symbol(:options) operator(()reserved(assoc) ident(options) ident(kw) ident(arg)operator(\)) symbol(:kw) predefined_constant(nil)operator(\))
       operator(()reserved(keyword?) ident(arg)operator(\))
       operator(()reserved(assoc) ident(r) symbol(:kw) ident(arg)operator(\))
       operator(()reserved(vector?) ident(arg)operator(\))
       operator(()reserved(assoc) ident(r) symbol(:bindings) ident(arg) symbol(:state) symbol(:forms)operator(\))operator(\))operator(\))
-   operator({)symbol(:options) operator({)operator(}) symbol(:kw) ident(nil) symbol(:state) symbol(:options) symbol(:forms) operator([)operator(])operator(}) ident(args)operator(\))operator(\))
+   operator({)symbol(:options) operator({)operator(}) symbol(:kw) predefined_constant(nil) symbol(:state) symbol(:options) symbol(:forms) operator([)operator(])operator(}) ident(args)operator(\))operator(\))
 
-operator(()reserved(defn) ident(remove-known-keys) operator([)ident(m) ident(ks)operator(])
+operator(()reserved(defn) function(remove-known-keys) operator([)ident(m) ident(ks)operator(])
   operator(()reserved(reduce) reserved(dissoc) ident(m) ident(ks)operator(\))operator(\))
 
-operator(()reserved(defn) ident(has-index?) operator([)reserved(seq) ident(idx)operator(])
-  operator(()reserved(and) operator(()reserved(>)reserved(=) ident(idx) integer(0)operator(\)) operator(()reserved(<) ident(idx) operator(()reserved(count) reserved(seq)operator(\))operator(\))operator(\))operator(\))
+operator(()reserved(defn) function(has-index?) operator([)reserved(seq) ident(idx)operator(])
+  operator(()reserved(and) operator(()reserved(>=) ident(idx) integer(0)operator(\)) operator(()reserved(<) ident(idx) operator(()reserved(count) reserved(seq)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(icon-setters) operator([)ident(names) ident(opts)operator(])
+operator(()reserved(defn) function(icon-setters) operator([)ident(names) ident(opts)operator(])
   operator(()reserved(if) ident(opts)
     operator(()reserved(remove) 
      reserved(nil?)
@@ -178,7 +178,7 @@ operator(()reserved(defn) ident(icon-setters) operator([)ident(names) ident(opts
 	operator(()reserved(when-let) operator([)ident(icon) operator(()ident(opts) reserved(name)operator(\))operator(]) 
 	  operator(`)operator(()reserved(.)  operator(~)operator(()ident(kw-to-setter) reserved(name)operator(\)) operator(()reserved(.)ident(getImage) operator(()ident(ImageIcon.) operator(~)ident(icon)operator(\))operator(\))operator(\))operator(\))operator(\)) ident(names)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(auto-setters) operator([)ident(cl) ident(known-kws) ident(opts)operator(])
+operator(()reserved(defn) function(auto-setters) operator([)ident(cl) ident(known-kws) ident(opts)operator(])
   operator(()reserved(if) ident(opts)
     operator(()reserved(map) operator(()reserved(fn) operator([)operator([)ident(a) ident(v)operator(])operator(]) operator(()reserved(list) 
 		      operator(')reserved(.) 
@@ -188,13 +188,13 @@ operator(()reserved(defn) ident(auto-setters) operator([)ident(cl) ident(known-k
 			ident(v)operator(\))operator(\))operator(\))
 	 operator(()ident(remove-known-keys) ident(opts) ident(known-kws)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(insert-at) operator([)reserved(seq) ident(idx) ident(item)operator(])
+operator(()reserved(defn) function(insert-at) operator([)reserved(seq) ident(idx) ident(item)operator(])
   operator(()reserved(concat) operator(()reserved(take) ident(idx) reserved(seq)operator(\)) operator([)ident(item)operator(]) operator(()reserved(drop) ident(idx) reserved(seq)operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(drop-nth) operator([)reserved(seq) ident(idx)operator(])
+operator(()reserved(defn) function(drop-nth) operator([)reserved(seq) ident(idx)operator(])
   operator(()reserved(concat) operator(()reserved(take) ident(idx) reserved(seq)operator(\)) operator(()reserved(drop) operator(()reserved(inc) ident(idx)operator(\)) reserved(seq)operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(add-action-listener) operator([)ident(obj) operator([)operator([)ident(event)operator(]) ident(&) ident(code)operator(])operator(])
+operator(()reserved(defmacro) function(add-action-listener) operator([)ident(obj) operator([)operator([)ident(event)operator(]) ident(&) ident(code)operator(])operator(])
   operator(`)operator(()reserved(doto) operator(~)ident(obj)
      operator(()reserved(.)ident(addActionListener)
       operator(()reserved(proxy) operator([)ident(ActionListener)operator(]) operator([)operator(])
@@ -202,7 +202,7 @@ operator(()reserved(defmacro) ident(add-action-listener) operator([)ident(obj) o
 			 operator(~@)ident(code)operator(\))operator(\))operator(\))operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(<3) operator([)ident(love) ident(&) ident(loves)operator(]) 
+operator(()reserved(defn) function(<3) operator([)ident(love) ident(&) ident(loves)operator(]) 
   operator(()reserved(loop) operator([)ident(l) operator(()reserved(str) string<delimiter(")content(I love )delimiter(")> ident(love)operator(\)) ident(loves) ident(loves)operator(])
     operator(()reserved(let) operator([)operator([)ident(love) ident(&) ident(loves)operator(]) ident(loves)operator(])
       operator(()reserved(if) operator(()reserved(nil?) ident(love)operator(\))
@@ -210,7 +210,7 @@ operator(()reserved(defn) ident(<3) operator([)ident(love) ident(&) ident(loves)
 	operator(()reserved(if) operator(()reserved(empty?) ident(loves)operator(\))
 	  operator(()reserved(str) ident(l) string<delimiter(")content( and )delimiter(")> ident(love) string<delimiter(")content(.)delimiter(")>operator(\))
 	  operator(()reserved(recur) operator(()reserved(str) ident(l) string<delimiter(")content(, )delimiter(")> ident(love)operator(\)) ident(loves)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
-operator(()reserved(ns) ident(clj-swing.document)
+operator(()reserved(ns) namespace(clj-swing.document)
   operator(()symbol(:use) operator([)ident(clojure.contrib.swing-utils) symbol(:only) operator([)ident(do-swing)operator(])operator(])operator(\))
   operator(()symbol(:require) operator([)ident(clojure.contrib.string) symbol(:as) ident(st)operator(])operator(\))
   operator(()symbol(:import) operator([)ident(javax.swing.text) ident(AbstractDocument) ident(Position) ident(Element) ident(PlainDocument)operator(])
@@ -219,23 +219,23 @@ operator(()reserved(ns) ident(clj-swing.document)
 	   ident(javax.swing.event.DocumentEvent$ElementChange)
 	   ident(javax.swing.text.AbstractDocument$Content)operator(\))operator(\))
 
-operator(()reserved(defn-) ident(update-positions) operator([)ident(positions) ident(offset) ident(change)operator(])
+operator(()reserved(defn-) function(update-positions) operator([)ident(positions) ident(offset) ident(change)operator(])
   operator(()reserved(doall) 
    operator(()reserved(map) 
     operator(()reserved(fn) operator([)ident(p)operator(])
-      operator(()reserved(if) operator(()reserved(>)reserved(=) operator(@)ident(p) ident(offset)operator(\))
+      operator(()reserved(if) operator(()reserved(>=) operator(@)ident(p) ident(offset)operator(\))
 	operator(()reserved(swap!) ident(p) reserved(+) ident(change)operator(\))
 	ident(p)operator(\))operator(\))
     ident(positions)operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(str-insert) operator([)ident(s) ident(offset) ident(new-s)operator(])
+operator(()reserved(defn) function(str-insert) operator([)ident(s) ident(offset) ident(new-s)operator(])
   operator(()reserved(str) operator(()ident(st/take) ident(offset) ident(s)operator(\)) ident(new-s) operator(()ident(st/drop) ident(offset) ident(s)operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(str-remove) operator([)ident(s) ident(offset) ident(cnt)operator(])
+operator(()reserved(defn) function(str-remove) operator([)ident(s) ident(offset) ident(cnt)operator(])
   operator(()reserved(str) operator(()ident(st/take) ident(offset) ident(s)operator(\)) operator(()ident(st/drop) operator(()reserved(+) ident(offset) ident(cnt)operator(\)) ident(s)operator(\))operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(string-ref-content) operator([)ident(str-ref)operator(])
+operator(()reserved(defn) function(string-ref-content) operator([)ident(str-ref)operator(])
   operator(()reserved(let) operator([)ident(positions) operator(()reserved(atom) operator([)operator(])operator(\))operator(])
     operator(()reserved(proxy) operator([)ident(AbstractDocument$Content)operator(]) operator([)operator(])
       operator(()ident(createPosition) operator([)ident(offset)operator(])
@@ -264,19 +264,19 @@ operator(()reserved(defn) ident(string-ref-content) operator([)ident(str-ref)ope
 		    operator(()reserved(swap!) ident(positions) ident(update-positions) ident(where) operator(()reserved(.)ident(length) reserved(str)operator(\))operator(\))
 		    operator(()reserved(dosync)
 		     operator(()reserved(alter) ident(str-ref) ident(str-insert) ident(where) reserved(str)operator(\))operator(\))
-		    ident(nil)operator(\))
+		    predefined_constant(nil)operator(\))
 
       operator(()reserved(remove) operator([)ident(where) ident(nitems)operator(]) 
 	      operator(()reserved(swap!) ident(positions) ident(update-positions) ident(where) operator(()reserved(-) integer(0) ident(nitems)operator(\))operator(\))
 	      operator(()reserved(dosync) 
 	       operator(()reserved(alter) ident(str-ref) ident(str-remove) ident(where) ident(nitems)operator(\))operator(\))
-	      ident(nil)operator(\))operator(\))operator(\))operator(\))
+	      predefined_constant(nil)operator(\))operator(\))operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(plain-str-ref-document) operator([)ident(str-ref)operator(])
+operator(()reserved(defn) function(plain-str-ref-document) operator([)ident(str-ref)operator(])
   operator(()ident(PlainDocument.) operator(()ident(string-ref-content) ident(str-ref)operator(\))operator(\))operator(\))
 
-operator(()reserved(comment) reserved(defn) ident(abstract-str-ref-document) operator([)ident(str-ref)operator(])
+operator(()reserved(comment) reserved(defn) function(abstract-str-ref-document) operator([)ident(str-ref)operator(])
   operator(()reserved(let) operator([)ident(d) operator(()reserved(proxy) operator([)ident(AbstractDocument)operator(])  operator([)operator(()ident(string-ref-content) ident(str-ref)operator(\))operator(])operator(\))operator(])
     operator(()reserved(add-watch) ident(str-ref) operator(()reserved(gensym) string<delimiter(")content(abstract-str-ref-document-watch)delimiter(")>operator(\))
 	       operator(()reserved(fn) operator([)ident(_) ident(_) ident(_) ident(state)operator(])
@@ -306,7 +306,7 @@ operator(()reserved(comment) reserved(defn) ident(abstract-str-ref-document) ope
 			    operator(()ident(getType) operator([)operator(]) operator(()ident(DocumentEvent$EventType/CHANGE)operator(\))operator(\))operator(\))operator(\))
     ident(d)operator(\))operator(\))
 
-operator(()reserved(defn) ident(add-str-ref-doc-listener) operator([)ident(doc-owner) ident(str-ref)operator(])
+operator(()reserved(defn) function(add-str-ref-doc-listener) operator([)ident(doc-owner) ident(str-ref)operator(])
   operator(()reserved(let) operator([)reserved(doc) operator(()reserved(.)ident(getDocument) ident(doc-owner)operator(\))
 	ident(watch-key) operator(()reserved(gensym) string<delimiter(")content(str-ref-doc-listener-watch)delimiter(")>operator(\))
 	ident(watch-fn) operator(()reserved(fn) operator([)ident(l)operator(])
@@ -314,7 +314,7 @@ operator(()reserved(defn) ident(add-str-ref-doc-listener) operator([)ident(doc-o
 		     operator(()ident(do-swing)
 		      operator(()reserved(.)ident(removeDocumentListener) reserved(doc) ident(l)operator(\))
 		      operator(()reserved(.)reserved(remove) reserved(doc) integer(0) operator(()reserved(.)ident(getLength) reserved(doc)operator(\))operator(\))
-		      operator(()reserved(.)ident(insertString) reserved(doc) integer(0) ident(state) ident(nil)operator(\))
+		      operator(()reserved(.)ident(insertString) reserved(doc) integer(0) ident(state) predefined_constant(nil)operator(\))
 		      operator(()reserved(.)ident(addDocumentListener) reserved(doc) ident(l)operator(\))operator(\))operator(\))operator(\))
 	ident(l) operator(()reserved(proxy) operator([)ident(DocumentListener)operator(]) operator([)operator(])
 	    operator(()ident(insertUpdate) operator([)ident(event)operator(])
@@ -329,10 +329,10 @@ operator(()reserved(defn) ident(add-str-ref-doc-listener) operator([)ident(doc-o
 	    operator(()ident(changedUpdate) operator([)ident(event)operator(])operator(\))operator(\))operator(])
     operator(()reserved(if) operator(()reserved(<) integer(0) operator(()reserved(.)ident(getLength) reserved(doc)operator(\))operator(\))
       operator(()reserved(.)reserved(remove) reserved(doc) integer(0) operator(()reserved(.)ident(getOffset) operator(()reserved(.)ident(getEndPosition) reserved(doc)operator(\))operator(\))operator(\))operator(\))
-    operator(()reserved(.)ident(insertString) reserved(doc) integer(0) operator(@)ident(str-ref) ident(nil)operator(\))
+    operator(()reserved(.)ident(insertString) reserved(doc) integer(0) operator(@)ident(str-ref) predefined_constant(nil)operator(\))
     operator(()reserved(.)ident(addDocumentListener) reserved(doc) ident(l)operator(\))
     operator(()reserved(add-watch) ident(str-ref) ident(watch-key) operator(()ident(watch-fn) ident(l)operator(\))operator(\))operator(\))operator(\))
-operator(()reserved(ns) ident(clj-swing.example)
+operator(()reserved(ns) namespace(clj-swing.example)
   operator(()symbol(:use) operator([)ident(clj-swing) ident(core) ident(frame) ident(label) ident(button) ident(combo-box) reserved(list) ident(panel) ident(document) ident(text-field)operator(])operator(\))operator(\))
 
 operator(()reserved(import) operator(')operator(()ident(javax.swing)  ident(UIManager)operator(\))
@@ -340,17 +340,17 @@ operator(()reserved(import) operator(')operator(()ident(javax.swing)  ident(UIMa
 	operator(')operator(()ident(java.awt.geom) ident(AffineTransform) ident(Ellipse2D)operator(\))
 	operator(')operator(()ident(java.awt) ident(GridBagLayout) ident(FlowLayout) ident(GridLayout) ident(GridBagConstraints)operator(\))operator(\))
 
-operator(()reserved(def) ident(sr) operator(()reserved(ref) operator(')operator([)string<delimiter(")content(Quick sort)delimiter(")> string<delimiter(")content(Bubble Sort)delimiter(")>operator(])operator(\))operator(\))
-operator(()reserved(def) ident(lm) operator(()reserved(ref) operator(')operator([)string<delimiter(")content(Bla)delimiter(")> string<delimiter(")content(Blubb)delimiter(")>operator(])operator(\))operator(\))
-operator(()reserved(def) ident(str-ref) operator(()reserved(ref) string<delimiter(")content(A String!)delimiter(")>operator(\))operator(\))
+operator(()reserved(def) function(sr) operator(()reserved(ref) operator(')operator([)string<delimiter(")content(Quick sort)delimiter(")> string<delimiter(")content(Bubble Sort)delimiter(")>operator(])operator(\))operator(\))
+operator(()reserved(def) function(lm) operator(()reserved(ref) operator(')operator([)string<delimiter(")content(Bla)delimiter(")> string<delimiter(")content(Blubb)delimiter(")>operator(])operator(\))operator(\))
+operator(()reserved(def) function(str-ref) operator(()reserved(ref) string<delimiter(")content(A String!)delimiter(")>operator(\))operator(\))
 
-operator(()reserved(def) ident(selected) operator(()reserved(atom) ident(nil)operator(\))operator(\))
+operator(()reserved(def) function(selected) operator(()reserved(atom) predefined_constant(nil)operator(\))operator(\))
 
-operator(()reserved(def) ident(nativeLF) operator(()reserved(.) ident(UIManager) ident(getSystemLookAndFeelClassName)operator(\))operator(\))
+operator(()reserved(def) function(nativeLF) operator(()reserved(.) ident(UIManager) ident(getSystemLookAndFeelClassName)operator(\))operator(\))
 
 operator(()reserved(.) ident(UIManager) ident(setLookAndFeel) ident(nativeLF)operator(\))
 
-operator(()reserved(defn) ident(paint-donut) operator([)ident(g)operator(])
+operator(()reserved(defn) function(paint-donut) operator([)ident(g)operator(])
   operator(()reserved(println) string<delimiter(")content(y!!!o)delimiter(")>operator(\))
   operator(()reserved(let) operator([)ident(width) integer(360)
 	ident(height) integer(310)
@@ -363,7 +363,7 @@ operator(()reserved(defn) ident(paint-donut) operator([)ident(g)operator(])
       operator(()reserved(.)ident(rotate) ident(g) operator(()ident(Math/toRadians) ident(i)operator(\))operator(\))
       operator(()reserved(.)ident(draw) ident(g) operator(()reserved(.)ident(createTransformedShape) ident(at) ident(ellipse)operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(graphics-example) operator([)operator(])
+operator(()reserved(defn) function(graphics-example) operator([)operator(])
   operator(()ident(frame)
    symbol(:title) string<delimiter(")content(Graphics example)delimiter(")> 
    symbol(:show) predefined_constant(true) symbol(:pack) predefined_constant(true)
@@ -374,7 +374,7 @@ operator(()reserved(defn) ident(graphics-example) operator([)operator(])
 		 operator(()reserved(proxy-super) ident(paintComponent) ident(g)operator(\))
 		 operator(()ident(paint-donut) ident(g)operator(\))operator(\))operator(\))operator(])operator(\))operator(\))
 
-operator(()reserved(defn) ident(grid-bag-example) operator([)operator(])
+operator(()reserved(defn) function(grid-bag-example) operator([)operator(])
   operator(()ident(frame) symbol(:title) string<delimiter(")content(Sort Visualizer)delimiter(")> symbol(:layout) symbol(:grid-bag)
 	 symbol(:show) predefined_constant(true) symbol(:pack) predefined_constant(true)
 	 operator([)symbol(:gridx) integer(0) symbol(:gridy) integer(0) symbol(:anchor) symbol(:LINE_END)
@@ -391,7 +391,7 @@ operator(()reserved(defn) ident(grid-bag-example) operator([)operator(])
 	  symbol(:gridx) integer(3) symbol(:gridy) integer(0) symbol(:gridheight) integer(3) symbol(:anchor) symbol(:CENTER)
 	  ident(_) operator(()ident(scroll-panel) operator(()ident(jlist) symbol(:model) operator(()ident(seq-ref-list-model) ident(lm)operator(\))operator(\)) symbol(:preferred-size) operator([)integer(150) integer(100)operator(])operator(\))operator(])operator(\))operator(\))
 
-operator(()reserved(defn) ident(button-example) operator([)operator(])
+operator(()reserved(defn) function(button-example) operator([)operator(])
   operator(()ident(frame) symbol(:title) string<delimiter(")content(A Button Example)delimiter(")>
 	 symbol(:layout) operator(()ident(FlowLayout.)operator(\))
 	 symbol(:size) operator([)integer(220) integer(90)operator(])
@@ -402,17 +402,17 @@ operator(()reserved(defn) ident(button-example) operator([)operator(])
 	 operator(()ident(add-action-listener) ident(b1) operator(()operator([)ident(e)operator(]) operator(()reserved(println) string<delimiter(")content(listener called)delimiter(")>operator(\))operator(\))operator(\))operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(c-to-f) operator([)ident(c)operator(])
-  operator(()reserved(+) operator(()reserved(*) ident(c) integer(9/5)operator(\)) integer(32)operator(\))operator(\))
+operator(()reserved(defn) function(c-to-f) operator([)ident(c)operator(])
+  operator(()reserved(+) operator(()reserved(*) ident(c) float(9/5)operator(\)) integer(32)operator(\))operator(\))
 
-operator(()reserved(defn) ident(f-to-c) operator([)ident(f)operator(])
-  operator(()reserved(*) operator(()reserved(-) ident(f) integer(32)operator(\)) integer(5/9)operator(\))operator(\))
+operator(()reserved(defn) function(f-to-c) operator([)ident(f)operator(])
+  operator(()reserved(*) operator(()reserved(-) ident(f) integer(32)operator(\)) float(5/9)operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(convert-temp) operator([)ident(converter) ident(temp)operator(])
+operator(()reserved(defn) function(convert-temp) operator([)ident(converter) ident(temp)operator(])
   operator(()reserved(constantly) operator(()reserved(str) operator(()ident(Math/round) operator(()reserved(float) operator(()ident(converter) operator(()ident(Double/parseDouble) operator(()reserved(.)ident(trim) ident(temp)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(converter-example) operator([)operator(])
+operator(()reserved(defn) function(converter-example) operator([)operator(])
   operator(()reserved(let) operator([)ident(c) operator(()reserved(ref) string<delimiter(")delimiter(")>operator(\))
 	ident(f) operator(()reserved(ref) string<delimiter(")delimiter(")>operator(\))operator(])
     operator(()ident(frame) symbol(:layout) symbol(:grid-bag) symbol(:show) predefined_constant(true) symbol(:pack) ident(truef)
@@ -431,7 +431,7 @@ operator(()reserved(defn) ident(converter-example) operator([)operator(])
 			 symbol(:action) operator(()operator([)ident(_)operator(])
 				    operator(()reserved(println) operator(@)ident(c)operator(\))
 				    operator(()reserved(if) operator(()reserved(re-find) regexp<delimiter(#")content(^)content(\\d)content(+$)delimiter(")> operator(@)ident(c)operator(\))
-				      operator(()reserved(dosync) operator(()reserved(alter) ident(f) operator(()ident(convert-temp) ident(c-to-f)  operator(@)ident(c)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(])operator(\))operator(\))operator(\))operator(()reserved(ns) ident(clj-swing.frame)
+				      operator(()reserved(dosync) operator(()reserved(alter) ident(f) operator(()ident(convert-temp) ident(c-to-f)  operator(@)ident(c)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(])operator(\))operator(\))operator(\))operator(()reserved(ns) namespace(clj-swing.frame)
   operator(()symbol(:use) operator([)ident(clj-swing.core) symbol(:only) operator([)ident(group-container-args) ident(icon-setters) ident(auto-setters)operator(])operator(])
 	operator([)ident(clojure.contrib.swing-utils) symbol(:only) operator([)ident(do-swing)operator(])operator(])operator(\))
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JFrame) ident(ImageIcon)operator(\))
@@ -439,23 +439,23 @@ operator(()reserved(defn) ident(converter-example) operator([)operator(])
   operator(()symbol(:require) operator([)ident(clojure.contrib.java-utils) symbol(:as) ident(java)operator(])operator(\))operator(\))
 
 
-operator(()reserved(defmacro) ident(set-constraint!) operator([)ident(constraints) ident(field) ident(value)operator(])
+operator(()reserved(defmacro) function(set-constraint!) operator([)ident(constraints) ident(field) ident(value)operator(])
   operator(`)operator(()ident(set!) operator(()reserved(.) operator(~)ident(constraints) operator(~)operator(()reserved(symbol) operator(()reserved(name) ident(field)operator(\))operator(\))operator(\))
          operator(~)operator(()reserved(if) operator(()reserved(keyword?) ident(value)operator(\))
 	    operator(`)operator(()ident(java/wall-hack-field)  operator(()reserved(class) operator(~)ident(constraints)operator(\)) operator(')operator(~)operator(()reserved(symbol) operator(()reserved(name) ident(value)operator(\))operator(\))  operator(()reserved(class) operator(~)ident(constraints)operator(\))operator(\))
             ident(value)operator(\))operator(\))operator(\))
 
-operator(()reserved(def) ident(*frame-on-close-actions*)
+operator(()reserved(def) function(*frame-on-close-actions*)
   operator({)symbol(:do-nothing) operator(()ident(JFrame/DO_NOTHING_ON_CLOSE)operator(\))
    symbol(:exit) operator(()ident(JFrame/EXIT_ON_CLOSE)operator(\))
    symbol(:hide) operator(()ident(JFrame/HIDE_ON_CLOSE)operator(\))
    symbol(:dispose) operator(()ident(JFrame/DISPOSE_ON_CLOSE)operator(\))operator(})operator(\))
 
 
-operator(()reserved(def) ident(*frame-known-keys*)
+operator(()reserved(def) function(*frame-known-keys*)
      operator([)symbol(:name) symbol(:icon) symbol(:title) symbol(:layout) symbol(:constrains) symbol(:on-close) symbol(:size) symbol(:bounds) symbol(:location) symbol(:pack) symbol(:show) symbol(:centered)operator(])operator(\))
 
-operator(()reserved(defmacro) ident(frame) operator([)ident(&) ident(args)operator(])
+operator(()reserved(defmacro) function(frame) operator([)ident(&) ident(args)operator(])
   string<delimiter(")content(options are:
 :name - internal name of the frame.
 :icon - icon, will be passed to javax.swing.ImageIcon.
@@ -523,11 +523,11 @@ operator(()reserved(defmacro) ident(frame) operator([)ident(&) ident(args)operat
 	    operator(~@)operator(()reserved(if) operator(()symbol(:pack) ident(opts)operator(\))
 		operator([)operator(`)operator(()reserved(.)ident(pack)operator(\))operator(])operator(\))
 	    operator(~@)operator(()reserved(if) operator(()symbol(:show) ident(opts)operator(\))
-		operator([)operator(`)operator(()reserved(.)ident(setVisible) predefined_constant(true)operator(\))operator(])operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(()reserved(ns) ident(clj-swing.label)
+		operator([)operator(`)operator(()reserved(.)ident(setVisible) predefined_constant(true)operator(\))operator(])operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(()reserved(ns) namespace(clj-swing.label)
   operator(()symbol(:use) operator([)ident(clj-swing.core) symbol(:only) operator([)ident(add-action-listener) ident(icon-setters) ident(auto-setters)operator(])operator(])operator(\))
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JLabel) ident(ImageIcon)operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(label) 
+operator(()reserved(defmacro) function(label) 
   operator([)ident(caption) ident(&) operator({)ident(obj) symbol(:for) symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()reserved(let) operator([)ident(l#) operator(()ident(JLabel.) operator(~)ident(caption)operator(\))operator(])
      operator(()reserved(doto) ident(l#)
@@ -535,24 +535,24 @@ operator(()reserved(defmacro) ident(label)
 	   operator([)operator(`)operator(()reserved(.)ident(setLabelFor) operator(~)ident(obj)operator(\))operator(])operator(\))
        operator(~@)operator(()ident(icon-setters) operator([)symbol(:icon) symbol(:disabled-icon)operator(])  ident(opts)operator(\))
        operator(~@)operator(()ident(auto-setters) ident(JLabel) operator([)symbol(:for)operator(]) ident(opts)operator(\))operator(\))operator(\))operator(\))
-operator(()reserved(ns) ident(clj-swing.list)
+operator(()reserved(ns) namespace(clj-swing.list)
   operator(()symbol(:use) operator([)ident(clj-swing) ident(core) ident(panel)operator(])
 	operator([)ident(clojure.contrib.swing-utils) symbol(:only) operator([)ident(do-swing)operator(])operator(])operator(\))
 
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JList) ident(ListModel)operator(\))
 	   operator(()ident(javax.swing.event) ident(ListDataEvent) ident(ListDataListener) ident(ListSelectionListener)operator(\))operator(\))operator(\))
 
-operator(()reserved(def) ident(*list-known-keys*) operator([)symbol(:action) symbol(:on-selection-change)operator(])operator(\))
+operator(()reserved(def) function(*list-known-keys*) operator([)symbol(:action) symbol(:on-selection-change)operator(])operator(\))
 
 
-operator(()reserved(defmacro) ident(add-list-selection-listener) operator([)ident(obj) operator([)operator([)ident(event)operator(]) ident(&) ident(code)operator(])operator(])
+operator(()reserved(defmacro) function(add-list-selection-listener) operator([)ident(obj) operator([)operator([)ident(event)operator(]) ident(&) ident(code)operator(])operator(])
   operator(`)operator(()reserved(doto) operator(~)ident(obj)
      operator(()reserved(.)ident(addListSelectionListener)
       operator(()reserved(proxy) operator([)ident(ListSelectionListener)operator(]) operator([)operator(])
 	operator(()ident(valueChanged) operator([)operator(~)ident(event)operator(])
 			 operator(~@)ident(code)operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(list-model) operator([)ident(&) operator({)operator([)operator([)operator(]) ident(&) ident(size-code)operator(]) symbol(:size)
+operator(()reserved(defmacro) function(list-model) operator([)ident(&) operator({)operator([)operator([)operator(]) ident(&) ident(size-code)operator(]) symbol(:size)
 			 operator([)operator([)ident(get-idx)operator(]) ident(&) ident(get-code)operator(]) symbol(:get)
 			 operator([)operator([)ident(a-l-l)operator(]) ident(&) ident(add-listener-code)operator(]) symbol(:add-listener)
 			 operator([)operator([)ident(r-l-l)operator(]) ident(&) ident(remove-listener-code)operator(]) symbol(:remove-listener)operator(})operator(])
@@ -567,14 +567,14 @@ operator(()reserved(defmacro) ident(list-model) operator([)ident(&) operator({)o
 			     operator(~@)ident(remove-listener-code)operator(\))operator(\))operator(\))
 
 
-operator(()reserved(defn) ident(seq-ref-list-model) operator([)ident(seq-ref)operator(])
+operator(()reserved(defn) function(seq-ref-list-model) operator([)ident(seq-ref)operator(])
   operator(()reserved(let) operator([)ident(listeners) operator(()reserved(atom) operator(#{)operator(})operator(\))
 	reserved(key) operator(()reserved(gensym) string<delimiter(")content(seq-ref-list-model-watch)delimiter(")>operator(\))
 	ident(m) operator(()ident(list-model)
 	   symbol(:size) operator(()operator([)operator(]) operator(()reserved(count) operator(@)ident(seq-ref)operator(\))operator(\))
 	   symbol(:add-listener) operator(()operator([)ident(l)operator(]) operator(()reserved(swap!) ident(listeners) reserved(conj) ident(l)operator(\))operator(\))
 	   symbol(:remove-listener) operator(()operator([)ident(l)operator(]) operator(()reserved(swap!) ident(listeners) reserved(disj) ident(l)operator(\))operator(\))
-	   symbol(:get) operator(()operator([)ident(i)operator(]) operator(()reserved(if) operator(()ident(has-index?) operator(@)ident(seq-ref) ident(i)operator(\)) operator(()reserved(nth) operator(@)ident(seq-ref) ident(i)operator(\)) ident(nil)operator(\))operator(\))
+	   symbol(:get) operator(()operator([)ident(i)operator(]) operator(()reserved(if) operator(()ident(has-index?) operator(@)ident(seq-ref) ident(i)operator(\)) operator(()reserved(nth) operator(@)ident(seq-ref) ident(i)operator(\)) predefined_constant(nil)operator(\))operator(\))
 	   operator(\))operator(])
     operator(()reserved(add-watch) ident(seq-ref) reserved(key) 
 	       operator(()reserved(fn) operator([)ident(_) ident(_) ident(_) ident(state)operator(])
@@ -584,7 +584,7 @@ operator(()reserved(defn) ident(seq-ref-list-model) operator([)ident(seq-ref)ope
 		      operator(()reserved(.)ident(contentsChanged) ident(l) ident(m)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
     ident(m)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(jlist) operator([)ident(&) operator({)ident(action) symbol(:action) ident(on-selection-change) symbol(:on-selection-change) ident(items) symbol(:items) ident(scrolling) symbol(:scrolling) symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(jlist) operator([)ident(&) operator({)ident(action) symbol(:action) ident(on-selection-change) symbol(:on-selection-change) ident(items) symbol(:items) ident(scrolling) symbol(:scrolling) symbol(:as) ident(opts)operator(})operator(])
   operator(()reserved(let) operator([)ident(l) operator(()reserved(gensym) string<delimiter(")content(jlist)delimiter(")>operator(\))operator(])
   operator(`)operator(()reserved(let) operator([)operator(~)ident(l) operator(()reserved(doto) operator(()ident(JList.)operator(\))
 	      operator(~@)operator(()reserved(if) ident(action)  
@@ -606,11 +606,11 @@ comment(;; TODO Add list cell renderer proxy stuff(ns clj-swing.panel)
   operator(()symbol(:require) operator([)ident(clojure.contrib.java-utils) symbol(:as) ident(java)operator(])operator(\))operator(\))
 
 
-operator(()reserved(def) ident(*panel-known-keys*)
+operator(()reserved(def) function(*panel-known-keys*)
      operator([)symbol(:name) symbol(:icon) symbol(:title) symbol(:layout) symbol(:constrains) symbol(:size) symbol(:bounds) symbol(:location) symbol(:pack) symbol(:preferred-size) symbol(:paint)operator(])operator(\))
 
 
-operator(()reserved(defmacro) ident(general-panel) operator([)ident(cl) ident(args)operator(])
+operator(()reserved(defmacro) function(general-panel) operator([)ident(cl) ident(args)operator(])
   string<delimiter(")content(options are:
 :name - internal name of the frame.
 :layout - layout manager.
@@ -663,24 +663,24 @@ operator(()reserved(defmacro) ident(general-panel) operator([)ident(cl) ident(ar
 	      operator([)operator(`)operator(()reserved(.)ident(setLocation) operator(~)ident(x) operator(~)ident(y)operator(\))operator(])operator(\))
 	   operator(~@)ident(forms)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(panel) operator([)ident(&) ident(args)operator(])
+operator(()reserved(defmacro) function(panel) operator([)ident(&) ident(args)operator(])
   operator(`)operator(()ident(general-panel) ident(JPanel) operator(~)ident(args)operator(\))operator(\))
 
-operator(()reserved(defmacro) ident(scroll-panel) operator([)ident(obj) ident(&) operator({) symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(scroll-panel) operator([)ident(obj) ident(&) operator({) symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()reserved(doto) operator(()reserved(new) ident(JScrollPane) operator(~)ident(obj)operator(\))
      operator(~@)operator(()ident(auto-setters) ident(JScrollPane) operator([)symbol(:preferred-size)operator(]) ident(opts)operator(\))
      operator(~@)operator(()reserved(when-let) operator([)operator([)ident(w) ident(h)operator(]) operator(()symbol(:preferred-size) ident(opts)operator(\))operator(])
 	 operator([)operator(`)operator(()reserved(.)ident(setPreferredSize) operator(()ident(Dimension.) operator(~)ident(w) operator(~)ident(h)operator(\))operator(\))operator(])operator(\))operator(\))operator(\))
 
 
-operator(()reserved(ns) ident(clj-swing.text-field)
+operator(()reserved(ns) namespace(clj-swing.text-field)
   operator(()symbol(:use) operator([)ident(clj-swing) ident(core) ident(document)operator(])operator(\))
   operator(()symbol(:import) operator(()ident(javax.swing) ident(JTextField) ident(ListModel)operator(\))
 	   operator(()ident(javax.swing.event) ident(ListDataEvent) ident(ListDataListener) ident(ListSelectionListener)operator(\))operator(\))operator(\))
 
-operator(()reserved(def) ident(*text-field-known-keys*) operator([)symbol(:action) symbol(:str-ref)operator(])operator(\))
+operator(()reserved(def) function(*text-field-known-keys*) operator([)symbol(:action) symbol(:str-ref)operator(])operator(\))
 
-operator(()reserved(defmacro) ident(text-field) operator([)ident(&) operator({)ident(action) symbol(:action) ident(str-ref) symbol(:str-ref) symbol(:as) ident(opts)operator(})operator(])
+operator(()reserved(defmacro) function(text-field) operator([)ident(&) operator({)ident(action) symbol(:action) ident(str-ref) symbol(:str-ref) symbol(:as) ident(opts)operator(})operator(])
   operator(`)operator(()reserved(doto) operator(()ident(JTextField.)operator(\))
      operator(~@)operator(()reserved(if) ident(action)  
 	 operator([)operator(`)operator(()ident(add-action-listener) operator(~)ident(action)operator(\))operator(])operator(\))

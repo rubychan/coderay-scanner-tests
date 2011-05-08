@@ -1,4 +1,4 @@
-operator(()reserved(ns) ident(clicky)
+operator(()reserved(ns) namespace(clicky)
   operator(()symbol(:use) ident(compojure)operator(\))
   operator(()symbol(:use) ident(net.licenser.sandbox)operator(\))
   operator(()symbol(:use) ident(net.licenser.sandbox.matchers)operator(\))
@@ -7,11 +7,11 @@ operator(()reserved(ns) ident(clicky)
   operator(()symbol(:gen-class)operator(\))operator(\))
   
   
-operator(()reserved(def) ident(*data-dir*) string<delimiter(")content(./data)delimiter(")>operator(\))
+operator(()reserved(def) function(*data-dir*) string<delimiter(")content(./data)delimiter(")>operator(\))
 
-operator(()reserved(def) ident(*base-name*) string<delimiter(")content(clicky.sandbox)delimiter(")>operator(\))
+operator(()reserved(def) function(*base-name*) string<delimiter(")content(clicky.sandbox)delimiter(")>operator(\))
 
-operator(()reserved(defn) ident(parital-namespace-matcher)
+operator(()reserved(defn) function(parital-namespace-matcher)
   string<delimiter(")content(Creates a tester that whitelists all functions within a namespace.)delimiter(")>
   operator([)ident(&) ident(namespaces)operator(])
   operator(()reserved(fn) operator([)ident(form)operator(])
@@ -25,23 +25,23 @@ operator(()reserved(defn) ident(parital-namespace-matcher)
      predefined_constant(true)
       operator(')operator(()operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(def) ident(*tester*) operator(()ident(extend-tester) ident(secure-tester) operator(()ident(whitelist) operator(()ident(function-matcher) operator(')reserved(def) operator(')reserved(require) operator(')reserved(use)operator(\)) operator(()ident(parital-namespace-matcher) operator(')ident(clicky.sandbox)operator(\))operator(\))operator(\))operator(\))
+operator(()reserved(def) function(*tester*) operator(()ident(extend-tester) ident(secure-tester) operator(()ident(whitelist) operator(()ident(function-matcher) operator(')reserved(def) operator(')reserved(require) operator(')reserved(use)operator(\)) operator(()ident(parital-namespace-matcher) operator(')ident(clicky.sandbox)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(page)
+operator(()reserved(defn) function(page)
   operator([)ident(&) ident(body)operator(])
   operator(()ident(html) operator([)symbol(:title) string<delimiter(")content(Clicky! Bunti!)delimiter(")>operator(]) operator(()reserved(vec) operator(()reserved(concat) operator([)symbol(:body)operator(]) ident(body)operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(uri-to-ns)
+operator(()reserved(defn) function(uri-to-ns)
   operator([)ident(uri)operator(])
-  operator(()reserved(symbol) operator(()ident(su/replace) operator(()ident(su/drop) ident(uri) integer(1)operator(\)) error(\\)reserved(/) error(\\)reserved(.)operator(\))operator(\))operator(\))
+  operator(()reserved(symbol) operator(()ident(su/replace) operator(()ident(su/drop) ident(uri) integer(1)operator(\)) char(\\/) char(\\.)operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(exec-file)
+operator(()reserved(defn) function(exec-file)
   operator([)ident(file) reserved(ns)operator(])
   operator(()reserved(let) operator([)ident(sb) operator(()ident(new-sandbox-compiler) symbol(:namespace) reserved(ns) symbol(:tester) ident(*tester*) symbol(:timeout) integer(500)operator(\))operator(])
     operator(()reserved(with-open) operator([)ident(r) operator(()ident(java.io.PushbackReader.) operator(()ident(reader) ident(file)operator(\))operator(\))operator(]) operator(()operator(()ident(sb) operator(()reserved(read) ident(r)operator(\))operator(\)) operator({)operator(})operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(run-file)
-  operator([)reserved(ns) ident(file) ident(uri)operator(])
+operator(()reserved(defn) function(run-file)
+  operator([)reserved(ns) namespace(file) ident(uri)operator(])
   operator(()reserved(let) operator([)reserved(ns) operator(()reserved(symbol) operator(()reserved(str) ident(*base-name*) string<delimiter(")content(.)delimiter(")> reserved(ns)operator(\))operator(\))operator(])
     operator(()reserved(try)
      operator(()reserved(let) operator([)ident(res) operator(()ident(exec-file) ident(file) reserved(ns)operator(\))operator(])
@@ -49,17 +49,17 @@ operator(()reserved(defn) ident(run-file)
      operator(()reserved(catch) ident(Exception) ident(e)
        operator(()ident(page) operator([)symbol(:body) ident(e)operator(])operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(clicly-handler) operator([)ident(request)operator(])
+operator(()reserved(defn) function(clicly-handler) operator([)ident(request)operator(])
   operator(()ident(html)operator(\))operator(\))
   
-operator(()reserved(defn) ident(uri-to-file-name)
+operator(()reserved(defn) function(uri-to-file-name)
   operator([)ident(uri)operator(])
   operator(()reserved(str) ident(*data-dir*)  ident(uri) string<delimiter(")content(.clj)delimiter(")>operator(\))operator(\))
 
 operator(()ident(defroutes) ident(my-app)
-  operator(()reserved(GET) string<delimiter(")content(/)delimiter(")>
+  operator(()ident(GET) string<delimiter(")content(/)delimiter(")>
        operator(()ident(html) operator([)symbol(:h1) string<delimiter(")content(Hello World)delimiter(")>operator(])operator(\))operator(\))
-  operator(()reserved(GET) string<delimiter(")content(*)delimiter(")>
+  operator(()ident(GET) string<delimiter(")content(*)delimiter(")>
        operator(()reserved(let) operator([)ident(uri) operator(()symbol(:uri) ident(request)operator(\))
 	     ident(file-name) operator(()ident(uri-to-file-name) ident(uri)operator(\))
 	     ident(file) operator(()ident(java.io.File.) ident(file-name)operator(\))operator(])
@@ -79,7 +79,7 @@ operator(()ident(defroutes) ident(my-app)
 	   operator(()ident(run-file) operator(()ident(uri-to-ns) ident(uri)operator(\)) ident(file) ident(uri)operator(\))
 	   operator(()reserved(catch) ident(Exception) ident(e) operator(()ident(page) operator([)symbol(:h1) string<delimiter(")content(Ohhh no! The code could not be read!)delimiter(")>operator(]) operator([)symbol(:pre) ident(code)operator(]) ident(e)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(first-update) operator([)operator(])
+operator(()reserved(defn) function(first-update) operator([)operator(])
   operator(()reserved(let) operator([)ident(files) operator(()reserved(filter) operator(#()reserved(.)ident(isFile) ident(%)operator(\)) operator(()reserved(file-seq) operator(()ident(java.io.File.) ident(*data-dir*)operator(\))operator(\))operator(\))operator(])
     operator(()reserved(loop) operator([)ident(c) operator(()reserved(*) operator(()reserved(count) ident(files)operator(\)) operator(()reserved(count) ident(files)operator(\))operator(\))operator(])
       operator(()reserved(if) 
@@ -87,13 +87,13 @@ operator(()reserved(defn) ident(first-update) operator([)operator(])
 	   operator(()reserved(dorun)
 	    operator(()reserved(map) operator(#()reserved(apply) ident(exec-file) ident(%)operator(\))
 		 operator(()reserved(sort-by) operator(()reserved(fn) operator([)ident(&) ident(_)operator(]) operator(()reserved(rand-int) integer(42)operator(\))operator(\)) operator(()reserved(map) 
-						    operator(()reserved(fn) operator([)ident(file)operator(]) operator(()reserved(vector) ident(file) operator(()reserved(symbol) operator(()reserved(str) ident(*base-name*) string<delimiter(")content(.)delimiter(")> operator(()ident(su/replace) operator(()reserved(second) operator(()reserved(re-find) regexp<delimiter(#")content(^)content(\\.)content(/data/(.*\))content(\\.)content(clj$)delimiter(")> operator(()reserved(str) ident(file)operator(\))operator(\))operator(\)) error(\\)reserved(/) error(\\)reserved(.)operator(\))operator(\))operator(\))operator(\))operator(\))
+						    operator(()reserved(fn) operator([)ident(file)operator(]) operator(()reserved(vector) ident(file) operator(()reserved(symbol) operator(()reserved(str) ident(*base-name*) string<delimiter(")content(.)delimiter(")> operator(()ident(su/replace) operator(()reserved(second) operator(()reserved(re-find) regexp<delimiter(#")content(^)content(\\.)content(/data/(.*\))content(\\.)content(clj$)delimiter(")> operator(()reserved(str) ident(file)operator(\))operator(\))operator(\)) char(\\/) char(\\.)operator(\))operator(\))operator(\))operator(\))operator(\))
 						    ident(files)operator(\))operator(\))operator(\))operator(\))
 	   predefined_constant(true)
 	   operator(()reserved(catch) ident(Exception) ident(e) predefined_constant(false)operator(\))operator(\))
 	predefined_constant(true) operator(()reserved(if) operator(()reserved(>) ident(c) integer(0)operator(\)) operator(()reserved(recur) operator(()reserved(dec) ident(c)operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))operator(\))
 
-operator(()reserved(defn) ident(-main) operator([)operator(])
+operator(()reserved(defn) function(-main) operator([)operator(])
   operator(()ident(first-update)operator(\))
   operator(()ident(run-server) operator({)symbol(:port) integer(8080)operator(})
 	      string<delimiter(")content(/*)delimiter(")> operator(()ident(servlet) ident(my-app)operator(\))operator(\))operator(\))
