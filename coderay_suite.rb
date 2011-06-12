@@ -171,7 +171,7 @@ module CodeRay
         for example_filename in examples.sort
           @known_issue_description = @known_issue_ticket_url = nil
           name = File.basename(example_filename, ".#{extension}")
-          next if ENV['lang'] && ENV['only'] && ENV['only'] != name
+          next if ENV['lang'] && ENV['only'] && ![name, '*'].include?(ENV['only'])
           print '%20s'.cyan % name + ' '
           filesize = File.size(example_filename)
           amount = filesize
@@ -343,7 +343,7 @@ module CodeRay
       end
       print "\b" * 'encoding...'.size
       
-      if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && name == ENV['new'])
+      if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && [name, '*'].include?(ENV['new']))
         expected = scanner.class.normalize File.read(expected_filename)
         ok = expected == result
         if !ok && expected.respond_to?(:encoding) && expected.encoding != result.encoding
@@ -496,9 +496,15 @@ module CodeRay
       
       def check_env_lang
         for key in %w(only new)
-          if ENV[key] && ENV[key][/^(\w+)\.([-\w]+)$/]
-            ENV['lang'] = $1
-            ENV[key] = $2
+          if ENV[key]
+            case ENV[key]
+            when /^(\w+)\.([-\w]+)$/
+              ENV['lang'] = $1
+              ENV[key] = $2
+            when /^(\w+)(?:\.\*)?$/
+              ENV['lang'] = $1
+              ENV[key] = '*'
+            end
           end
         end
       end
