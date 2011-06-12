@@ -7,14 +7,14 @@ bY SiMoN StRaNdGaArD *
 
 preprocessor(#define) ident(GUN1) integer(42)operator(:)
 preprocessor(#define) ident(GUN2) integer(43)operator(:)
-preprocessor(#define) ident(bo) reserved(do)
+preprocessor(#define) ident(bo) keyword(do)
 preprocessor(#define) ident(when)operator(()ident(gun)operator(\)) comment(/**/)
 preprocessor(#define) ident(DATA) string<delimiter(")content(p 'Hello embedded world')delimiter(")>
 preprocessor(#define) ident(DIRTY)operator(()ident(argc)operator(,)ident(argv)operator(\))\
 ident(argc)operator(,)ident(argv)operator(,)predefined_type(char)operator(=)ident(eval)operator(()\
 string<delimiter(")content(#{DATA.read})char(\\n)content([3,2,1])delimiter(")>\
 operator(\);)ident(sun)operator(=)ident(O)operator(.)ident(new)\
-reserved(if)operator(()integer(0)operator(\))
+keyword(if)operator(()integer(0)operator(\))
 
 predefined_type(int)
 ident(sun)operator([]={)integer(12)operator(,)integer(9)operator(,)integer(16)operator(,)integer(9)operator(,)integer(2)operator(,)integer(1)operator(,)integer(7)operator(,)integer(1)operator(,)integer(3)operator(,)integer(9)operator(,)integer(27)operator(,)integer(4)operator(,) integer(13)operator(,)integer(2)operator(,)integer(11)operator(,)integer(5)operator(,)integer(4)operator(,)integer(1)operator(,)integer(25)operator(,)
@@ -31,13 +31,13 @@ integer(97)operator(,)integer(1)operator(,)integer(94)operator(,)integer(35)oper
 
 directive(void) ident(run)operator(()predefined_type(int) ident(gun)operator(=)integer(0)operator(\)) operator({)        comment(// [gun]=[:GUN1,:GUN2])
         ident(printf)operator(()string<delimiter(")content(run(\) %i)char(\\n)delimiter(")>operator(,) ident(gun)operator(\);)
-        reserved(switch)operator(()ident(gun)operator(\)) operator({)
-        reserved(case) ident(GUN1) ident(when)operator(()integer(2)operator(\))
+        keyword(switch)operator(()ident(gun)operator(\)) operator({)
+        keyword(case) ident(GUN1) ident(when)operator(()integer(2)operator(\))
                 ident(printf)operator(()string<delimiter(")content(when2)char(\\n)delimiter(")>operator(\);)
-                reserved(break)operator(;) comment(// end)
-        reserved(case) ident(GUN2) ident(when)operator(()integer(3)operator(\))
+                keyword(break)operator(;) comment(// end)
+        keyword(case) ident(GUN2) ident(when)operator(()integer(3)operator(\))
                 ident(printf)operator(()string<delimiter(")content(when3)char(\\n)delimiter(")>operator(\);)
-                reserved(break)operator(;) comment(// end)
+                keyword(break)operator(;) comment(// end)
         operator(})
 operator(})
 
@@ -47,10 +47,10 @@ predefined_type(int) ident(main)operator(()predefined_type(int) ident(argc)opera
         ident(bo) operator({)
                 ident(fun) operator(-=) integer(1)operator(;) comment(//.id - gun = fun)
                 ident(run)operator(()ident(fun)operator(\);)
-        operator(}) reserved(while)operator(()ident(fun)operator(>)integer(0)operator(\);)
+        operator(}) keyword(while)operator(()ident(fun)operator(>)integer(0)operator(\);)
         ident(ruby_init)operator((\);)
         ident(rb_eval_string)operator(()ident(DATA)operator(\);)
-        reserved(return) integer(0)operator(;)
+        keyword(return) integer(0)operator(;)
 operator(})
 
 comment(# if   0  // nobody reads un-defined code
