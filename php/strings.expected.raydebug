@@ -32,8 +32,8 @@ plain(Heredoc
 
 Example #1 Invalid example
 )inline_delimiter(<?php)
-reserved(class) class(foo) operator({)
-    reserved(public) local_variable($bar) operator(=) string<delimiter(<<<EOT)content(
+keyword(class) class(foo) operator({)
+    keyword(public) local_variable($bar) operator(=) string<delimiter(<<<EOT)content(
 )content(bar)content(
 )delimiter(EOT)>operator(;)
 operator(})
@@ -49,19 +49,19 @@ local_variable($str) operator(=) string<delimiter(<<<EOD)content(
 )delimiter(EOD)>operator(;)
 
 comment(/* More complex example, with variables. */)
-reserved(class) class(foo)
+keyword(class) class(foo)
 operator({)
-    reserved(var) local_variable($foo)operator(;)
-    reserved(var) local_variable($bar)operator(;)
+    keyword(var) local_variable($foo)operator(;)
+    keyword(var) local_variable($bar)operator(;)
 
-    reserved(function) function(foo)operator(()operator(\))
+    keyword(function) function(foo)operator(()operator(\))
     operator({)
         local_variable($this)operator(->)ident(foo) operator(=) string<delimiter(')content(Foo)delimiter(')>operator(;)
         local_variable($this)operator(->)ident(bar) operator(=) predefined(array)operator(()string<delimiter(')content(Bar1)delimiter(')>operator(,) string<delimiter(')content(Bar2)delimiter(')>operator(,) string<delimiter(')content(Bar3)delimiter(')>operator(\))operator(;)
     operator(})
 operator(})
 
-local_variable($foo) operator(=) reserved(new) ident(foo)operator(()operator(\))operator(;)
+local_variable($foo) operator(=) keyword(new) ident(foo)operator(()operator(\))operator(;)
 local_variable($name) operator(=) string<delimiter(')content(MyName)delimiter(')>operator(;)
 
 predefined(echo) string<delimiter(<<<EOT)content(
@@ -90,21 +90,21 @@ plain(Example #4 Using Heredoc to initialize static values
 
 )inline_delimiter(<?php)
 comment(// Static variables)
-reserved(function) function(foo)operator(()operator(\))
+keyword(function) function(foo)operator(()operator(\))
 operator({)
-    reserved(static) local_variable($bar) operator(=) string<delimiter(<<<LABEL)content(
+    keyword(static) local_variable($bar) operator(=) string<delimiter(<<<LABEL)content(
 )content(Nothing in here...)content(
 )delimiter(LABEL)>operator(;)
 operator(})
 
 comment(// Class properties/constants)
-reserved(class) class(foo)
+keyword(class) class(foo)
 operator({)
-    reserved(const) constant(BAR) operator(=) string<delimiter(<<<FOOBAR)content(
+    keyword(const) constant(BAR) operator(=) string<delimiter(<<<FOOBAR)content(
 )content(Constant example)content(
 )delimiter(FOOBAR)>operator(;)
 
-    reserved(public) local_variable($baz) operator(=) string<delimiter(<<<FOOBAR)content(
+    keyword(public) local_variable($baz) operator(=) string<delimiter(<<<FOOBAR)content(
 )content(Property example)content(
 )delimiter(FOOBAR)>operator(;)
 operator(})
@@ -130,19 +130,19 @@ local_variable($str) operator(=) string<delimiter(<<<'EOD')content(
 )delimiter(EOD)>operator(;)
 
 comment(/* More complex example, with variables. */)
-reserved(class) class(foo)
+keyword(class) class(foo)
 operator({)
-    reserved(public) local_variable($foo)operator(;)
-    reserved(public) local_variable($bar)operator(;)
+    keyword(public) local_variable($foo)operator(;)
+    keyword(public) local_variable($bar)operator(;)
 
-    reserved(function) function(foo)operator(()operator(\))
+    keyword(function) function(foo)operator(()operator(\))
     operator({)
         local_variable($this)operator(->)ident(foo) operator(=) string<delimiter(')content(Foo)delimiter(')>operator(;)
         local_variable($this)operator(->)ident(bar) operator(=) predefined(array)operator(()string<delimiter(')content(Bar1)delimiter(')>operator(,) string<delimiter(')content(Bar2)delimiter(')>operator(,) string<delimiter(')content(Bar3)delimiter(')>operator(\))operator(;)
     operator(})
 operator(})
 
-local_variable($foo) operator(=) reserved(new) ident(foo)operator(()operator(\))operator(;)
+local_variable($foo) operator(=) keyword(new) ident(foo)operator(()operator(\))operator(;)
 local_variable($name) operator(=) string<delimiter(')content(MyName)delimiter(')>operator(;)
 
 predefined(echo) string<delimiter(<<<'EOT')content(
@@ -160,8 +160,8 @@ This should not print a capital 'A': \\x41
 Example #7 Static data example
 
 )inline_delimiter(<?php)
-reserved(class) class(foo) operator({)
-    reserved(public) local_variable($bar) operator(=) string<delimiter(<<<'EOT')content(
+keyword(class) class(foo) operator({)
+    keyword(public) local_variable($bar) operator(=) string<delimiter(<<<'EOT')content(
 )content(bar)content(
 )delimiter(EOT)>operator(;)
 operator(})
@@ -270,11 +270,11 @@ inline_delimiter(?>)
 plain(It is also possible to access class properties using variables within strings using this syntax.
 
 )inline_delimiter(<?php)
-reserved(class) class(foo) operator({)
-    reserved(var) local_variable($bar) operator(=) string<delimiter(')content(I am bar.)delimiter(')>operator(;)
+keyword(class) class(foo) operator({)
+    keyword(var) local_variable($bar) operator(=) string<delimiter(')content(I am bar.)delimiter(')>operator(;)
 operator(})
 
-local_variable($foo) operator(=) reserved(new) ident(foo)operator(()operator(\))operator(;)
+local_variable($foo) operator(=) keyword(new) ident(foo)operator(()operator(\))operator(;)
 local_variable($bar) operator(=) string<delimiter(')content(bar)delimiter(')>operator(;)
 local_variable($baz) operator(=) predefined(array)operator(()string<delimiter(')content(foo)delimiter(')>operator(,) string<delimiter(')content(bar)delimiter(')>operator(,) string<delimiter(')content(baz)delimiter(')>operator(,) string<delimiter(')content(quux)delimiter(')>operator(\))operator(;)
 predefined(echo) string<delimiter(")inline<delimiter({)local_variable($foo)operator(->)local_variable($bar)delimiter(})>char(\\n)delimiter(")>operator(;)
@@ -289,9 +289,9 @@ Note: Functions, method calls, static class variables, and class constants insid
 comment(// Show all errors.)
 predefined(error_reporting)operator(()exception(E_ALL)operator(\))operator(;)
 
-reserved(class) class(beers) operator({)
-    reserved(const) ident(softdrink) operator(=) string<delimiter(')content(rootbeer)delimiter(')>operator(;)
-    reserved(public) reserved(static) local_variable($ale) operator(=) string<delimiter(')content(ipa)delimiter(')>operator(;)
+keyword(class) class(beers) operator({)
+    keyword(const) ident(softdrink) operator(=) string<delimiter(')content(rootbeer)delimiter(')>operator(;)
+    keyword(public) keyword(static) local_variable($ale) operator(=) string<delimiter(')content(ipa)delimiter(')>operator(;)
 operator(})
 
 local_variable($rootbeer) operator(=) string<delimiter(')content(A & W)delimiter(')>operator(;)
