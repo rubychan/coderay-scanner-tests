@@ -1,18 +1,18 @@
-reserved(undef) method(/)
-reserved(undef) operator(,)
-reserved(undef) method(-)operator(-)
+keyword(undef) method(/)
+keyword(undef) operator(,)
+keyword(undef) method(-)operator(-)
 
-reserved(undef)
+keyword(undef)
 comment(# bla)
 method([]=)
 
-reserved(undef) method(undef)
-reserved(undef) method(/)operator(,)method(/)operator(,)symbol(:/)
+keyword(undef) method(undef)
+keyword(undef) method(/)operator(,)method(/)operator(,)symbol(:/)
 
-reserved(undef) method(&)operator(,)method(&)operator(&)
+keyword(undef) method(&)operator(,)method(&)operator(&)
 
 symbol(:simple)
 symbol<symbol(:)delimiter(")content(bla)delimiter(")>
-symbol<symbol(:)delimiter(")inline<inline_delimiter(#{)reserved(undef) symbol(:blubb)inline_delimiter(})>escape(#)class_variable(@@cv)delimiter(")>
+symbol<symbol(:)delimiter(")inline<inline_delimiter(#{)keyword(undef) symbol(:blubb)inline_delimiter(})>escape(#)class_variable(@@cv)delimiter(")>
 
-reserved(undef) symbol<symbol(:)delimiter(")content(bla)delimiter(")>operator(,) method(/)operator(,) symbol<symbol(:)delimiter(")inline<inline_delimiter(#{)reserved(undef) symbol(:blubb)inline_delimiter(})>escape(#)class_variable(@@cv)delimiter(")>
+keyword(undef) symbol<symbol(:)delimiter(")content(bla)delimiter(")>operator(,) method(/)operator(,) symbol<symbol(:)delimiter(")inline<inline_delimiter(#{)keyword(undef) symbol(:blubb)inline_delimiter(})>escape(#)class_variable(@@cv)delimiter(")>

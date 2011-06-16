@@ -1,25 +1,25 @@
-reserved(class) class(Feeling)
+keyword(class) class(Feeling)
   
-  reserved(def) method(~)
+  keyword(def) method(~)
     ident(p) symbol(:drunk)
-  reserved(end)
+  keyword(end)
   
-  reserved(def) method(!)
+  keyword(def) method(!)
     ident(p) symbol(:alert)
-  reserved(end)
+  keyword(end)
   
-  reserved(alias) method(not) method(!@)
-  reserved(alias) method(tilde) method(~@)
+  keyword(alias) method(not) method(!@)
+  keyword(alias) method(tilde) method(~@)
   
-  reserved(def) method(-@)
+  keyword(def) method(-@)
     ident(p) symbol(:bad)
-  reserved(end)
+  keyword(end)
   
-  reserved(def) method(+@)
+  keyword(def) method(+@)
     ident(p) symbol(:good)
-  reserved(end)
+  keyword(end)
   
-reserved(end)
+keyword(end)
 
 ident(feeling) operator(=) constant(Feeling)operator(.)ident(new)
 
@@ -28,9 +28,9 @@ operator(+)ident(feeling)  comment(# => :good)
 operator(!)ident(feeling)  comment(# => :alert)
 operator(~)ident(feeling)  comment(# => :drunk)
 
-reserved(def) method(=~) ident(other)
+keyword(def) method(=~) ident(other)
   ident(bla)
-reserved(end)
+keyword(end)
 
 ident(feeling)operator(.)ident(!)  comment(# => :alert)
 ident(feeling)operator(.)ident(~)  comment(# => :drunk)

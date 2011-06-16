@@ -3,29 +3,29 @@ ident(require) string<delimiter(')content(fits)delimiter(')>
 
 constant(N) operator(=) integer(100_000)
 
-reserved(def) method(test) ident(s)
+keyword(def) method(test) ident(s)
   ident(puts) ident(s)
-  constant(Benchmark)operator(.)ident(bm) integer(10) reserved(do) operator(|)ident(bm)operator(|)
-    ident(bm)operator(.)ident(report) string<delimiter(')content(default)delimiter(')> reserved(do)
+  constant(Benchmark)operator(.)ident(bm) integer(10) keyword(do) operator(|)ident(bm)operator(|)
+    ident(bm)operator(.)ident(report) string<delimiter(')content(default)delimiter(')> keyword(do)
       constant(N)operator(.)ident(times) operator({) ident(s) operator(=)operator(~) regexp<delimiter(/)char(\\A)char(\\w)content(+)char(\\z)delimiter(/)> operator(})
-    reserved(end)
+    keyword(end)
 
-    ident(bm)operator(.)ident(report) string<delimiter(')content(fits?)delimiter(')> reserved(do)
+    ident(bm)operator(.)ident(report) string<delimiter(')content(fits?)delimiter(')> keyword(do)
       constant(N)operator(.)ident(times) operator({) ident(s)operator(.)ident(fits?) regexp<delimiter(/)char(\\w)content(+)delimiter(/)> operator(})
-    reserved(end)
+    keyword(end)
 
-    ident(bm)operator(.)ident(report) string<delimiter(')content(f)delimiter(')> reserved(do)
+    ident(bm)operator(.)ident(report) string<delimiter(')content(f)delimiter(')> keyword(do)
       constant(N)operator(.)ident(times) operator({) ident(s) operator(=)operator(~) regexp<delimiter(/)char(\\w)content(+)delimiter(/)>operator(.)ident(f) operator(})
-    reserved(end)
+    keyword(end)
    
     ident(re) operator(=) regexp<delimiter(/)char(\\w)content(+)delimiter(/)>operator(.)ident(f)
 
-    ident(bm)operator(.)ident(report) string<delimiter(')content(preparsed)delimiter(')> reserved(do)
+    ident(bm)operator(.)ident(report) string<delimiter(')content(preparsed)delimiter(')> keyword(do)
       constant(N)operator(.)ident(times) operator({) ident(s) operator(=)operator(~) ident(re) operator(})
-    reserved(end)
-  reserved(end)
+    keyword(end)
+  keyword(end)
   ident(puts)
-reserved(end)
+keyword(end)
 
 ident(a)operator(.)ident(fits?) operator(/) ident(bla) regexp<delimiter(/)content(x
 

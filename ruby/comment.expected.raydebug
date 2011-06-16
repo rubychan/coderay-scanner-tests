@@ -3,7 +3,7 @@ comment(=begin test
 
 ident(bla)
 
- operator(=)reserved(begin)
+ operator(=)keyword(begin)
 
  ident(__END__)
 
