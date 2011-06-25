@@ -390,7 +390,7 @@ module CodeRay
           else
             ticket_info = 'ticket ?'
           end
-          print ticket_info.rjust('complete'.size).red
+          print ticket_info.rjust('complete'.size).yellow
           print ', '.green
         else
           print 'complete, '.green_or_red(ok)
