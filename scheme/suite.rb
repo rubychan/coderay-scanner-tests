@@ -1,2 +1,2 @@
-class Scheme < CodeRay::TestCase
+class Scheme #< CodeRay::TestCase
 end
