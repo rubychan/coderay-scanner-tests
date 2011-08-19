@@ -9,6 +9,7 @@ require 'coderay'
 
 $:.unshift $mydir + '..' + 'lib'
 
+require 'rubygems' unless defined? Gem
 require 'term/ansicolor' unless ENV['nocolor']
 
 require 'test/unit'
@@ -142,7 +143,7 @@ module CodeRay
     
     def test_ALL
       scanner = CodeRay::Scanners[self.class.lang].new
-      raise "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[nil]
+      raise "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[:text]
       
       puts
       puts '    >> Testing '.magenta + scanner.class.title.cyan + ' scanner <<'.magenta
@@ -250,7 +251,7 @@ module CodeRay
     end
     
     def random_test scanner, max
-      if defined?(JRUBY_VERSION) && JRUBY_VERSION == '1.4.0' && %w[ruby nitro_xhtml rhtml].include?(scanner.lang)
+      if defined?(JRUBY_VERSION) && JRUBY_VERSION == '1.4.0' && %w[ruby erb].include?(scanner.lang)
         puts 'Random test skipped due to a bug in JRuby. See http://redmine.rubychan.de/issues/136.'.red
         @@warning_about_jruby_bug = true
         return
@@ -318,20 +319,11 @@ module CodeRay
     end
     
     def complete_test scanner, code, name
-      print 'benchmarking...'.magenta
-      @time_for_direct_streaming = Benchmark.realtime do
-        Tokenizer.encode code, scanner.lang
-      end
-      print "\b" * 'benchmarking...'.size
-      print ' ' * 'benchmarking...'.size
-      print "\b" * 'benchmarking...'.size
-      
-      print 'complete...'.blue
-      expected_filename = name + '.expected.' + Tokenizer.file_extension
-      
-      scanner.string = code
       
       tokens = result = nil
+      scanner.string = code
+      
+      print 'complete...'.blue
       print 'scanning...'.yellow
       @time_for_scanning = Benchmark.realtime do
         tokens = scanner.tokens
@@ -339,10 +331,19 @@ module CodeRay
       print "\b" * 'scanning...'.size
       print 'encoding...'.yellow
       @time_for_encoding = Benchmark.realtime do
-        result = Tokenizer.encode_tokens tokens
+        Tokenizer.encode_tokens tokens
       end
       print "\b" * 'encoding...'.size
       
+      print 'benchmarking...'.magenta
+      @time_for_direct_streaming = Benchmark.realtime do
+        result = Tokenizer.encode code, scanner.lang
+      end
+      print "\b" * 'benchmarking...'.size
+      print ' ' * 'benchmarking...'.size
+      print "\b" * 'benchmarking...'.size
+      
+      expected_filename = name + '.expected.' + Tokenizer.file_extension
       if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && [name, '*'].include?(ENV['new']))
         expected = scanner.class.normalize File.read(expected_filename)
         ok = expected == result
