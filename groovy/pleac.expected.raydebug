@@ -985,7 +985,7 @@ comment(// any field of a calendar is incrementable via add(\) and roll(\) metho
 ident(cal) operator(=) predefined_type(Calendar)operator(.)ident(instance)
 ident(df) operator(=) keyword(new) predefined_type(SimpleDateFormat)operator(()operator(\))
 ident(printCal) operator(=) operator({)ident(cal) operator(->) ident(df)operator(.)ident(format)operator(()ident(cal)operator(.)ident(time)operator(\))operator(})
-ident(cal)operator(.)ident(set)operator(()integer(2000)operator(,) integer(0)operator(,) integer(1)operator(,) oct(00)operator(,) oct(01)operator(,) integer(0)operator(\))
+ident(cal)operator(.)ident(set)operator(()integer(2000)operator(,) integer(0)operator(,) integer(1)operator(,) octal(00)operator(,) octal(01)operator(,) integer(0)operator(\))
 keyword(assert) ident(printCal)operator(()ident(cal)operator(\)) operator(==) string<delimiter(')content(1/01/00 00:01)delimiter(')>
 comment(// roll minute back by 2 but don't adjust other fields)
 ident(cal)operator(.)ident(roll)operator(()predefined_type(Calendar)operator(.)ident(MINUTE)operator(,) operator(-)integer(2)operator(\))
@@ -6199,7 +6199,7 @@ type(class) class(PetLover4) operator({)
             ident(append)operator(()string<delimiter(')content(Age)delimiter(')>operator(,) ident(age)operator(\))
     operator(})
 operator(})
-ident(println) keyword(new) ident(PetLover4)operator(()key(name)operator(:)string<delimiter(')content(Jason)delimiter(')>operator(,) key(dob)operator(:)keyword(new) predefined_type(Date)operator(()integer(83)operator(,)oct(03)operator(,)oct(04)operator(\))operator(,) key(pets)operator(:)operator([)key(dog)operator(:)string<delimiter(')content(Rover)delimiter(')>operator(,)key(cat)operator(:)string<delimiter(')content(Garfield)delimiter(')>operator(])operator(\))
+ident(println) keyword(new) ident(PetLover4)operator(()key(name)operator(:)string<delimiter(')content(Jason)delimiter(')>operator(,) key(dob)operator(:)keyword(new) predefined_type(Date)operator(()integer(83)operator(,)octal(03)operator(,)octal(04)operator(\))operator(,) key(pets)operator(:)operator([)key(dog)operator(:)string<delimiter(')content(Rover)delimiter(')>operator(,)key(cat)operator(:)string<delimiter(')content(Garfield)delimiter(')>operator(])operator(\))
 comment(// => PetLover4@fdfc58[Pet Lover's name=Jason,Pets={cat=Garfield, dog=Rover},Age=23])
 comment(//----------------------------------------------------------------------------------)
 

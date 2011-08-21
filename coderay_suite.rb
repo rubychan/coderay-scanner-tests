@@ -382,37 +382,42 @@ module CodeRay
           end
         end
         
-        if ENV['assert']
-          assert(ok, "Scan error: unexpected output".red)
-        elsif not ok
-          @hints << '%s: %s (%s)' % [
-            'Scanner returned unexpected result'.red,
-            "open #{File.join 'test', 'scanners', self.class.lang, diff}.html".cyan,
-            debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red
-          ]
-        end
-        
         print "\b" * 'complete...'.size
-        known_issue = expected_filename.sub(/\.expected\..*/, '.known-issue.yaml')
-        if !ok && File.exist?(known_issue)
-          known_issue = YAML.load_file(known_issue)
-          ticket_url = known_issue['ticket_url']
-          @known_issue_description = known_issue['description']
-          if ticket_url && ticket_url[/(\d+)\/?$/]
-            @known_issue_ticket_url = ticket_url
-            ticket_info = 'see #' + $1
+        if !ok
+          known_issue_file = expected_filename.sub(/\.expected\..*/, '.known-issue.yaml')
+          if File.exist?(known_issue_file)
+            known_issue = YAML.load_file(known_issue_file)
+            ticket_url = known_issue['ticket_url']
+            @known_issue_description = known_issue['description']
+            if ticket_url && ticket_url[/(\d+)\/?$/]
+              @known_issue_ticket_url = ticket_url
+              ticket_info = 'see #' + $1
+            else
+              ticket_info = 'ticket ?'
+            end
+            print ticket_info.rjust('complete'.size).yellow
+            print ', '.green
           else
-            ticket_info = 'ticket ?'
+            print 'complete, '.green_or_red(ok)
           end
-          print ticket_info.rjust('complete'.size).yellow
-          print ', '.green
         else
           print 'complete, '.green_or_red(ok)
+          known_issue = nil
         end
       else
         File.open(expected_filename, 'wb') { |f| f.write result }
         print "\b" * 'complete...'.size, "new test".blue, ", ".green
         ok = true
+      end
+      
+      if ENV['assert']
+        assert(ok, "Scan error: unexpected output".red)
+      elsif !ok && !known_issue
+        @hints << '%s: %s (%s)' % [
+          'Scanner returned unexpected result'.red,
+          "open #{File.join 'test', 'scanners', self.class.lang, diff}.html".cyan,
+          debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red
+        ]
       end
       
       return tokens, ok, changed_lines

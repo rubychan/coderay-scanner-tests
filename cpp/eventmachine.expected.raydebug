@@ -4026,7 +4026,7 @@ operator({)
 	keyword(if) operator((!)ident(filename) operator(||) operator(!*)ident(filename)operator(\))
 		keyword(return) predefined_constant(NULL)operator(;)
 
-  predefined_type(int) ident(fd) operator(=) ident(open) operator(()ident(filename)operator(,) ident(O_CREAT)operator(|)ident(O_TRUNC)operator(|)ident(O_WRONLY)operator(|)ident(O_NONBLOCK)operator(,) oct(0644)operator(\);)
+  predefined_type(int) ident(fd) operator(=) ident(open) operator(()ident(filename)operator(,) ident(O_CREAT)operator(|)ident(O_TRUNC)operator(|)ident(O_WRONLY)operator(|)ident(O_NONBLOCK)operator(,) octal(0644)operator(\);)
   
 	ident(FileStreamDescriptor) operator(*)ident(fsd) operator(=) keyword(new) ident(FileStreamDescriptor) operator(()ident(fd)operator(,) local_variable(this)operator(\);)
   keyword(if) operator((!)ident(fsd)operator(\))
