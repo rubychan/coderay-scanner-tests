@@ -145,6 +145,8 @@ module CodeRay
       scanner = CodeRay::Scanners[self.class.lang].new
       raise "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[:text]
       
+      @hints = []
+      
       puts
       puts '    >> Testing '.magenta + scanner.class.title.cyan + ' scanner <<'.magenta
       puts
@@ -156,6 +158,10 @@ module CodeRay
       end
       
       puts 'Finished in '.green + '%0.2fs'.white % time_for_lang + '.'.green
+      
+      unless @hints.empty?
+        flunk @hints.map { |hint| '  ' + hint }.join("\n") + "\n"
+      end
     end
     
     def examples_test scanner, max
@@ -319,7 +325,6 @@ module CodeRay
     end
     
     def complete_test scanner, code, name
-      
       tokens = result = nil
       scanner.string = code
       
@@ -377,7 +382,15 @@ module CodeRay
           end
         end
         
-        assert(ok, "Scan error: unexpected output".red) if ENV['assert']
+        if ENV['assert']
+          assert(ok, "Scan error: unexpected output".red)
+        elsif not ok
+          @hints << '%s: %s (%s)' % [
+            'Scanner returned unexpected result'.red,
+            "open #{File.join 'test', 'scanners', self.class.lang, diff}.html".cyan,
+            debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red
+          ]
+        end
         
         print "\b" * 'complete...'.size
         known_issue = expected_filename.sub(/\.expected\..*/, '.known-issue.yaml')
