@@ -74,7 +74,7 @@ insert[insert(+)    constant(ClassOfKind)operator([)symbol(:escape)operator(]) o
 insert[insert(+)    comment(#ClassOfKind.default = ClassOfKind[:error] or raise 'no class found for :error!')]
 insert[insert(+)  keyword(end)]
 insert[insert(+)keyword(end)]
-change[change(\\ )plain(No newline at end of file)]
+comment(\\ No newline at end of file)
 
 head[head(Property changes on: )plain(lib/coderay/token_classes.rb)]
 head[head(___________________________________________________________________)filename()]
@@ -738,7 +738,7 @@ insert[insert(+)keyword(def) eyecatcher<predefined_constant(self)operator(.)>met
  keyword(end)
 insert[insert(+)]
 insert[insert(+)keyword(end)]
-change[change(\\ )plain(No newline at end of file)]
+comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/helpers/file_type.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/helpers/file_type.rb)plain(	(revision 0\))]
@@ -1096,7 +1096,7 @@ change[change(@@)plain( -104,3 +119,5 )change(@@)]
  keyword(end)
 insert[insert(+)]
 insert[insert(+)keyword(end)]
-change[change(\\ )plain(No newline at end of file)]
+comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/styles/cycnus.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/styles/cycnus.rb)plain(	(revision 200\))]
@@ -1473,7 +1473,7 @@ insert[insert(+)  ]
 insert[insert(+)keyword(end)]
 insert[insert(+)]
 insert[insert(+)constant(CodeRay)operator(::)constant(ForRedCloth)operator(.)ident(install)]
-change[change(\\ )plain(No newline at end of file)]
+comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/scanners/ruby/patterns.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/scanners/ruby/patterns.rb)plain(	(revision 200\))]
@@ -1937,7 +1937,7 @@ insert[insert(+)      keyword(end) comment(#scan_tokens)]
 insert[insert(+)    keyword(end) comment(#class)]
 insert[insert(+)  keyword(end) comment(#module scanners)]
 insert[insert(+)keyword(end) comment(#module coderay)]
-change[change(\\ )plain(No newline at end of file)]
+comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/scanners/delphi.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/scanners/delphi.rb)plain(	(revision 200\))]
