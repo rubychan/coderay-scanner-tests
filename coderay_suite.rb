@@ -222,7 +222,7 @@ module CodeRay
               puts 'See '.yellow + @known_issue_ticket_url.white + '.'.yellow
             else
               puts 'No ticket yet. Visit '.yellow +
-                'http://redmine.rubychan.de/projects/coderay/issues/new'.white + '.'.yellow
+                'http://odd-eyed-code.org/projects/coderay/issues/new'.white + '.'.yellow
             end
           end
         end
@@ -258,7 +258,7 @@ module CodeRay
     
     def random_test scanner, max
       if defined?(JRUBY_VERSION) && JRUBY_VERSION == '1.4.0' && %w[ruby erb].include?(scanner.lang)
-        puts 'Random test skipped due to a bug in JRuby. See http://redmine.rubychan.de/issues/136.'.red
+        puts 'Random test skipped due to a bug in JRuby. See http://odd-eyed-code.org/issues/136.'.red
         @@warning_about_jruby_bug = true
         return
       end

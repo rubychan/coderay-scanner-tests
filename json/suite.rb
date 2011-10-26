@@ -1,2 +1,3 @@
-class JSON < CodeRay::TestCase
+class JSON_ < CodeRay::TestCase
+  @lang = 'json'
 end
