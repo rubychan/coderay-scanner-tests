@@ -247,14 +247,14 @@ change[change(@@)plain( -51,12 +51,12 )change(@@)]
 delete[delete(-)          ident(line) operator(=) ident(start)]
 insert[insert(+)          ident(line)eyecatcher<ident(_number)> operator(=) ident(start)]
            ident(gsub!)operator(()regexp<delimiter(/)content(^)delimiter(/)>operator(\)) keyword(do)
-delete[delete(-)            ident(line_number) operator(=) ident(bolding)operator(.)ident(call) ident(line)]
-delete[delete(-)            ident(indent) operator(=) string<delimiter(')content( )delimiter(')> operator(*) operator(()ident(max_width) operator(-) ident(line)operator(.)ident(to_s)operator(.)ident(size)operator(\))]
-delete[delete(-)            ident(res) operator(=) string<delimiter(")content(<span class=)char(\\")content(no)char(\\")content(>)inline<inline_delimiter(#{)ident(indent)inline_delimiter(})>inline<inline_delimiter(#{)ident(line_number)inline_delimiter(})>content(</span> )delimiter(")>]
+delete[delete(-)            ident(line_number)eyecatcher< operator(=) ident(bolding)operator(.)ident(call) ident(line)>]
+delete[delete(-)            ident(indent) operator(=) string<delimiter(')content( )delimiter(')> operator(*) operator(()ident(max_width) operator(-) ident(line)eyecatcher<operator(.)ident(to_s)operator(.)ident(size)>operator(\))]
+delete[delete(-)            ident(res) operator(=) string<delimiter(")content(<span class=)char(\\")content(no)char(\\")content(>)inline<inline_delimiter(#{)ident(indent)inline_delimiter(})>inline<inline_delimiter(#{)ident(line_number)>>string<inline<inline_delimiter(})>content(</span> )delimiter(")>]
 delete[delete(-)            ident(line) operator(+=) integer(1)]
-insert[insert(+)            ident(line_number_text) operator(=) ident(bolding)operator(.)ident(call) ident(line_number)]
-insert[insert(+)            ident(indent) operator(=) string<delimiter(')content( )delimiter(')> operator(*) operator(()ident(max_width) operator(-) ident(line_number)operator(.)ident(to_s)operator(.)ident(size)operator(\))  comment(# TODO: Optimize (10^x\))]
-insert[insert(+)            ident(res) operator(=) string<delimiter(")content(<span class=)char(\\")content(no)char(\\")content(>)inline<inline_delimiter(#{)ident(indent)inline_delimiter(})>inline<inline_delimiter(#{)ident(line_number_text)inline_delimiter(})>content(</span> )delimiter(")>]
-insert[insert(+)            ident(line_number) operator(+=) integer(1)]
+insert[insert(+)            ident(line_number)eyecatcher<ident(_text) operator(=) ident(bolding)operator(.)ident(call) ident(line_number)>]
+insert[insert(+)            ident(indent) operator(=) string<delimiter(')content( )delimiter(')> operator(*) operator(()ident(max_width) operator(-) ident(line)eyecatcher<ident(_number)operator(.)ident(to_s)operator(.)ident(size)operator(\))  comment(# TODO: Optimize (10^x)>comment(\))]
+insert[insert(+)            ident(res) operator(=) string<delimiter(")content(<span class=)char(\\")content(no)char(\\")content(>)inline<inline_delimiter(#{)ident(indent)inline_delimiter(})>inline<inline_delimiter(#{)ident(line_number)>>eyecatcher<string<inline<ident(_text)>>>string<inline<inline_delimiter(})>content(</span> )delimiter(")>]
+insert[insert(+)            ident(line)eyecatcher<ident(_number)> operator(+=) integer(1)]
              ident(res)
            keyword(end)
  
@@ -266,12 +266,12 @@ change[change(@@)plain( -33,9 +33,9 )change(@@)]
  
      constant(FILE_EXTENSION) operator(=) string<delimiter(')content(tok)delimiter(')>
  
-delete[delete(-)    ident(protected)]
-delete[delete(-)    keyword(def) method(token) operator(*)ident(args)]
-delete[delete(-)      instance_variable(@out) operator(<<) constant(CodeRay)operator(::)constant(Tokens)operator(.)ident(write_token)operator(()operator(*)ident(args)operator(\))]
+delete[delete(-)  eyecatcher<  >ident(protected)]
+delete[delete(-)    keyword(def) method(token) eyecatcher<operator(*)ident(args)>]
+delete[delete(-)      instance_variable(@out) operator(<<) constant(CodeRay)operator(::)constant(Tokens)operator(.)ident(write_token)operator(()eyecatcher<operator(*)ident(args)>operator(\))]
 insert[insert(+)  ident(protected)]
-insert[insert(+)    keyword(def) method(token) ident(text)operator(,) ident(kind)]
-insert[insert(+)      instance_variable(@out) operator(<<) constant(CodeRay)operator(::)constant(Tokens)operator(.)ident(write_token)operator(()ident(text)operator(,) ident(kind)operator(\))]
+insert[insert(+)    keyword(def) method(token) eyecatcher<ident(text)operator(,) ident(kind)>]
+insert[insert(+)      instance_variable(@out) operator(<<) constant(CodeRay)operator(::)constant(Tokens)operator(.)ident(write_token)operator(()eyecatcher<ident(text)operator(,) ident(kind)>operator(\))]
      keyword(end)
  
    keyword(end)
@@ -1275,12 +1275,12 @@ insert[insert(+)      comment(# To allow calls like Duo[:ruby, :html].highlight.
        keyword(alias) method([]) method(new)
      keyword(end)
  
-delete[delete(-)    keyword(def) method(encode) ident(code)]
-delete[delete(-)      instance_variable(@scanner)operator(.)ident(string) operator(=) ident(code)]
-delete[delete(-)      instance_variable(@encoder)operator(.)ident(encode_tokens)operator(()ident(scanner)operator(.)ident(tokenize)operator(\))]
-insert[insert(+)    comment(# The scanner of the duo. Only created once.)]
-insert[insert(+)    keyword(def) method(scanner)]
-insert[insert(+)      instance_variable(@scanner) operator(||=) constant(CodeRay)operator(.)ident(scanner) instance_variable(@lang)operator(,) constant(CodeRay)operator(.)ident(get_scanner_options)operator(()instance_variable(@options)operator(\))]
+delete[delete(-)    eyecatcher<keyword(def) method(encode) ident(code)>]
+delete[delete(-)    eyecatcher<  instance_variable(@scanner)operator(.)ident(string) operator(=) ident(code)>]
+delete[delete(-)      instance_variable(@)eyecatcher<instance_variable(encoder)operator(.)ident(encode_tokens)operator(()ident(scanner)operator(.)ident(tokenize)>operator(\))]
+insert[insert(+)    eyecatcher<comment(# The scanner of the duo. Only created once.)>]
+insert[insert(+)    eyecatcher<keyword(def) method(scanner)>]
+insert[insert(+)      instance_variable(@)eyecatcher<instance_variable(scanner) operator(||=) constant(CodeRay)operator(.)ident(scanner) instance_variable(@lang)operator(,) constant(CodeRay)operator(.)ident(get_scanner_options)operator(()instance_variable(@options)>operator(\))]
      keyword(end)
 insert[insert(+)    ]
 insert[insert(+)    comment(# The encoder of the duo. Only created once.)]
@@ -1504,10 +1504,10 @@ change[change(@@)plain( -41,19 +36,20 )change(@@)]
      constant(METHOD_NAME) operator(=) regexp<delimiter(/)content( )inline<inline_delimiter(#{)constant(IDENT)inline_delimiter(})>content( [?!]? )delimiter(/)modifier(ox)>
      constant(METHOD_NAME_OPERATOR) operator(=) regexp<delimiter(/)>
 regexp<content(       )char(\\*)char(\\*)content(?           # multiplication and power)>
-delete[delete(-)regexp<content(      | [-+]@?        # plus, minus)>]
-delete[delete(-)regexp<content(      | [)char(\\/)content(%&|^`~]    # division, modulo or format strings, &and, |or, ^xor, `system`, tilde)>]
-insert[insert(+)regexp<content(      | [-+~]@?       # plus, minus, tilde with and without @)>]
-insert[insert(+)regexp<content(      | [)char(\\/)content(%&|^`]     # division, modulo or format strings, &and, |or, ^xor, `system`)>]
+delete[delete(-)regexp<content(      | [-+)>eyecatcher<regexp<content(]@?        # plus, minus)>>]
+delete[delete(-)regexp<content(      | [)char(\\/)content(%&|^`)>eyecatcher<regexp<content(~]    # division, modulo or format strings, &and, |or, ^xor, `system`, tilde)>>]
+insert[insert(+)regexp<content(      | [-+)>eyecatcher<regexp<content(~]@?       # plus, minus, tilde with and without @)>>]
+insert[insert(+)regexp<content(      | [)char(\\/)content(%&|^`)>eyecatcher<regexp<content(]     # division, modulo or format strings, &and, |or, ^xor, `system`)>>]
 regexp<content(       | )char(\\[)char(\\])content(=?        # array getter and setter)>
 regexp<content(       | << | >>       # append or shift left, shift right)>
 regexp<content(       | <=?>? | >=?   # comparison, rocket operator)>
@@ -1588,10 +1588,10 @@ change[change(@@)plain( -90,15 +91,15 )change(@@)]
              keyword(end)
  
            keyword(when) string<delimiter(')content(#)delimiter(')>
-delete[delete(-)            keyword(case) ident(peek)operator(()integer(1)operator(\))operator([)integer(0)operator(])]
-delete[delete(-)            keyword(when) integer(?{)]
+delete[delete(-)            keyword(case) ident(peek)operator(()integer(1)operator(\))eyecatcher<operator([)integer(0)operator(])>]
+delete[delete(-)            keyword(when) eyecatcher<integer(?{)>]
 insert[insert(+)            keyword(case) ident(peek)operator(()integer(1)operator(\))]
-insert[insert(+)            keyword(when) string<delimiter(')content({)delimiter(')>]
+insert[insert(+)            keyword(when) string<>eyecatcher<string<delimiter(')content({)delimiter(')>>]
                ident(inline_block_stack) operator(<<) operator([)ident(state)operator(,) ident(depth)operator(,) ident(heredocs)operator(])
                ident(value_expected) operator(=) predefined_constant(true)
                ident(state) operator(=) symbol(:initial)
@@ -2145,10 +2145,10 @@ change[change(@@)plain( -24,8 +24,8 )change(@@)]
  comment(#)
  comment(# == Usage)
  comment(#)
-delete[delete(-)comment(# Remember you need RubyGems to use CodeRay. Run Ruby with -rubygems option)]
-delete[delete(-)comment(# if required.)]
-insert[insert(+)comment(# Remember you need RubyGems to use CodeRay, unless you have it in your load path. Run Ruby with)]
-insert[insert(+)comment(# -rubygems option if required.)]
+delete[delete(-)comment(# Remember you need RubyGems to use CodeRay)eyecatcher<comment(. Run Ruby with -rubygems option)>]
+delete[delete(-)comment(# )comment(if required.)]
+insert[insert(+)comment(# Remember you need RubyGems to use CodeRay)eyecatcher<comment(, unless you have it in your load path. Run Ruby with)>]
+insert[insert(+)comment(# )eyecatcher<comment(-rubygems option )>comment(if required.)]
  comment(#)
  comment(# === Highlight Ruby code in a string as html)
  comment(# )

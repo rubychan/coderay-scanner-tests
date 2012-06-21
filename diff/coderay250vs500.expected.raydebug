@@ -93,20 +93,20 @@ insert[insert(+)      comment(# Called with +)eyecatcher<comment(conten)>comment
        comment(# For simple scanners, it's enougth to implement this method.)
        comment(#)
        comment(# By default, it calls text_token or block_token, depending on)
-delete[delete(-)      comment(# whether +text+ is a String.)]
-delete[delete(-)      keyword(def) method(token) ident(text)operator(,) ident(kind)]
-delete[delete(-)        ident(out) operator(=)]
-delete[delete(-)          keyword(if) ident(text)operator(.)ident(is_a?) operator(::)constant(String)  comment(# Ruby 1.9: :open.is_a? String)]
-delete[delete(-)            ident(text_token) ident(text)operator(,) ident(kind)]
-delete[delete(-)          keyword(elsif) ident(text)operator(.)ident(is_a?) operator(::)constant(Symbol)]
-delete[delete(-)            ident(block_token) ident(text)operator(,) ident(kind)]
-insert[insert(+)      comment(# whether +content+ is a String.)]
-insert[insert(+)      keyword(def) method(token) ident(content)operator(,) ident(kind)]
-insert[insert(+)        ident(encoded_token) operator(=)]
-insert[insert(+)          keyword(if) ident(content)operator(.)ident(is_a?) operator(::)constant(String)]
-insert[insert(+)            ident(text_token) ident(content)operator(,) ident(kind)]
-insert[insert(+)          keyword(elsif) ident(content)operator(.)ident(is_a?) operator(::)constant(Symbol)]
-insert[insert(+)            ident(block_token) ident(content)operator(,) ident(kind)]
+delete[delete(-)      comment(# whether +)eyecatcher<comment(tex)>comment(t+ is a String.)]
+delete[delete(-)      keyword(def) method(token) eyecatcher<ident(tex)>ident(t)operator(,) ident(kind)]
+delete[delete(-)        eyecatcher<ident(out)> operator(=)]
+delete[delete(-)          keyword(if) eyecatcher<ident(text)operator(.)ident(is_a?) operator(::)constant(String)  comment(# Ruby 1.9: :open.is_a? )>comment(String)]
+delete[delete(-)            ident(text_token) eyecatcher<ident(tex)>ident(t)operator(,) ident(kind)]
+delete[delete(-)          keyword(elsif) eyecatcher<ident(tex)>ident(t)operator(.)ident(is_a?) operator(::)constant(Symbol)]
+delete[delete(-)            ident(block_token) eyecatcher<ident(tex)>ident(t)operator(,) ident(kind)]
+insert[insert(+)      comment(# whether +)eyecatcher<comment(conten)>comment(t+ is a String.)]
+insert[insert(+)      keyword(def) method(token) eyecatcher<ident(conten)>ident(t)operator(,) ident(kind)]
+insert[insert(+)        eyecatcher<ident(encoded_token)> operator(=)]
+insert[insert(+)          keyword(if) eyecatcher<ident(content)operator(.)ident(is_a?) operator(::)>constant(String)]
+insert[insert(+)            ident(text_token) eyecatcher<ident(conten)>ident(t)operator(,) ident(kind)]
+insert[insert(+)          keyword(elsif) eyecatcher<ident(conten)>ident(t)operator(.)ident(is_a?) operator(::)constant(Symbol)]
+insert[insert(+)            ident(block_token) eyecatcher<ident(conten)>ident(t)operator(,) ident(kind)]
            keyword(else)
 delete[delete(-)            ident(raise) string<delimiter(')content(Unknown token )>eyecatcher<string<content(text type: %p)delimiter(')> operator(%) ident(text)>]
 insert[insert(+)            ident(raise) string<delimiter(')content(Unknown token )>eyecatcher<string<content(content type: %p)delimiter(')> operator(%) operator([)ident(content)operator(])>]
@@ -262,10 +262,10 @@ insert[insert(+)      eyecatcher<keyword(super)>]
        instance_variable(@sep) operator(=) ident(options)operator([)symbol(:separator)operator(])
      keyword(end)
  
-delete[delete(-)    keyword(def) method(token) ident(text)operator(,) ident(kind)]
-delete[delete(-)      instance_variable(@out) operator(<<) ident(text) operator(+) instance_variable(@sep) keyword(if) ident(text)operator(.)ident(is_a?) operator(::)constant(String)]
-insert[insert(+)    keyword(def) method(text_token) ident(text)operator(,) ident(kind)]
-insert[insert(+)      ident(text) operator(+) instance_variable(@sep)]
+delete[delete(-)    keyword(def) method(t)method(oken) ident(text)operator(,) ident(kind)]
+delete[delete(-)      eyecatcher<instance_variable(@out) operator(<<) ident(text) operator(+) instance_variable(@sep) keyword(if) ident(text)operator(.)ident(is_a?) operator(::)constant(String)>]
+insert[insert(+)    keyword(def) method(t)eyecatcher<method(ext_t)>method(oken) ident(text)operator(,) ident(kind)]
+insert[insert(+)      eyecatcher<ident(text) operator(+) instance_variable(@sep)>]
      keyword(end)
  
      keyword(def) method(finish) ident(options)
@@ -1498,9 +1498,9 @@ insert[insert(+)    comment(# Styles are used by Encoders::HTML to colorize toke
 delete[delete(-)]
 delete[delete(-)      constant(DEFAULT_OPTIONS) operator(=) operator({) operator(})]
 delete[delete(-)]
-insert[insert(+)      ]
-insert[insert(+)      constant(DEFAULT_OPTIONS) operator(=) operator({) operator(})  comment(# :nodoc:)]
-insert[insert(+)      ]
+insert[insert(+)eyecatcher<      >]
+insert[insert(+)      constant(DEFAULT_OPTIONS) operator(=) operator({) operator(})eyecatcher<  comment(# :nodoc:)>]
+insert[insert(+)eyecatcher<      >]
      keyword(end)
 delete[delete(-)]
 insert[insert(+)eyecatcher<    >]
@@ -1617,9 +1617,9 @@ insert[insert(+)operator(.)ident(s) operator(.)ident(k) operator({) operator(})]
 insert[insert(+)operator(.)ident(s) operator(.)ident(ch) operator({) ident(color)operator(:) comment(#b0b; })]
 insert[insert(+)operator(.)ident(s) operator(.)ident(dl) operator({) ident(color)operator(:) comment(#710; })]
  
-delete[delete(-)operator(.)ident(sh) operator({) ident(background)operator(-)ident(color)operator(:)comment(#f0fff0 })]
-delete[delete(-)operator(.)ident(sh) operator(.)ident(k) operator({) ident(color)operator(:)comment(#2B2 })]
-insert[insert(+)operator(.)ident(sh) operator({) ident(background)operator(-)ident(color)operator(:)comment(#f0fff0; color:#2B2 })]
+delete[delete(-)operator(.)ident(sh) operator({) ident(background)operator(-)ident(color)operator(:)comment(#f0fff0)comment( })]
+delete[delete(-)operator(.)ident(sh) operator(.)ident(k) operator({) eyecatcher<ident(color)operator(:)comment(#2B2 )>comment(})]
+insert[insert(+)operator(.)ident(sh) operator({) ident(background)operator(-)ident(color)operator(:)comment(#f0fff0)eyecatcher<comment(; color:#2B2)>comment( })]
 insert[insert(+)operator(.)ident(sh) operator(.)ident(k) operator({) operator(})]
  operator(.)ident(sh) operator(.)ident(dl) operator({) ident(color)operator(:)comment(#161 })
  
@@ -2147,10 +2147,10 @@ change[change(@@)plain( -231,10 +265,10 )change(@@)]
 delete[delete(-)          ident(line)operator(,) ident(pos)operator(,)]
 insert[insert(+)          ident(line)operator(,) eyecatcher<ident(column)operator(,) >ident(pos)operator(,)]
            ident(matched)operator(,) ident(state)operator(,) ident(bol?)operator(,) ident(eos?)operator(,)
-delete[delete(-)          ident(string)operator([)ident(pos)operator(-)ident(ambit)operator(,)ident(ambit)operator(])operator(,)]
+delete[delete(-)          ident(string)operator([)ident(pos)eyecatcher<operator(-)ident(ambit)operator(,)>ident(ambit)operator(])operator(,)]
 delete[delete(-)          ident(string)operator([)ident(pos)operator(,)ident(ambit)operator(])operator(,)]
-insert[insert(+)          ident(string)operator([)ident(pos) operator(-) ident(ambit)operator(,) ident(ambit)operator(])operator(,)]
-insert[insert(+)          ident(string)operator([)ident(pos)operator(,) ident(ambit)operator(])operator(,)]
+insert[insert(+)          ident(string)operator([)ident(pos)eyecatcher< operator(-) ident(ambit)operator(,) >ident(ambit)operator(])operator(,)]
+insert[insert(+)          ident(string)operator([)ident(pos)operator(,)eyecatcher< >ident(ambit)operator(])operator(,)]
          operator(])
        keyword(end)
  
@@ -2240,10 +2240,10 @@ insert[insert(+)    constant(IDENT) operator(=) string<>eyecatcher<string<delimi
      constant(METHOD_NAME) operator(=) regexp<delimiter(/)content( )inline<inline_delimiter(#{)constant(IDENT)inline_delimiter(})>content( [?!]? )delimiter(/)modifier(ox)>
      constant(METHOD_NAME_OPERATOR) operator(=) regexp<delimiter(/)>
 regexp<content(       )char(\\*)char(\\*)content(?           # multiplication and power)>
-delete[delete(-)regexp<content(      | [-+~]@?       # plus, minus, tilde with and without @)>]
-delete[delete(-)regexp<content(      | [)char(\\/)content(%&|^`]     # division, modulo or format strings, &and, |or, ^xor, `system`)>]
-insert[insert(+)regexp<content(      | [-+~]@?       # plus, minus, tilde with and without at sign)>]
-insert[insert(+)regexp<content(      | [)char(\\/)content(%&|^`]     # division, modulo or format strings, and, or, xor, system)>]
+delete[delete(-)regexp<content(      | [-+~]@?       # plus, minus, tilde with and without )>eyecatcher<regexp<content(@)>>]
+delete[delete(-)regexp<content(      | [)char(\\/)content(%&|^`]     # division, modulo or format strings, )>eyecatcher<regexp<content(&and, |or, ^xor, `system`)>>]
+insert[insert(+)regexp<content(      | [-+~]@?       # plus, minus, tilde with and without )>eyecatcher<regexp<content(at sign)>>]
+insert[insert(+)regexp<content(      | [)char(\\/)content(%&|^`]     # division, modulo or format strings, )>eyecatcher<regexp<content(and, or, xor, system)>>]
 regexp<content(       | )char(\\[)char(\\])content(=?        # array getter and setter)>
 regexp<content(       | << | >>       # append or shift left, shift right)>
 regexp<content(       | <=?>? | >=?   # comparison, rocket operator)>
@@ -2344,8 +2344,8 @@ insert[insert(+)          ident(delim_pattern) operator(=) ident(delim_pattern)o
          keyword(end)
 delete[delete(-)]
 delete[delete(-)]
-insert[insert(+)        ident(delim_pattern) operator(<<) string<delimiter(')char(\\\\)char(\\\\)delimiter(')> keyword(unless) ident(delim) operator(==) string<delimiter(')char(\\\\)delimiter(')>]
-insert[insert(+)        ]
+insert[insert(+)eyecatcher<        ident(delim_pattern) operator(<<) string<delimiter(')char(\\\\)char(\\\\)delimiter(')> keyword(unless) ident(delim) operator(==) string<delimiter(')char(\\\\)delimiter(')>>]
+insert[insert(+)eyecatcher<        >]
          ident(special_escapes) operator(=)
            keyword(case) ident(interpreted)
            keyword(when) symbol(:regexp_symbols)
@@ -3474,10 +3474,10 @@ insert[insert(+)    operator(])  comment(# :nodoc:)]
 delete[delete(-)      string<delimiter(')content(int)delimiter(')>operator(,) string<delimiter(')content(long)delimiter(')>operator(,) string<delimiter(')content(short)delimiter(')>operator(,) string<delimiter(')content(char)delimiter(')>operator(,)eyecatcher< string<delimiter(')content(void)delimiter(')>operator(,)>]
 insert[insert(+)      string<delimiter(')content(int)delimiter(')>operator(,) string<delimiter(')content(long)delimiter(')>operator(,) string<delimiter(')content(short)delimiter(')>operator(,) string<delimiter(')content(char)delimiter(')>operator(,)]
        string<delimiter(')content(signed)delimiter(')>operator(,) string<delimiter(')content(unsigned)delimiter(')>operator(,) string<delimiter(')content(float)delimiter(')>operator(,) string<delimiter(')content(double)delimiter(')>operator(,)
-delete[delete(-)      string<delimiter(')content(bool)delimiter(')>operator(,) string<delimiter(')content(complex)delimiter(')>operator(,)  comment(# C99)]
+delete[delete(-)      string<delimiter(')content(bool)delimiter(')>operator(,) string<delimiter(')content(complex)delimiter(')>operator(,)  comment(# )comment(C99)]
 delete[delete(-)    operator(])]
-insert[insert(+)      string<delimiter(')content(bool)delimiter(')>operator(,) string<delimiter(')content(complex)delimiter(')>operator(,)  comment(# added in C99)]
-insert[insert(+)    operator(])  comment(# :nodoc:)]
+insert[insert(+)      string<delimiter(')content(bool)delimiter(')>operator(,) string<delimiter(')content(complex)delimiter(')>operator(,)  comment(# )eyecatcher<comment(added in )>comment(C99)]
+insert[insert(+)    operator(])eyecatcher<  comment(# :nodoc:)>]
  
      constant(PREDEFINED_CONSTANTS) operator(=) operator([)
        string<delimiter(')content(EOF)delimiter(')>operator(,) string<delimiter(')content(NULL)delimiter(')>operator(,)
@@ -3622,10 +3622,10 @@ change[change(@@)plain( -131,8 +172,8 )change(@@)]
              ident(state) operator(=) symbol(:initial) keyword(if) ident(match)operator(.)ident(index) integer(?\\n)
  
            keyword(else)
-delete[delete(-)            ident(getch)]
-delete[delete(-)            ident(kind) operator(=) symbol(:error)]
-insert[insert(+)            ident(state) operator(=) symbol(:initial)]
-insert[insert(+)            keyword(next)]
+delete[delete(-)            eyecatcher<ident(getch)>]
+delete[delete(-)            eyecatcher<ident(kind) operator(=) symbol(:error)>]
+insert[insert(+)            eyecatcher<ident(state) operator(=) symbol(:initial)>]
+insert[insert(+)            eyecatcher<keyword(next)>]
  
            keyword(end)
  
@@ -5347,9 +5347,9 @@ change[change(@@)plain( -26,19 +34,21 )change(@@)]
        operator(\))
        operator(;)
 delete[delete(-)    regexp<delimiter(/)content(ox)>]
-delete[delete(-)]
-insert[insert(+)    regexp<delimiter(/)content(ox  # :nodoc:)>]
-insert[insert(+)regexp<content(    )>]
+delete[delete(-)regexp<>]
+insert[insert(+)    regexp<delimiter(/)content(ox)>eyecatcher<regexp<content(  # :nodoc:)>>]
+insert[insert(+)regexp<>eyecatcher<regexp<content(    )>>]
 regexp<content(     PLAIN_STRING_CONTENT = {)>
 regexp<content(       "'" => )delimiter(/)>operator([)operator(^)operator(&)string<delimiter(')content(>)content(\\n)content(]+/,)>
 string<content(       )delimiter(')>string<delimiter(")content(' => /[^&)delimiter(")>operator(>)error(\\)ident(n)operator(])operator(+)regexp<delimiter(/)content(,)>
@@ -5432,8 +5432,8 @@ string<content(         letrec-syntax begin define quote if or and cond case do 
 string<content(         quasiquote set! cons force call-with-current-continuation call/cc)>
 delete[delete(-)string<content(      )delimiter(])>]
 delete[delete(-)]
-insert[insert(+)string<content(      )delimiter(])>  comment(# :nodoc:)]
-insert[insert(+)      ]
+insert[insert(+)string<content(      )delimiter(])>eyecatcher<  comment(# :nodoc:)>]
+insert[insert(+)eyecatcher<      >]
        constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)operator(\))operator(.)
 delete[delete(-)        ident(add)operator(()constant(CORE_FORMS)operator(,) symbol(:reserved)operator(\))]
 insert[insert(+)        ident(add)operator(()constant(CORE_FORMS)operator(,) symbol(:reserved)operator(\))eyecatcher<  comment(# :nodoc:)>]
@@ -5843,9 +5843,9 @@ change[change(@@)plain( -15,9 +19,9 )change(@@)]
 delete[delete(-)      string<delimiter(')content(xor)delimiter(')>operator(,) string<delimiter(')content(on)delimiter(')>]
 delete[delete(-)    operator(])]
 delete[delete(-)]
-insert[insert(+)      string<delimiter(')content(xor)delimiter(')>operator(,) string<delimiter(')content(on)delimiter(')>operator(,)]
-insert[insert(+)    operator(])  comment(# :nodoc:)]
-insert[insert(+)    ]
+insert[insert(+)      string<delimiter(')content(xor)delimiter(')>operator(,) string<delimiter(')content(on)delimiter(')>eyecatcher<operator(,)>]
+insert[insert(+)    operator(])eyecatcher<  comment(# :nodoc:)>]
+insert[insert(+)eyecatcher<    >]
      constant(DIRECTIVES) operator(=) operator([)
        string<delimiter(')content(absolute)delimiter(')>operator(,) string<delimiter(')content(abstract)delimiter(')>operator(,) string<delimiter(')content(assembler)delimiter(')>operator(,) string<delimiter(')content(at)delimiter(')>operator(,) string<delimiter(')content(automated)delimiter(')>operator(,) string<delimiter(')content(cdecl)delimiter(')>operator(,)
        string<delimiter(')content(contains)delimiter(')>operator(,) string<delimiter(')content(deprecated)delimiter(')>operator(,) string<delimiter(')content(dispid)delimiter(')>operator(,) string<delimiter(')content(dynamic)delimiter(')>operator(,) string<delimiter(')content(export)delimiter(')>operator(,)
@@ -5856,10 +5856,10 @@ change[change(@@)plain( -26,19 +30,20 )change(@@)]
 delete[delete(-)      string<delimiter(')content(virtual)delimiter(')>operator(,) string<delimiter(')content(write)delimiter(')>operator(,) string<delimiter(')content(writeonly)delimiter(')>]
 delete[delete(-)    operator(])]
 delete[delete(-)]
-delete[delete(-)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)operator(,) ident(caching)operator(=)predefined_constant(true)operator(\))operator(.)]
-insert[insert(+)      string<delimiter(')content(virtual)delimiter(')>operator(,) string<delimiter(')content(write)delimiter(')>operator(,) string<delimiter(')content(writeonly)delimiter(')>operator(,)]
-insert[insert(+)    operator(])  comment(# :nodoc:)]
-insert[insert(+)    ]
+delete[delete(-)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)eyecatcher<operator(,) ident(caching)operator(=)predefined_constant(true)>operator(\))operator(.)]
+insert[insert(+)      string<delimiter(')content(virtual)delimiter(')>operator(,) string<delimiter(')content(write)delimiter(')>operator(,) string<delimiter(')content(writeonly)delimiter(')>eyecatcher<operator(,)>]
+insert[insert(+)    operator(])eyecatcher<  comment(# :nodoc:)>]
+insert[insert(+)eyecatcher<    >]
 insert[insert(+)    constant(IDENT_KIND) operator(=) constant(CaseIgnoringWordList)operator(.)ident(new)operator(()symbol(:ident)operator(\))operator(.)]
        ident(add)operator(()constant(RESERVED_WORDS)operator(,) symbol(:reserved)operator(\))operator(.)
 delete[delete(-)      ident(add)operator(()constant(DIRECTIVES)operator(,) symbol(:directive)operator(\))]
@@ -5898,9 +5898,9 @@ change[change(@@)plain( -5,13 +5,17 )change(@@)]
  
    comment(# Nitro XHTML Scanner)
 delete[delete(-)  comment(#)]
-delete[delete(-)  comment(# $Id$)]
-insert[insert(+)  comment(# )]
-insert[insert(+)  comment(# Alias: +nitro+)]
+delete[delete(-)  comment(# )eyecatcher<comment($Id$)>]
+insert[insert(+)  comment(#)eyecatcher<comment( )>]
+insert[insert(+)  comment(# )eyecatcher<comment(Alias: +nitro+)>]
    keyword(class) class(NitroXHTML) operator(<) constant(Scanner)
  
      ident(include) constant(Streamable)
@@ -6285,16 +6285,16 @@ change[change(@@)plain( -130,13 +128,14 )change(@@)]
  keyword(module) class(CodeRay)
  
    comment(# Version: Major.Minor.Teeny[.Revision])
-delete[delete(-)  comment(# Major: 0 for pre-release)]
-delete[delete(-)  comment(# Minor: odd for beta, even for stable)]
+delete[delete(-)  comment(# Major: 0 for pre-)eyecatcher<comment(releas)>comment(e)]
+delete[delete(-)  comment(# Minor: )eyecatcher<comment(odd for beta, even for stabl)>comment(e)]
 delete[delete(-)  comment(# Teeny: development state)]
-delete[delete(-)  comment(# Revision: Subversion Revision number (generated on rake\))]
-delete[delete(-)  constant(VERSION) operator(=) string<delimiter(')content(0.7.9)delimiter(')>]
-insert[insert(+)  comment(# Major: 0 for pre-stable, 1 for stable)]
-insert[insert(+)  comment(# Minor: feature milestone)]
-insert[insert(+)  comment(# Teeny: development state, 0 for pre-release)]
-insert[insert(+)  comment(# Revision: Subversion Revision number (generated on rake gem:make\))]
-insert[insert(+)  constant(VERSION) operator(=) string<delimiter(')content(0.9.1)delimiter(')>]
+delete[delete(-)  comment(# Revision: Subversion Revision number (generated on rake)comment(\))]
+delete[delete(-)  constant(VERSION) operator(=) string<delimiter(')content(0.)>eyecatcher<string<content(7.9)>>string<delimiter(')>]
+insert[insert(+)  comment(# Major: 0 for pre-)eyecatcher<comment(stable, 1 for stabl)>comment(e)]
+insert[insert(+)  comment(# Minor: )eyecatcher<comment(feature mileston)>comment(e)]
+insert[insert(+)  comment(# Teeny: development state)eyecatcher<comment(, 0 for pre-release)>]
+insert[insert(+)  comment(# Revision: Subversion Revision number (generated on rake)eyecatcher<comment( gem:make)>comment(\))]
+insert[insert(+)  constant(VERSION) operator(=) string<delimiter(')content(0.)>eyecatcher<string<content(9.1)>>string<delimiter(')>]
  
    ident(require) string<delimiter(')content(coderay/tokens)delimiter(')>
 insert[insert(+)  ident(require) string<delimiter(')content(coderay/token_classes)delimiter(')>]

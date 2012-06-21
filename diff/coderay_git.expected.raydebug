@@ -974,14 +974,14 @@ delete[delete(-)plain( )]
 delete[delete(-)plain(Updated command line interface and minor scanner fixes for the Diff, HTML, and RHTML scanners.)]
 insert[insert(+)plain(The @coderay@ executable was rewritten and has a few new features:)]
 plain(  )
-delete[delete(-)plain(h3. @coderay@ executable)]
-delete[delete(-)plain( )]
-delete[delete(-)plain(* *FIXED*: Partly rewritten, simplified, fixed.)]
-delete[delete(-)plain(  ("#244":http://redmine.rubychan.de/issues/244\))]
-insert[insert(+)plain(* *NEW* Ability to stream into a pipe; try @coderay file | more -r@)]
-insert[insert(+)plain(* *NEW* help)]
-insert[insert(+)plain(* *IMPROVED*: more consistent parameter handling)]
-insert[insert(+)plain(* *REMOVED* @coderay_stylesheet@ executable; use @coderay stylesheet [name]@.)]
+delete[delete(-)eyecatcher<plain(h3. @coderay@ executable)>]
+delete[delete(-)eyecatcher<plain( )>]
+delete[delete(-)plain(* *)eyecatcher<plain(FIXED*: Partly rewritten, simplified, fixed.)>]
+delete[delete(-)eyecatcher<plain(  ("#244":http://redmine.rubychan.de/issues/244\))>]
+insert[insert(+)eyecatcher<plain(* *NEW* Ability to stream into a pipe; try @coderay file | more -r@)>]
+insert[insert(+)eyecatcher<plain(* *NEW* help)>]
+insert[insert(+)plain(* *)eyecatcher<plain(IMPROVED*: more consistent parameter handling)>]
+insert[insert(+)eyecatcher<plain(* *REMOVED* @coderay_stylesheet@ executable; use @coderay stylesheet [name]@.)>]
 plain( )
 delete[delete(-)plain(h3. @)eyecatcher<plain(Scanners::Diff)>plain(@)]
 insert[insert(+)plain(h3. @)eyecatcher<plain(Tokens)>plain(@)]
@@ -1109,12 +1109,12 @@ plain( )
 delete[delete(-)plain(h3. )eyecatcher<plain(@Scanners::YAML@)>]
 insert[insert(+)plain(h3. )eyecatcher<plain(*RENAMED*: @Encoders::TokenKindFilter@ (was @Encoders::TokenClassFilter@\))>]
 plain(  )
-delete[delete(-)plain(* *FIXED* doesn't send debug tokens when @$DEBUG@ is true [Trans])]
-delete[delete(-)plain(  ("#149":http://redmine.rubychan.de/issues/149\))]
-delete[delete(-)]
-insert[insert(+)plain(* *NEW*: Handles token groups.)]
-insert[insert(+)plain(  See "#223":http://odd-eyed-code.org/issues/223.)]
-insert[insert(+)plain(* *RENAMED* @include_block_token?@ to @include_group?@.)]
+delete[delete(-)plain(* *)eyecatcher<plain(FIXED* doesn't send debug tokens when @$DEBUG@ is true [Trans])>]
+delete[delete(-)plain(  )eyecatcher<plain(("#149":http://redmine.rubychan.de/issues/149\))>]
+delete[delete(-)plain()]
+insert[insert(+)plain(* *)eyecatcher<plain(NEW*: Handles token groups.)>]
+insert[insert(+)plain(  )eyecatcher<plain(See "#223":http://odd-eyed-code.org/issues/223.)>]
+insert[insert(+)eyecatcher<plain(* *RENAMED* @include_block_token?@ to @include_group?@.)>]
 plain( )
 delete[delete(-)plain(h)eyecatcher<plain(2. Changes in 0.9.1 [2009-12-31])>]
 insert[insert(+)plain(h)eyecatcher<plain(3. @Encoders::Statistic@)>]
@@ -1493,10 +1493,10 @@ change<change(@@)plain( -54,17 +54,35 )change(@@)>plain( end)
 plain( def commands)
 plain(   puts <<-COMMANDS)
 plain(   general:)
-delete[delete(-)plain(    highlight   code highlighting (default command\))]
+delete[delete(-)plain(    highlight   code highlighting (default command)plain(\))]
 delete[delete(-)plain(    stylesheet  print the CSS stylesheet with the given name)]
-insert[insert(+)plain(    highlight   code highlighting (default command, optional\))]
-insert[insert(+)plain(    stylesheet  print the CSS stylesheet with the given name (aliases: style, css\))]
+insert[insert(+)plain(    highlight   code highlighting (default command)eyecatcher<plain(, optional)>plain(\))]
+insert[insert(+)plain(    stylesheet  print the CSS stylesheet with the given name)eyecatcher<plain( (aliases: style, css\))>]
 plain(   )
 plain(   about:)
 delete[delete(-)plain(    list [of]   list all available plugins (or just the scanners|encoders)plain(\))]
@@ -1639,9 +1639,9 @@ plain(     end)
 delete[delete(-)plain(    puts encoders.sort)]
 plain(   end)
 delete[delete(-)plain(when 'stylesheet')]
-delete[delete(-)plain(  puts CodeRay::Encoders[:html]::CSS.new(args.first\).stylesheet)]
-insert[insert(+)plain(when 'stylesheet', 'style', 'css')]
-insert[insert(+)plain(  puts CodeRay::Encoders[:html]::CSS.new(args.first || :default\).stylesheet)]
+delete[delete(-)plain(  puts CodeRay::Encoders[:html]::CSS.new(args.first)plain(\).stylesheet)]
+insert[insert(+)plain(when 'stylesheet')eyecatcher<plain(, 'style', 'css')>]
+insert[insert(+)plain(  puts CodeRay::Encoders[:html]::CSS.new(args.first)eyecatcher<plain( || :default)>plain(\).stylesheet)]
 plain( when 'commands')
 plain(   commands)
 plain( when 'help')
@@ -1683,12 +1683,12 @@ delete[delete(-)  comment(# s.executables   = `git ls-files -- bin/*`.split("\\n
 delete[delete(-)  comment(# s.require_paths = ["lib"])]
    ident(readme_file) operator(=) string<delimiter(')content(README_INDEX.rdoc)delimiter(')>
    
-delete[delete(-)  ident(s)operator(.)ident(files)         operator(=) constant(Dir)operator([)string<delimiter(')content(lib/**/*.rb)delimiter(')>operator(]) operator(+) string<delimiter(%W()content(Rakefile )inline<inline_delimiter(#{)ident(readme_file)inline_delimiter(})>content( LICENSE)delimiter(\))> operator(+) constant(Dir)operator([)string<delimiter(')content(test/functional/*.rb)delimiter(')>operator(])]
-delete[delete(-)  ident(s)operator(.)ident(test_files)    operator(=) constant(Dir)operator([)string<delimiter(')content(test/functional/*.rb)delimiter(')>operator(])]
-delete[delete(-)  ident(s)operator(.)ident(executables)   operator(=) operator([)string<delimiter(')content(coderay)delimiter(')>operator(])]
-insert[insert(+)  ident(s)operator(.)ident(files)         operator(=) shell<delimiter(`)content(git ls-files -- lib/* test/functional/* Rakefile )inline<inline_delimiter(#{)ident(readme_file)inline_delimiter(})>content( LICENSE)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))]
-insert[insert(+)  ident(s)operator(.)ident(test_files)    operator(=) shell<delimiter(`)content(git ls-files --       test/functional/*)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))]
-insert[insert(+)  ident(s)operator(.)ident(executables)   operator(=) shell<delimiter(`)content(git ls-files -- bin/*)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))operator(.)ident(map) operator({) operator(|)ident(f)operator(|) constant(File)operator(.)ident(basename)operator(()ident(f)operator(\)) operator(})]
+delete[delete(-)  ident(s)operator(.)ident(files)         operator(=) eyecatcher<constant(Dir)operator([)string<delimiter(')content(lib/**/*.rb)delimiter(')>operator(]) operator(+) string<delimiter(%W()content(Rakefile )inline<inline_delimiter(#{)ident(readme_file)inline_delimiter(})>content( LICENSE)delimiter(\))> operator(+) constant(Dir)operator([)string<delimiter(')content(test/functional/*.rb)delimiter(')>operator(])>]
+delete[delete(-)  ident(s)operator(.)ident(test_files)    operator(=) eyecatcher<constant(Dir)operator([)string<delimiter(')content(test/functional/*.rb)delimiter(')>operator(])>]
+delete[delete(-)  ident(s)operator(.)ident(executables)   operator(=) eyecatcher<operator([)string<delimiter(')content(coderay)delimiter(')>operator(])>]
+insert[insert(+)  ident(s)operator(.)ident(files)         operator(=) shell<>eyecatcher<shell<delimiter(`)content(git ls-files -- lib/* test/functional/* Rakefile )inline<inline_delimiter(#{)ident(readme_file)inline_delimiter(})>content( LICENSE)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))>]
+insert[insert(+)  ident(s)operator(.)ident(test_files)    operator(=) shell<>eyecatcher<shell<delimiter(`)content(git ls-files --       test/functional/*)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))>]
+insert[insert(+)  ident(s)operator(.)ident(executables)   operator(=) shell<>eyecatcher<shell<delimiter(`)content(git ls-files -- bin/*)delimiter(`)>operator(.)ident(split)operator(()string<delimiter(")char(\\n)delimiter(")>operator(\))operator(.)ident(map) operator({) operator(|)ident(f)operator(|) constant(File)operator(.)ident(basename)operator(()ident(f)operator(\)) operator(})>]
    ident(s)operator(.)ident(require_paths) operator(=) operator([)string<delimiter(')content(lib)delimiter(')>operator(])
    
    ident(s)operator(.)ident(rubyforge_project) operator(=) ident(s)operator(.)ident(name)
@@ -1971,9 +1971,9 @@ change<change(@@)plain( -21,8 +21,8 )change(@@)> keyword(module) class(Encoders)
      keyword(rescue) constant(LoadError)
        keyword(begin)
 delete[delete(-)        ident(require) string<delimiter(')content(rubygems)delimiter(')>]
-delete[delete(-)        ident(gem) string<delimiter(")content(json)delimiter(")>]
-insert[insert(+)        ident(require) string<delimiter(')content(rubygems)delimiter(')> keyword(unless) keyword(defined?) constant(Gem)]
-insert[insert(+)        ident(gem) string<delimiter(')content(json)delimiter(')>]
+delete[delete(-)        ident(gem) string<>eyecatcher<string<delimiter(")content(json)delimiter(")>>]
+insert[insert(+)        ident(require) string<delimiter(')content(rubygems)delimiter(')>eyecatcher< keyword(unless) keyword(defined?) constant(Gem)>]
+insert[insert(+)        ident(gem) string<>eyecatcher<string<delimiter(')content(json)delimiter(')>>]
          ident(require) string<delimiter(')content(json)delimiter(')>
        keyword(rescue) constant(LoadError)
          global_variable($stderr)operator(.)ident(puts) string<delimiter(")content(The JSON encoder needs the JSON library.)char(\\n)delimiter(")> \
@@ -2078,8 +2078,8 @@ change<change(@@)plain( -122,8 +121,8 )change(@@)> ident(table)operator(.)ident(
  
 delete[delete(-)operator(.)ident(insert) operator({) ident(background)operator(:) ident(hsla)operator(()integer(120)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.1)operator(\)) operator(})]
 delete[delete(-)operator(.)ident(delete) operator({) ident(background)operator(:) ident(hsla)operator(()integer(0)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.1)operator(\)) operator(})]
-insert[insert(+)operator(.)ident(insert) operator({) ident(background)operator(:) ident(hsla)operator(()integer(120)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.12)operator(\)) operator(})]
-insert[insert(+)operator(.)ident(delete) operator({) ident(background)operator(:) ident(hsla)operator(()integer(0)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.12)operator(\)) operator(})]
+insert[insert(+)operator(.)ident(insert) operator({) ident(background)operator(:) ident(hsla)operator(()integer(120)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.1)eyecatcher<float(2)>operator(\)) operator(})]
+insert[insert(+)operator(.)ident(delete) operator({) ident(background)operator(:) ident(hsla)operator(()integer(0)operator(,)integer(100)operator(%)operator(,)integer(50)operator(%)operator(,)float(0.1)eyecatcher<float(2)>operator(\)) operator(})]
  operator(.)ident(change) operator({) ident(color)operator(:) comment(#bbf; background: #007; })
  operator(.)ident(head) operator({) ident(color)operator(:) comment(#f8f; background: #505 })
  operator(.)ident(head) operator(.)ident(filename) operator({) ident(color)operator(:) ident(white)operator(;) operator(})
@@ -2287,9 +2287,9 @@ change<change(@@)plain( -1087,13 +1087,12 )change(@@)> keyword(module) class(Gen
      keyword(def) method(markup_code)operator(()ident(tokens)operator(\))
        ident(code) operator(=) ident(tokens)operator(.)ident(map) operator({) operator(|)ident(t)operator(|) ident(t)operator(.)ident(text) operator(})operator(.)ident(join)
        ident(options) operator(=) operator({)
-delete[delete(-)              symbol(:css) operator(=)operator(>) symbol(:class)operator(,)]
-delete[delete(-)              symbol(:line_numbers_start) operator(=)operator(>) ident(code)operator([)regexp<delimiter(/)char(\\A)content(.*?, line ()char(\\d)content(+\))delimiter(/)>operator(,)integer(1)operator(])operator(.)ident(to_i) operator(-) integer(1)operator(,)]
-delete[delete(-)              symbol(:bold_every) operator(=)operator(>) symbol(:no_bolding)operator(,)]
+delete[delete(-)        eyecatcher<      >symbol(:css) operator(=)operator(>) symbol(:class)operator(,)]
+delete[delete(-)        eyecatcher<      >symbol(:line_numbers_start) operator(=)operator(>) ident(code)operator([)regexp<delimiter(/)char(\\A)content(.*?, line ()char(\\d)content(+\))delimiter(/)>operator(,)integer(1)operator(])operator(.)ident(to_i) operator(-) integer(1)operator(,)]
+delete[delete(-)        eyecatcher<      >symbol(:bold_every) operator(=)operator(>) symbol(:no_bolding)operator(,)]
 insert[insert(+)        symbol(:css) operator(=)operator(>) symbol(:class)operator(,)]
 insert[insert(+)        symbol(:line_numbers_start) operator(=)operator(>) ident(code)operator([)regexp<delimiter(/)char(\\A)content(.*?, line ()char(\\d)content(+\))delimiter(/)>operator(,)integer(1)operator(])operator(.)ident(to_i) operator(-) integer(1)operator(,)]
 insert[insert(+)        symbol(:bold_every) operator(=)operator(>) symbol(:no_bolding)operator(,)]
@@ -2350,10 +2350,10 @@ regexp<content( <span style="color:#080;font-weight:bold">end<)delimiter(/)modif
      
      comment(# output as standalone HTML page (using CSS classes\))
      ident(page) operator(=) constant(CodeRay)operator(.)ident(scan)operator(()string<delimiter(')content(puts "Hello, world!")delimiter(')>operator(,) symbol(:ruby)operator(\))operator(.)ident(page)
-delete[delete(-)    ident(assert) ident(page)operator([)string<delimiter(<<-PAGE)>operator(])]
-delete[delete(-)string<content(<body style="background-color: white;">)>]
-insert[insert(+)    ident(assert_match) string<delimiter(<<-PAGE)>operator(,) ident(page)]
-insert[insert(+)string<content(<body>)>]
+delete[delete(-)    ident(assert)eyecatcher< ident(page)operator([)string<delimiter(<<-PAGE)>operator(])>]
+delete[delete(-)string<content(<body)>eyecatcher<string<content( style="background-color: white;")>>string<content(>)>]
+insert[insert(+)    ident(assert)eyecatcher<ident(_match) string<delimiter(<<-PAGE)>operator(,) ident(page)>]
+insert[insert(+)string<content(<body)>string<content(>)>]
 string<content( )>
 string<content( <table class="CodeRay"><tr>)>
 string<content(   <td class="line-numbers" title="double click to toggle" ondblclick="with (this.firstChild.style\) { display = (display == ''\) ? 'none' : '' }"><pre>)>
@@ -2372,8 +2372,8 @@ change<change(@@)plain( -56,8 +58,8 )change(@@)> keyword(end)
        string<delimiter(")content(:)delimiter(")>operator(,) symbol(:operator)operator(,) string<delimiter(")content( )delimiter(")>operator(,) symbol(:space)operator(,) string<delimiter(")content(42)delimiter(")>operator(,) symbol(:integer)operator(,)
 delete[delete(-)      string<delimiter(")content( )delimiter(")>operator(,) symbol(:space)operator(,) string<delimiter(")content(})delimiter(")>operator(,) symbol(:operator)operator(])operator(,) ident(tokens)]
 delete[delete(-)]
-insert[insert(+)      string<delimiter(")content( )delimiter(")>operator(,) symbol(:space)operator(,) string<delimiter(")content(})delimiter(")>operator(,) symbol(:operator)operator(])operator(,) ident(tokens)operator(.)ident(tokens)]
-insert[insert(+)    ]
+insert[insert(+)      string<delimiter(")content( )delimiter(")>operator(,) symbol(:space)operator(,) string<delimiter(")content(})delimiter(")>operator(,) symbol(:operator)operator(])operator(,) ident(tokens)eyecatcher<operator(.)ident(tokens)>]
+insert[insert(+)eyecatcher<    >]
      comment(# produce a token statistic)
      ident(assert_equal) string<delimiter(<<-STATISTIC)>operator(,) ident(tokens)operator(.)ident(statistic)
 string<content( )>
