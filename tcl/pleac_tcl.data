@@ -1,0 +1,5514 @@
+ # -*- tcl -*-
+
+
+# @@PLEAC@@_NAME
+# @@SKIP@@ Tcl
+
+# @@PLEAC@@_WEB
+# @@SKIP@@ http://tcl.tk/
+
+# @@PLEAC@@_INTRO
+# @@SKIP@@ Version: Tcl 8.4
+
+# @@PLEAC@@_APPENDIX
+# @@SKIP@@ General-purpose, custom functions that might be used in several sections, appear here
+
+# coroutines.
+# recursion messes with the uplevel stuff. so using this imperative
+# version instead.
+# what we have here is an eqivalent of ruby's str.gsub! &block mechanism,
+# where each matched string is passed into the block and the results are
+# used for substitution.
+
+proc gregsub {re txt block} {
+    set res {}
+    while 1 {
+        #fetch the regexp first
+        set part [lindex [regexp -inline $re $txt] 1]
+        if {![string length $part]} {
+                append res $txt
+                break
+        }
+
+        #now substitute with original
+        set lst [split [regsub -- $re $txt "\0"] "\0"]
+        append res [lindex $lst 0] [apply $block $part]
+        set txt [lindex $lst 1]
+    }
+    return $res
+}
+
+proc regrange {p1 sep p2 data block} {
+    set on 0
+    set delay 0
+    if {![string compare $sep "..."]} {
+        set delay 1
+    }
+    if ![llength $p1] { ;# {} for start from begining.
+        set on 1
+        set p1 {$-^} ;# never match any thing more.
+    }
+
+    foreach line $data {
+        switch -exact -- $sep {
+            {..}  {
+                if {[regexp -- $p1 $line]} {set on 1} elseif {[regexp -- $p2 $line]} {set delay 1}
+                if {$on} {
+                    #do thingies.
+                    apply $block $line
+                }
+                if {$delay} {
+                    set on 0
+                    set delay 0
+                }
+            }
+            {...} {
+                if {[regexp -- $p1 $line]} {set delay 0} elseif {[regexp -- $p2 $line]} {set on 0}
+                if {$on} {
+                    #do thingies.
+                    apply $block $line
+                }
+                if {!$delay} {
+                    set on 1
+                    set delay 1
+                }
+            }
+            default {
+                error "wrong range operator $sep"
+            }
+        }
+    }
+}
+
+proc with-file {file block} {
+    set fd [open $file]
+    uplevel 1 [list apply $block $fd]
+    close $fd
+}
+
+proc read-lines {fd block} {
+    while {[gets $fd line] >= 0} {
+        uplevel 1 [list apply $block $line]
+    }
+}
+
+proc readlines {fd block} {
+    set data [read -nonewline $fd]
+    set variable options
+    set cr "\n"
+    if [info exist options(CR)] {
+        set cr $options(CR)
+    }
+    foreach line [split [regsub -all -- $cr $data "\0" ] "\0" ] {
+        uplevel 1 [list apply $block $line]
+        puts -nonewline $cr
+    }
+}
+
+proc argf-iter {block} {
+    variable options
+    foreach file $::argv {
+        with-file $file [list fd "return \[readlines \$fd {$block}\]"]
+    }
+}
+
+# @@PLEAC@@_1.0
+
+
+# Tcl's "..." corresponds to Perl's "...", while the other
+# quoting construct {...} is more similar to Perl's q{...}
+# operator.
+
+# It's not necessary to quote text data in Tcl as long as
+# it doesn't contain whitespace.
+
+
+
+set string {\n}                     ;# two characters, \ and n
+
+set string "jon 'maddog' orwant"    ;# literal single quotes
+
+set string \n                       ;# a "newline" character
+
+set string "jon \"crosby\" orwant"  ;# literal double quotes
+
+set string {jon "stills" orwant}    ;# literal double quotes
+
+set string "jon {nash} orwant"      ;# literal braces
+
+set string {jon {young} orwant}     ;# literal braces
+
+set a {
+this is a multiline string
+terminated by an unescaped and
+{unnested} right brace (\})
+}
+
+# @@PLEAC@@_1.1
+
+
+set value [string range $string $first $last]
+
+set value [string range $string $first [expr {$first+$count-1}]]
+
+set value [string range $string $first end]
+
+
+set string [string replace $string $first $last $newstring]
+
+set string [string replace $string $first [expr {$first+$count-1}] $newstring]
+
+set string [string replace $string $first end $newtail]
+
+
+# get a 5-byte string, skip 3, then grab 2 8-byte strings, then the rest
+binary scan $data "A5 x3 A8 A8 A*" leading s1 s2 trailing
+
+
+# Important note: the above was all well and good when the Cookbook was 
+# written and a character and a byte were the same size.  They still
+# are for some programming languages, but Tcl for one uses 16-bit
+# Unicode characters to encode strings.
+
+#   The above unpack/scan works for strings containing only character
+# codes in the range 0--255, but distorts other strings by truncating
+# all codes to 8 bits.
+
+#   To avoid this, the input string can be converted to an 8-bit
+# encoding before scanning:
+
+
+encoding convertto utf-8 "H\u2082O is the chemical formula for water"
+# => Hâ??O is the chemical formula for water
+
+
+# split at five-byte boundaries (16-bit safe)
+set fivers [list]
+set temp [encoding convertto utf-8 $string]
+while {[binary scan $temp a5a* group tail]} {
+    lappend fivers $group
+    set temp $tail
+}
+if {[string length $tail]} { lappend fivers $tail }
+set fivers
+
+
+# split at five-char boundaries (16-bit safe)
+set fivers [regexp -all -inline {.{1,5}} $data]
+
+
+# chop string into individual characters:
+set chars [split $data {}]
+
+
+# "This is what you have"
+# +012345678901234567890  Indexing forwards (left to right)
+#  098765432109876543210- Indexing from end (right to left)
+# note that 0 means 10 or 20, etc. above
+
+# end is a special value that is available in list and string 
+# commands.  It is defined as the index of the last element (in 
+# lists), or character (in strings).
+#   Likewise, end-1 is defined as the element/character
+# preceding the last, and so on.
+
+
+set first [string index "This is what you have" 0]
+# => T
+
+ 
+set start [string range "This is what you have" 5 6]
+# => is
+
+ 
+set rest [string range "This is what you have" 13 end]
+# => you have
+
+ 
+set last [string index "This is what you have" end]
+# => e
+
+ 
+set end [string range "This is what you have" end-3 end]
+# => have
+
+ 
+set piece [string range "This is what you have" end-7 end-5]
+# => you
+
+
+# The general technique here is to mutate a string and then assign
+# it back to the variable.  One can [replace] a segment of the string
+# with another string or with an empty string (deleting the segment)
+# or simply select a segment using [range].
+
+
+ 
+set string [string replace "This is what you have" 5 6 wasn't]
+# => This wasn't what you have
+
+ 
+set string [string replace "This wasn't what you have" end-11 end ondrous]
+# => This wasn't wondrous
+
+ 
+set string [string range "This wasn't wondrous" 1 end]
+# => his wasn't wondrous
+
+ 
+set string [string range "his wasn't wondrous" 0 end-10]
+# => his wasn'
+
+
+if {[regexp $pattern [string range $string end-9 end]]} {
+    return "Pattern matches in last 10 characters"
+} else {
+    return "Match failed"
+}
+
+
+# substitute "at" for "is", restricted to first five characters
+regsub -all is [string range $string 0 4] at newstring
+set string [string replace $string 0 4 $newstring]
+
+
+regsub {(.)(.*)(.)} "make a hat" {\3\2\1} a
+puts $a
+# => take a ham
+
+
+set b [string range "To be or not to be" 6 11]
+# => or not
+
+ 
+set a "To be or not to be"
+set b [string range $a 6 7]
+append b : [string range $a 3 4]
+# => or:be
+
+
+proc cut2fmt {args} {
+    set positions $args
+    set template  {}
+    set lastpos   1
+    foreach {place} $positions {
+        append template "A[expr {$place-$lastpos}] "
+        set lastpos $place
+    }
+    append template A*
+    return $template
+}
+    
+set fmt [cut2fmt 8 14 20 26 30]
+# => A7 A6 A6 A6 A4 A*
+
+# @@PLEAC@@_1.2
+
+
+# In Tcl, commands such as if or while require the value of the
+# condition expression to be a proper boolean value.  If the 
+# value is numeric, 0 is false and anything else is true.  For
+# non-numeric strings, "true", "on", or "yes" is true and 
+# "false", "off", or "no" is false.  Any other value for the
+# condition expression raises an error.
+#   The `boolean operators' return either "1" or "0".
+
+
+
+# use $b if b has characters, else $c
+if {[string length $b]} {
+    set a $b
+} else {
+    set a $c
+}
+
+ 
+# use $b if b is non-zero, else $c
+if {$b != 0} {
+    set a $b
+} else {
+    set a $c
+}
+
+
+# set x to $y if $x has no characters
+if {![string length $x]} {
+    set x $y
+}
+
+ 
+# set x to $y if $x is zero
+if {$x == 0} {
+    set x $y
+}
+
+
+# set a to $b if b exists, else to $c
+if {[info exists b]} {
+    set a $b
+} else {
+    set a $c
+}
+
+
+# Perl: $dir = shift(@ARGV) || "/tmp";
+set arg [lindex $argv 0]
+set argv [lrange $argv 1 end]
+if {[string length $arg]} {
+    set dir $arg
+} else {
+    set dir /tmp
+}
+
+
+# Perl: $dir = $ARGV[0] || "/tmp";
+set arg [lindex $argv 0]
+if {[string length $arg]} {
+    set dir $arg
+} else {
+    set dir /tmp
+}
+
+
+# Perl: $dir = defined($ARGV[0]) ? shift(@ARGV) : "/tmp";
+if {[info exists argv] && [llength $argv]} {
+    set dir [lindex $argv 0]
+    set argv [lrange $argv 1 end]
+} else {
+    set dir /tmp
+}
+
+ 
+# Perl: $dir = @ARGV ? $ARGV[0] : "/tmp";
+if {[llength $argv]} {
+    set dir [lindex $argv 0]
+} else {
+    set dir /tmp
+}
+
+
+# Perl: $count{ $shell || "/bin/sh" }++;
+if {![string length $shell]} {
+    set shell /bin/sh
+}
+if {[info exist count($shell)]} {
+    incr count($shell)
+} else {
+    set count($shell) 1
+}
+
+
+# The catch command intercepts errors raised.  In this
+# case catch is used as an alternative idiom to 
+# [info exists var].
+# The pros and cons of the different idioms is 
+# discussed at <URL: http://mini.net/tcl/1322.html>.
+
+
+
+# find the user name on Unix systems; needs extension to
+# check getlogin() and getpwuid()
+if {![catch {string length $env(USER)}]} {
+    set user $env(USER)
+} elseif {![catch {string length $env(LOGIN)}]} {
+    set user $env(LOGIN)
+} else {
+    set user "Unknown user"
+}
+
+# The most obvious way to do the above in Tcl is
+set ::tcl_platform(user)
+
+if {![string length $startingPoint]} {
+    set startingPoint Greenwich
+}
+
+
+# if x has no elements, assign $y to it
+if {[llength $x] == 0} {
+    set x $y
+}
+
+# if y has elements, assign it to x, otherwise assign $z to x
+if {[llength $y]} {
+    set x $y
+} else {
+    set x $z
+}
+
+# @@PLEAC@@_1.3
+
+
+# cross-assignment
+foreach {b a} $args break
+
+
+# cross-assignment with temp
+set temp $a
+set a $b
+set b $temp
+unset temp
+
+
+foreach {alpha beta production} [list January March August] break
+# move beta       to alpha,
+# move production to beta,
+# move alpha      to production
+foreach {alpha beta production} [list $beta $production $alpha] break
+
+# @@PLEAC@@_1.4
+
+
+set num [scan $char %c]
+
+
+set char [format %c $num]
+
+format "Number %d is character %c" 101 101
+# => Number 101 is character e
+
+
+set utf8data [encoding convertto utf-8 $string]
+binary scan $utf8data c* codelist
+
+
+set utf8data [binary format c* $codelist]
+set string [encoding convertfrom utf-8 $utf8data]
+
+
+proc hal2ibm {} {
+    set hal HAL
+    binary scan $hal c* codes
+    foreach {num} $codes {
+        lappend newcodes [incr num]
+    }
+    set ibm [binary format c* $newcodes]
+}
+hal2ibm
+# => IBM
+
+# @@PLEAC@@_1.5
+
+
+set a [split $string {}]
+
+
+set utf8data [encoding convertto utf-8 $string]
+binary scan $utf8data c* a
+
+
+# with -line, . never matches newline
+foreach 1 [regexp -inline -all -line . $string] {
+    # do something with $1
+}
+
+
+proc indChars-1 {s} {
+    array set seen [list]
+    set string $s
+    foreach {char} [split $string {}] {
+        if {[info exists seen($char)]} {
+            incr seen($char)
+        } else {
+            set seen($char) 1
+        }
+    }
+    puts "unique chars are: {[join [lsort [array names seen]] {}]}"
+}
+indChars-1 "an apple a day"
+# => unique chars are: { adelnpy}
+
+
+# Of course, if all you care about are which unique 
+# characters appear, it's much easier:
+
+
+
+proc uniqueChars-1 {s} {
+    puts "unique chars are: {[join [lsort -unique [split $s {}]] {}]}"
+}
+uniqueChars-1 "an apple a day"
+# => unique chars are: { adelnpy}
+
+
+# simplistic checksum calculation
+proc simpleChecksum {string} {
+    set sum 0
+    binary scan $string c* codes
+    foreach {code} $codes {
+        incr sum $code
+    }
+    return $sum
+}
+simpleChecksum "an apple a day"
+# => 1248
+
+
+# The Trf package, which is available at
+# <URL: http://www.oche.de/~akupries/soft/trf/>,
+# has several utilities for transforming data,
+# including message digests such as CRC and MD5.
+
+
+
+package require Trf
+binary scan [crc {an apple a day}] H* checksum
+set checksum
+# => 325295
+
+
+# slowcat - emulate a   s l o w   line printer
+# usage: slowcat [-DELAY] [files ...]
+proc slowcat {args} {
+    set delay 1
+    if {[llength $args]} {
+        if {[regexp {^-([.\d]+)} [lindex $args 0] match delay]} {
+            set args [lrange $args 1 end]
+        }
+    }
+    fconfigure stdout -buffering no
+    if {[llength $args]} {
+        foreach {arg} $args {
+            set f [open $arg]
+            lappend channels $f
+        }
+    } else {
+        set channels stdin
+    }
+    foreach {chan} $channels {
+        while {[gets $chan line] > -1} {
+            foreach {ch} [split $line {}] {
+                puts -nonewline $ch
+                after [expr {int(5 * $delay)}]
+            }
+            puts {}
+        }
+    }
+}
+
+# @@PLEAC@@_1.6
+
+
+proc reverse {args} {
+    set res [list]
+    if {[llength $args] == 1} {
+        set args [lindex $args 0]
+    }
+    foreach elem $args {
+        set res [linsert $res 0 $elem]
+    }
+    return $res
+}
+
+
+# reverse characters
+join [reverse [split $string {}]] {}
+
+
+# reverse words
+join [reverse [split $string]]
+
+# reverse quoted words
+join [reverse [split {Yoda said, "can you see this?"}]]
+# => this?" see you "can said, Yoda
+
+
+set word reviver
+set is_palindrome [string equal $word [join [reverse [split $word]]]]
+# => 1
+
+# @@PLEAC@@_1.7
+
+
+package require textutil
+namespace import ::textutil::tabify::*
+tabify "...     zzz        xxx"
+# => ...     zzz	xxx
+
+
+untabify "...\tzzz\txxx"
+# => ...        zzz        xxx
+
+
+tabify2 "...     zzz     xxx"
+# => ...	zzz	xxx
+
+
+untabify2 "...\tzzz\txxx"
+# => ...     zzz     xxx
+
+# @@PLEAC@@_1.8
+
+
+set debt 100
+subst "You owe $debt to me."
+# => You owe 100 to me.
+
+
+set debt 100
+proc writeIt {string} {
+    uplevel subst [list $string]
+}
+# braces prevent immediate substitution
+writeIt {You owe $debt to me.}
+# => You owe 100 to me.
+
+
+foreach {rows cols} {24 80} break
+set text {I am $rows high and $cols long}
+subst $text
+# => I am 24 high and 80 long
+
+
+set string "I am 17 years old"
+regsub -all {(\d+)} $string {[expr {\1*2}]} string
+subst $string
+# => I am 34 years old
+
+
+# expand variables in $text, but put an error message in
+# if the variable isn't defined.
+proc expandOrError-1 {@text} {
+    upvar ${@text} text
+    while {[regexp {\$(\w+)} $text match var]} {
+        if {[uplevel info exists $var]} {
+            regsub \\$match $text [uplevel set $var] text
+        } else {
+            regsub \\$match $text "\[NO VARIABLE: $var\]" text
+        }
+    }
+    set text
+}
+
+
+# Tcl allows commands to embedded in text data as well as variables. 
+# If the string is taken from user input, this may be a security
+# hazard.  The solution is to let a "safe interpreter" (which has a
+# reduced set of commands by default) interpret the text data.  In
+# case the interpreted script text contains illegal commands the
+# interpreter raises an error.
+
+
+
+proc safeExpand-1 {string} {
+    set si [interp create -safe]
+    set res [uplevel $si eval [list subst [list $string]]]
+    interp delete $si
+    set res
+}
+safeExpand-1 {[exec rm foo.bar]}
+# => invalid command name "exec"
+
+
+# It is also possible to further reduce the command set of an
+# interpreter, or to add new commands, or to change the meaning
+# of commands (i.e. exec would perform *some* system commands
+# but not all, etc).
+
+# But I digress...
+
+
+# @@PLEAC@@_1.9
+
+
+set little "bo peep"
+set big [string toupper $little]
+# => BO PEEP
+
+
+set big "BO PEEP"
+set little [string tolower $big]
+# => bo peep
+
+
+set little "bo peep"
+set title [string totitle $little]
+# => Bo peep
+
+
+set little "bo peep"
+set big [string toupper $little 0]
+# => Bo peep
+
+
+set big "BO PEEP"
+set little [string tolower $big 0]
+# => bO PEEP
+
+
+# convert case within a string
+set name {kirk}
+set string "Ship's Captain: [string totitle $name]."
+# => Ship's Captain: Kirk.
+
+
+# capitalize each word's first character, downcase the rest
+set text "thIS is a loNG liNE"
+set pos 0
+while {[regexp -indices -start $pos {(\w+)} $text where]} {
+    foreach {first last} $where break
+    set text [string totitle $text $first $last]
+    set pos $last
+    incr pos
+}
+puts $text
+# => This Is A Long Line
+
+# capitalize each word's first character, downcase the rest
+# (another solution)
+foreach word "thIS is a loNG liNE" {
+    lappend words [string totitle $word]
+}
+puts $words
+# => This Is A Long Line
+
+
+# case insensitive string comparison
+string equal -nocase foo Foo
+# => 1
+
+
+# randcap: filter to randomly capitalize 20% of the letters
+set text {
+001:001 In the beginning God created the heaven and the earth.
+001:002 And the earth was without form, and void; and darkness was
+        upon the face of the deep. And the spirit of God moved upon
+        the face of the waters.
+001:003 And God said, let there be light: and there was light.
+}
+set pos 0
+while {[regexp -indices -start $pos {(\w)} $text where]} {
+    foreach {first last} $where break
+    if {rand()<=0.2} {
+        set text [string toupper $text $first]
+    } else {
+        set text [string tolower $text $first]
+    }
+    set pos $last
+    incr pos
+}
+puts $text
+# => 
+# =>         001:001 iN The begInNing god crEaTed tHe HeAven And thE earTh.
+# => 
+# =>         001:002 and tHe earth was wiThout form, aNd void; and darknESs Was
+# =>                 upOn tHe faCe OF the deep. and the sPirIt Of goD moved upOn
+# =>                 the fACE oF the wATers.
+# => 
+# =>         001:003 AnD goD said, lEt there be light: aND there wAs LighT.
+# =>         
+
+# @@PLEAC@@_1.10
+
+
+# Interpolating functions and expressions within strings
+set var1 Tool
+proc func {s} {string totitle $s}
+set var2 Language
+set answer "$var1 [func command] $var2"
+# => Tool Command Language
+
+
+set n 5
+set phrase "I have [expr {$n + 1}] guanacos."
+# => I have 6 guanacos.
+
+
+set rec foo:bar:baz
+interp alias {} some_cmd {} join
+some_cmd "What you want is [llength [split $rec :]] items"
+# => What you want is 3 items
+
+
+set text {
+To: $naughty
+From: Your Bank
+Cc: [getManagerList $naughty]
+Date: [clock format [clock seconds]] (today)
+Dear $naughty,
+Today, you bounced check number [expr {500 + int(rand()*100)}] to us.
+Your account is now closed.
+Sincerely,
+the management
+}
+if {![sendMail $text $target]} {
+    error "Couldn't send mail"
+}
+
+# @@PLEAC@@_1.11
+
+
+# all in one
+regsub -line -all {^\s+} {
+    your text
+    goes here
+} {} var
+format %s \n$var
+# => 
+# => your text
+# => goes here
+
+
+# or with two steps
+set var {
+    your text
+    goes here
+}
+regsub -line -all {^\s+} $var {} var
+format %s \n$var
+# => 
+# => your text
+# => goes here
+
+# one more time
+regsub -line -all {^\s+} {
+    The five varieties of camelids
+    are the familiar camel, his friends
+    the llama and the alpaca, and the
+    rather less well-known guanaco
+    and vicuña.
+} {} definition
+# => 6
+
+
+proc fix {string} {
+    regsub -line -all {^\s+} $string {} string
+    return $string
+}
+
+fix {
+    My stuff goes here
+}
+# => My stuff goes here
+
+
+# the end-of-string right brace doesn't have to be flush left
+regsub -line -all {^\s+} {
+    ...we will have peace, when you and all your works have
+    perished--and the works of your dark master to whom you would
+    deliver us. You are a liar, Saruman, and a corrupter of men's
+    hearts.  --Theoden in /usr/src/perl/taint.c
+                         } {} quote       ;# <-- looki looki
+# move attribution to line of its own
+regsub {\s+--} $quote \n-- quote
+format %s \n$quote
+# => 
+# => ...we will have peace, when you and all your works have
+# => perished--and the works of your dark master to whom you would
+# => deliver us. You are a liar, Saruman, and a corrupter of men's
+# => hearts.
+# => --Theoden in /usr/src/perl/taint.c
+
+proc rememberTheMain {} {
+    dequote {
+        @@@ int
+        @@@ runops() {
+        @@@     SAVEI32(runlevel);
+        @@@     runlevel++;
+        @@@     while ( op = (*op->op_ppaddr)() ) ;
+        @@@     TAINT_NOT;
+        @@@     return 0;
+        @@@ }
+    }
+    # add more code here if you want
+}
+ 
+proc roadGoesEverOn {} {
+    dequote {
+       Now far ahead the Road has gone,
+          And I must follow, if I can,
+       Pursuing it with eager feet,
+          Until it joins some larger way
+       Where many paths and errands meet.
+          And whither then? I cannot say.
+                --Bilbo in /usr/src/perl/pp_ctl.c
+    }
+}
+proc quotemeta {string} {
+    regsub -all {(\W)} $string {\\\1} string
+    return $string
+}
+proc dequote {text} {
+    if {[regexp -line {^\s*(?:([^\w\s]+)(\s*).*\n)(?:\s*\1\2?.*\n)+(?:\s*)$} $text m 1 2]} {
+        set white $2
+        set leader [quotemeta $1]
+    } else {
+        regexp -line {^\n?(\s+)} $text m white
+        set leader {}
+    }
+    regsub -line -all ^\\s*?$leader\(?:$white\) $text {} text
+    return [string trimright $text]\n
+}
+
+# @@PLEAC@@_1.12
+
+
+# The tcllib 1.0 textutil module can adjust text
+# to a specified line length, justify left, right,
+# and plain, and fill lines to the right margin.
+# However, it can't add indentation.
+
+
+
+# A naive implementation of wrap.  Arguments:
+# text	the text
+# col	the line length (default 72)
+# lead	first line indentation (def empty string)
+# follow	indentation for following lines (def empty string)
+proc wrap {text {col 72} {lead {}} {follow {}}} {
+    set newtext {}
+    set text $lead[string trimleft $text]
+    set upto $col
+    while {![string is wordchar [string index $text $upto]]} {incr upto -1}
+    set upto [string wordstart $text $upto]
+    if {$upto == 0} {
+        set upto [string wordend $text $upto]
+    } else {
+        incr upto -1
+    }
+    append newtext [string range $text 0 $upto]\n
+    set text [string replace $text 0 $upto]
+    while {[string length $text]} {
+        set text $follow[string trimleft $text]
+        if {[string length $text] > $col} {
+            set upto $col
+            while {![string is wordchar [string index $text $upto]]} {incr upto -1}
+            set upto [string wordstart $text $upto]
+            if {$upto == 0} {
+                set upto [string wordend $text $upto]
+            } else {
+                incr upto -1
+            }
+            append newtext [string range $text 0 $upto]\n
+            set text [string replace $text 0 $upto]
+        } else {
+            append newtext $text
+            set text {}
+        }       
+    }
+    return $newtext
+}
+
+set input {"Folding and splicing is the work of an editor,"
+      "not a mere collection of silicon"
+      "and"
+      "mobile electrons!"}
+append res \n [string repeat 0123456789 2] \n
+append res [wrap [join $input] 20 {    } {  }] \n
+# => 
+# => 01234567890123456789
+# =>     Folding and 
+# =>   splicing is the 
+# =>   work of an 
+# =>   editor, not a 
+# =>   mere collection 
+# =>   of silicon and 
+# =>   mobile electrons!
+
+# @@PLEAC@@_1.13
+
+
+# backslash
+regsub -all (\[$charlist]) $var {\\\1} var
+
+
+# double
+regsub -all (\[$charlist]) $var {\1\1} var
+
+
+set string {Mom said, "Don't do that."}
+regsub -all {(['"])} $string {\\\1} string
+puts $string
+# => Mom said, \"Don\'t do that.\"
+
+set string {Mom said, "Don't do that."}
+regsub -all {(['"])} $string {\1\1} string
+puts $string
+# => Mom said, ""Don''t do that.""
+
+set string {Mom said, "Don't do that."}
+regsub -all {([^A-Z])} $string {\\\1} string    ;# or: ([^[:upper:]])
+puts $string
+# => M\o\m\ \s\a\i\d\,\ \"D\o\n\'\t\ \d\o\ \t\h\a\t\.\"
+
+regsub -all {([^[:alnum:]])} "is a test!" {\\\1} string
+puts "this $string"
+# => this is\ a\ test\!
+
+# @@PLEAC@@_1.14
+
+
+string trim "\n\t Tcl \t\n"
+# => Tcl
+
+
+set string {
+    foo bar
+    baz
+    
+}
+set res [list]
+foreach {s} [split $string \n] {
+    lappend res [string trim $s]
+}
+string trim [join $res]
+# => foo bar baz
+
+
+# The [gets] (get string) command always strips off the EOL
+# sequence, be it CR, LF, or CRLF (configurable for the stream).
+
+# Anyway, if you have a string that *might* have one or more
+# \n characters at the end, and in case it does, you want to
+# remove them:
+
+
+
+string trimright "foo bar\n\n" \n
+# => foo bar
+
+# @@PLEAC@@_1.15
+
+
+# csv is a part of the standard ActiveTcl distribution
+package require csv
+set line {XYZZY,,"O'Reilly, Inc","Wall, Larry","a ""glug"" bit",5,"Error, Core Dumped"}
+set fields [::csv::split $line]
+set res {}
+for {set i 0} {$i < [llength $fields]} {incr i} {
+    append res \n "$i : [lindex $fields $i]"
+}
+puts $res
+# => 
+# => 0 : XYZZY
+# => 1 : 
+# => 2 : O'Reilly, Inc
+# => 3 : Wall, Larry
+# => 4 : a "glug" bit
+# => 5 : 5
+# => 6 : Error, Core Dumped
+
+# @@PLEAC@@_1.17
+
+
+# fixstyle - switch one set of strings to another set
+#   usage: <scriptname> [-v] [files ...]
+array set ::data {
+    analysed         analyzed
+    built-in         builtin
+    chastized        chastised
+    commandline      command-line
+    de-allocate      deallocate
+    dropin           drop-in
+    hardcode         hard-code
+    meta-data        metadata
+    multicharacter   multi-character
+    multiway         multi-way
+    non-empty        nonempty
+    non-profit       nonprofit
+    non-trappable    nontrappable
+    pre-define       predefine
+    preextend        pre-extend
+    re-compiling     recompiling
+    reenter          re-enter
+    turnkey          turn-key
+}
+ 
+set testtext {
+    Yesterday we analysed the efficiency of the 
+    built-in thingummies and were considerably 
+    chastized by the results.  It seems that 
+    commandline invocation forced the 
+    whatchamacallit to de-allocate dropin 
+    maguffins.  First, we tested instead to 
+    hardcode meta-data -- especially when in 
+    multicharacter and multiway format
+    (obviously only for non-empty data sets).  
+    However, that turned out to be a non-profit 
+    improvement.  Dr Egnarts then demonstrated 
+    using non-trappable signals in pre-define 
+    mode to preextend save rates.  When 
+    re-compiling we saw the application reenter 
+    acceptable ratings on turnkey operations.
+}
+# verbose or non-verbose?
+if {[llength $argv] && [string equal [lindex $argv 0] -v]} {
+    set ::verbose yes
+    set argv [lrange $argv 1 end]
+} else {
+    set ::verbose no
+}
+# prepare text to be read
+set text {}
+if {[string match *test [info script]]} {
+    # if we're running a test:
+    set text $testtext
+} else {
+    # Try to assemble text from input.  Do we have arguments?
+    if {[info exists argv]} {
+        # Yes; try to open each and read contents:
+        foreach {fn} [lrange $argv 0 end] {
+            if {![catch {open $fn} chan]} {
+                append text [read $chan]
+                close $chan
+            }
+        }
+    }
+    if {![string length $text]} {
+        # we still don't have any text; try standard input
+        # (inform user first)
+        if {[tell stdin] == -1} {
+            puts stderr "[info script]: Reading from stdin"
+        }
+        set text [read stdin]
+    }
+}
+ 
+proc fixstyle {text} {
+    global data verbose
+    set newtext [list]
+    foreach w $text {
+        if {[catch {set word $data($w)}]} {
+            set word $w
+        } else {
+            if {$verbose} {
+                puts stderr "$w => $word"
+            }
+        }
+        lappend newtext $word
+    }
+    return $newtext
+}
+ 
+fixstyle $text
+# => Yesterday we analyzed the efficiency of the builtin thingummies and were considerably chastised by the results. It seems that command-line invocation forced the whatchamacallit to deallocate drop-in maguffins. First, we tested instead to hard-code metadata -- especially when in multi-character and multi-way format (obviously only for nonempty data sets). However, that turned out to be a nonprofit improvement. Dr Egnarts then demonstrated using nontrappable signals in predefine mode to pre-extend save rates. When recompiling we saw the application re-enter acceptable ratings on turn-key operations.
+
+# @@PLEAC@@_2.0
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_2.1
+
+
+# The "backwards conditional" Perl form is useful here
+# to demonstrate the various regexps.  Tcl doesn't have
+# this syntax, but it can be fudged very easily:
+
+
+
+proc warn {msg cond pattern {string 0}} {
+    if {[string equal if $cond]} {
+        if {[regexp $pattern $string]} {
+            return [format "%s: %s" $string $msg]
+        }
+    } elseif {[string equal unless $cond]} {
+        if {![regexp $pattern $string]} {
+            return [format "%s: %s" $string $msg]
+        }
+    }
+    return
+}
+
+warn "has nondigits" if {\D}
+
+warn "not a natural number" unless {^\d+$}        ;# rejects -3
+
+warn "not an integer" unless {^[+-]?\d+$}         ;# rejects +3
+
+warn "not a real number" unless {^-?\d+\.?\d*$}   ;# rejects .2
+
+warn "not a C float" unless {^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$}
+
+
+# Regexps like the above are sometimes necessary for making fine
+# distinctions among string representations of numbers.
+# If the only thing in questions is whether $x is a number
+# or not, or whether it is an integer or a real number, Tcl
+# can help:
+
+
+
+if {[string is integer $x]} {
+    set res "$x is an integer"
+} elseif {[string is double $x]} {
+    set res "$x is a real number"
+} else {
+    set res "$x is not a number"
+}
+set res
+
+# @@PLEAC@@_2.2
+
+
+# limit number of decimals when determining equality of
+# floating point values to avoid rounding errors.
+proc floatEqual-1 {num1 num2 accuracy} {
+    expr {[format %.${accuracy}f $num1] == [format %.${accuracy}f $num2]}
+}
+
+
+set wage 536                  ;# $5.36/hour
+set week [expr {40 * $wage}]  ;# $214.40
+format "One week's wage is: \$%.2f" [expr {$week/100.0}]
+# => One week's wage is: $214.40
+
+# @@PLEAC@@_2.3
+
+
+set a 0.255
+set b [format %.2f $a]
+puts "Unrounded: $a"
+puts "Rounded:   $b"
+# => Unrounded: 0.255
+# => Rounded:   0.26
+
+set res \nnumber\tint\tfloor\tceil\n
+set a [list 3.3 3.5 3.7 -3.3]
+foreach n $a {
+    append res [format %.1f\t $n]
+    append res [format %.1f\t [expr {int($n)}]]
+    append res [format %.1f\t [expr {floor($n)}]]
+    append res [format %.1f\n [expr {ceil($n)}]]
+}
+puts $res
+# => 
+# => number	int	floor	ceil
+# => 3.3	3.0	3.0	4.0
+# => 3.5	3.0	3.0	4.0
+# => 3.7	3.0	3.0	4.0
+# => -3.3	-3.0	-4.0	-3.0
+
+# @@PLEAC@@_2.4
+
+
+proc dec2bin {string} {
+    binary scan [binary format I $string] B32 str
+    return [string trimleft $str 0]
+}
+dec2bin 54
+# => 110110
+
+
+proc bin2dec {string} {
+    set string [format %032s $string]
+    binary scan [binary format B32 $string] I str
+    return $str
+}
+bin2dec 110110
+# => 54
+
+# @@PLEAC@@_2.5
+
+
+for {set i $X} {$i <= $Y} {incr i} {
+    # $i is set to every integer from X to Y, inclusive
+}
+
+for {set i $X} {$i <= $Y} {incr i 7} {
+    # $i is set to every integer from X to Y, stepsize = 7
+}
+
+set res {}
+append res "Infancy is: "
+foreach i [list 0 1 2] {
+    append res "$i "
+}
+ 
+proc .. {low high} {
+    for {set i $low} {$i <= $high} {incr i} {
+        lappend res $i
+    }
+    set res
+}
+append res \n
+append res "Toddling is: "
+foreach i [.. 3 4] {
+    append res "$i "
+}
+ 
+append res \n
+append res "Childhood is: "
+for {set i 5} {$i <= 12} {incr i} {
+    append res "$i "
+}
+ 
+puts $res
+# => Infancy is: 0 1 2 
+# => Toddling is: 3 4 
+# => Childhood is: 5 6 7 8 9 10 11 12 
+
+# @@PLEAC@@_2.6
+
+
+# These procedures were written by Richard Suchenwirth.
+# See <URL: http://mini.net/tcl/1749.html>
+
+
+
+roman:number 15
+# => XV
+
+
+roman:get XV
+# => 15
+
+# @@PLEAC@@_2.7
+
+
+# The rand function returns a floating point number from zero to
+# just less than one or, in mathematical notation, the range [0,1).
+# The seed comes from the internal clock of the machine or may be
+# set manually with the srand function.
+         
+# The math module of the standard distribution has a wrapper for
+# rand called random; it supports generation of pseudo-random
+# numbers in the [0,n) and [n,m) ranges.
+
+
+
+puts [expr {int(rand()*51)+25}]
+# => 32
+
+package require math
+puts [::math::random 25 76]
+# => 32
+
+
+set list [split {Demonstrate selecting a random element from a list.}]
+package require math
+puts [lindex $list [::math::random [llength $list]]]
+# => selecting
+
+
+package require math
+set password {}
+for {set i 0} {$i < 8} {incr i} {
+    append password [lindex $chars [::math::random [llength $chars]]]
+}
+puts $password
+# => JhzQ!p!$
+
+# @@PLEAC@@_2.8
+
+
+set value 1138
+expr {srand($value)}
+# => 0.00890640821723
+
+# @@PLEAC@@_2.9
+
+
+# There is no standard module known to me that implements better
+# random number generators than the one in the C library, but at
+# <URL: http://www.elf.org/etc/randomnumbers.html> there is Tcl
+# and C source for a ``very long period random number generator''.
+         
+# Also see <URL: http://mini.net/cgi-bin/wikit/1551.html> for a
+# `post-processor' that improves the randomness of the output of
+# rand().
+
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_2.10
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_2.11
+
+
+# You'd typically want a variable like PI to be 
+# contained within a namespace and not automatically
+# set in the global namespace.  [variable] creates
+# a variable in the current namespace, and [namespace
+# current] returns the qualified name of the current
+# namespace, or :: for the global namespace.
+
+
+
+variable PI [expr {acos(-1)}]
+puts [set [namespace current]::PI]
+# => 3.14159265359
+
+
+proc deg2rad {degrees} {
+    variable PI
+    return [expr {$degrees / 180.0 * $PI}]
+}
+
+
+proc rad2deg {radians} {
+    variable PI
+    return [expr {$radians / $PI * 180}]
+}
+
+
+# The core Tcl command [expr] has most of the commonly
+# used trigonometric functions defined, so there is
+# less need for a Trig module.
+
+
+
+proc degreeSine {degrees} {
+    set radians [deg2rad $degrees]
+    return [expr {sin($radians)}]
+}
+
+# @@PLEAC@@_2.12
+
+
+# The tangent function is already available in the [expr]
+# command, as is the arcus cosine and many more.
+         
+# In some cases, the [expr] functions raise an error because
+# of overflow or division by zero.  To trap such errors, wrap
+# in [catch]:
+
+
+
+list [catch {expr {1/0}} msg] $msg
+# => 1 {divide by zero}
+
+# @@PLEAC@@_2.13
+
+
+set value 1138
+puts [expr {log($value)}]
+# => 7.03702761469
+
+
+set value 1138
+puts [expr {log10($value)}]
+# => 3.05614226206
+
+
+proc logN {base value} {
+    return [expr {log($value) / log($base)}]
+}
+
+# @@PLEAC@@_2.14
+
+
+# There are a few non-standard matrix modules available for Tcl, e.g.
+#  * TiM: <URL: http://www-obs.univ-lyon1.fr/~thiebaut/TiM/TiM.html>.
+#    In TiM, matrix multiplication seems to be an "A * B" matter.
+#  * La (The Hume Linear Algebra Tcl Package):
+#    <URL: http://www.hume.com/la/index.html>.  Matrix multiplication
+#    in La looks like this: mmult A B.
+
+
+
+# There is also a matrix module in the standard distribution library,
+# but it does not contain arithmetic.  I have used it anyway, with
+# an adaptation of the mmult subroutine in the Perl Cookbook.
+
+
+
+package require struct 1.1.1
+proc mmult {m1 m2} {
+   set m1rows [$m1 rows]
+   set m1cols [$m1 columns]
+   set m2rows [$m2 rows]
+   set m2cols [$m2 columns]
+   if {$m1cols != $m2rows} {
+       error "IndexError: matrices don't match: $m1cols != $m2rows"
+   }
+   
+   ::struct::matrix result
+   result add rows $m1rows
+   result add columns $m2cols
+   for {set i 0} {$i < $m1rows} {incr i} {
+       for {set j 0} {$j < $m2cols} {incr j} {
+           set v 0
+           for {set k 0} {$k < $m1cols} {incr k} {
+               incr v [expr {[$m1 get cell $k $i] * [$m2 get cell $j $k]}]
+           }
+           result set cell $j $i $v
+       }
+   }
+   return result
+}
+
+::struct::matrix x
+x add columns 3
+x add row [list 3 2 3]
+x add row [list 5 9 8]
+::struct::matrix y
+y add rows 3
+y add column [list 4 9 3]
+y add column [list 7 3 1]
+set res [mmult x y]
+$res get rect 0 0 end end
+# => {39 30} {125 70}
+
+# @@PLEAC@@_2.15
+
+
+# See <URL: http://www.mini.net/tcl/Complex> for complex
+# arithmetic routines by Richard Suchenwirth.
+
+
+
+complex::* 3+5i 2-2i
+# => 16+4i
+
+# @@PLEAC@@_2.16
+
+
+# Tcl does not have hex/oct functions, but
+# they are easy to implement.  If [expr]
+# gets handed an invalid octal/hex number,
+# it raises an error instead of returning
+# 0 as the Perl functions do.
+
+
+
+proc hex {string} {
+    if {[regexp -nocase {^0x} $string]} {
+        return [expr $string]
+    } else {
+        return [expr 0x$string]
+    }
+}
+
+
+# This simpler version does not raise errors for invalid input:
+#     proc hex {string} {
+#         scan $string %x
+#     }
+
+
+
+proc oct {string} {
+    if {[regexp -nocase {^0x} $string]} {
+        return [hex $string]
+    } else {
+        return [expr 0$string]
+    }
+}
+
+
+# This simpler version does not raise errors for invalid input:
+#     proc oct {string} {
+#         scan $string %o
+#     }
+
+
+
+if {[string match *.test [info script]]} {
+    # we are testing, supply known value
+    set num 0x39a
+} else {
+    puts "Gimme a number in decimal, octal, or hex: "
+    set num [gets stdin]
+}
+if {[string length $num]} {
+    if {[regexp ^0 $num]} {
+        set num [oct $num]
+    }
+    format "%d %x %o" $num $num $num
+}
+# => 922 39a 1632
+
+# @@PLEAC@@_2.17
+
+
+# This procedure is written by Keith Vetter and is part of the Tcl
+# Cookbook (<URL: #http://aspn.activestate.com/ASPN/Cookbook/Tcl/Recipe/68381>)
+proc comma {num {sep ,}} {
+    while {[regsub {^([-+]?\d+)(\d\d\d)} $num "\\1$sep\\2" num]} {}
+    return $num
+}
+
+# @@PLEAC@@_2.18
+
+
+# See <URL: http://mini.net/tcl/EnglishPlurals> for an
+# English pluralization function by Richard Suchenwirth.
+
+
+
+set data [join {fish fly ox
+species genus phylum
+cherub radius jockey
+index matrix mythos
+phenomenon formula}]
+set res {}
+foreach word $data {
+    append res "One $word, two [en:pl $word]\n"
+}
+puts $res
+# => One fish, two fish
+# => One fly, two flies
+# => One ox, two oxen
+# => One species, two species
+# => One genus, two genera
+# => One phylum, two phyla
+# => One cherub, two cherubim
+# => One radius, two radii
+# => One jockey, two jockeys
+# => One index, two indices
+# => One matrix, two matrices
+# => One mythos, two mythoi
+# => One phenomenon, two phenomena
+# => One formula, two formulae
+
+# @@PLEAC@@_2.19
+
+
+# See <URL: http://www.mini.net/tcl/AdditionalMath>:
+# the primefactors function by Richard Suchenwirth.
+
+
+
+primefactors 2178
+# => 2 3 3 11 11
+
+primefactors 2099999990
+# => 2 5 11 19090909
+
+# @@PLEAC@@_3.0
+
+
+# A single command, [clock], is used for a wide range
+# of date/time-related tasks.  Subcommands include
+# seconds, which returns a seconds-since-epoch value,
+# and format, which formats a date/time-string like
+# the result of POSIX strftime.
+
+
+
+# get current time in epoch seconds
+set now [clock seconds]
+# print default-formatted time
+puts [clock format $now]
+# print custom formatted time
+set fmt "Today is day %j of the current year."
+puts [clock format $now -format $fmt]
+
+# @@PLEAC@@_3.1
+
+
+set now [clock seconds]
+foreach {day month year} [clock format $now -format "%d %m %Y"] break
+
+set now [clock seconds]
+set fmt "%Y-%m-%d"
+puts "The current date is [clock format $now -format $fmt]."
+
+# @@PLEAC@@_3.2
+
+
+# this is one of several possible variants of scannable
+# date/time strings; clock scan is considerably more
+# versatile than the Perl functions in this recipe.
+set time [clock scan "$hours:$min:$sec $year-$mon-$mday"]
+# => 999955820
+
+
+set time [clock scan "$hours:$min:$sec $year-$mon-$mday" -gmt yes]
+# => 999963020
+
+# @@PLEAC@@_3.3
+
+
+if {[string match *.test [info script]]} {
+    # we are testing, supply a known value
+    set now 1000000000
+} else {
+    set now [clock seconds]
+}
+set vars [list seconds minutes hours dayOfMonth month year wday yday]
+set desc [list S       M       H     d          m     Y    w    j]
+foreach v $vars d $desc {
+    set $v [clock format $now -format %$d]
+}
+format %s-%s-%sT%s:%s:%s $year $month $dayOfMonth $hours $minutes $seconds
+# => 2001-09-09T03:46:40
+
+
+if {[string match *.test [info script]]} {
+    # we are testing, supply a known value
+    set now 1000000000
+} else {
+    set now [clock seconds]
+}
+set vars [list seconds minutes hours dayOfMonth month year wday yday]
+set desc [list S       M       H     d          m     Y    w    j]
+foreach v $vars d $desc {
+    set $v [clock format $now -format %$d -gmt yes]
+}
+format %s-%s-%sT%s:%s:%s $year $month $dayOfMonth $hours $minutes $seconds
+# => 2001-09-09T01:46:40
+
+# @@PLEAC@@_3.4
+
+
+#     set when [expr {$now + $difference}]
+#     set when [expr {$now - $difference}]
+
+# The following is slightly more idiomatic:
+
+#     set when [clock scan "$difference seconds"]
+#     set when [clock scan "$difference seconds ago"]
+#     set when [clock scan "-$difference seconds"] ;# same as previous
+
+
+
+set newTime [clock scan "$y-$m-$d $offset days"]
+foreach {y2 m2 d2} [clock format $newTime -format "%Y %m %d"] break
+return [list $y2 $m2 $d2]
+
+
+set oldTime [clock scan $time]
+set newTime [clock scan "
+    $daysOffset days
+    $hourOffset hours
+    $minuteOffset minutes
+    $secondOffset seconds
+" -base $oldTime]
+
+# @@PLEAC@@_3.5
+
+
+set bree [clock scan "16 Jun 1981 4:35:25"]
+set nat  [clock scan "18 Jan 1973 3:45:50"]
+set difference [expr {$bree - $nat}]
+format "There were $difference seconds between Nat and Bree"
+# => There were 265333775 seconds between Nat and Bree
+
+
+set bree [clock scan "16 Jun 1981 4:35:25"]
+set nat  [clock scan "18 Jan 1973 3:45:50"]
+set difference [expr {$bree - $nat}]
+set vars    {seconds minutes hours days}
+set factors {60      60      24    7}
+foreach v $vars f $factors {
+    set $v [expr {$difference % $f}]
+    set difference [expr {($difference-[set $v]) / $f}]
+}
+set weeks $difference
+format "($weeks weeks, $days days, $hours:$minutes:$seconds)"
+# => (438 weeks, 4 days, 23:49:35)
+
+# @@PLEAC@@_3.6
+
+
+set then [clock scan 6/16/1981]
+set format {
+%Y-%m-%d was a %A
+in week number %W,
+and day %j of the year.
+}
+clock format $then -format $format
+# => 
+# =>         1981-06-16 was a Tuesday
+# =>         in week number 24,
+# =>         and day 167 of the year.
+# =>         
+
+# @@PLEAC@@_3.7
+
+
+# The [clock scan] command parses a wide variety of date/time
+# strings, converting them to epoch seconds.
+
+# Examples:
+
+#     set t [clock scan "1998-06-03"]
+#     set t [clock scan "2 weeks ago Friday"]
+#     set t [clock scan "today"]
+
+#     # second Sunday of 1996:
+#     set t [clock scan "Sunday" -base [clock scan "1996-01-01 1 week"]]
+
+# The result can be converted to lists of year, month, etc
+# values or to other date/time strings by the [clock format]
+# command.
+
+
+# @@PLEAC@@_3.8
+
+
+puts [clock format [clock scan 01/18/73] -gmt yes]
+# => Wed Jan 17 23:00:00 GMT 1973
+
+puts [clock format [clock scan 01/18/73] -format "%A %D"]
+# => Thursday 01/18/73
+
+set format "%a %b %e %H:%M:%S %Z %Y"
+puts [clock format [clock scan "18 Jan 1973 3:45:50 GMT"] -format $format -gmt yes]
+# => Thu Jan 18 03:45:50 GMT 1973
+
+# @@PLEAC@@_3.9
+
+
+puts "Press return when ready"
+set before [clock clicks -milliseconds]
+gets stdin
+set elapsed [expr {([clock clicks -milliseconds] - $before) / 1000.0}]
+puts "You took $elapsed seconds"
+
+set size 500
+set numberOfTimes 100
+set a [list]
+for {set j 0} {$j < $size} {incr j} {
+    lappend a [expr {rand()}]
+}
+puts "Sorting $size random numbers:"
+puts [time {
+    set a [lsort -real $a]
+} $numberOfTimes]
+
+# @@PLEAC@@_3.10
+
+
+# wait 25 milliseconds
+after 25
+
+# @@PLEAC@@_3.11
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_4.0
+
+
+set presidents [list Reagan Bush Clinton]
+# => Reagan Bush Clinton
+
+
+set nested [list this that [list the other]]
+llength $nested
+# => 3
+
+
+set tune [list The Star-spangled Banner]
+list #0 = [lindex $tune 0] #1 = [lindex $tune 1]
+# => #0 = The #1 = Star-spangled
+
+# @@PLEAC@@_4.1
+
+
+set a [list quick brown fox]
+# => quick brown fox
+
+set a "Why are you teasing me?"
+# => Why are you teasing me?
+
+set lines [list]
+foreach {l} [split {
+    The boy stood on the burning deck,
+    It was as hot as glass.
+} \n ] {
+    set line [string trimleft $l]
+    if {[string length $line]} {
+        lappend lines $line
+    }
+}
+puts $lines
+# => {The boy stood on the burning deck,} {It was as hot as glass.}
+
+set f [open $mydatafile]          ;# Automatically raises error on failure
+set biglist [split [read $f] \n]
+
+lappend banner1 Costs only \$4.95
+set banner2 [list Costs only \$4.95]
+set banner3 [split {Costs only $4.95}]
+expr {"$banner1" == "$banner2" && "$banner2" == "$banner3"}
+# => 1
+
+set ships [list Niña Pinta Santa María]   ;# WRONG (4 ships)
+llength $ships
+# => 4
+
+set ships [list Niña Pinta {Santa María}] ;# right (3 ships)
+llength $ships
+# => 3
+
+# @@PLEAC@@_4.2
+
+
+set list [list red yellow green]
+puts [list I have $list marbles.]
+# => I have {red yellow green} marbles.
+
+set list [list red yellow green]
+puts "I have $list marbles."
+# => I have red yellow green marbles.
+
+
+set lists {
+    {{just one thing}}
+    {Mutt Jeff}
+    {Peter Paul Mary}
+    {{to our parents} {Mother Theresa} God}
+    {{pastrami} {ham and cheese} {peanut butter and jelly} {tuna}}
+    {{recycle tired, old phrases} {ponder big, happy thoughts}}
+    {{recycle tired, old phrases}  {ponder big, happy thoughts}  {sleep and dream peacefully}  }
+}
+proc commifySeries {args} {
+    if {[regexp , $args]} {
+        set sepchar ";"
+    } else {
+        set sepchar ,
+    }
+    # Tcl has a switch command, nyah nyah nyah
+    switch [llength $args] {
+        0 { return {} }
+        1 { eval return $args }
+        2 { return [join $args { and }] }
+        default {
+            set args [lreplace $args end end [concat and [lindex $args end]]]
+            return [join $args "$sepchar "]
+        }
+    }
+}
+
+# => just one thing
+
+# => Mutt and Jeff
+
+# => Peter, Paul, and Mary
+
+# => to our parents, Mother Theresa, and God
+
+# => pastrami, ham and cheese, peanut butter and jelly, and tuna
+
+# => recycle tired, old phrases and ponder big, happy thoughts
+
+# => recycle tired, old phrases; ponder big, happy thoughts; and sleep and dream peacefully
+
+# @@PLEAC@@_4.3
+
+
+# There is no equivalent to $#ARRAY in Tcl.
+
+
+
+proc whatAboutThatList args {
+    variable people
+    append res "The list now has [set len [llength $people]] elements.\n"
+    append res "The index of the last element is [incr len -1].\n"
+    append res "Element #3 is `[lindex $people 3]'."
+}
+
+set people [list Crosby Stills Nash Young]
+whatAboutThatList
+# => The list now has 4 elements.
+# => The index of the last element is 3.
+# => Element #3 is `Young'.
+
+set people [lrange $people 0 end-1]
+whatAboutThatList
+# => The list now has 3 elements.
+# => The index of the last element is 2.
+# => Element #3 is `'.
+
+# append 10001-(length of list) null elements to the list:
+for {set i [llength $people]} {$i <= 10000} {incr i} {
+    lappend people {}
+}
+whatAboutThatList
+# => The list now has 10001 elements.
+# => The index of the last element is 10000.
+# => Element #3 is `'.
+
+# @@PLEAC@@_4.4
+
+
+foreach user $badUsers {
+    complain $user
+}
+
+foreach key [lsort [array names env]] {
+    puts $key=$env($key)
+}
+
+foreach {user} $allUsers {
+    set diskSpace [getUsage $user]
+    if {$diskSpace > $MAXQUOTA} {
+        complain $user
+    }
+}
+
+# Tcl has no implicit variables like Perl's $_.
+foreach _ [exec who] {
+    if [regexp tchrist $_] {
+        puts $_
+    }
+}
+
+
+# Tcl does not sneak in references unexpectedly.
+# If you need to mutate a list, this is the preferred
+# idiom:
+
+#     set mylist [mutate $mylist args]
+
+# You *can* 'simulate' manipulation by reference by
+# using call-by-name and connecting a local variable
+# to a variable with that name in the outer scope:
+
+
+
+proc timesSeven {listname} {
+    upvar $listname listref
+    for {set i 0} {$i < [llength $listref]} {incr i} {
+        set listref [lreplace $listref $i $i [expr {[lindex $listref $i] * 7}]]
+    }
+}
+
+# @@PLEAC@@_4.5
+
+
+variable res {}
+set fruits [list Apple Blackberry]
+set fruitRef fruits
+# the variable fruitRef is now set to the name of the fruit list,
+# which makes it a kind of reference variable
+foreach fruit [set $fruitRef] {
+    append res "$fruit tastes good in a pie.\n"
+}
+puts $res
+# => Apple tastes good in a pie.
+# => Blackberry tastes good in a pie.
+
+# @@PLEAC@@_4.6
+
+
+lsort -unique [list how much wood would a wood chuck chuck]
+# => a chuck how much wood would
+
+
+# This is an order of magnitude slower than the previous solution.
+foreach e $list {
+    array set unique [list $e {}]
+}
+array names unique
+# => a wood much chuck how would
+
+# @@PLEAC@@_4.7
+
+
+# Use the TclX standard package (contained in
+# the ActiveTcl distribution).
+package require Tclx
+set listA [list 1 1 2 2 3 3 3 4 5]
+set listB [list 1 2 4]
+set res [intersect3 $listA $listB]
+# [intersect3] yields three result lists;
+# we want the first one:
+lindex $res 0
+# => 3 5
+
+# @@PLEAC@@_4.8
+
+# Use the TclX standard package (contained in
+# the ActiveTcl distribution).
+package require Tclx
+set listA [list 1 1 2 2 3 3 3 4 5]
+set listB [list 1 2 4 4 6 7]
+foreach {difference intersection -} [intersect3 $listA $listB] break
+set union [union $listA $listB]
+list $difference $intersection $union
+# => {3 5} {1 2 4} {1 2 3 4 5 6 7}
+
+# @@PLEAC@@_4.9
+
+
+set members [list Time Flies]
+lappend members An Arrow
+# => Time Flies An Arrow
+
+
+set members [list Time Flies]
+set initiates [list An Arrow]
+set members [concat $members $initiates]
+# => Time Flies An Arrow
+
+
+set members [list Time Flies An Arrow]
+set members [linsert $members 2 Like]
+# => Time Flies Like An Arrow
+
+
+set members [list Time Flies Like An Arrow]
+set members [lreplace $members 0 0 Fruit]
+set members [lreplace $members end-1 end A Banana]
+# => Fruit Flies Like A Banana
+
+# @@PLEAC@@_4.10
+
+
+set list [list 0 1 2 3 4 5 6 7 8 9]
+set rlist [list]
+for {set i [expr {[llength $list]-1}]} {$i >= 0} {incr i -1} {
+    lappend rlist [lindex $list $i]
+}
+puts $rlist
+# => 9 8 7 6 5 4 3 2 1 0
+
+
+set list [list 0 1 2 3 4 5 6 7 8 9]
+lsort -decreasing $list
+# => 9 8 7 6 5 4 3 2 1 0
+
+# @@PLEAC@@_4.11
+
+
+proc splice-ish {listname number} {
+    upvar $listname list
+    set length [llength $list]
+    if {$number < 0} {
+        set number [expr {abs($number)}]
+        set res [lrange $list end-[expr {$number-1}] end]
+        set list [lrange $list 0 end-$number]
+    } else {
+        set res [lrange $list 0 [expr {$number-1}]]
+        set list [lrange $list $number end]
+    }
+    return $res
+}
+
+
+proc shift2 {listname} {
+    upvar $listname list
+    return [splice-ish list 2]
+}
+
+set friends [list Peter Paul Mary Jim Tim]
+foreach {this that} [shift2 friends] break
+list $this $that $friends
+# => Peter Paul {Mary Jim Tim}
+
+
+proc pop2 {listname} {
+    upvar $listname list
+    return [splice-ish list -2]
+}
+
+set beverages [list Dew Jolt Cola Sprite Fresca]
+set pair [pop2 beverages]
+list $beverages $pair
+# => {Dew Jolt Cola} {Sprite Fresca}
+
+# @@PLEAC@@_4.12
+
+
+set matchIdx [lsearch $list $criterion]
+if {$matchIdx >= 0} {
+    set match [lindex $list $matchIdx]
+    ## do something with $match
+} else {
+    ## unfound
+}
+
+
+set matchIdx [lsearch $list $criterion]
+if {$matchIdx >= 0} {
+    ## found in [lindex $list $matchIdx]
+} else {
+    ## unfound
+}
+
+
+Employee is an [incr Tcl] class with the members category,
+name, salary, ssn, and age.
+
+
+lappend employees [Employee #auto {manager John 120000 {}}]
+lappend employees [Employee #auto {engineer Susie 100000 {}}]
+lappend employees [Employee #auto {programmer Harold 90000 {}}]
+foreach employee $employees {
+    if {[$employee category] eq "engineer"} {
+        set highestEngineer $employee
+        break
+    }
+}
+$highestEngineer name
+# => Susie
+
+# @@PLEAC@@_4.13
+
+
+# If the test is matching an element's value against
+# an exact string, a wildcard pattern, or a regular
+# expression, use the standard package TclX (contained
+# in the ActiveTcl distribution).
+
+
+
+package require Tclx
+set matching [lmatch [list ab ac bc dk ab] a*]
+# => ab ac ab
+
+
+# If another type of test is necessary, or TclX is
+# unavailable, a foreach loop is useful:
+
+
+
+# TEST could have been a regular proc, of course
+interp alias {} TEST {} string match a*
+set matching [list]
+foreach e [list ab ac bc dk ab] {
+    if {[TEST $e]} {
+        lappend matching $e
+    }
+}
+set matching
+# => ab ac ab
+
+# @@PLEAC@@_4.14
+
+
+set numsorted [lsort -real [list 38 388.7 1.56 279 1e7]]
+# => 1.56 38 279 388.7 1e7
+
+
+set descending [lsort -decreasing -real [list 38 388.7 1.56 279 1e7]]
+# => 1e7 388.7 279 38 1.56
+
+# @@PLEAC@@_4.15
+
+
+# Generic code for using a custom comparison in a list sort:
+
+#     set ordered [lsort -command compare $unordered]
+
+# Tcl doesn't have a standard map command as used by the following
+# examples.
+
+# Pool (<URL: http://www.purl.org/NET/akupries/soft/pool/index.htm>)
+# includes a command, ::pool::list::apply, which is similar to Perl's
+# map.
+
+
+
+package require Pool_Base
+namespace import ::pool::list::apply
+set unordered [list 1+7 5-2 3+4]
+proc compute e {list [expr $e] $e}
+proc second args {lindex $args 1}
+set precomputed [apply compute $unordered]
+set orderedPrecomputed [lsort -integer -index 0 $precomputed]
+set ordered [apply second $orderedPrecomputed]
+# => 5-2 3+4 1+7
+
+
+Employee is an [incr Tcl] class with the members category,
+name, salary, ssn, and age.
+
+
+
+apply names $employees
+# => Betsy Ewan Fran Andy Carl Diane
+set ordered [lsort -command Employee::compare-name $employees]
+apply names $ordered
+# => Andy Betsy Carl Diane Ewan Fran
+
+foreach employee [lsort -command Employee::compare-name $employees] {
+    puts "[$employee name] earns \$[$employee salary]"
+}
+# => Andy earns $110000
+# => Betsy earns $120000
+# => Carl earns $90000
+# => Diane earns $80000
+# => Ewan earns $115000
+# => Fran earns $110000
+
+set sortedEmployees [lsort -command Employee::compare-name $employees]
+foreach employee $sortedEmployees {
+    puts "[$employee name] earns \$[$employee salary]"
+}
+# load bonus array
+foreach employee $sortedEmployees {
+    if {[info exists bonus([$employee ssn])]} {
+        puts "[$employee name] got a bonus!"
+    }
+}
+# => Andy earns $110000
+# => Betsy earns $120000
+# => Carl earns $90000
+# => Diane earns $80000
+# => Ewan earns $115000
+# => Fran earns $110000
+# => Ewan got a bonus!
+# => Fran got a bonus!
+
+
+# The class procedure Employee::compare-name-or-age looks
+# like this:
+
+#     proc compare-name-or-age {a b} {
+#         set cmp [string compare [[namespace parent]::$a name] [[namespace parent]::$b name]]
+#         if {$cmp != 0} {
+#             return $cmp
+#         } else {
+#             return [expr {[[namespace parent]::$a age]-[[namespace parent]::$b age]}]
+#         }
+#     }
+
+
+
+lappend employees [Employee #auto {{} Andy  95000 28}] ;# add another Andy
+set sorted [lsort -command Employee::compare-name-or-age $employees]
+apply names-and-ages $sorted
+# => {Andy 28} {Andy 30} {Betsy 43} {Carl 30} {Diane 27} {Ewan 37} {Fran 35}
+
+# @@PLEAC@@_4.16
+
+
+set circular [concat [lrange $list 1 end] [lindex $list 0]]
+set circular [concat [lindex $list end] [lrange $list 0 end-1]]
+
+
+proc grabAndRotate {listname} {
+    upvar $listname list
+    set first [lindex $list 0]
+    set list [concat [lrange $list 1 end] $first]
+    return $first
+}
+while 1 {
+    set process [grabAndRotate processes]
+    puts "Handling process $process"
+    after 1000
+}
+
+# @@PLEAC@@_4.17
+
+
+proc FisherYatesShuffle {listname} {
+    upvar $listname list
+    for {set i [expr {[llength $list]-1}]} {$i >= 0} {incr i -1} {
+        set j [expr {int(rand()*$i+1)}]
+        if {$i != $j} {
+            set temp [lindex $list $i]
+            set list [lreplace $list $i $i [lindex $list $j]]
+            set list [lreplace $list $j $j $temp]
+        }
+    }
+}
+
+
+#   Several shuffle algorithms in Tcl are compared for performance
+#   here: <URL: http://mini.net/cgi-bin/nph-wikit/941.html>.
+#   This is a very efficient algorithm for small lists:
+
+
+proc K {x y} {return $x}
+ 
+proc shuffle5a { list } {
+    set n 1
+    set slist {}
+    foreach item $list {
+        set index [expr {int(rand()*$n)}]
+        set slist [linsert [K $slist [set slist {}]] $index $item]
+        incr n
+    }
+    return $slist
+} ;# Christoph Bauer
+
+# @@PLEAC@@_4.18
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_4.19
+
+
+package require math 1.2
+ 
+# n2pat N len : produce the $N-th pattern of length $len
+proc n2pat {N len} {
+    set i 1
+    set pat [list]
+    while {$i <= $len + 1} {
+        lappend pat [expr {$N % $i}]
+        set N [expr {int($N/$i)}]
+        incr i
+    }
+    return $pat
+}
+ 
+# pat2perm pat : turn pattern returned by n2pat into
+# permutation of integers.
+proc pat2perm {args} {
+    if {[llength $args] == 1} {
+        set pat [lindex $args 0]
+    } else {
+        set pat $args
+    }
+    set source [list]
+    for {set i 0} {$i < [llength $pat]} {incr i} {
+        lappend source $i
+    }
+    set perm [list]
+    while {[llength $pat]} {
+        set i [lindex $pat end]
+        set pat [lrange $pat 0 end-1]
+        lappend perm [lindex $source $i]
+        set source [lreplace $source $i $i]
+    }
+    return $perm;
+}
+ 
+# n2perm N len : generate the $Nth permutation of $len objects
+proc n2perm {N len} {
+    return [pat2perm [n2pat $N $len]]
+}
+ 
+proc main {} {
+    while {[gets stdin _] >= 0} {
+        set data [split $_]
+        set len [llength $data]
+        set numPermutations [::math::factorial $len]
+        for {set i 0} {$i < $numPermutations} {incr i} {
+            set permutation [list]
+            foreach {p} [n2perm $i [expr {$len - 1}]] {
+                lappend permutation [lindex $data $p]
+            }
+            puts $permutation
+        }
+    }
+}
+ 
+main
+
+# @@PLEAC@@_5.0
+
+
+array set age {
+    Nat   24
+    Jules 25
+    Josh  17
+}
+ 
+set age(Nat)   24
+set age(Jules) 25
+set age(Josh)  17
+
+ 
+array set foodColor {
+    Apple   red
+    Banana  yellow
+    Lemon   yellow
+    Carrot  orange
+}
+
+# @@PLEAC@@_5.1
+
+
+set array(foo) bar
+ 
+# or
+ 
+set key foo
+set value bar
+set array($key) $value
+ 
+# or
+ 
+array set array [list $key $value]
+
+ 
+# foodColor defined per the introduction
+set foodColor(Raspberry) pink
+puts "Known foods:"
+foreach food {[array names foodColor]} {
+    puts $food
+}
+
+# @@PLEAC@@_5.2
+
+
+if {[info exists array($key)]} {
+    # it exists
+} else {
+    # it doesn't
+}
+
+ 
+# foodColor per the introduction
+foreach name {Banana Martini} {
+    if {[info exists foodColor($name)]} {
+        puts "$name is a food."
+    } else {
+        puts "$name is a drink.";
+    }
+}
+
+ 
+array unset age
+set age(Toddler)  3
+set age(Unborn)   0
+set age(Phantasm) false
+
+foreach thing {Toddler Unborn Phantasm Relic} {
+	set result "$thing:"
+	if {[info exists age($thing)]} {
+		append result " Exists"  
+		if {$age($thing)} {
+			append result " True"
+		} 
+		if {$age($thing) != 0} {
+			append result " Non-zero"
+		}
+	}
+	puts $result
+} ;# improved by Bob Techentin
+
+
+# @@PLEAC@@_5.3
+
+
+# remove $KEY and its value from ARRAY
+array unset ARRAY $KEY
+
+# foodColor as per Introduction
+proc print-foods {} {
+    variable foodColor
+    set foods [array names foodColor]
+    set food {}
+     
+    puts "Keys: $foods"
+    puts -nonewline "Values: "
+     
+    foreach food $foods {
+        set color $foodColor($food)
+         
+        if {$color ne {}} {
+            puts -nonewline "$color "
+        } else {
+            puts -nonewline {(empty) }
+        }
+    }
+    puts {}
+}
+puts "Initially:"
+print-foods
+puts "\nWith Banana empty"
+set foodColor(Banana) {}
+print-foods
+puts "\nWith Banana deleted"
+array unset foodColor Banana
+print-foods
+# => Initially:
+# => Keys: Banana Apple Carrot Lemon
+# => Values: yellow red orange yellow 
+# => 
+# => With Banana empty
+# => Keys: Banana Apple Carrot Lemon
+# => Values: (empty) red orange yellow 
+# => 
+# => With Banana deleted
+# => Keys: Apple Carrot Lemon
+# => Values: red orange yellow 
+
+# several members can be deleted in one
+# go if their names match a glob pattern,
+# otherwise the [array unset] command must
+# be called once for each name.
+array unset foodColor ?a*
+print-foods
+# => Keys: Apple Lemon
+# => Values: red yellow 
+
+# @@PLEAC@@_5.4
+
+
+foreach {key value} [array get ARRAY] {
+    # do something with $key and $value
+}
+
+# another way
+set searchId [array startsearch ARRAY]
+while {[set key [array nextelement ARRAY $searchId]] ne {}} {
+    set value $ARRAY($key)
+    # do something with $key and $value
+}
+
+foreach {food color} [array get foodColor] {
+    puts "$food is $color."
+}
+# => Banana is yellow.
+# => Apple is red.
+# => Carrot is orange.
+# => Lemon is yellow.
+
+set searchId [array startsearch foodColor]
+while {[set food [array nextelement foodColor $searchId]] ne {}} {
+    set color $foodColor($food)
+    puts "$food is $color."
+}
+# => Banana is yellow.
+# => Apple is red.
+# => Carrot is orange.
+# => Lemon is yellow.
+
+
+# countfrom - count number of messages from each sender
+if {[llength $argv] > 0} {
+    if {[catch {set f [open [lindex $argv 0]]} err]} {
+        error $err
+    }
+} else {
+    set f stdin
+}
+ 
+while {[gets $f line] >= 0} {
+    if {[regexp {^From: (.*)} $line --> name]} {
+        if {[info exists from($name)]} {
+            incr from($name)
+        } else {
+            set from($name) 1
+        }
+    }
+}
+
+if {[array size from] == 0} {
+    puts "No senders found"
+    exit
+}
+ 
+foreach person [lsort [array names from]] {
+    puts "$person: $from($person)"
+}
+
+# @@PLEAC@@_5.5
+
+
+# print each member of the array...
+foreach {k v} [array get ARRAY] {
+    puts "$k => $v"
+}
+
+# ...or print all of it at once...
+puts [array get ARRAY]
+
+# ...or copy it to a list variable and print that...
+set temp [array get ARRAY]
+puts $temp
+
+# ...or use the inspection command [parray]
+parray ARRAY
+
+# print with sorted keys
+foreach {k} [lsort [array names ARRAY]] {
+    puts "$k => $ARRAY($k)"
+}
+
+# @@PLEAC@@_5.6
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_5.7
+
+
+# A list is a string in Tcl, so there is
+# no problem storing multiple values as an
+# array ("hash") item.
+
+
+
+array set ttys [list]
+ 
+set WHO [open "|who"]
+while {[gets $WHO line] > -1} {
+    foreach {user tty} [split $line] break
+    lappend ttys($user) $tty
+}
+close $WHO
+ 
+foreach user [lsort [array names ttys]] {
+    puts "$user: $ttys($user)"
+}
+
+# dummy code; there is no getpwuid command
+foreach user [lsort [array names ttys]] {
+    puts "$user: [llength $ttys($user)] ttys."
+     
+    foreach tty [lsort $ttys($user)] {
+        if {![catch {file stat /dev/$tty stat}]} {
+            set user [lindex [getpwuid $stat(uid)] 0]
+        } else {
+            set user "(not available)"
+        }
+        puts "\t$tty (owned by $user)" 
+    }
+}
+
+proc multihash_delete {arrayname key value} {
+    upvar $arrayname array
+    set i {}
+     
+    set len [llength $array($key)]
+    for {set i 0} {$i < $len} {incr i} {
+        if {[lindex $array($key) $i] eq $value} {
+            lset array($key) [lreplace $array($key) $i $i]
+            break
+        }
+    }
+     
+    if {[llength $array($key)] <= 0} {
+        array unset array $key
+    }
+}
+
+# @@PLEAC@@_5.8
+#-----------------------------
+package require struct 1.4
+array set REVERSE [::struct::list reverse [array get LOOKUP]]
+#-----------------------------
+
+# foodfind - find match for food or color
+package require struct 1.4
+proc foodfind foodOrColor {
+	array set color {
+		Apple	red
+		Banana	yellow
+		Lemon	yellow
+		Carrot	orange
+	}
+	array set food [::struct::list reverse [array get color]]
+	if {[info exists color($foodOrColor)]} {
+		puts "$foodOrColor is a food with color $color($foodOrColor)."
+	}
+	if {[info exists food($foodOrColor)]} {
+		puts "$food($foodOrColor) is a food with color $foodOrColor."
+	}
+}
+
+foreach {f c} [array get color] {
+	lappend food($c) $f
+}
+puts "[join $food(yellow)] were yellow foods."
+
+
+# @@PLEAC@@_5.9
+#-----------------------------
+# a is the array to sort
+set keys [lsort OPTIONS [array names a]]
+foreach key $keys {
+	set value $a($key)
+	# do something with $key, $value
+}
+#-----------------------------
+foreach food [lsort [array names foodColor]] {
+	puts "$food is $foodColor($food)."
+}
+#-----------------------------
+proc sortFoods {a b} {
+	expr {[string length $a] - [string length $b]}
+}
+foreach food [lsort -command sortFoods [array names foodColor]] {
+	lappend foods $food
+}
+foreach food $foods {
+	puts "$food is $foodColor($food)."
+}
+#-----------------------------
+
+# @@PLEAC@@_5.10
+#-----------------------------
+array set merged [concat [array get A] [array get B]]
+#-----------------------------
+array unset merged
+foreach {k v} [array get A] {
+	set merged($k) $v
+}
+foreach {k v} [array get B] {
+	set merged($k) $v
+}
+#-----------------------------
+# foodColor as per the introduction
+array set drinkColor {
+	Galliano	yellow
+	"Mai Tai"	blue
+}
+array set ingestedColor [concat [array get drinkColor] [array get foodColor]]
+#-----------------------------
+# foodColor per the introduction, then
+array set drinkColor {
+	Galliano	yellow
+	"Mai Tai"	blue
+}
+array unset ingestedColor
+foreach {k v} [array get foodColor] {
+	set ingestedColor($k) $v
+}
+foreach {k v} [array get drinkColor] {
+	set ingestedColor($k) $v
+}
+#-----------------------------
+foreach substanceref {foodColor drinkColor} {
+	foreach {k v} [array get $substanceref] {
+		set substanceColor($k) $v
+	}
+}
+#-----------------------------
+foreach substanceref {foodColor drinkColor} {
+	foreach {k v} [array get $substanceref] {
+		if {[info exists substanceColor($k)]} {
+			puts "Warning: $k seen twice.  Using the first definition."
+			continue
+		}
+		set substanceColor($k) $v
+	}
+}
+
+#-----------------------------
+# @@PLEAC@@_5.11
+#-----------------------------
+set common {}
+foreach k [array names arr1] {
+	if {[info exists arr2($k)]} {
+		lappend common $k
+	}
+}
+# common now contains common keys
+#-----------------------------
+set thisNotThat {}
+foreach k [array names arr1] {
+	if {![info exists arr2($k)]} {
+		lappend thisNotThat $k
+	}
+}
+#-----------------------------
+# foodColor per the introduction
+
+# citrusColor is an array mapping citrus food name to its color.
+array set citrusColor {
+	Lemon	yellow
+	Orange	orange
+	Lime	green
+}
+
+# build up a list of non-citrus foods
+set nonCitrus {}
+
+foreach k [array names foodColor] {
+	if {![info exists citrusColor($k)]} {
+		lappend nonCitrus $k
+	}
+}
+#-----------------------------
+
+#-----------------------------
+# @@PLEAC@@_5.12
+#-----------------------------
+
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+#-----------------------------
+# @@PLEAC@@_5.13
+#-----------------------------
+
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+#-----------------------------
+# @@PLEAC@@_5.14
+#-----------------------------
+
+array unset count
+foreach element $LIST {
+	if {![info exists count($element)]} {
+		set count($element) 1
+	} else {
+		incr count($element)
+	}
+}
+
+#-----------------------------
+# @@PLEAC@@_5.15
+#-----------------------------
+
+array set father {
+	Cain		Adam
+	Abel		Adam
+	Seth		Adam
+	Enoch		Cain
+	Irad		Enoch
+	Mehujael	Irad
+	Methusael	Mehujael
+	Lamech		Methusael
+	Jabal		Lamech
+	Jubal		Lamech
+	Tubalcain	Lamech
+	Enos		Seth
+}
+#-----------------------------
+foreach name {Adam Tubalcain Elvis Enos} {
+	set fathers {}
+	while {[info exists father($name)]} {    ;# if <name> has a father
+		lappend fathers $name            ;# add it to the list
+		set name $father($name)         ;# and check the father's father
+	}
+	puts $fathers
+}
+#-----------------------------
+
+foreach {k v} [array get father] {
+	lappend children($v) $k
+}
+set sep {, }                ;# separate output with commas
+foreach name {Adam Tubalcain Elvis Lamech} {
+	if {[info exists children($name)] && [llength children($name)]} {
+		set res $children($name)
+	} else {
+		set res nobody
+	}
+	puts "$name begat [join $res $sep]"
+}
+#-----------------------------
+
+foreach file $files {
+	if {[catch {open $file} F]} {
+		puts stderr "Couldn't read $file: $F; skipping."
+		continue
+	}
+	while {[gets $F line] >= 0} {
+		if {![regexp {^\s*#\s*include\s*<([^>]+)>} $line --> name]} {
+			continue
+		}
+		lappend includes($name) $file
+	}
+	close $F
+}
+#-----------------------------
+
+set includeFree {}                  ;# list of files that don't include others
+foreach k [array names includes] {
+	set uniq($k) {}
+}
+forech file [lsort [array names uniq]] {
+	if {![info exists includes($file)]} {
+		lappend includeFree $file
+	}
+}
+
+#-----------------------------
+# @@PLEAC@@_5.16
+#-----------------------------
+
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+#-----------------------------
+
+# @@PLEAC@@_6.0
+#-----------------------------
+regexp $pattern $string
+regsub $pattern $string $replacement
+#-----------------------------
+regexp sheep $meadow            # True if $meadow contains "sheep"
+
+#-----------------------------
+regsub old $meadow new meadow   # Replace "old" with "new" in $meadow
+
+#-----------------------------
+if [regexp -nocase {\bovines?\b} $meadow ] {
+    puts -nonewline {Here be sheep!}
+}
+
+#-----------------------------
+set string {good food}
+set string [regsub {o*} $string e] # regsub with out replacement var returns result.
+
+#-----------------------------
+foreach i [regexp -all -inline {\d+}] {
+    puts "Found number $i"
+}
+
+#-----------------------------
+set numbers [regexp -all -inline {\d+}]
+
+#-----------------------------
+set digits 123456789
+set nonlap [regexp -inline -all {\d\d\d} $digits]
+#no direct way for overlap since the regex behavior of /g|-all in tcl is differnt from perl.
+set yeslap {}
+for {set i 0} {$i < [string length $digits]} {incr i} {
+     set match [regexp -inline {\d\d\d} [string range $digits $i end]]
+     if {[string length $match]} {
+        lappend yeslap $match
+     }
+}
+
+#-----------------------------
+# no direct pre and post match vars in tcl.
+set string {And little lambs eat ivy}
+regexp -indices  -- {l.*s} $string idxs
+set start [lindex $idxs 0]
+set stop [lindex $idxs 1]
+puts "([string range $string 0 $start-1]) ([string range $string $start $stop]) ([string range $string $stop+1 end])"
+
+# @@PLEAC@@_6.1
+#-----------------------------
+set dst $src
+regsub this $dst that dst
+
+#-----------------------------
+regsub this $src that dst
+
+#-----------------------------
+# strip to basename
+regsub ^.*/ $::argv0 {} progname
+
+#-----------------------------
+# it is easier to do it this way than the next.
+package require struct::list
+::struct::list map $words {string totitle}
+
+# using regex.
+set capword [gregsub {(\w+)} $words {
+      r {return [string totitle $r]}
+}]
+
+#-----------------------------
+# /usr/man/man3/foo.1 changes to /usr/man/cat3/foo.1
+regsub {man(?=\d)} $manpage cat catpage
+
+#-----------------------------
+set bindirs {/usr/bin /bin /usr/local/bin}
+set libdirs [string map {bin lib} $bindirs]
+puts $libdirs
+# /usr/lib /lib /usr/local/lib
+
+#-----------------------------
+regsub -all x $a y b # copy changed string to b
+set b [regsub -all x $a y a] # change a, count goes in b
+
+# @@PLEAC@@_6.2
+#-----------------------------
+# matching letters
+if [regexp {^[A-Za-z]+$} $var] {
+    #may be better to user [[:alpha:]]+$
+}
+
+#-----------------------------
+if [regexp {^[[:alpha:]]+$} $var] {
+    puts "var is purely alphabetic"
+}
+
+#-----------------------------
+readlines $data {
+    {line} {
+        if {[regexp {^[[:alpha:]]+$} $line]} {
+            puts -nonewline "$line: alphabetic"
+        } else {
+            puts -nonewline "$line: line noice"
+        }
+    }
+}
+#__END__
+#silly
+#façade
+#coöperate
+#niño
+#Renée
+#Molière
+#hæmoglobin
+#naïve
+#tschüß
+#random!stuff#here
+
+# @@PLEAC@@_6.3
+#-----------------------------
+# matching words
+{\S+} # as many non-whitespace bytes as possible
+{[A-Za-z'-]+} # as many letters apostrophes and hyphens
+
+#-----------------------------
+{\y([A-Za-z]+)\y} # usually best
+{\s([A-Za-z]+)\s} # fails at ends or w/ punctuation
+
+# @@PLEAC@@_6.4
+#-----------------------------
+package require Tclx
+set str {www.tcl.tk}
+
+set re {(?x)                # allow formatting
+    (                       # capture group
+        (?:                 # grouping parens
+            (?! [-_] )      # lookahead for neither - nor _
+            [\w] +          # hostname component
+            \.              # add domain dot
+        )+                  # repeat
+        [A-Za-z]            # next must be letter
+        [\w-]+              # now trailing domain part
+    )
+}
+
+puts [gregsub $re $str {
+        {host} {
+            return "$host \[[host_info addresses $host]\]"
+        }
+    }]
+
+#-----------------------------
+set re {(?x)       # replace
+    \#             # a pound
+    (\w+)          # varname
+    \#             # another pound
+}
+
+puts [gregsub $re $str {
+        {var} {
+            return [uplevel 2 "set $var"]
+        }
+    }]
+
+# @@PLEAC@@_6.5
+#-----------------------------
+# finding Nth occurence of a match
+set pond  "One fish two fish red fish blue fish"
+set want 3
+set count 0
+gregsub {(?i)(\w+)\s+fish} $pond {
+    {c} {
+        variable want
+        variable count
+        incr count
+        if {$want == $count} {
+            puts "The third fish is a $c one"
+        }
+    }
+}
+
+#-----------------------------
+set fishes [regexp -all -inline -- {(?i)\w+(?=\s+fish)} $pond ]
+puts "The third fish is a [lindex $fishes 2] one."
+
+#-----------------------------
+{(?i)(?:\w+\s+fish\s+){2}(\w+)\s+fish}
+
+#-----------------------------
+set count 0
+gregsub {(?i)(\w+)\s+fish} $pond {
+    {c} {
+        uplevel 2 {incr count} #or what eveer you want to do.
+    }
+}
+
+#-----------------------------
+set count [regsub -all -- {PAT} $string {} {}]
+
+#-----------------------------
+set count [expr [llength [regexp -all -- {PAT} $string]] + 1]
+
+#-----------------------------
+# no overlapping matches.
+# @@INCOMPLETE@@
+
+#-----------------------------
+set colors [regexp -all -inline -- {(?i)\w+(?=\s+fish)} $pond ]
+set color [lindex $colors 2]
+
+# with out temporary.
+set color [lindex [regexp -all -inline -- {(?i)\w+(?=\s+fish)} $pond ] 2]
+puts "The third fish in the pond is $color"
+
+#-----------------------------
+set evens {}
+foreach {a b} [regexp -all -inline -- {(?i)\w+(?=\s+fish)} $pond ] {
+    lappend evens $b
+}
+puts "The even numbered fish are $evens"
+
+#-----------------------------
+# hard to do sushi.
+#-----------------------------
+set pond  "One fish two fish red fish blue fish swim here"
+set color [lindex [regexp -all -inline -- {(?i)\w+(?=\s+fish)} $pond ] end]
+puts "Last fish is $color"
+
+# last fish is blue
+#-----------------------------
+set re {(?x)
+    A           # find some pattern A
+    (?!         # mustn't be able to find
+        .*      # something
+        A       # and A
+    )
+    $           # thru end of str
+}
+
+#-----------------------------
+set pond  "One fish two fish red fish blue fish swim here"
+if [regexp -- {(?x)
+        \y(\w+)\s+fish\y
+        (?!.*\yfish\y)
+    } $pond all one] {
+    puts "Last fish is $one"
+} else {
+    puts "Failed."
+}
+# last fish is blue
+
+# @@PLEAC@@_6.6
+#-----------------------------
+argf-iter {
+    line {
+        puts [regsub -all -- {<.*>} $line {}]
+    }
+}
+
+#-----------------------------
+# headerfy: change certain chapter headers to html
+set re {(?xn)
+    \A              # start of record
+    (
+        ^Chapter    # title
+        \s+
+        \d+         # decimal number
+        \s+
+        :
+        .*
+     )$
+}
+
+set options(CR) "\n"
+argf-iter {
+    para {
+        variable re
+        puts -nonewline [regsub -all -- $re $para {<H1>\1</H1>}]
+    }
+}
+array unset options(CR)
+
+#-----------------------------
+set options(CR) "\n\n"
+argf-iter {
+    para {
+        gregsub {(?w)^START(.*?)^END} $para {
+            {chunk} {
+                puts -nonewline "chunk in $::argv has $chunk"
+            }
+        }
+    }
+}
+
+# @@PLEAC@@_6.7
+#-----------------------------
+# reading records with a pattern separator
+set chunks [split [regsub -all -- {pattern} [read -nonewline $fd] "\0"] "\0"]
+
+#-----------------------------
+set chunks [split [regsub -all -- {(?n)^\.(Ch|Se|Ss)$} [read -nonewline $fd] "\0"] "\0"]
+set len [llength $chunks]
+puts "I read $len chunks"
+
+# @@PLEAC@@_6.8
+#-----------------------------
+# tcl does not have regexp range operators
+
+#-----------------------------
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+
+regrange {BEGIN PATTERN} .. {ENDPATTERN} $data {
+    {line} {
+        puts ">$line"
+    }
+}
+
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+foreach line [lrange $data $first_line_no $last_line_no-1] {
+    puts $line
+}
+
+#-----------------------------
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+
+regrange {BEGIN PATTERN} ... {ENDPATTERN} $data {
+    {line} {
+        puts ">$line"
+    }
+}
+
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+foreach line [lrange $data $first_line_no-1 $last_line_no] {
+    puts $line
+}
+
+#-----------------------------
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+puts [lrange $data 15-1 17-1] # prints lines 15 .. 17 as it is indexed by 0.
+
+#-----------------------------
+# the perl logic is not directly portable due to absence of range operators.
+set in_header {}
+regrange {} .. {^$} $data {
+    {line} {
+        variable in_header
+        lappend in_header $line
+    }
+}
+
+set in_body {}
+regrange {^$} .. {$-^} $data { # $-^ will not match any thing thus leaving an open end.
+    {line} {
+        variable in_body
+        lappend in_body $line
+    }
+}
+
+#-----------------------------
+set fd [open $argv]
+set data [split [read $fd] "\n"]
+array set seen {}
+regrange {(?i)^From:?\s} .. {^$} $data {
+    line {
+        variable seen
+        set ids [regexp -inline -all {[^<>(),;\s]+\@[^<>(),;\s]+} $line]
+        foreach id $ids {
+            if {![info exists seen($id)]} {
+                puts $id
+                set seen($id) 0
+            } else {
+                incr seen($id)
+            }
+        }
+    }
+}
+
+# @@PLEAC@@_6.9
+#-----------------------------
+proc glob2pat globstr {
+    # note - we dont need to do this, we already have 'glob' command.
+    # escapes the chars '\' '.' '+' '^' '$' '{' '}' '(' ')'
+    set patmap {
+       "\\" "\\\\"
+        {.} {\.}
+        {+} {\+}
+        {^} {\^}
+        {$} {\$}
+        "{" "\{"
+        "}" "\}"
+        {(} {\(}
+        {)} {\)}
+
+        * .*
+        ? .
+        [ [
+        ] ]
+    }
+    # using a bre to avoid other regexp rules
+    return [append {} (?b)^ [string map $patmap [join $globstr]] $]
+}
+
+# @@PLEAC@@_6.10
+#-----------------------------
+# tcl caches compiled regexp if it is assigned to a variable (and even if it is not,
+# but that is restricted to last 30) so /o in perl is not necessary here.
+set pattern {blue}
+argf-iter {
+    line {
+        variable pattern
+        if [regexp  -- $pattern $line] {
+            # do something.
+        }
+    }
+}
+
+#-----------------------------
+set popstates {CO ON MI WI MN}
+while {[gets $fd line] >= 0} {
+    foreach state $popstates {
+        if [regexp  -- $state $line] {
+            puts $line
+            break
+        }
+    }
+}
+
+#-----------------------------
+# using argf-iter
+set popstates {CO ON MI WI MN}
+argf-iter {
+    line {
+        variable popstates
+        foreach state $popstates {
+            if [regexp  -- $state $line] {
+                puts -nonewline $line
+                break
+            }
+        }
+    }
+}
+
+#-----------------------------
+set popstates {CO ON MI WI MN}
+set pre {while {[gets $fd line]>= 0}}
+set code {}
+foreach state $popstates {
+    append code [subst -nocommands {
+    if [regexp  -- $state [set line]] {
+        puts [set line]
+    }
+    }]
+}
+
+eval [lappend pre $code]
+
+#-----------------------------
+package require struct::list
+
+set fd [open $argv]
+set sw_pre {[switch -regexp {$line}}
+set code {}
+append code [::struct::list map $popstates {apply {
+        {state} {
+            return "$state {return 1}"
+        }
+    }}]
+lappend code {default {return 0}}
+
+set tmp {}
+set myproc [append tmp $sw_pre { } [list [join $code]] {]}]
+while {[gets $fd line] >= 0} {
+    if [subst [subst -nocommands $myproc]] {
+        puts $line
+    }
+}
+
+#-----------------------------
+proc build_exp words {
+    # return a list of lambdas that can be applied to a line to get a
+    # result string containing matching results.
+    return [::struct::list map $words {apply
+        {{word} {
+            return "line {return \[regexp $word \$line\]}"
+        }}
+    }]
+}
+
+proc func {var f} {
+    return [apply $f $var]
+}
+
+proc + {a b} {return [expr ($a + $b)]}
+proc * {a b} {return [expr ($a * $b)]}
+
+proc build_match_func {func init words} {
+    #return an applicable lambda.
+    return "line {return \[::struct::list fold \[::struct::list map \[build_exp {$words}\] \[list func \$line\]\] $init $func\]}"
+}
+
+set match_any [build_match_func + 0 $words]
+set match_all [build_match_func * 1 $words]
+
+while {[gets $fd line] >= 0} {
+    if [apply $match_all $line] {
+        puts $line
+    }
+}
+
+#-----------------------------
+# we cache all regex in tcl. so there is no difference here.
+set popstates {CO ON MI WI MN}
+while {[gets $fd line] >= 0} {
+    foreach state $popstates {
+        if [regexp  -- $state $line] {
+            puts $line
+            break
+        }
+    }
+}
+
+# @@PLEAC@@_6.11
+#-----------------------------
+chan configure stdout -buffering none
+while {![eof stdin]} {
+    if {[catch {
+        puts -nonewline "Pattern? "
+        gets stdin pat
+        regexp $pat {}
+    } err]} {
+        puts "Invalid pattern"
+    }
+}
+
+#-----------------------------
+proc is_valid_pattern pat {
+    return [expr ![catch {regexp $pat {}} err]]
+}
+
+#-----------------------------
+set rexp [lindex $argv 0]
+if [catch "regexp $rexp {}" err] {
+    puts "Bad Pattern $rexp: $::argv0"
+    exit -1
+}
+set fd [open [lindex $argv 1]]
+foreach para [split [regsub -all -- "\n\n" [read $fd] "\0"] "\0"] {
+    if [regexp $rexp $para] {
+        puts $para
+    }
+}
+close $fd
+
+#-----------------------------
+set safe [interp create -safe]
+if [$safe eval {regexp $pat $line}] {
+    do_something
+}
+
+# @@PLEAC@@_6.12
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_6.13
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_6.14
+#-----------------------------
+# perl does not support \G switch
+# so we are left with:
+
+gregsub {(\d+)} $str {
+        {match} {
+            puts "Found $match"
+        }
+    }
+
+#-----------------------------
+set n [gregsub {^( )} $str {
+        {match} {
+            return 0
+        }
+    }]
+
+#-----------------------------
+gregsub {^,?(\d+)} $str {
+        {match} {
+            puts "Found number $match"
+        }
+    }
+
+#-----------------------------
+# tcl does not have /c modifier either.
+proc gmatch {exp str block} {
+    set start 0
+    while 1 {
+        if {[regexp -indices -start $start -- $exp $str idx]} {
+            set start [expr [lindex $idx 1] + 1]
+            apply $block [string range $str {expand}$idx]
+        } else break
+    }
+    return $start
+}
+
+set str "The year 1752 lost 10 days on the 3rd of September"
+set e [gmatch {\d+} $str {
+        {match} {
+            puts $match
+        }
+    }]
+
+if [regexp -indices -start $e -- {\S+} $str idx] {
+    puts "Found [string range $str {expand}$idx] after last number"
+}
+
+#-----------------------------
+# use the [lindex $idx end] as the pos for next regexp match..
+
+# @@PLEAC@@_6.15
+#-----------------------------
+# try removing tags very badly
+regsub -all -- {<.*>} $line {} line
+
+#-----------------------------
+# non greedy but still bad.
+regsub -all -- {<.*?>} $line {} line
+
+#-----------------------------
+# stil wrong
+set txt "<b><i>this</i> and <i>that</i> are important</b> Oh, <b><i>me
+too!</i></b>"
+regexp -all -inline -- {(?x) <b><i>(.*?)</i></b> } $txt
+
+#-----------------------------
+{(?x)BEGIN((?:(?!BEGIN).)*)END}
+
+#-----------------------------
+{(?x) <b><i>(  (?:  (?!</b>|</i>). )* )</i></b> }
+
+#-----------------------------
+{(?x) <b><i>(  (?:  (?!</[bi]>). )* )</i></b> }
+
+#-----------------------------
+{(?x)
+    <b><i>
+    [^<]*       #stuff not possibly bad and not possibly end
+    (?:
+        (?!  </?[ib]>  ) #what we cant have
+        <
+        [^>]*
+    ) *
+    </i></b>
+}
+
+# @@PLEAC@@_6.16
+#-----------------------------
+# no easy way to do this.
+# a difference in the tcl regex implementation means that if I say \1+, it immediatly
+# changes the definition of \1 do not know if this behavior is correct.
+# but it means that unlike the perl version, we print the dup words multiple times.
+# if they are repeated more than 2 times .
+# using a non capturing gropu (?:xx\1xx) did not help.
+
+set fd [open $argv]
+set p 0
+foreach para [split [regsub -all -- "\n\n" [read -nonewline $fd] "\0"] "\0"] {
+    incr p
+    set start 0
+    while 1 {
+        set re {\y(\S+)\y(\s+\1\y)}
+        if {[regexp -indices -start $start -- $re $para all one two]} {
+            puts "dup word '[string range $para {expand}$one]' at paragraph $p"
+            set start [expr [lindex $all end] + 1]
+        } else break
+    }
+}
+
+#-----------------------------
+set a nobody
+set b bodysnatcher
+if [regexp -- {^(\w+)(\w+) \2(\w+)$} "$a $b" all 1 2 3] {
+    puts "$2 overlaps in $1-$2-$3"
+}
+
+#-----------------------------
+{^(\w+?)(\w+) \2(\w+)$}
+
+#-----------------------------
+# prime factors
+set arg 180
+set cap [string repeat o $arg]
+while {[regexp -- {^(oo+?)\1+$} $cap all one]} {
+    puts -nonewline [string length $one]
+    regsub -all $one $cap o cap
+}
+puts [string length $cap]
+
+#-----------------------------
+# diophantine
+set cap [string repeat o 281]
+if {[regexp -- {(o*)\1{11}(o*)\2{14}(o*)\3{15}$} [string repeat o 281]
+all 1 2 3]} {
+    puts "One solution is x=[string length $1] y=[string length $2]
+z=[string length $3]"
+} else {
+    puts "No match"
+}
+
+# One solution is x=17 y=3 z=2
+#-----------------------------
+{^(o+)\1{11}(o+)\2{14}(o+)\3{15}$}  => One solution is x=17 y=3 z=2
+{^(o*?)\1{11}(o*)\2{14}(o*)\3{15}$} => One solution is x=0 y=7 z=11
+{^(o+?)\1{11}(o*)\2{14}(o*)\3{15}$} => One solution is x=1 y=3 z=14
+
+# @@PLEAC@@_6.17
+#-----------------------------
+# alpha | beta
+{alpha|beta}
+
+#-----------------------------
+# alpha & beta
+{(?=.*alpha)(?=.*beta)}
+
+#-----------------------------
+# alpha beta | beta alpha
+{alpha.*beta|beta.*alpha}
+
+#-----------------------------
+# !beta
+{^(?:(?!beta).)*$}
+
+#-----------------------------
+# !bad but good
+{(?=(?:(?!BAD).)*$)GOOD}
+# we dont have an operator like =~ or !~ in tcl so no prefered way.
+
+#-----------------------------
+if {[expr [regexp {pat1} $string] && [regexp {pat2} $string]]} {
+    something
+}
+
+#-----------------------------
+if {[expr [regexp {pat1} $string] || [regexp {pat2} $string]]} {
+    something
+}
+
+#-----------------------------
+# mini grep
+set pat [::struct::list shift argv]
+argf-iter {
+    line {
+        variable pat
+        if [regexp $pat $line] {
+            puts -nonewline $line
+        }
+    }
+}
+
+#-----------------------------
+regexp {(?=.*bell)(?=.*lab)} "labelled"
+[expr {[regexp {} bell] && [regexp {} lab]}]
+
+#-----------------------------
+if [regexp {(?xw)
+    ^               # start
+    (?=             # lookahead
+        .*
+        bell
+    )
+    (?=
+        .*
+        lab
+    )
+} $murray_hill] {
+    puts "Looks like Bell Labs might be in Murray Hill!"
+}
+
+#-----------------------------
+regexp {(?:^.*bell.*lab)|(?:^.*lab.*bell)} labelled
+
+#-----------------------------
+set brand labelled
+if [regexp {(?xw)
+        (?:                 # non-capturing grouper
+            ^ .*?           # any amount of stuff at the front
+              bell          # look for a bell
+              .*?           # followed by any amount of anything
+              lab           # look for a lab
+          )                 # end grouper
+    |                       # otherwise, try the other direction
+        (?:                 # non-capturing grouper
+            ^ .*?           # any amount of stuff at the front
+              lab           # look for a lab
+              .*?           # followed by any amount of anything
+              bell          # followed by a bell
+          )                 # end grouper
+} $brand] {
+    puts "Our brand has bell and lab separate."
+}
+
+#-----------------------------
+regexp {(?w)^(?:(?!waldo).)*$} $map
+
+#-----------------------------
+if [regexp {(?xw)
+        ^                   # start of string
+        (?:                 # non-capturing grouper
+            (?!             # look ahead negation
+                waldo       # is he ahead of us now?
+            )               # is so, the negation failed
+            .               # any character (cuzza /s)
+        ) *                 # repeat that grouping 0 or more
+        $                   # through the end of the string
+} $map] {
+    puts "There's no waldo here!"
+}
+
+#-----------------------------
+{(?x)
+    ^                       # anchored to the start
+    (?!                     # zero-width look-ahead assertion
+        .*                  # any amount of anything (faster than .*?)
+        ttyp                # the string you don't want to find
+    )                       # end look-ahead negation; rewind to start
+    .*                      # any amount of anything (faster than .*?)
+    tchrist                 # now try to find Tom
+}
+
+# @@PLEAC@@_6.18
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_6.19
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_6.20
+#-----------------------------
+set ans [gets stdin]
+set safe [interp create -safe]
+if [$safe eval {regexp -nocase SEND $ans}] {
+    puts {Action is send}
+} elseif [$safe eval {regexp -nocase STOP $ans}] {
+    puts {Action is stop}
+} elseif [$safe eval {regexp -nocase START $ans}] {
+    puts {Action is start}
+} elseif [$safe eval {regexp -nocase ABORT $ans}] {
+    puts {Action is abort}
+} elseif [$safe eval {regexp -nocase LIST $ans}] {
+    puts {Action is list}
+} elseif [$safe eval {regexp -nocase EDIT $ans}] {
+    puts {Action is edit}
+}
+
+#-----------------------------
+set ans [gets stdin]
+set safe [interp create -safe]
+proc smatch {exp data} {
+    variable safe
+    return [$safe eval [list regexp -nocase $exp $data]]
+}
+
+set actions {SEND STOP START ABORT LIST EDIT}
+foreach act $actions {
+    if [smatch $act $ans] {
+        puts "Action is [string tolower $act]"
+    }
+}
+
+#-----------------------------
+set errors 0
+argf-iter {
+    cmd {
+        variable errors
+        switch -regexp $cmd {
+            edit invoke_editor
+            send deliver_message
+            list {$pager $file}
+            abort {
+                puts {see you}
+                exit
+            }
+            default {
+                puts "unknown command $cmd"
+                incr errors
+            }
+        }
+    }
+}
+
+# @@PLEAC@@_6.21
+#-----------------------------
+set urls {(http|telnet|gopher|file|wais|ftp)}
+set ltrs {\w}
+set gunk {/#~:.?+=&%@!\-}
+set punc {.:?\-}
+set any  "$ltrs$gunk$punc"
+argf-iter {
+    line {
+        variable urls
+        variable ltrs
+        variable gunk
+        variable punc
+        variable any
+        #puts [subst -nocommands (?x)
+        regsub -all [subst -nocommands {(?x)
+          \\y
+          (
+           $urls     :
+           [$any] +?
+          )
+          (?=
+           [$punc]*
+           [^$any]
+           |
+           $
+          )
+         }] $line {<A HREF="\1">\1</A>} line
+        puts $line
+    }
+}
+
+# @@PLEAC@@_6.22
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_6.23
+#-----------------------------
+{(?i)^m*(d?c{0,3}|c[dm])(l?x{0,3}|x[lc])(v?i{0,3}|i[vx])$}
+
+#-----------------------------
+regsub {(\S+)(\s+)(\S+)} $str {\3\2\1} str
+
+#-----------------------------
+{(\w+)\s*=\s*(.*)\s*$}             # keyword is $1, value is $2
+
+#-----------------------------
+{.{80,}}
+#-----------------------------
+{(\d+)/(\d+)/(\d+) (\d+):(\d+):(\d+)}
+
+#-----------------------------
+regsub -all {/usr/bin} $str {/usr/local/bin} str
+
+#-----------------------------
+gregsub {%([0-9A-Fa-f][0-9A-Fa-f])} $str {
+    {match} {
+        return [format %x $match]
+    }
+}
+
+#-----------------------------
+regsub -all {(?x)
+    /\*                    # Match the opening delimiter
+    .*?                    # Match a minimal number of characters
+    \*/                    # Match the closing delimiter
+} $str {}
+
+#-----------------------------
+regsub {^\s+} $str {} str
+regsub {\s+$} $str {} str
+
+# but really, in Ruby we'd just do:
+string trim $str
+
+#-----------------------------
+regsub -all {\\n} $str "\n" str
+
+#-----------------------------
+regsub -all {^.*::} $str {} str
+
+#-----------------------------
+{(?x)^([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.
+    ([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])$}
+
+#-----------------------------
+regsub {.*$/|} $str {} str
+
+#-----------------------------
+set cols { }
+if [info exists env::(TERMCAP)] {
+    set cols $::env(TERMCAP)
+}
+if [regexp {:co#(\d+):} $cols all one] {
+    set cols $one
+} {
+    set cols 80
+}
+
+#-----------------------------
+set name [regsub -all { /\S+/|} "$::argv0 $argv" { }]
+
+#-----------------------------
+if {![regexp -nocase {linux} $tcl_platform(os)]} {
+    error "This isn't Linux"
+}
+
+#-----------------------------
+regsub -all {\n\s+} $str {} str
+
+#-----------------------------
+regexp -all {\d+\.?\d*|\.\d+} $line nums
+
+#-----------------------------
+# @@INCOMPLETE@@
+# no direct translation for \W
+# regexp -all {\y[^\Wa-z0-9_]+\y} $line capword
+
+#-----------------------------
+# regexp -all {\y[^\WA-Z0-9_]+\y} $line lowords
+
+#-----------------------------
+# regexp -all {\y[^\Wa-z0-9_][^\WA-Z0-9_]*\y} $line icwords
+
+#-----------------------------
+regexp -all {<A[^>]+?HREF\s*=\s*["']?([^'" >]+?)[ '"]?>} $line links
+
+#-----------------------------
+set initial {}
+regexp {^\S+\s+(\S)\S*\s+\S} $line all initial
+
+#-----------------------------
+# @@INCOMPLETE@@
+#-----------------------------
+set sentences {}
+foreach para [split [regsub -all -- "\n\n" [read -nonewline $fd] "\0"] "\0"] {
+    regsub -all -- "\n" $para { } para
+    regsub -all -- { {3,}} $para {  } para
+    lappend sentences [regexp -all -inline {\S.*?[!?.](?=  |\Z)}]
+}
+
+#-----------------------------
+{(\d{4})-(\d\d)-(\d\d)}            # YYYY in $1, MM in $2, DD in $3
+
+#-----------------------------
+# @@INCOMPLETE@@
+#-----------------------------
+{(?i)\yoh\s+my\s+gh?o(d(dess(es)?|s?)|odness|sh)\y}
+
+#-----------------------------
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_7.0
+#-----------------------------
+set filename {/tmp/messages}
+if {![catch {open $filename r} F]} {
+    while {[gets $F line] >= 0} {
+        if [regexp  -- {blue} $line] {
+            puts $line
+        }
+    }
+close $F
+} else {
+error "Opening $filename: $F"
+}
+
+#-----------------------------
+while {[gets stdin line] >= 0} {        #read from STDIN
+    if {![regexp -- {\d} $line]} {
+        puts stderr {No digit found}    #writes to STDERR
+    }
+    puts "Read: $line"                  #writes to STDOUT
+}
+
+#-----------------------------
+set logfile [open {/tmp/log} w]
+close $logfile
+
+#-----------------------------
+puts $logfile {Countdown initiated}
+puts {You have 30 seconds to reach minimum safety distance.}
+
+# @@PLEAC@@_7.1
+#-----------------------------
+# open file "path" for reading only
+set source  [open $path r]
+# open file "path" for writing only
+set sink    [open $path w]
+
+# open file "path" for reading only
+set source  [open $path RDONLY]
+# open file "path" for writing only
+set sink    [open $path WRONLY]
+
+# open "path" for reading and writing
+set file    [open $path r+ ]
+# open "path" with the flags "flags" (see examples below for flags)
+set file    [open $path $flags]
+
+# open file "path" read only
+set file    [open $path r]
+set file    [open $path RDONLY]
+
+# open file "path" write only, create it if it does not exist
+# truncate it to zero length if it exists
+set file    [open $path w]
+set file    [open $path {WRONLY TRUNC CREAT}]
+
+# open file "path" write only, fails if file exists
+set file    [open $path {WRONLY EXCL CREAT}]
+
+# open file "path" for appending
+set file    [open $path a]
+set file    [open $path {WRONLY APPEND CREAT}]
+
+# open file "path" for appending only when file exists
+set file    [open $path {WRONLY APPEND}]
+
+# open file "path" for reading and writing
+set file    [open $path r+]
+set file    [open $path w+]
+set file    [open $path RDWR]
+
+# open file for reading and writing, create a new file if it does not exist
+set file    [open $path {RDWR CREAT}]
+
+# open file "path" reading and writing, fails if file exists
+set file   [open $path {RDWR EXCL CREAT}]
+
+# @@PLEAC@@_7.2
+#-----------------------------
+# tcl open does not use chars with special meaning.
+set file [open $filename]
+
+# @@PLEAC@@_7.3
+#-----------------------------
+set el [file split $path]
+lset el 0 [glob [lindex $el 0]]
+set expandedpath [file join {expand}$el]
+
+# @@PLEAC@@_7.4
+#-----------------------------
+# the raised exception contains the filename.
+open afile r
+
+# @@PLEAC@@_7.6
+#-----------------------------
+set data {
+Your data goes here
+}
+foreach line [split $data "\n"] {
+    # process the line
+}
+
+# @@PLEAC@@_7.6
+#-----------------------------
+while {[gets stdin line] >= 0} {
+    # do something with the line.
+}
+
+#-----------------------------
+foreach filename $argv {
+    # closing and exception handling are done by the block
+    if {![catch {open $filename r} F]} {
+        set line [gets $F] #do stuff with $line
+        close $F
+    } else {
+        error "can't open $filename"
+    }
+}
+
+#-----------------------------
+if {![llength $argv]} {
+    set argv [glob {*.[Cch]}]
+}
+
+#-----------------------------
+# arg demo 1
+set chop_first 0
+if {![string compare [lindex $argv 0] {-c}]} {
+    incr chop_first
+    set argv [lrange $argv 1 end]
+}
+
+#-----------------------------
+# arg demo 2
+if [regexp -- {^-(\d+)$} [lindex $argv 0] all one] {
+    set columns $one
+    set argv [lrange $argv 1 end]
+}
+
+#-----------------------------
+# arg demo 3 - clustered options
+# unfortunately tcllib does not yet provide clustered opts
+# so using the same logic as that of perl.
+set append 0
+set ignore_ints 0
+set nostdout 0
+set unbuffer 0
+foreach arg $argv {
+    #process arg for -abcd
+    set parg $arg
+    while 1 {
+        if [regexp -- {^-(.)(.*)$} $parg all one two] {
+            switch -- $one {
+                {a} {incr append}
+                {i} {incr ignore_ints}
+                {n} {incr ignore_ints}
+                {u} {incr unbuffer}
+                default { error {usage: [-ainu] [filenames] ...}}
+            }
+            set parg -$two
+        } else {
+            break
+        }
+    }
+}
+
+#-----------------------------
+set fd [open [lindex $argv 0]]
+set data [read -nonewline $fd]
+close $fd
+
+#-----------------------------
+foreach arg $argv {
+    set F [open $arg r]
+    for {set i 0} {[gets $F line] >= 0} {incr i} {
+        puts $arg:$i:$line
+    }
+    close $F
+}
+
+#-----------------------------
+foreach arg $argv {
+    set F [open $arg r]
+    while {[gets $F line] >= 0} {
+        if [regexp -- {login} $line] {
+            puts $line
+        }
+    }
+    close $F
+}
+
+#-----------------------------
+set fd [open [lindex $argv 0] r]
+set data [read -nonewline $fd]
+close $fd
+set chunks 0
+foreach line [split $data "\n"] {
+    switch $line {
+    {^#} continue
+    {__(DATA|END)__} break
+    default { set chunks [llength $line]}
+}
+
+puts "Found $chunks chunks"
+
+# @@PLEAC@@_7.8
+#-----------------------------
+set old [open $old_file]
+set new [open $new_file w]
+while {[gets $old line] >= 0} {
+    # change $line, then...
+    puts $new $line
+}
+close $old
+close $new
+
+file rename $old_file "old.orig"
+file rename $new_file $old_file
+
+for {set i 0} {[gets $old line] >= 0} {incr i} {
+    if {$i == 20} { # we are at the 20th line
+        puts $new "Extra line 1"
+        puts $new "Extra line 2"
+    }
+    puts $new $line
+}
+
+for {set i 0} {[gets $old line] >= 0} {incr i} {
+    if {![expr (20 <= $i) && ($i <= 30)]} {
+        puts $new $line
+    }
+}
+
+# @@PLEAC@@_7.10
+#-----------------------------
+set fd [open {itest} r+]
+set data [read -nonewline $fd]
+regsub {foo} $data {QQQ} data
+chan seek $fd 0
+puts $fd $data
+chan truncate $fd
+close $fd
+
+#-----------------------------
+set fd [open {itest} r+]
+set data [read -nonewline $fd]
+regsub {foo} $data [clock format [clock seconds]] data
+chan seek $fd 0
+puts $fd $data
+chan truncate $fd
+close $fd
+
+# @@PLEAC@@_7.11
+#-----------------------------
+# tcl does not yet support locking of files though it is available in tclx
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_7.12
+#-----------------------------
+chan configure $fd none
+if [llength $argv] {
+    chan configure stdout none
+}
+puts -nonewline {Now you dont see it...}
+sleep 2
+puts {Now you do}
+
+#-----------------------------
+# stderr is unbuffered by default. so this is not necessary
+chan configure stderr none
+chan configure $fd full
+
+#-----------------------------
+chan configure $sock none
+chan configure $fd full
+
+#-----------------------------
+set sock [socket {www.tcl.tk} 80]
+chan configure $sock -buffering none
+puts $sock "GET / HTTP/1.0\n\n"
+set resp [read -nonewline $sock]
+close $sock
+puts "DOC is \n$resp\n"
+
+# @@PLEAC@@_7.13
+#-----------------------------
+# assume fh1 fh2 fh3 are open channels
+foreach $f {fh1 fh2 fh3} {
+    chan event [set $f] readable {
+        # do something when this becomes readable.
+    }
+    chan event [set $f] writable {
+        # do something when this becomes writable.
+    }
+}
+vwait forever
+
+# @@PLEAC@@_7.14
+#-----------------------------
+set fd [open {/dev/cua0} r+]
+chan configure $fd -blocking 0
+
+#-----------------------------
+set blocked [chan configure $fd -blocking]
+chan configure $fd -blocking 0
+
+#-----------------------------
+chan configure $fd -blocking 0
+chan puts $fd {some data}
+if [chan blocked $fd] {
+    # incomplete write, but there is no case of
+    # us having to redo the write again since tcl
+    # does it in the back ground for us.
+}
+
+set buffer [chan read -nonewline $fd $bufsize]
+if [chan blocked $fd] {
+    # did not read full bufsize.
+}
+
+# @@PLEAC@@_7.15
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_7.16
+#-----------------------------
+# tcl filehandles are like any other vars
+set fd [open {myfile}]
+set newfd $fd
+set data [myproc $newfd]
+
+# @@PLEAC@@_7.17
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_7.18
+#-----------------------------
+foreach $f {fh1 fh2 fh3} {
+    puts [set $f] $stuff_to_print
+}
+
+#-----------------------------
+set fd [open {| tee file1 file2 > /dev/null} w]
+puts $fd {data\n}
+close $fd
+
+# @@PLEAC@@_7.19
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_7.20
+#-----------------------------
+# file descriptors are just like any other variables
+set fd [open {file}]
+set newfd $fd
+
+# @@PLEAC@@_8.0
+#-----------------------------
+foreach line [split [read -nonewline $fd] "\n"] {
+   puts [string length $line] # we get chomped line by default.
+}
+
+#-----------------------------
+set lines [split [read -nonewline $fd] "\n"]
+
+#-----------------------------
+set data [read $fd]
+
+#-----------------------------
+# not a direct equivalent but it is not required in tcl.
+puts $fd [list one two three]
+
+#-----------------------------
+puts {Baa baa black sheep.}
+
+#-----------------------------
+set buffer [read $fd 4096]
+set rv [string length $buffer]
+
+#-----------------------------
+chan truncate $fd $length
+# truncating with out a file handle is not possible directly in tcl.
+
+#-----------------------------
+set pos [chan tell $datafd]
+puts "I am $pos bytes from the start of datafd"
+
+#-----------------------------
+chan seek $logfd 0 end
+chan seek $datafd $pos start
+chan seek $outfd -20 current
+#-----------------------------
+# in tcl, there is no partial write, as even in non blocking mode,
+# tcl writes in the background to complete the write.
+chan configure $datafd -blocking 0 -buffering none
+puts -nonewline $mystring
+
+chan configure $infd -blocking 0 -buffering none
+set block [read $infd 256]
+set len [string length $block]
+expr {($len != 256) ? [puts "only read $len bytes"] : 0 }
+
+#-----------------------------
+set pos [seek $handle 0 current] #dont change position.
+
+# @@PLEAC@@_8.1
+#-----------------------------
+while {[gets $fd line] >= 0} {
+    while {[regexp -- {\\$} $line]} {
+        regsub -- {\\$} $line [gets $fd] line
+    }
+    #process the full $line here.
+}
+
+# @@PLEAC@@_8.2
+#-----------------------------
+set count [wc -l $filename]
+
+#-----------------------------
+set fd [open $file]
+set count [llength [split [read -nonewline $fd] "\n"]]
+
+#-----------------------------
+set count [expr [regsub -all -- "\n" [read -nonewline $fd] {} tmp] + 1]
+
+#-----------------------------
+for {set count 0} {[gets $fd line] > -1} {incr count} {}
+
+#-----------------------------
+# para is just \n\n
+set count [expr [regsub -all -- "\n\n" [read -nonewline $fd] {} tmp] + 1]
+
+# @@PLEAC@@_8.3
+#-----------------------------
+while {[gets $fd line] >= 0} {
+    foreach word $line {
+        #do something with the word.
+    }
+}
+
+#-----------------------------
+while {[gets $fd line] >= 0} {
+    foreach word [regexp -all -inline -- {\w[\w'-]*} $line] {
+        #do something with the word.
+    }
+}
+
+#-----------------------------
+# word frequency
+array set seen {}
+while {[gets $fd line] >= 0} {
+    foreach word [regexp -all -inline -- {\w[\w'-]*} $line] {
+        incr seen([string tolower $word])
+    }
+}
+
+#-----------------------------
+array set seen {}
+while {[gets $fd line] >= 0} {
+    incr seen([string tolower $line])
+}
+
+set names [lsort -command {apply {{a b} {upvar seen seen; expr $seen($a) > $seen($b)}}} [array names seen]]
+foreach line $names {
+    puts "$line $seen($line)"
+}
+
+# @@PLEAC@@_8.4
+#-----------------------------
+package require struct::list
+
+set lines [split [read -nonewline $fd] "\n"]
+foreach line [struct::list reverse $lines] {
+    # do something with the line.
+}
+
+#-----------------------------
+set lines [split [read -nonewline $fd] "\n"]
+for {set i [llength $lines]} {$i} {incr i -1} {
+    set line [lindex $lines $i-1]
+}
+# same strategy for paragraphs.
+
+# @@PLEAC@@_8.5
+#-----------------------------
+while 1 {
+    myproc [read $fd]
+    while {[eof $fd]} {
+        after 5000
+        seek $fd 0 current
+    }
+}
+
+#-----------------------------
+set naptime 1000
+set fd [open {/tmp/logfile}]
+while 1 {
+    set out [gets $fd]
+    if [string length $out] {
+        puts $out
+    }
+    while {[eof $fd]} {
+        after $naptime
+        seek $fd 0 current
+    }
+}
+
+#-----------------------------
+file stat $logfile info
+if {!$info(nlink)} {
+    exit 0
+}
+
+# @@PLEAC@@_8.6
+#-----------------------------
+set lines [split [read -nonewline $fd] "\n"]
+set randline [lindex $lines [expr "round(rand() * [llength $lines])"]]
+
+#-----------------------------
+set fd [open {/usr/share/fortune/humorists}]
+set lines [split [regsub -all -- {%\n} [read -nonewline $fd] "\0"] "\0"]
+set idx [expr "round(rand() * [llength $lines])"]
+puts [lindex $lines $idx]
+
+# @@PLEAC@@_8.7
+#-----------------------------
+set lines [split [read -nonewline $input] "\n"]
+foreach line [shuffle $lines] { #assumes shuffle from chapt 4
+    puts $output $line
+}
+
+# @@PLEAC@@_8.8
+#-----------------------------
+for {set i 0} {[gets $fd line] >= 0} {incr i} {
+    if {$desired_line_number == $i} break
+}
+
+#-----------------------------
+set lines [split [read -nonewline $input] "\n"]
+set line [lindex $lines $desired_line_number]
+
+#-----------------------------
+proc build_index {data_file index_file} {
+    puts -nonewline $index_file [binary format i 0]
+    while {[gets $data_file line] >= 0} {
+        puts -nonewline $index_file [binary format i [tell $data_file]]
+    }
+}
+
+proc line_with_index {data_file index_file line_no} {
+    set size [string length [binary format i 0]]
+    set i_offset [expr $size * ($line_no - 1)]
+    seek $index_file $i_offset start
+    if {[tell $index_file] != $i_offset} {
+        error "Did not find $line_no"
+    }
+    set entry [read $index_file $size]
+    binary scan $entry i* d_offset
+    seek $data_file $d_offset start
+    if {[tell $data_file] != $d_offset} {
+        error "Did not find $line_no"
+    }
+    return [gets $data_file]
+}
+
+# usage
+set dfd [open fortune.dat]
+set ifd [open fortune.dat.index w]
+build_index $dfd $ifd
+close $dfd
+close $ifd
+
+set dfd [open fortune.dat]
+set ifd [open fortune.dat.index]
+puts [line_with_index $dfd $ifd 90]
+close $dfd
+close $ifd
+
+#-----------------------------
+# we dont have a tie.
+package require struct::list
+
+expr {([llength $argv] == 2) || [error "usage: print_line FILENAME
+LINE_NUMBER\n"]}
+::struct::list assign $argv filename linenumber
+
+set fd [open $filename]
+for {set i 0} {[gets $fd line] >= 0} {incr i} {
+    if {$linenumber == $i} {
+        puts $line
+        exit 0
+    }
+}
+error "Didn't find line $line_number in $filename\n"
+
+#-----------------------------
+package require struct::list
+
+expr {([llength $argv] == 2) || [error "usage: print_line FILENAME LINE_NUMBER\n"]}
+::struct::list assign $argv filename linenumber
+set dfd [open $filename]
+set ifd [open $filename.index]
+build_index $dfd $ifd
+puts [line_with_index $dfd $ifd]
+
+# @@PLEAC@@_8.9
+#-----------------------------
+set fields [split [regsub -all -- {PATTERN} $record {\0}] "\0"]
+
+#-----------------------------
+set fields [split [regsub -all -- {:} $record {\0}] "\0"]
+
+#-----------------------------
+set fields [split [regsub -all -- {\s+} $record {\0}] "\0"]
+
+#-----------------------------
+set fields [split [regsub -all -- { } $record {\0}] "\0"]
+
+# @@PLEAC@@_8.10
+#-----------------------------
+set last 0
+while {[gets $fd line] >= 0} {
+    if {![eof $fd]} {
+        set last [tell $fd]
+    }
+}
+chan truncate $fd $last
+
+# @@PLEAC@@_8.11
+#-----------------------------
+chan configure $handle -translation binary
+
+#-----------------------------
+set gifname "picture.gif"
+set gif [open $gifname]
+chan configure $gif -translation binary
+chan configure stdout -translation binary
+while {![eof $gif]} {
+    puts -nonewline [read $gif [expr 8 * 2**10]]
+}
+
+# @@PLEAC@@_8.12
+#-----------------------------
+set addr [expr $recsize * $recno]
+seek $fh $addr start
+set data [read $fh $recsize]
+binary scan $buffer $format field1 field2 #we can not pass a list/array as argument.
+#update fields
+set buffer [binary format $format $field1 $field2]
+seek $fh -$recsize current
+puts -nonewline $fh $buffer
+close $fh
+
+#-----------------------------
+# setting the login date.
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_8.13
+#-----------------------------
+chan configure $fh -translation binary
+seek $fh $addr start
+set out [read $fh]
+
+#-----------------------------
+#not optimal. do not use it for large strings.
+proc get_till_null {fh} {
+    set out {}
+    while {![eof $fh]} {
+        set char [read $fh 1]
+        set out "$out$char"
+        if [regexp -- {\0} $char] break
+    }
+    return $out
+}
+
+foreach addr $addrs {
+    #seek will detect the oct if it is prefixed with '0'.
+    seek $fh $addr start
+    puts [format {%x %o %d "%s"} $addr $addr $addr [get_till_null $fh]]
+}
+
+#-----------------------------
+set fh [open $argv]
+chan configure $fh -translation binary
+foreach line [split [read $fh] "\0"] {
+    foreach word [regexp -all -inline -- {[\x20-\x7e]+} $line] {
+        puts $word
+    }
+}
+
+# @@PLEAC@@_8.14
+#-----------------------------
+chan configure $fh -translation binary
+while {![eof $fh]} {
+    set record [read $fh $recordsize]
+    binary scan $data $template field1 field2 field3
+}
+
+# @@PLEAC@@_8.15
+#-----------------------------
+array set user_preferences {}
+foreach line [split [read -nonewline $fh] "\n"] {
+    regsub -- {#.*$} [string trim $line] {} line
+    if [string length $line] {
+        array set user_preferences [string map {= { }} $line]
+    }
+}
+
+# @@PLEAC@@_8.16
+#-----------------------------
+file stat $filename statinfo
+# statinfo now contains the relevant information.
+foreach var [array names statinfo] {
+    set $var $statinfo($var)
+}
+set mode [expr $mode & 07777]
+
+#-----------------------------
+file stat $filename statinfo
+if {!$statinfo(uid)) {
+    puts "Superuser owns $filename"
+}
+if {$statinfo(atime) > $statinfo(mtime)} {
+    puts "$filename has been read since it was written."
+}
+
+#-----------------------------
+proc is_safe path {
+    file stat $path info
+    # owner neither su nor me
+    if {$info(uid) && ![file owned $path]} {
+        return 0
+    }
+    # check if group or other can write file.
+    if {$info(mode) & 022} {
+        if {![file isdirectory $path]} {
+            return 0
+        }
+        if {!($info(mode) & 01000)} {
+            return 0
+        }
+    }
+    return 1
+}
+
+#-----------------------------
+proc is_verysafe path {
+    set build {}
+    foreach elem [file split $path] {
+        set build [file join $build $elem]
+        if {![is_safe $build]} {
+            return 0
+        }
+    }
+    return 1
+}
+
+# @@PLEAC@@_8.17
+#-----------------------------
+#struct tmp {
+#    short ut_type;                 +2      -> s    short
+#                                   +2      -> x2   padding
+#    pid_t ut_pid;                  +4      -> i    int
+#    //alignment                    +20     -> x20  padding
+#    char ut_line[UT_LINESIZE];     +12     -> A12  char
+#    char ut_id[4];                 +4      -> A4   char
+#    char ut_user[UT_NAMESIZE];     +32     -> A32  char
+#    char ut_host[UT_HOSTSIZE];     +256    -> A256 char
+#    struct exit_status ut_exit;    +4      -> x4   skip
+#
+#    long ut_session;               +4      -> x4   skip
+#    struct timeval ut_tv;          +8      -> ii   int
+#    int32_t ut_addr_v6[4];         +16     -> iiii int
+#    char pad[20];                          -> x20  skip
+#};
+
+set typedef {s x2 i x20 A12 A4 A32 A256 x4 x4 ii iiii x20}
+set sizeof [string length [binary format $typedef 0 0 {} {} {} {} 0 0 0 0 0 0 ]]
+
+set wtmp [open {/var/log/wtmp}]
+seek $wtmp 0 end
+while 1 {
+        set buffer [read $wtmp $sizeof]
+        binary scan $buffer $typedef type pid line id user host tsec tmsec addr addr2 addr3 addr4
+        scan $user %c ord
+        if {!$user || !$time || !$ord} continue
+        puts "type:$type user:$user uid:$line id:$id host:$host pid:$pid time:[clock format $tval1]"
+        puts [format "->%u.%u.%u.%u" [expr $addr & 0xff] [expr ($addr >> 8) & 0xff] [expr ($addr >> 16) & 0xff] [expr ($addr >> 24) & 0xff]]
+}
+
+# @@PLEAC@@_8.18
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_8.19
+#-----------------------------
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+#-----------------------------
+# @@PLEAC@@_9.0
+# feat. Bob Techentin
+#-----------------------------
+if {[catch {file stat /usr/bin/vi entry} err]} {error "Couldn't stat /usr/bin/vi : $err"}
+#-----------------------------
+if {[catch {file stat /usr/bin entry} err]} {error "Couldn't stat /usr/bin : $err"}
+#-----------------------------
+# can't [file stat] a filehandle
+#-----------------------------
+file stat /usr/bin/vi inode
+set ctime $inode(ctime)
+set size $inode(size)
+
+# or you can use specific [file] subcommands
+set size [file size /usr/bin/vi]
+#-----------------------------
+#  You have to read the file to test for binary data
+if {![catch {open $filename r} F]} {
+	set data [read $F]
+	close $F
+	if {![string is ascii $data]} {
+		error "$filename doesn't have text in it."
+	}
+} else {
+	error "Opening $filename: $F"
+}
+#-----------------------------
+set files [glob /usr/bin/*]
+foreach f $files {
+    puts "Inside /usr/bin is something called [file tail $f]"
+}
+#-----------------------------
+
+# @@PLEAC@@_9.1
+# feat. Bob Techentin
+#-----------------------------
+set READTIME [file atime $filename]
+set WRITETIME [file mtime $filename]
+
+file atime $filename $NEWREADTIME
+file mtime $filename $NEWWRITETIME
+#-----------------------------
+set atime [file atime $filename]
+set mtime [file mtime $filename]
+
+set atime [clock scan "- 1 week" -base $atime]
+set mtime [clock scan "- 1 week" -base $mtime]
+
+if {[catch {
+	file atime $filename $atime
+	file mtime $filename $mtime
+} err]} {
+	error "couldn't backdate $filename by a week w/ file (a|m)time: $err"
+}
+#-----------------------------
+file atime $file [clock seconds]
+#-----------------------------
+#!/bin/sh
+# uvi - vi a file without changing its access times
+# the next line restarts using tclsh \
+exec tclsh "$0" "$@"
+if {[llength $argv] != 1} {
+	error "usage: uvi filename"
+}
+set file [lindex $argv 0]
+file stat $file statinfo
+if {[info exists env(EDITOR)]} {
+	exec $env(EDITOR) $file
+} else {
+	exec vi $file
+}
+file atime $file $statinfo(atime)
+file mtime $file $statinfo(mtime)
+#-----------------------------
+
+# @@PLEAC@@_9.2
+# feat. Bob Techentin
+#-----------------------------
+file delete $filename
+eval file delete $filenames
+#-----------------------------
+if {[catch {file delete $file}]} {
+	error "Can't unlink $file"
+}
+#-----------------------------
+
+#  Tcl's [file delete] command doesn't return a count,
+#  so we have to count files before and after deletion.
+set existing 0
+foreach f $filelist {
+	if {[file exists $f]} {incr existing}
+}
+catch {eval file delete $filelist}
+set remaining 0
+foreach f $filelist {
+	if {[file exists $f]} {incr remaining}
+}
+if {$remaining > 0} {
+	set count [expr {$existing-$remaining}]
+	puts stderr "could only delete $count of $existing files"
+}
+#-----------------------------
+
+# @@PLEAC@@_9.2
+# feat. Bob Techentin
+#-----------------------------
+file delete $filename
+eval file delete $filenames
+#-----------------------------
+if {[catch {file delete $file}]} {
+	error "Can't unlink $file"
+}
+#-----------------------------
+
+if {[catch {eval file delete $filelist}]} {
+	set remaining 0
+	foreach f $filelist {
+		if {[file exists $f]} {incr remaining}
+	}
+	set count [expr {[llength $filelist] - $remaining}]
+	puts stderr "could only delete $count of $existing files"
+}
+#  Tcl's [file delete] command doesn't return a count,
+#  so we have to count files before and after deletion.
+set existing 0
+foreach f $filelist {
+	if {[file exists $f]} {incr existing}
+}
+catch {eval file delete $filelist}
+set remaining 0
+foreach f $filelist {
+	if {[file exists $f]} {incr remaining}
+}
+if {$remaining > 0} {
+	set count [expr {$existing-$remaining}]
+	puts stderr "could only delete $count of $existing files"
+}
+#-----------------------------
+
+# @@PLEAC@@_9.3
+# feat. Bob Techentin
+#-----------------------------
+file copy $oldfile $newfile
+#-----------------------------
+if {[catch {open $oldfile "r"} IN]}  {error "can't open $oldfile: $IN"}
+if {[catch {open $newfile "w"} OUT]} {error "can't open $newfile: $OUT"}
+
+set blksize [fconfigure $IN -buffersize]
+fcopy $IN $OUT -size $blksize
+close $IN
+close $OUT
+
+#-----------------------------
+#  Tcl file operations are portable
+file copy $oldfile $newfile
+#-----------------------------
+file copy datafile.dat datafile.bak
+file rename -force datafile.new datafile.dat
+#-----------------------------
+
+# @@PLEAC@@_9.4
+# feat. Bob Techentin
+#-----------------------------
+
+unset seen
+foreach filename $argv {
+	file stat $filename statinfo
+	set dev $statinfo(dev)
+	set ino $statinfo(ino)
+	if {![info exists seen($dev,$ino)]} {
+		#  do something with $filename because
+		#  we haven't seen it before
+
+		lappend seen($dev,$ino) $filename
+		#  seen($dev,$ino) is a list of filenames for the same file
+	}
+}
+
+#-----------------------------
+
+# @@PLEAC@@_9.5
+# feat. Bob Techentin
+#-----------------------------
+foreach file [glob [file join $dirname "*"]] {
+	# do something with $file
+}
+#-----------------------------
+set dir /usr/local/bin
+puts "Text files in $dir are:"
+foreach file [glob [file join $dir "*"]] {
+	set fp [open $file "r"]
+	if {[string is ascii [read $fp]]} {
+		puts $file
+	}
+	close $fp
+}
+#-----------------------------
+foreach file [glob [file join $dir "*"]] {
+	if {$file eq ".." || $file eq "."} continue
+	# ...
+}
+#-----------------------------
+proc plainfiles {dir} {
+	set result [list]
+	foreach file [lsort [glob [file join $dir "*"]]] {
+		if {[string index [file tail $file] 0] eq "."} continue
+		if {[file type $file] eq "file"} {
+			lappend result $file
+		}
+	}
+	return $result
+}
+#-----------------------------
+
+# @@PLEAC@@_9.6
+# List of regular files in current directory - file names only in list
+set files [glob -nocomplain -type f -- *.c]
+
+# -------------
+
+# As above, but with full path
+set files [glob -directory [pwd] -nocomplain -type f -- *.c]
+
+# -------------
+
+# As previous [which is more compact, so preferred], showing use of 'file' to build file names
+set pwd [pwd] ; set files [glob -nocomplain -type f -- *.c]
+
+# Assemble full path names from list entries
+foreach f $files {
+  puts [file nativename [file join "$pwd" "$f"]]
+}
+
+# -------------
+
+# Variants of the *NIX, 'find', command from the 'fileutil' package
+package require fileutil
+
+# Set search path to current directory. Could have also have used either of ~,
+# for the user's HOME directory, or a relative / absolute path
+set path .
+
+# -----
+
+# 1. Similar to, 'glob', but also allows 'regexp'-based globbing
+set files [fileutil::findByPattern $path -glob -- *.c]
+
+# -----
+
+# 2. Makes use of a 'filter' procedure
+proc is_c {name} { return [string match *.c $name] }
+
+set files [fileutil::find $path is_c]
+
+# -----
+
+# In both cases:
+# * Search is recursive
+# * Full path names printed
+foreach f $files {
+  puts $f
+}
+
+# -----------------------------
+
+# Two lists generated, first one filtered by file extension, second one by file type
+package require fileutil
+
+proc is_c_or_h {name} { return [string match -nocase *.\[ch\] $name] }
+
+set path . ; set files [fileutil::find $path is_c_or_h]
+
+foreach f $files {
+  if {[string match "text" [fileutil::fileType $f]]} { lappend textfiles $f }
+}
+
+foreach f $textfiles {
+  puts $f
+}
+
+# -------------
+
+# As above, but both file extension and file type considered in filter procedure, so
+# only a single list is generated
+package require fileutil
+
+proc is_c_or_h_and_text {name} {
+  if {[string match -nocase *.\[ch\] $name] && ![catch {fileutil::fileType $name} filetype]} {
+    return [expr [string compare "text" $filetype] == 0]
+  }
+  return 0
+}
+
+set path . ; set files [fileutil::find $path is_c_or_h_and_text]
+
+foreach f $files {
+  puts $f
+}
+
+# -----------------------------
+
+# Sorted list of all subdirectories in the current directory which commence with the
+# digits 0-9
+set dirs [lsort [glob -directory [pwd] -nocomplain -type d -- \[0-9\]*]]
+
+# @@PLEAC@@_9.7
+# Minimal-code approach to this problem is to generate a list of paths using the
+# 'find' or 'findByPattern' commands of the 'fileutil' package, then traverse that
+# list processing each file in turn. A variation is to write a filter procedure for
+# 'find' that processes each selected file whilst still retaining its expected 
+# behaviour. Whilst the latter is likely to be better-performing, it isn't generally
+# recommended to have a filter procedure possess side-effecting behaviour
+
+package require fileutil
+
+# Conventional filter procedures for use with, fileutil::find
+proc is_dir {name} { return [expr [fileutil::test $name {d}] != 0] }
+
+# -----
+
+# Generate list of directories in a directory
+set path . ; set files [fileutil::find $path is_dir]
+
+# -------------
+
+# Side-effecting filter procedures
+proc accum_filesize {name} {
+  global filesize
+  if [fileutil::test $name {f}] { set filesize [expr $filesize + [file size $name]] }
+  return 0
+}
+
+proc biggest_file {name} {
+  global biggest
+  if {[fileutil::test $name {f}] && [file size $name] > $biggest} {
+    set biggest [file size $name]
+  }
+  return 0
+}
+
+proc youngest_file {name} {
+  global youngest
+  if {[fileutil::test $name {f}] && [file mtime $name] < $youngest} {
+    set youngest [file mtime $name]
+  }
+  return 0
+}
+
+# -----
+
+# Obtain total size of all files in a directory and its subdirectories
+set path . ; set filesize 0 ; set files [fileutil::find $path accum_filesize]
+puts $filesize
+
+# Find biggest size file in a directory and its subdirectories
+set path . ; set biggest 0 ; set files [fileutil::find $path biggest_file]
+puts $biggest
+
+# Find most recent file in a directory and its subdirectories
+set youngest 2147483647 ; set files [fileutil::find $path youngest_file]
+puts [clock format $youngest -format %D]
+
+# Alternatively, one could implement a procedure that actually recurses through
+# directories performing required processing. One approach would see the intermixing
+# of recursing and processing code; another would see a generic recursing procedure
+# passed the name of a processing procedure which is then applied to each selected
+# file via the 'eval' command. The latter approach has the advanatage of being flexible,
+# though performance is hampered due to the use of 'eval'; the former approach is more
+# 'one-shot', but most likely, better performing
+
+proc processDirectory {baseDir proc} {
+  set pwd [pwd] ; if [catch {cd $baseDir} result] { return }
+
+  foreach dir [glob -nocomplain -type d -- *] {
+    processDirectory $dir $proc
+  }
+
+  eval "$proc [pwd]" ; cd $pwd
+}
+
+# -------------
+
+proc show {dir} { puts $dir }
+
+proc accum_filesize {dir} {
+  global filesize
+  foreach file [glob -directory $dir -nocomplain -type f -- *] {
+    set filesize [expr $filesize + [file size $file]]
+  }
+}
+
+proc biggest_file {dir} {
+  global biggest
+  foreach file [glob -directory $dir -nocomplain -type f -- *] {
+    if {[file size $file] > $biggest} { set biggest [file size $file]}
+  }
+}
+
+proc youngest_file {dir} {
+  global youngest
+  foreach file [glob -directory $dir -nocomplain -type f -- *] {
+    if {[file mtime $file] < $youngest} { set youngest [file mtime $file]}
+  }
+}
+
+# -------------
+
+# Obtain total size of all files in a directory and its subdirectories
+set filesize 0 ; processDirectory [pwd] "accum_filesize" ; puts $filesize
+
+# Find biggest size file in a directory and its subdirectories
+set biggest 0 ; processDirectory [pwd] "biggest_file" ; puts $biggest
+
+# Find most recent file in a directory and its subdirectories
+set youngest 2147483647 ; processDirectory [pwd] "youngest_file"
+puts [clock format $youngest -format %D]
+
+# -----------------------------
+
+# Generate list of directories in a list of directories
+
+if {$argc < 1} { puts stderr "usage: $argv0 dir..." ; exit 1 }
+
+foreach dirname $argv {
+  processDirectory $dirname "show"
+}
+
+# @@PLEAC@@_9.8
+# The 'file delete' command can:
+# * Delete both files and subdirectories
+# * Recursively delete the latter
+# Therefore, it is not necessary to construct a tree-traversing [recursive or otherwise]
+# procedure in order to remove a directory tree. It may be, however, useful to use such
+# an approach should it be necessary to implement special processing [e.g. interactive
+# prompting]. The use of a custom procedure that intermixes recursing and processing code
+# [as shown in the previous section] is probably the simplest, best performing approach,
+# to this latter task.
+
+# 'rmtree1' - straightforward implementation 
+
+if {$argc < 1} { puts stderr "usage: $argv0 dir..." ; exit 1 }
+
+foreach dirname $argv {
+  if [catch {file delete -force -- $dirname} result] {
+    puts "Error deleting $dirname \[$result\]"
+  }
+}
+
+# -----------------------------
+
+# 'rmtree2' - recursive, tree-traversing implementation 
+
+# Recurser - recursively traverses directory tree
+proc rmtree_ {baseDir} {
+  set pwd [pwd] ; if [catch {cd $baseDir} result] { return }
+
+  foreach dir [glob -nocomplain -type d -- *] {
+    rmtree_ $dir
+  }
+
+  # Let's delete the regular files in, 'baseDir'
+  foreach filename [glob -nocomplain -type f -- *] {
+    if [catch {file delete -force -- $filename} result] {
+      puts "Error deleting $filename \[$result\]"
+    }
+  }
+
+  # Let's move up, out of, 'baseDir', so as to allow it's deletion
+  cd $pwd
+
+  # Let's delete, 'baseDir'
+  set dirname [file join $pwd $baseDir]
+
+  if [catch {file delete -force -- $dirname} result] {
+    puts "Error deleting $dirname \[$result\]"
+  }
+}
+
+# -----
+
+# Launcher - performs validation, then starts recursive routine
+proc rmtree {baseDir} {
+  if {![file exists $baseDir]} {
+    puts stderr "Directory does not exist" ; return
+  }
+
+  if [string match $baseDir* [pwd]] {
+    puts stderr "Cannot remove current directory or its parent" ; return
+  }
+
+  # Validation passed, so start recursing through subdirectories 
+  return [rmtree_ $baseDir]
+}
+
+# -------------
+
+if {$argc < 1} { puts stderr "usage: $argv0 dir..." ; exit 1 }
+
+foreach dirname $argv {
+  rmtree $dirname
+}
+
+# @@PLEAC@@_9.9
+set names [list x y z]
+
+foreach file $names {
+  # This deliberately atempts to rename an existing file to it's own, same name,
+  # thus forcing an error [unless the -force option is used]
+  set newname file
+
+  # Error display mimics Perl example
+  ## if [catch {file rename $file $newname} result] {
+  ##   puts stderr "Couldn't rename $file to $newname"
+  ## }
+
+  # However, approach shown here is preferable as it furnishes more relevant
+  # diagnostic message(s)
+  if [catch {file rename $file $newname} result] {
+    puts stderr $result
+  }
+}
+
+# -----------------------------
+
+#
+# A modified implementation of Larry's Filename Fixer. Rather than passing
+# a single expression, a 'from' regexp is passed; each match in the file
+# name(s) is changed to the value of 'to'. It otherwise behaves the same
+# 
+if {$argc < 2} { puts stderr "usage: $argv0 from to \[files...\]" ; exit 1 }
+
+set from [lrange $argv 0 0] ; set to [lrange $argv 1 1]
+set argv [lrange $argv 2 [llength $argv]]
+
+if {$argv == {}} {
+  while {[gets stdin line] >= 0} {lappend argv $line}
+} 
+
+foreach f $argv {
+  set was $f ; regsub $from $f $to file
+  if {[string compare $was $file] != 0} {
+    if [catch {file rename $was $file} result] {
+      puts stderr $result
+    }
+  }
+}
+
+# @@PLEAC@@_9.10
+set path {/usr/lib/libc.a}
+
+# -----
+
+set basename [file tail $path]
+set dirname [file dirname $path]
+
+# No equivalent to Perl's, 'fileparse', so must do:
+set base [file tail $path]
+set dir [file dirname $path]
+set ext [file extension $path]
+
+# -------------
+
+set path {/usr/lib/libc.a}
+
+# -----
+
+set file [file tail $path]
+set dir [file dirname $path]
+
+puts "dir is $dir, file is $file"
+
+# -----
+
+set name [file tail $path]
+set dir [file dirname $path]
+set ext [file extension $path]
+
+puts "dir is $dir, name is $name, extension is $ext"
+
+# -------------
+
+# According to the Tcl documentation, the 'file' command is platform-independant, so
+# should correctly work for platforms such as MacOS. Code below assumes this, but is
+# otherwise untested
+set path {Hard%20Drive:System%20Folder:README.txt}
+
+# -----
+
+set name [file tail $path]
+set dir [file dirname $path]
+set ext [file extension $path]
+
+puts "dir is $dir, name is $name, extension is $ext"
+
+# @@PLEAC@@_9.11
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_9.12
+# @@INCOMPLETE@@
+# @@INCOMPLETE@@
+
+# @@PLEAC@@_10.1
+
+
+# Subroutines in Tcl are created with the [proc] command,
+# which takes a list of formal parameters as its second
+# argument.
+         
+# On activation, the parameters are bound to the "words"
+# of the call (which may contain data, variable/subroutine
+# names, executable expressions, etc).  This is a variant
+# of call-by-name semantics.
+
+
+
+proc hypotenuse {x y} {
+   return [expr {sqrt($x*$x+$y*$y)}]   ;# Better still: use hypot()
+}
+set diag [hypotenuse 3 4]
+# => 5.0
+
+
+# Subroutines may have a variable number of 
+# arguments, by using the special argument "args":
+
+
+proc hypotenuse args {
+   foreach {x y} $args break
+   return [expr {hypot($x, $y)}]
+}
+
+
+# A subroutine can be applied to a list using [eval],
+# which concatenates and then executes its arguments.
+
+
+set a [list 3 4]
+eval hypotenuse $a
+# => 5.0
+
+
+# It is possible to create local references
+# to variables in other stack frames using
+# [upvar], so the typical idiom for
+# pass-by-reference is to pass the variable's
+# name as argument, and [upvar] it:
+
+
+set nums [list 1.4 3.5 6.7]
+proc trunc-em {name} {
+    upvar $name a
+    set len [llength $a]
+    for {set i 0} {$i < $len} {incr i} {
+        lset a $i [expr {int([lindex $a $i])}]
+    }
+}
+trunc-em nums
+
