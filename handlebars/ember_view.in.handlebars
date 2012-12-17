@@ -1,0 +1,10 @@
+<h1>Joe's Lamprey Shack</h1>
+{{controller.restaurantHours}}
+{{#view App.FDAContactForm}}
+  If you are experiencing discomfort from eating at Joe's Lamprey Shack,
+please use the form below to submit a complaint to the FDA.
+  {{#if controller.allowComplaints}}
+    {{view Ember.TextArea valueBinding="controller.complaint"}}
+    <button {{action submitComplaint}}>Submit</button>
+  {{/if}}
+{{/view}}

@@ -1,0 +1,10 @@
+tag(<h1>)plain(Joe's Lamprey Shack)tag(</h1>)
+inline<inline_delimiter({{)attribute_name(controller.restaurantHours)inline_delimiter(}})>
+inline<inline_delimiter({{#)attribute_name(view) attribute_name(App.FDAContactForm)inline_delimiter(}})>
+  plain(If you are experiencing discomfort from eating at Joe's Lamprey Shack,
+please use the form below to submit a complaint to the FDA.
+  )inline<inline_delimiter({{#)attribute_name(if) attribute_name(controller.allowComplaints)inline_delimiter(}})>
+    inline<inline_delimiter({{)attribute_name(view) attribute_name(Ember.TextArea) attribute_name(valueBinding)operator(=)string<delimiter(")content(controller.complaint)delimiter(")>inline_delimiter(}})>
+    tag(<button) inline<inline_delimiter({{)attribute_name(action) attribute_name(submitComplaint)inline_delimiter(}})>tag(>)plain(Submit)tag(</button>)
+  inline<inline_delimiter({{/)attribute_name(if)inline_delimiter(}})>
+inline<inline_delimiter({{/)attribute_name(view)inline_delimiter(}})>
