@@ -416,7 +416,7 @@ module CodeRay
         @hints << '%s: %s (%s)' % [
           'Scanner returned unexpected result'.red,
           "open #{File.join 'test', 'scanners', self.class.lang, diff}.html".cyan,
-          debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red
+          (debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red rescue 'ERROR')
         ]
       end
       
