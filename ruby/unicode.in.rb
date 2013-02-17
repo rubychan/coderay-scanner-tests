@@ -28,3 +28,5 @@ class << Osaka = Object.new
     sleep ∞
   end
 end
+
+?× != :∑∞∑

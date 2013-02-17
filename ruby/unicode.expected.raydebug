@@ -28,3 +28,5 @@ keyword(class) operator(<<) class(Osaka) operator(=) constant(Object)operator(.)
     ident(sleep) ident(∞)
   keyword(end)
 keyword(end)
+
+integer(?×) operator(!=) symbol(:∑∞∑)
