@@ -1118,36 +1118,36 @@ string<content( )>
 string<content( .ch { color:#04D })>
 string<content( .ch .k { color:#04D })>
 change[change(@@)plain( -83,7 +85,7 )change(@@)]
- operator(.)ident(la) operator({) ident(color)operator(:)comment(#970; font-weight:bold })
- operator(.)ident(lv) operator({) ident(color)operator(:)comment(#963 })
- operator(.)ident(oc) operator({) ident(color)operator(:)comment(#40E; font-weight:bold })
-delete[delete(-)operator(.)ident(o)eyecatcher<ident(n)> operator({) ident(color)operator(:)comment(#000; font-weight:bold })]
-insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) ident(color)operator(:)comment(#000; font-weight:bold })]
+ operator(.)ident(la) operator({) key(color)operator(:)comment(#970; font-weight:bold })
+ operator(.)ident(lv) operator({) key(color)operator(:)comment(#963 })
+ operator(.)ident(oc) operator({) key(color)operator(:)comment(#40E; font-weight:bold })
+delete[delete(-)operator(.)ident(o)eyecatcher<ident(n)> operator({) key(color)operator(:)comment(#000; font-weight:bold })]
+insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) key(color)operator(:)comment(#000; font-weight:bold })]
  operator(.)ident(op) operator({) operator(})
- operator(.)ident(pc) operator({) ident(color)operator(:)comment(#038; font-weight:bold })
- operator(.)ident(pd) operator({) ident(color)operator(:)comment(#369; font-weight:bold })
+ operator(.)ident(pc) operator({) key(color)operator(:)comment(#038; font-weight:bold })
+ operator(.)ident(pd) operator({) key(color)operator(:)comment(#369; font-weight:bold })
 head[head(Index: )plain(lib/coderay/styles/murphy.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/styles/murphy.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/styles/murphy.rb)plain(	(revision 250\))]
 change[change(@@)plain( -47,7 +47,7 )change(@@)]
- operator(.)ident(av) operator({) ident(color)operator(:)comment(#700; })
- operator(.)ident(aw) operator({) ident(color)operator(:)comment(#C00; })
- operator(.)ident(bi) operator({) ident(color)operator(:)comment(#509; font-weight:bold; })
-delete[delete(-)operator(.)ident(c)  operator({) ident(color)operator(:)comment(#)eyecatcher<comment(666)>comment(; })]
-insert[insert(+)operator(.)ident(c)  operator({) ident(color)operator(:)comment(#)eyecatcher<comment(555; background-color: black)>comment(; })]
+ operator(.)ident(av) operator({) key(color)operator(:)comment(#700; })
+ operator(.)ident(aw) operator({) key(color)operator(:)comment(#C00; })
+ operator(.)ident(bi) operator({) key(color)operator(:)comment(#509; font-weight:bold; })
+delete[delete(-)operator(.)ident(c)  operator({) key(color)operator(:)comment(#)eyecatcher<comment(666)>comment(; })]
+insert[insert(+)operator(.)ident(c)  operator({) key(color)operator(:)comment(#)eyecatcher<comment(555; background-color: black)>comment(; })]
  
- operator(.)ident(ch) operator({) ident(color)operator(:)comment(#88F; })
- operator(.)ident(ch) operator(.)ident(k) operator({) ident(color)operator(:)comment(#04D; })
+ operator(.)ident(ch) operator({) key(color)operator(:)comment(#88F; })
+ operator(.)ident(ch) operator(.)ident(k) operator({) key(color)operator(:)comment(#04D; })
 change[change(@@)plain( -77,7 +77,7 )change(@@)]
- operator(.)ident(la) operator({) ident(color)operator(:)comment(#970; font-weight:bold; })
- operator(.)ident(lv) operator({) ident(color)operator(:)comment(#963; })
- operator(.)ident(oc) operator({) ident(color)operator(:)comment(#40E; font-weight:bold; })
-delete[delete(-)operator(.)ident(o)eyecatcher<ident(n)> operator({) ident(color)operator(:)comment(#000; font-weight:bold; })]
-insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) ident(color)operator(:)comment(#000; font-weight:bold; })]
+ operator(.)ident(la) operator({) key(color)operator(:)comment(#970; font-weight:bold; })
+ operator(.)ident(lv) operator({) key(color)operator(:)comment(#963; })
+ operator(.)ident(oc) operator({) key(color)operator(:)comment(#40E; font-weight:bold; })
+delete[delete(-)operator(.)ident(o)eyecatcher<ident(n)> operator({) key(color)operator(:)comment(#000; font-weight:bold; })]
+insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) key(color)operator(:)comment(#000; font-weight:bold; })]
  operator(.)ident(op) operator({) operator(})
- operator(.)ident(pc) operator({) ident(color)operator(:)comment(#08f; font-weight:bold; })
- operator(.)ident(pd) operator({) ident(color)operator(:)comment(#369; font-weight:bold; })
+ operator(.)ident(pc) operator({) key(color)operator(:)comment(#08f; font-weight:bold; })
+ operator(.)ident(pd) operator({) key(color)operator(:)comment(#369; font-weight:bold; })
 head[head(Index: )plain(lib/coderay/tokens.rb)]
 head[head(===================================================================)filename()]
 head[head(--- )filename(lib/coderay/tokens.rb)plain(	(revision 200\))]
