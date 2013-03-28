@@ -1,1 +1,1 @@
-tag(<b>)inline<inline_delimiter({%) attribute_name(fill) inline_delimiter(%})>tag(</b>)
+tag(<b>)tag({%) directive(fill) tag(%})tag(</b>)

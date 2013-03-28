@@ -1,1 +1,1 @@
-tag(<b>)inline<inline_delimiter({{) attribute_name(hello) inline_delimiter(}})>tag(</b>)
+tag(<b>)tag({{) variable(hello) tag(}})tag(</b>)
