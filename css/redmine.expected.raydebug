@@ -347,7 +347,7 @@ key(text-align)operator(:)value(center)operator(;)
 key(padding)operator(:)float(0.6em)operator(;)
 key(z-index)operator(:)float(100)operator(;)
 key(filter)operator(:)function<delimiter(alpha()content(opacity=50)delimiter(\))>operator(;)
-key(opacity)operator(:) float(0)float(.5)operator(;)
+key(opacity)operator(:) float(0.5)operator(;)
 operator(})
 
 type(html)operator(>)type(body) constant(#ajax-indicator) operator({) key(position)operator(:) value(fixed)operator(;) operator(})
