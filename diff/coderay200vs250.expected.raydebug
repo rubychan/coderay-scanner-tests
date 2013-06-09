@@ -1,5 +1,5 @@
 head[head(Index: )plain(lib/coderay/token_classes.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/token_classes.rb)plain(	(revision 0\))]
 head[head(+++ )filename(lib/coderay/token_classes.rb)plain(	(revision 250\))]
 change[change(@@)plain( -0,0 +1,71 )change(@@)]
@@ -77,12 +77,12 @@ insert[insert(+)keyword(end)]
 comment(\\ No newline at end of file)
 
 head[head(Property changes on: )plain(lib/coderay/token_classes.rb)]
-head[head(___________________________________________________________________)filename()]
+head[head(___________________________________________________________________)]
 head[head(Added: )plain(svn:executable)]
 insert[insert(   +)plain( *)]
 
 head[head(Index: )plain(lib/coderay/encoder.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoder.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoder.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,3 +1,5 )change(@@)]
@@ -134,7 +134,7 @@ insert[insert(+)        comment(#tokens.each(&self\))]
  
      keyword(end)
 head[head(Index: )plain(lib/coderay/encoders/xml.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/xml.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/xml.rb)plain(	(revision 250\))]
 change[change(@@)plain( -22,7 +22,6 )change(@@)]
@@ -155,7 +155,7 @@ insert[insert(+)eyecatcher<    >]
        keyword(if) ident(kind) operator(==) symbol(:space)
          ident(token) operator(=) instance_variable(@node)
 head[head(Index: )plain(lib/coderay/encoders/html/classes.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/html/classes.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/html/classes.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,77 +0,0 )change(@@)]
@@ -237,7 +237,7 @@ delete[delete(-)]
 delete[delete(-)keyword(end)]
 delete[delete(-)keyword(end)]
 head[head(Index: )plain(lib/coderay/encoders/html/numerization.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/html/numerization.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/html/numerization.rb)plain(	(revision 250\))]
 change[change(@@)plain( -51,12 +51,12 )change(@@)]
@@ -259,7 +259,7 @@ insert[insert(+)            ident(line)eyecatcher<ident(_number)> operator(+=) i
            keyword(end)
  
 head[head(Index: )plain(lib/coderay/encoders/tokens.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/tokens.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/tokens.rb)plain(	(revision 250\))]
 change[change(@@)plain( -33,9 +33,9 )change(@@)]
@@ -276,7 +276,7 @@ insert[insert(+)      instance_variable(@out) operator(<<) constant(CodeRay)oper
  
    keyword(end)
 head[head(Index: )plain(lib/coderay/encoders/html.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/html.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/html.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,3 +1,5 )change(@@)]
@@ -423,7 +423,7 @@ insert[insert(+)string<content(                that is not open. Open are: %p.)d
              instance_variable(@out) operator(<<) string<delimiter(')content(</span>)delimiter(')>
              instance_variable(@opened)operator(.)ident(pop)
 head[head(Index: )plain(lib/coderay/encoders/text.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/text.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/text.rb)plain(	(revision 250\))]
 change[change(@@)plain( -14,13 +14,12 )change(@@)]
@@ -443,7 +443,7 @@ insert[insert(+)      instance_variable(@out) operator(<<) ident(text) operator(
  
      keyword(def) method(finish) ident(options)
 head[head(Index: )plain(lib/coderay/encoders/debug.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/debug.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/debug.rb)plain(	(revision 250\))]
 change[change(@@)plain( -19,19 +19,14 )change(@@)]
@@ -473,7 +473,7 @@ delete[delete(-)]
        string<delimiter(")inline<inline_delimiter(#{)ident(kind)inline_delimiter(})>content(<)delimiter(")>
      keyword(end)
 head[head(Index: )plain(lib/coderay/encoders/statistic.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/statistic.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/statistic.rb)plain(	(revision 250\))]
 change[change(@@)plain( -28,19 +28,15 )change(@@)]
@@ -499,7 +499,7 @@ delete[delete(-)]
 string<content( )>
 string<content( Code Statistics)>
 head[head(Index: )plain(lib/coderay/encoders/_map.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/encoders/_map.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/encoders/_map.rb)plain(	(revision 250\))]
 change[change(@@)plain( -2,7 +2,8 )change(@@)]
@@ -513,7 +513,7 @@ insert[insert(+)    symbol(:tex) operator(=)operator(>) symbol(:latex)]
  keyword(end)
  keyword(end)
 head[head(Index: )plain(lib/coderay/helpers/filetype.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/helpers/filetype.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/helpers/filetype.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,180 +0,0 )change(@@)]
@@ -698,7 +698,7 @@ delete[delete(-)  keyword(end)]
 delete[delete(-)]
 delete[delete(-)keyword(end)]
 head[head(Index: )plain(lib/coderay/helpers/plugin.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/helpers/plugin.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/helpers/plugin.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,3 +1,5 )change(@@)]
@@ -740,7 +740,7 @@ insert[insert(+)]
 insert[insert(+)keyword(end)]
 comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/helpers/file_type.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/helpers/file_type.rb)plain(	(revision 0\))]
 head[head(+++ )filename(lib/coderay/helpers/file_type.rb)plain(	(revision 250\))]
 change[change(@@)plain( -0,0 +1,210 )change(@@)]
@@ -956,12 +956,12 @@ insert[insert(+)]
 insert[insert(+)keyword(end)]
 
 head[head(Property changes on: )plain(lib/coderay/helpers/file_type.rb)]
-head[head(___________________________________________________________________)filename()]
+head[head(___________________________________________________________________)]
 head[head(Added: )plain(svn:keywords)]
 insert[insert(   +)plain( Id Rev)]
 
 head[head(Index: )plain(lib/coderay/helpers/gzip_simple.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/helpers/gzip_simple.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/helpers/gzip_simple.rb)plain(	(revision 250\))]
 change[change(@@)plain( -46,6 +46,7 )change(@@)]
@@ -973,7 +973,7 @@ insert[insert(+)]
  comment(#)
  comment(# The methods gzip and gunzip provide an even more simple)
 head[head(Index: )plain(lib/coderay/helpers/word_list.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/helpers/word_list.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/helpers/word_list.rb)plain(	(revision 250\))]
 change[change(@@)plain( -1,15 +1,19 )change(@@)]
@@ -1098,7 +1098,7 @@ insert[insert(+)]
 insert[insert(+)keyword(end)]
 comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/styles/cycnus.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/styles/cycnus.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/styles/cycnus.rb)plain(	(revision 250\))]
 change[change(@@)plain( -42,12 +42,14 )change(@@)]
@@ -1127,7 +1127,7 @@ insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) key(color)op
  operator(.)ident(pc) operator({) key(color)operator(:)comment(#038; font-weight:bold })
  operator(.)ident(pd) operator({) key(color)operator(:)comment(#369; font-weight:bold })
 head[head(Index: )plain(lib/coderay/styles/murphy.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/styles/murphy.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/styles/murphy.rb)plain(	(revision 250\))]
 change[change(@@)plain( -47,7 +47,7 )change(@@)]
@@ -1149,7 +1149,7 @@ insert[insert(+)operator(.)ident(o)eyecatcher<ident(f)> operator({) key(color)op
  operator(.)ident(pc) operator({) key(color)operator(:)comment(#08f; font-weight:bold; })
  operator(.)ident(pd) operator({) key(color)operator(:)comment(#369; font-weight:bold; })
 head[head(Index: )plain(lib/coderay/tokens.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/tokens.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/tokens.rb)plain(	(revision 250\))]
 change[change(@@)plain( -115,7 +115,7 )change(@@)]
@@ -1211,7 +1211,7 @@ insert[insert(+)  ident(require) string<delimiter(')content(coderay/token_classe
 insert[insert(+)]
  keyword(end)
 head[head(Index: )plain(lib/coderay/duo.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/duo.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/duo.rb)plain(	(revision 250\))]
 change[change(@@)plain( -4,26 +4,84 )change(@@)]
@@ -1309,7 +1309,7 @@ insert[insert(+)    keyword(end)]
  keyword(end)
 insert[insert(+)]
 head[head(Index: )plain(lib/coderay/scanner.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanner.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanner.rb)plain(	(revision 250\))]
 change[change(@@)plain( -66,8 +66,18 )change(@@)]
@@ -1397,7 +1397,7 @@ insert[insert(+)          ident(string)operator([)ident(pos)operator(,)ident(amb
        keyword(end)
  
 head[head(Index: )plain(lib/coderay/for_redcloth.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/for_redcloth.rb)plain(	(revision 0\))]
 head[head(+++ )filename(lib/coderay/for_redcloth.rb)plain(	(revision 250\))]
 change[change(@@)plain( -0,0 +1,72 )change(@@)]
@@ -1475,7 +1475,7 @@ insert[insert(+)]
 insert[insert(+)constant(CodeRay)operator(::)constant(ForRedCloth)operator(.)ident(install)]
 comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/scanners/ruby/patterns.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/ruby/patterns.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/ruby/patterns.rb)plain(	(revision 250\))]
 change[change(@@)plain( -14,19 +14,14 )change(@@)]
@@ -1573,7 +1573,7 @@ insert[insert(+)      operator(|) comment(#{CHARACTER})]
      regexp<delimiter(/)content(x)>
 regexp<content( )>
 head[head(Index: )plain(lib/coderay/scanners/ruby.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/ruby.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/ruby.rb)plain(	(revision 250\))]
 change[change(@@)plain( -18,6 +18,7 )change(@@)]
@@ -1769,7 +1769,7 @@ delete[delete(-)]
              ident(raise_inspect) string<delimiter(')content(Error token %p in line %d)delimiter(')> operator(%)
                operator([)operator([)ident(match)operator(,) ident(kind)operator(])operator(,) ident(line)operator(])operator(,) ident(tokens)operator(,) ident(state)
 head[head(Index: )plain(lib/coderay/scanners/c.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/c.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/c.rb)plain(	(revision 250\))]
 change[change(@@)plain( -4,6 +4,8 )change(@@)]
@@ -1791,7 +1791,7 @@ insert[insert(+)eyecatcher<        >]
  
          keyword(when) symbol(:initial)
 head[head(Index: )plain(lib/coderay/scanners/scheme.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/scheme.rb)plain(	(revision 0\))]
 head[head(+++ )filename(lib/coderay/scanners/scheme.rb)plain(	(revision 250\))]
 change[change(@@)plain( -0,0 +1,142 )change(@@)]
@@ -1939,7 +1939,7 @@ insert[insert(+)  keyword(end) comment(#module scanners)]
 insert[insert(+)keyword(end) comment(#module coderay)]
 comment(\\ No newline at end of file)
 head[head(Index: )plain(lib/coderay/scanners/delphi.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/delphi.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/delphi.rb)plain(	(revision 250\))]
 change[change(@@)plain( -29,13 +29,18 )change(@@)]
@@ -2014,7 +2014,7 @@ insert[insert(+)        ident(last_token) operator(=) ident(match)]
          
        keyword(end)
 head[head(Index: )plain(lib/coderay/scanners/debug.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/debug.rb)plain(	(revision 0\))]
 head[head(+++ )filename(lib/coderay/scanners/debug.rb)plain(	(revision 250\))]
 change[change(@@)plain( -0,0 +1,60 )change(@@)]
@@ -2079,7 +2079,7 @@ insert[insert(+)]
 insert[insert(+)keyword(end)]
 insert[insert(+)keyword(end)]
 head[head(Index: )plain(lib/coderay/scanners/rhtml.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/rhtml.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/rhtml.rb)plain(	(revision 250\))]
 change[change(@@)plain( -51,10 +51,10 )change(@@)]
@@ -2096,7 +2096,7 @@ insert[insert(+)          ident(tokens) operator(<<) operator([)ident(end_tag)op
  
          keyword(else)
 head[head(Index: )plain(lib/coderay/scanners/nitro_xhtml.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/nitro_xhtml.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/nitro_xhtml.rb)plain(	(revision 250\))]
 change[change(@@)plain( -95,20 +95,20 )change(@@)]
@@ -2125,7 +2125,7 @@ insert[insert(+)          ident(tokens) operator(<<) operator([)ident(end_tag)op
  
          keyword(elsif) ident(entity) operator(=) ident(scan)operator(()regexp<delimiter(/)inline<inline_delimiter(#{)constant(NITRO_ENTITY)inline_delimiter(})>delimiter(/)modifier(o)>operator(\))
 head[head(Index: )plain(lib/coderay/scanners/plaintext.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay/scanners/plaintext.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay/scanners/plaintext.rb)plain(	(revision 250\))]
 change[change(@@)plain( -4,6 +4,8 )change(@@)]
@@ -2138,7 +2138,7 @@ insert[insert(+)    ident(include) constant(Streamable)]
      keyword(def) method(scan_tokens) ident(tokens)operator(,) ident(options)
        ident(text) operator(=) operator(()ident(scan_until)operator(()regexp<delimiter(/)char(\\z)delimiter(/)>operator(\)) operator(||) string<delimiter(')delimiter(')>operator(\))
 head[head(Index: )plain(lib/coderay.rb)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(lib/coderay.rb)plain(	(revision 200\))]
 head[head(+++ )filename(lib/coderay.rb)plain(	(revision 250\))]
 change[change(@@)plain( -24,8 +24,8 )change(@@)]
@@ -2234,7 +2234,7 @@ insert[insert(+)  ident(code) operator(=) constant(File)operator(.)ident(read)op
  keyword(end)
 
 head[head(Property changes on: )plain(lib)]
-head[head(___________________________________________________________________)filename()]
+head[head(___________________________________________________________________)]
 head[head(Added: )plain(svn:externals)]
 insert[insert(   +)plain( term http://term-ansicolor.rubyforge.org/svn/trunk/lib/term/)]
 

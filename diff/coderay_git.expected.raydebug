@@ -1111,7 +1111,7 @@ insert[insert(+)plain(h3. )eyecatcher<plain(*RENAMED*: @Encoders::TokenKindFilte
 plain(  )
 delete[delete(-)plain(* *)eyecatcher<plain(FIXED* doesn't send debug tokens when @$DEBUG@ is true [Trans])>]
 delete[delete(-)plain(  )eyecatcher<plain(("#149":http://redmine.rubychan.de/issues/149\))>]
-delete[delete(-)plain()]
+delete[delete(-)]
 insert[insert(+)plain(* *)eyecatcher<plain(NEW*: Handles token groups.)>]
 insert[insert(+)plain(  )eyecatcher<plain(See "#223":http://odd-eyed-code.org/issues/223.)>]
 insert[insert(+)eyecatcher<plain(* *RENAMED* @include_block_token?@ to @include_group?@.)>]

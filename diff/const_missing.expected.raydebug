@@ -1,5 +1,5 @@
 head[head(Index: )plain(error.c)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(error.c)plain(	(revision 26674\))]
 head[head(+++ )filename(error.c)plain(	(working copy\))]
 change<change(@@)plain( -402,4 +402,6 )change(@@)> ident(VALUE) ident(rb_eSyntaxError)operator(;)
@@ -16,7 +16,7 @@ insert[insert(+)    ident(rb_eNoConstantError) operator(=) ident(rb_define_class
  
      ident(rb_eRuntimeError) operator(=) ident(rb_define_class)operator(()string<delimiter(")content(RuntimeError)delimiter(")>operator(,) ident(rb_eStandardError)operator(\);)
 head[head(Index: )plain(variable.c)]
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(variable.c)plain(	(revision 26674\))]
 head[head(+++ )filename(variable.c)plain(	(working copy\))]
 change<change(@@)plain( -1356,7 +1356,29 )change(@@)> ident(uninitialized_constant)operator(()ident(VALUE) ident(klass)operator(,) ident(ID) ident(i)

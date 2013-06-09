@@ -1,4 +1,4 @@
-head[head(===================================================================)filename()]
+head[head(===================================================================)]
 head[head(--- )filename(/Users/jgoebel/rails/pastie/app/controllers/pastes_controller.rb)plain(  (revision 1431\))]
 head[head(+++ )filename(/Users/jgoebel/rails/pastie/app/controllers/pastes_controller.rb)plain(  (revision 1437\))]
 change[change(@@)plain( -1,6 +1,10 )change(@@)]
