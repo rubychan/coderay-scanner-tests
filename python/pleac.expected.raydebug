@@ -5665,7 +5665,7 @@ ident(rename)operator(()ident(glob)operator(.)ident(glob)operator(()string<delim
 
 keyword(def) method(transfunc)operator(()ident(fname)operator(\))operator(:) 
     keyword(return) ident(fname)operator(.)ident(lower)operator(()operator(\))
-ident(rename)operator(()operator([)ident(f) keyword(for) ident(f) keyword(in) ident(glob)operator(.)ident(glob)operator(()string<delimiter(")content(*)delimiter(")>operator(\)) keyword(if) keyword(not) ident(f)operator(.)ident(startswith)operator(()string<delimiter(")content(Make\)], transfunc\) )>error()
+ident(rename)operator(()operator([)ident(f) keyword(for) ident(f) keyword(in) ident(glob)operator(.)ident(glob)operator(()string<delimiter(")content(*)delimiter(")>operator(\)) keyword(if) keyword(not) ident(f)operator(.)ident(startswith)operator(()string<delimiter(")content(Make\)], transfunc\) )>
 
 keyword(def) method(transfunc)operator(()ident(fname)operator(\))operator(:) 
     keyword(return) ident(fname) operator(+) string<delimiter(")content(.bad)delimiter(")>
