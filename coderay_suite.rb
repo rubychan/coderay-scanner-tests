@@ -153,7 +153,7 @@ module CodeRay
       
       time_for_lang = Benchmark.realtime do
         max = ENV.fetch('max', DEFAULT_MAX).to_i
-        random_test scanner, max unless ENV['norandom'] || ENV['only'] != '*'
+        random_test scanner, max unless ENV['norandom'] || (ENV['only'] && ENV['only'] != '*')
         examples_test scanner, max unless ENV['noexamples']
       end
       
