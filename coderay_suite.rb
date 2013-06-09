@@ -153,7 +153,7 @@ module CodeRay
       
       time_for_lang = Benchmark.realtime do
         max = ENV.fetch('max', DEFAULT_MAX).to_i
-        random_test scanner, max unless ENV['norandom'] || ENV['only']
+        random_test scanner, max unless ENV['norandom'] || ENV['only'] != '*'
         examples_test scanner, max unless ENV['noexamples']
       end
       
@@ -416,7 +416,7 @@ module CodeRay
         @hints << '%s: %s (%s)' % [
           'Scanner returned unexpected result'.red,
           "open #{File.join 'test', 'scanners', self.class.lang, diff}.html".cyan,
-          (debug_diff.scan(/^\+/).join.green + debug_diff.scan(/^-/).join.red rescue 'ERROR')
+          (debug_diff.scan(/^\+(?!\+\+)/).join.green + debug_diff.scan(/^-(?!--)/).join.red rescue 'ERROR')
         ]
       end
       
@@ -529,9 +529,10 @@ module CodeRay
       end
       
       def load
+        ENV['only'] = ARGV.find { |a| break $& if a[/^[^-].*/] }
         ENV['only'] = ENV['new'] if ENV['new']
         check_env_lang
-        subsuite = ARGV.find { |a| break $& if a[/^[^-].*/] } || ENV['lang']
+        subsuite = ENV['lang']
         if subsuite
           load_suite(subsuite) or exit
         else
