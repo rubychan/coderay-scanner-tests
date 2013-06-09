@@ -143,7 +143,7 @@ module CodeRay
     
     def test_ALL
       scanner = CodeRay::Scanners[self.class.lang].new
-      raise "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[:text]
+      puts "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[:text]
       
       @hints = []
       
@@ -529,7 +529,7 @@ module CodeRay
       end
       
       def load
-        ENV['only'] = ARGV.find { |a| break $& if a[/^[^-].*/] }
+        ENV['only'] ||= ARGV.find { |a| break $& if a[/^[^-].*/] }
         ENV['only'] = ENV['new'] if ENV['new']
         check_env_lang
         subsuite = ENV['lang']
