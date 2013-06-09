@@ -102,8 +102,8 @@ module CodeRay
       MAX_CODE_SIZE_TO_TEST = 500_000_000
       DEFAULT_MAX = 4096
     elsif ENV['fast']
-      MAX_CODE_SIZE_TO_HIGHLIGHT = 5_000_000
-      MAX_CODE_SIZE_TO_TEST = 1_000_000
+      MAX_CODE_SIZE_TO_HIGHLIGHT = 1_000_000
+      MAX_CODE_SIZE_TO_TEST = 100_000
       DEFAULT_MAX = 16
     else
       MAX_CODE_SIZE_TO_HIGHLIGHT = 10_000_000
@@ -143,7 +143,11 @@ module CodeRay
     
     def test_ALL
       scanner = CodeRay::Scanners[self.class.lang].new
-      puts "No Scanner for #{self.class.lang} found!" if scanner.is_a? CodeRay::Scanners[:text]
+      if scanner.is_a? CodeRay::Scanners[:text]
+        puts
+        puts '    >> Skipping tests for '.yellow + self.class.lang.cyan + ', no scanner found <<'.yellow
+        return
+      end
       
       @hints = []
       
