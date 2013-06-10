@@ -9,6 +9,7 @@ test \
   multi: :line
 
 more hash::tests
+more hash:new
 more hash:"tests"
 more hash:42
 more hash:??
@@ -17,3 +18,7 @@ more hash:nil
 more hash:foo
 more hash://
 _ _:_
+
+keywords for:keys
+predefined_constants nil:keys
+alias:void:goto
