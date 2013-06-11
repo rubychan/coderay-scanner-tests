@@ -97,7 +97,7 @@ class(.example)
     include(+background-size)operator(()float(100px) float(25px)operator(\))
 
 comment<delimiter(//)content( ./doc-src/content/examples/compass/css3/border_radius/stylesheet.sass)>
-directive(@import) include(compass/css3, compass/utilities)
+directive(@import) include(compass/css3)operator(,) include(compass/utilities)
 
 id(#demo)
   include(+clearfix)
@@ -331,7 +331,7 @@ class(.has-custom-shadow)
   include(+text-shadow)operator(()predefined(rgba)operator(()value(blue)operator(,) class(.2)operator(\)) float(1px) float(1px) float(0)operator(,) predefined(rgba)operator(()value(blue)operator(,) class(.2)operator(\)) float(2px) float(2px) float(0)operator(,) predefined(rgba)operator(()value(blue)operator(,) class(.2)operator(\)) float(3px) float(3px) float(0)operator(\))
 
 comment<delimiter(//)content( ./doc-src/content/examples/compass/css3/transform/stylesheet.sass)>
-directive(@import) include(compass/css3, compass/css3/transform-legacy)
+directive(@import) include(compass/css3)operator(,) include(compass/css3/transform-legacy)
 
 class(.transform-example)
   key(width)operator(:) float(40px)
