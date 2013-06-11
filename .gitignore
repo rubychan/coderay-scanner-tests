@@ -1,3 +1,6 @@
 .DS_Store
 */*.actual.html
+*/*.actual.raydebug
 */*.expected.html
+*/*.debug.diff
+*/*.debug.diff.html
