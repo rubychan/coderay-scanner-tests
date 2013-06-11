@@ -183,7 +183,7 @@ module CodeRay
           @known_issue_description = @known_issue_ticket_url = nil
           name = File.basename(example_filename, ".#{extension}")
           next if ENV['lang'] && ENV['only'] && ![name, '*'].include?(ENV['only'])
-          print '%20s'.cyan % name + ' '
+          print '%22s'.cyan % name + ' '
           filesize = File.size(example_filename)
           amount = filesize
           human_filesize =
@@ -533,8 +533,11 @@ module CodeRay
       end
       
       def load
-        ENV['only'] ||= ARGV.find { |a| break $& if a[/^[^-].*/] }
+        if scope = ARGV.find { |a| break $& if a[/^[^-].*/] }
+          ENV[scope.chomp!('!') ? 'new' : 'only'] ||= scope
+        end
         ENV['only'] = ENV['new'] if ENV['new']
+        
         check_env_lang
         subsuite = ENV['lang']
         if subsuite
