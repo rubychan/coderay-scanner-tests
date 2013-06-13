@@ -139,7 +139,7 @@ module CodeRay
     end
     
     # Create only once, for speed
-    Tokenizer = CodeRay::Encoders[:debug].new
+    Tokenizer = CodeRay::Encoders[:debug_lint].new
     
     def test_ALL
       scanner = CodeRay::Scanners[self.class.lang].new
