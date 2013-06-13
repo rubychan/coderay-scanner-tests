@@ -16,4 +16,4 @@ ident(New)operator(:) ident(print)operator(()operator(()ident(x)operator(,) iden
 ident(print)operator(()string<delimiter(")content(There are <)delimiter(")>operator(,) integer(2)operator(**)integer(32)operator(,) string<delimiter(")content(> possibilities!)delimiter(")>operator(,) ident(sep)operator(=)string<delimiter(")delimiter(")>operator(\))
 
 
-string<modifier(b)delimiter(")content(byte string)content(\\9)content(9)char(\\")delimiter(")>
+binary<modifier(b)delimiter(")content(byte string)content(\\9)content(9)char(\\")delimiter(")>
