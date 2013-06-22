@@ -1240,7 +1240,7 @@ dlgAbout = iupdialog
        iupvbox
        {
           iuplabel{title="Tecgraf/PUC-Rio"},
-          iuplabel{title="Mark/Ovídio/Scuri"},
+          iuplabel{title="Mark/OvÃ­dio/Scuri"},
           iuplabel{title="iup@tecgraf.puc-rio.br"} 
        }
     },
@@ -6121,7 +6121,7 @@ else
     iup.Message("Selected options",selection)
   end
 end-- IupMessage Example in IupLua 
--- Shows a dialog with the message: “Click the button”. 
+-- Shows a dialog with the message: Â“Click the buttonÂ”. 
 
 iup.Message ("IupMessage", "Press the button")-- IupScanf Example in IupLua 
 -- Shows a dialog with three fields to be filled. 
@@ -6245,10 +6245,10 @@ end
 function btn_image:button( b, e )
   if( b == iup.BUTTON1 ) then
     if( e == 1 ) then
-    -- botão pressionado
+    -- botÃ£o pressionado
       text.value = "Red button pressed"
     else           
-    -- botão solto 
+    -- botÃ£o solto 
       text.value = "Red button released"
     end
   end
