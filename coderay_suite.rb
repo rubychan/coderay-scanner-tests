@@ -139,7 +139,7 @@ module CodeRay
     end
     
     # Create only once, for speed
-    Tokenizer = CodeRay::Encoders[:debug_lint].new
+    DebugLintTokenizer = CodeRay::Encoders[:debug_lint].new
     
     def test_ALL
       scanner = CodeRay::Scanners[self.class.lang].new
@@ -270,11 +270,12 @@ module CodeRay
       okay = true
       for size in (0..max).progress
         srand size + 17
-        scanner.string = Array.new(size) { rand 256 }.pack 'c*'
+        string = Array.new(size) { rand 256 }.pack 'c*'
         begin
-          scanner.tokenize
-        rescue
+          DebugLintTokenizer.encode string, scanner.lang
+        rescue => boom
           assert_nothing_raised "Random test failed at #{size} #{RUBY_VERSION < '1.9' ? 'bytes' : 'chars'}" do
+            puts boom.message
             raise
           end if ENV['assert']
           okay = false
@@ -291,11 +292,12 @@ module CodeRay
         okay = true
         for size in (0..max).progress
           break if size > code.size
-          scanner.string = code[0,size]
+          string = code[0,size]
           begin
-            scanner.tokenize
-          rescue
+            DebugLintTokenizer.encode string, scanner.lang
+          rescue => boom
             assert_nothing_raised "Incremental test failed at #{size} #{RUBY_VERSION < '1.9' ? 'bytes' : 'chars'}!" do
+              puts boom.message
               raise
             end if ENV['assert']
             okay = false
@@ -312,12 +314,13 @@ module CodeRay
         okay = true
         for i in (0..max / 4).progress
           srand i
-          code_bits.shuffle!                     # ...mix...
-          scanner.string = code_bits.pack('Q*')  # ...and join again
+          code_bits.shuffle!             # ...mix...
+          string = code_bits.pack('Q*')  # ...and join again
           begin
-            scanner.tokenize
-          rescue
+            DebugLintTokenizer.encode string, scanner.lang
+          rescue => boom
             assert_nothing_raised 'shuffle test failed!' do
+              puts boom.message
               raise
             end if ENV['assert']
             okay = false
@@ -335,24 +338,24 @@ module CodeRay
       print 'complete...'.blue
       print 'scanning...'.yellow
       @time_for_scanning = Benchmark.realtime do
-        tokens = scanner.tokens
+        tokens = scanner.tokenize
       end
       print "\b" * 'scanning...'.size
       print 'encoding...'.yellow
       @time_for_encoding = Benchmark.realtime do
-        Tokenizer.encode_tokens tokens
+        DebugLintTokenizer.encode_tokens tokens
       end
       print "\b" * 'encoding...'.size
       
       print 'benchmarking...'.magenta
       @time_for_direct_streaming = Benchmark.realtime do
-        result = Tokenizer.encode code, scanner.lang
+        result = DebugLintTokenizer.encode code, scanner.lang
       end
       print "\b" * 'benchmarking...'.size
       print ' ' * 'benchmarking...'.size
       print "\b" * 'benchmarking...'.size
       
-      expected_filename = name + '.expected.' + Tokenizer.file_extension
+      expected_filename = name + '.expected.' + DebugLintTokenizer.file_extension
       if File.exist?(expected_filename) && !(ENV['lang'] && ENV['new'] && [name, '*'].include?(ENV['new']))
         expected = scanner.class.normalize File.read(expected_filename)
         ok = expected == result
