@@ -15,7 +15,7 @@ tag(<Page) attribute_name(title)operator(=)string<delimiter(")content(Questions 
           comment(<?r excerpt = excerpt_with_words(q.text, @tags\) ?>)
           plain(#{excerpt}
         )tag(</p>)
-        tag(<p) attribute_name(style)operator(=)string<delimiter(")content(float:right;)delimiter(")>tag(>)plain(#{q.answers.size.to_i} answers)tag(</p>)
+        tag(<p) attribute_name(style)operator(=)string<delimiter(")key(float)operator(:)value(right)operator(;)delimiter(")>tag(>)plain(#{q.answers.size.to_i} answers)tag(</p>)
       comment(<?r end ?>)
     tag(</div>)
     tag(<div) attribute_name(class)operator(=)string<delimiter(")content(pager)delimiter(")>tag(>)
@@ -75,7 +75,7 @@ tag(<Page) attribute_name(title)operator(=)string<delimiter(")content(Questions 
           sum = all_tags.inject(0\) { |sum, t| sum + t.popularity.to_i }
         ?>)
         comment(<?r all_tags.each do |t| ?>)
-          tag(<a) attribute_name(href)operator(=)string<delimiter(")content(/tags/#{t.name})delimiter(")> attribute_name(style)operator(=)string<delimiter(")content(font-size:#{(1+((t.popularity.to_i/sum.to_f\)*2\)\).to_s[0..3]}em;)delimiter(")>tag(>)plain(#{t.name})tag(</a>)
+          tag(<a) attribute_name(href)operator(=)string<delimiter(")content(/tags/#{t.name})delimiter(")> attribute_name(style)operator(=)string<delimiter(")key(font-size)operator(:)error(#)operator({)operator(()float(1)operator(+)operator(()operator(()key(t)operator(.)key(popularity)operator(.)key(to_i)operator(/)key(sum)operator(.)key(to_f)operator(\))error(*)float(2)operator(\))operator(\))operator(.)key(to_s)error([)float(0)operator(.)float(.3)error(])operator(})key(em)operator(;)delimiter(")>tag(>)plain(#{t.name})tag(</a>)
         comment(<?r end ?>)
       tag(</div>) comment(<!-- #cloud -->)
     comment(<?r end ?>)
@@ -84,4 +84,4 @@ tag(<Page) attribute_name(title)operator(=)string<delimiter(")content(Questions 
   tag(<render) attribute_name(href)operator(=)string<delimiter(")content(/right)delimiter(")> tag(/>)
 tag(</Page>)
 
-comment(<!-- Copyright © 2006 Kashia Buch (kashia@vfemail.net\), Fabian Buch (fabian@fabian-buch.de\). All rights reserved. -->)
+comment(<!-- Copyright Â© 2006 Kashia Buch (kashia@vfemail.net\), Fabian Buch (fabian@fabian-buch.de\). All rights reserved. -->)
