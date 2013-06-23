@@ -95,8 +95,8 @@ comment(// Predeclared identifiers)
     predefined_constant(nil)
 
     comment(// Functions:)
-    ident(append) ident(cap) ident(close) ident(complex) ident(copy) ident(delete) ident(imag) ident(len)
-    ident(make) ident(new) ident(panic) ident(print) ident(println) ident(real) ident(recover)
+    predefined(append) predefined(cap) predefined(close) predefined(complex) predefined(copy) predefined(delete) predefined(imag) predefined(len)
+    predefined(make) predefined(new) predefined(panic) predefined(print) predefined(println) predefined(real) predefined(recover)
 
 comment(// Types)
 
