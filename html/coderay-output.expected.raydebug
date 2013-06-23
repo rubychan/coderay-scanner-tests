@@ -5,120 +5,120 @@ tag(<head>)
   tag(<meta) attribute_name(http-equiv)operator(=)string<delimiter(")content(content-type)delimiter(")> attribute_name(content)operator(=)string<delimiter(")content(text/html; charset=utf-8)delimiter(")> tag(/>)
   tag(<title>)plain(CodeRay HTML Encoder Example)tag(</title>)
   tag(<style) attribute_name(type)operator(=)string<delimiter(")content(text/css)delimiter(")>tag(>)
-plain(.CodeRay {
-  background-color: #f8f8f8;
-  border: 1px solid silver;
-  font-family: 'Courier New', 'Terminal', monospace;
-  color: #100;
-}
-.CodeRay pre { margin: 0px }
+inline<class(.CodeRay) operator({)
+  key(background-color)operator(:) color(#f8f8f8)operator(;)
+  key(border)operator(:) float(1px) value(solid) value(silver)operator(;)
+  key(font-family)operator(:) string<delimiter(')content(Courier New)delimiter(')>operator(,) string<delimiter(')content(Terminal)delimiter(')>operator(,) value(monospace)operator(;)
+  key(color)operator(:) color(#100)operator(;)
+operator(})
+class(.CodeRay) tag(pre) operator({) key(margin)operator(:) float(0px) operator(})
 
-div.CodeRay { }
+tag(div)class(.CodeRay) operator({) operator(})
 
-span.CodeRay { white-space: pre; border: 0px; padding: 2px }
+tag(span)class(.CodeRay) operator({) key(white-space)operator(:) value(pre)operator(;) key(border)operator(:) float(0px)operator(;) key(padding)operator(:) float(2px) operator(})
 
-table.CodeRay { border-collapse: collapse; width: 100%; padding: 2px }
-table.CodeRay td { padding: 2px 4px; vertical-align: top }
+tag(table)class(.CodeRay) operator({) key(border-collapse)operator(:) value(collapse)operator(;) key(width)operator(:) float(100%)operator(;) key(padding)operator(:) float(2px) operator(})
+tag(table)class(.CodeRay) tag(td) operator({) key(padding)operator(:) float(2px) float(4px)operator(;) key(vertical-align)operator(:) value(top) operator(})
 
-.CodeRay .line_numbers, .CodeRay .no {
-  background-color: #def;
-  color: gray;
-  text-align: right;
-}
-.CodeRay .line_numbers tt { font-weight: bold }
-.CodeRay .no { padding: 0px 4px }
-.CodeRay .code { width: 100% }
+class(.CodeRay) class(.line_numbers)operator(,) class(.CodeRay) class(.no) operator({)
+  key(background-color)operator(:) color(#def)operator(;)
+  key(color)operator(:) value(gray)operator(;)
+  key(text-align)operator(:) value(right)operator(;)
+operator(})
+class(.CodeRay) class(.line_numbers) tag(tt) operator({) key(font-weight)operator(:) value(bold) operator(})
+class(.CodeRay) class(.no) operator({) key(padding)operator(:) float(0px) float(4px) operator(})
+class(.CodeRay) class(.code) operator({) key(width)operator(:) float(100%) operator(})
 
-ol.CodeRay { font-size: 10pt }
-ol.CodeRay li { white-space: pre }
+tag(ol)class(.CodeRay) operator({) key(font-size)operator(:) float(10pt) operator(})
+tag(ol)class(.CodeRay) tag(li) operator({) key(white-space)operator(:) value(pre) operator(})
 
-.CodeRay .code pre { overflow: auto }
+class(.CodeRay) class(.code) tag(pre) operator({) key(overflow)operator(:) value(auto) operator(})
 
-.CodeRay .debug { color:white ! important; background:blue ! important; }
+class(.CodeRay) class(.debug) operator({) key(color)operator(:)value(white) important(! important)operator(;) key(background)operator(:)value(blue) important(! important)operator(;) operator(})
 
-.CodeRay .af { color:#00C }
-.CodeRay .an { color:#007 }
-.CodeRay .at { color:#f08 }
-.CodeRay .av { color:#700 }
-.CodeRay .aw { color:#C00 }
-.CodeRay .bi { color:#509; font-weight:bold }
-.CodeRay .c  { color:#666; }
+class(.CodeRay) class(.af) operator({) key(color)operator(:)color(#00C) operator(})
+class(.CodeRay) class(.an) operator({) key(color)operator(:)color(#007) operator(})
+class(.CodeRay) class(.at) operator({) key(color)operator(:)color(#f08) operator(})
+class(.CodeRay) class(.av) operator({) key(color)operator(:)color(#700) operator(})
+class(.CodeRay) class(.aw) operator({) key(color)operator(:)color(#C00) operator(})
+class(.CodeRay) class(.bi) operator({) key(color)operator(:)color(#509)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.c)  operator({) key(color)operator(:)color(#666)operator(;) operator(})
 
-.CodeRay .ch { color:#04D }
-.CodeRay .ch .k { color:#04D }
-.CodeRay .ch .dl { color:#039 }
+class(.CodeRay) class(.ch) operator({) key(color)operator(:)color(#04D) operator(})
+class(.CodeRay) class(.ch) class(.k) operator({) key(color)operator(:)color(#04D) operator(})
+class(.CodeRay) class(.ch) class(.dl) operator({) key(color)operator(:)color(#039) operator(})
 
-.CodeRay .cl { color:#B06; font-weight:bold }
-.CodeRay .co { color:#036; font-weight:bold }
-.CodeRay .cr { color:#0A0 }
-.CodeRay .cv { color:#369 }
-.CodeRay .df { color:#099; font-weight:bold }
-.CodeRay .di { color:#088; font-weight:bold }
-.CodeRay .dl { color:black }
-.CodeRay .do { color:#970 }
-.CodeRay .ds { color:#D42; font-weight:bold }
-.CodeRay .e  { color:#666; font-weight:bold }
-.CodeRay .en { color:#800; font-weight:bold }
-.CodeRay .er { color:#F00; background-color:#FAA }
-.CodeRay .ex { color:#F00; font-weight:bold }
-.CodeRay .fl { color:#60E; font-weight:bold }
-.CodeRay .fu { color:#06B; font-weight:bold }
-.CodeRay .gv { color:#d70; font-weight:bold }
-.CodeRay .hx { color:#058; font-weight:bold }
-.CodeRay .i  { color:#00D; font-weight:bold }
-.CodeRay .ic { color:#B44; font-weight:bold }
+class(.CodeRay) class(.cl) operator({) key(color)operator(:)color(#B06)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.co) operator({) key(color)operator(:)color(#036)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.cr) operator({) key(color)operator(:)color(#0A0) operator(})
+class(.CodeRay) class(.cv) operator({) key(color)operator(:)color(#369) operator(})
+class(.CodeRay) class(.df) operator({) key(color)operator(:)color(#099)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.di) operator({) key(color)operator(:)color(#088)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.dl) operator({) key(color)operator(:)value(black) operator(})
+class(.CodeRay) class(.do) operator({) key(color)operator(:)color(#970) operator(})
+class(.CodeRay) class(.ds) operator({) key(color)operator(:)color(#D42)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.e)  operator({) key(color)operator(:)color(#666)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.en) operator({) key(color)operator(:)color(#800)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.er) operator({) key(color)operator(:)color(#F00)operator(;) key(background-color)operator(:)color(#FAA) operator(})
+class(.CodeRay) class(.ex) operator({) key(color)operator(:)color(#F00)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.fl) operator({) key(color)operator(:)color(#60E)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.fu) operator({) key(color)operator(:)color(#06B)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.gv) operator({) key(color)operator(:)color(#d70)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.hx) operator({) key(color)operator(:)color(#058)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.i)  operator({) key(color)operator(:)color(#00D)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.ic) operator({) key(color)operator(:)color(#B44)operator(;) key(font-weight)operator(:)value(bold) operator(})
 
-.CodeRay .il { background: #eee }
-.CodeRay .il .il { background: #ddd }
-.CodeRay .il .il .il { background: #ccc }
-.CodeRay .il .idl { font-weight: bold; color: #888 }
+class(.CodeRay) class(.il) operator({) key(background)operator(:) color(#eee) operator(})
+class(.CodeRay) class(.il) class(.il) operator({) key(background)operator(:) color(#ddd) operator(})
+class(.CodeRay) class(.il) class(.il) class(.il) operator({) key(background)operator(:) color(#ccc) operator(})
+class(.CodeRay) class(.il) class(.idl) operator({) key(font-weight)operator(:) value(bold)operator(;) key(color)operator(:) color(#888) operator(})
 
-.CodeRay .im { color:#f00; }
-.CodeRay .in { color:#B2B; font-weight:bold }
-.CodeRay .iv { color:#33B }
-.CodeRay .la { color:#970; font-weight:bold }
-.CodeRay .lv { color:#963 }
-.CodeRay .oc { color:#40E; font-weight:bold }
-.CodeRay .of { color:#000; font-weight:bold }
-.CodeRay .op { }
-.CodeRay .pc { color:#038; font-weight:bold }
-.CodeRay .pd { color:#369; font-weight:bold }
-.CodeRay .pp { color:#579; }
-.CodeRay .ps { color:#00C; font-weight: bold; }
-.CodeRay .pt { color:#339; font-weight:bold }
-.CodeRay .r, .kw  { color:#080; font-weight:bold }
+class(.CodeRay) class(.im) operator({) key(color)operator(:)color(#f00)operator(;) operator(})
+class(.CodeRay) class(.in) operator({) key(color)operator(:)color(#B2B)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.iv) operator({) key(color)operator(:)color(#33B) operator(})
+class(.CodeRay) class(.la) operator({) key(color)operator(:)color(#970)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.lv) operator({) key(color)operator(:)color(#963) operator(})
+class(.CodeRay) class(.oc) operator({) key(color)operator(:)color(#40E)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.of) operator({) key(color)operator(:)color(#000)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.op) operator({) operator(})
+class(.CodeRay) class(.pc) operator({) key(color)operator(:)color(#038)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.pd) operator({) key(color)operator(:)color(#369)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.pp) operator({) key(color)operator(:)color(#579)operator(;) operator(})
+class(.CodeRay) class(.ps) operator({) key(color)operator(:)color(#00C)operator(;) key(font-weight)operator(:) value(bold)operator(;) operator(})
+class(.CodeRay) class(.pt) operator({) key(color)operator(:)color(#339)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.r)operator(,) class(.kw)  operator({) key(color)operator(:)color(#080)operator(;) key(font-weight)operator(:)value(bold) operator(})
 
-.CodeRay .ke { color: #808; }
-.CodeRay .vl { color: #088; }
+class(.CodeRay) class(.ke) operator({) key(color)operator(:) color(#808)operator(;) operator(})
+class(.CodeRay) class(.vl) operator({) key(color)operator(:) color(#088)operator(;) operator(})
 
-.CodeRay .rx { background-color:#fff0ff }
-.CodeRay .rx .k { color:#808 }
-.CodeRay .rx .dl { color:#404 }
-.CodeRay .rx .mod { color:#C2C }
-.CodeRay .rx .fu  { color:#404; font-weight: bold }
+class(.CodeRay) class(.rx) operator({) key(background-color)operator(:)color(#fff0ff) operator(})
+class(.CodeRay) class(.rx) class(.k) operator({) key(color)operator(:)color(#808) operator(})
+class(.CodeRay) class(.rx) class(.dl) operator({) key(color)operator(:)color(#404) operator(})
+class(.CodeRay) class(.rx) class(.mod) operator({) key(color)operator(:)color(#C2C) operator(})
+class(.CodeRay) class(.rx) class(.fu)  operator({) key(color)operator(:)color(#404)operator(;) key(font-weight)operator(:) value(bold) operator(})
 
-.CodeRay .s  { background-color:#fff0f0 }
-.CodeRay .s  .s { background-color:#ffe0e0 }
-.CodeRay .s  .s  .s { background-color:#ffd0d0 }
-.CodeRay .s  .k { color:#D20 }
-.CodeRay .s  .dl { color:#710 }
+class(.CodeRay) class(.s)  operator({) key(background-color)operator(:)color(#fff0f0) operator(})
+class(.CodeRay) class(.s)  class(.s) operator({) key(background-color)operator(:)color(#ffe0e0) operator(})
+class(.CodeRay) class(.s)  class(.s)  class(.s) operator({) key(background-color)operator(:)color(#ffd0d0) operator(})
+class(.CodeRay) class(.s)  class(.k) operator({) key(color)operator(:)color(#D20) operator(})
+class(.CodeRay) class(.s)  class(.dl) operator({) key(color)operator(:)color(#710) operator(})
 
-.CodeRay .sh { background-color:#f0fff0 }
-.CodeRay .sh .k { color:#2B2 }
-.CodeRay .sh .dl { color:#161 }
+class(.CodeRay) class(.sh) operator({) key(background-color)operator(:)color(#f0fff0) operator(})
+class(.CodeRay) class(.sh) class(.k) operator({) key(color)operator(:)color(#2B2) operator(})
+class(.CodeRay) class(.sh) class(.dl) operator({) key(color)operator(:)color(#161) operator(})
 
-.CodeRay .sy { color:#A60 }
-.CodeRay .sy .k { color:#A60 }
-.CodeRay .sy .dl { color:#630 }
+class(.CodeRay) class(.sy) operator({) key(color)operator(:)color(#A60) operator(})
+class(.CodeRay) class(.sy) class(.k) operator({) key(color)operator(:)color(#A60) operator(})
+class(.CodeRay) class(.sy) class(.dl) operator({) key(color)operator(:)color(#630) operator(})
 
-.CodeRay .ta { color:#070 }
-.CodeRay .tf { color:#070; font-weight:bold }
-.CodeRay .ts { color:#D70; font-weight:bold }
-.CodeRay .ty { color:#339; font-weight:bold }
-.CodeRay .v  { color:#036 }
-.CodeRay .xt { color:#444 }
+class(.CodeRay) class(.ta) operator({) key(color)operator(:)color(#070) operator(})
+class(.CodeRay) class(.tf) operator({) key(color)operator(:)color(#070)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.ts) operator({) key(color)operator(:)color(#D70)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.ty) operator({) key(color)operator(:)color(#339)operator(;) key(font-weight)operator(:)value(bold) operator(})
+class(.CodeRay) class(.v)  operator({) key(color)operator(:)color(#036) operator(})
+class(.CodeRay) class(.xt) operator({) key(color)operator(:)color(#444) operator(})>
 
-  )tag(</style>)
+  tag(</style>)
 tag(</head>)
 tag(<body) attribute_name(style)operator(=)string<delimiter(")content(background-color: white;)delimiter(")>tag(>)
 
@@ -357,7 +357,7 @@ tag(</tt>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimite
 tag(</tt>)tag(<tt>)
 tag(</tt>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(a)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>) tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:attribute_name])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(an)delimiter(")>tag(>)plain(href)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:operator])delimiter(")>tag(>)plain(=)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(s)delimiter(")>tag(>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :delimiter])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(dl)delimiter(")>tag(>)entity(&quot;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :content])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(k)delimiter(")>tag(>)plain(goodies/styleswitcher)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :delimiter])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(dl)delimiter(")>tag(>)entity(&quot;)tag(</span>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:plain])delimiter(")>tag(>)plain(Styleswitcher)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/a)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>) tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:plain])delimiter(")>tag(>)plain(- )tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:entity])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(en)delimiter(")>tag(>)entity(&amp;)plain(auml;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:plain])delimiter(")>tag(>)plain(ndere das Aussehen dieser Seite.)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>)tag(<tt>)
 tag(</tt>)tag(<tt>)
-tag(</tt>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:plain])delimiter(")>tag(>)plain(Diese Website wird aus Zeitgründen nicht mehr aktualisiert.)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>)tag(<tt>)
+tag(</tt>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:plain])delimiter(")>tag(>)plain(Diese Website wird aus ZeitgrÃ¼nden nicht mehr aktualisiert.)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/strong)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(/p)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>)tag(<tt>)
 tag(</tt>)tag(<tt>)
 tag(</tt>)tag(<tt>)
 tag(</tt>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&lt;)plain(div)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>) tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:attribute_name])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(an)delimiter(")>tag(>)plain(style)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:operator])delimiter(")>tag(>)plain(=)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(s)delimiter(")>tag(>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :delimiter])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(dl)delimiter(")>tag(>)entity(&quot;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :content])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(k)delimiter(")>tag(>)plain(text-align:center; padding:5px;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:string, :delimiter])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(dl)delimiter(")>tag(>)entity(&quot;)tag(</span>)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:tag])delimiter(")> attribute_name(class)operator(=)string<delimiter(")content(ta)delimiter(")>tag(>)entity(&gt;)tag(</span>)tag(<span) attribute_name(title)operator(=)string<delimiter(")content([:space])delimiter(")>tag(>)tag(<tt>)

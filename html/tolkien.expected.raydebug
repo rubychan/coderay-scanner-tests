@@ -11,9 +11,9 @@ tag(<meta) attribute_name(name)operator(=)string<delimiter(")content(robots)deli
 tag(<meta) attribute_name(name)operator(=)string<delimiter(")content(revisit-after)delimiter(")> attribute_name(content)operator(=)string<delimiter(")content(7 days)delimiter(")> tag(/>)
 tag(<meta) attribute_name(http-equiv)operator(=)string<delimiter(")content(imagetoolbar)delimiter(")> attribute_name(content)operator(=)string<delimiter(")content(no)delimiter(")> tag(/>)
 tag(<style) attribute_name(type)operator(=)string<delimiter(")content(text/css)delimiter(")>tag(>)
-comment(<!--
-@import url("/css/perun.css"\);
--->)
+comment(<!--)inline<
+directive(@import) function<delimiter(url()content("/css/perun.css")delimiter(\))>operator(;)
+>comment(-->)
 tag(</style>)
 tag(<link) attribute_name(rel)operator(=)string<delimiter(")content(shortcut icon)delimiter(")> attribute_name(href)operator(=)string<delimiter(")content(http://www.faszination-tolkien.de/favicon.ico)delimiter(")> tag(/>)
 tag(<link) attribute_name(rel)operator(=)string<delimiter(")content(home)delimiter(")> attribute_name(href)operator(=)string<delimiter(")content(/)delimiter(")> attribute_name(title)operator(=)string<delimiter(")content(Startseite)delimiter(")> tag(/>)
@@ -62,7 +62,7 @@ tag(<p>)plain(Immer auf dem laufenden bleiben? Mit )tag(<a) attribute_name(href)
 
 tag(<p>)tag(<strong>)tag(<a) attribute_name(href)operator(=)string<delimiter(")content(goodies/styleswitcher)delimiter(")>tag(>)plain(Styleswitcher)tag(</a>)tag(</strong>) plain(- )entity(&auml;)plain(ndere das Aussehen dieser Seite.)tag(</p>)
 
-tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgründen nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
+tag(<p>)tag(<strong>)plain(Diese Website wird aus Zeitgrï¿½nden nicht mehr aktualisiert.)tag(</strong>)tag(</p>)
 
 
 tag(<div) attribute_name(style)operator(=)string<delimiter(")content(text-align:center; padding:5px;)delimiter(")>tag(>)

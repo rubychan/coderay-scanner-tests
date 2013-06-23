@@ -11,9 +11,12 @@ tag(</script>)
 plain(or this CSS example:
 
 )tag(<style) attribute_name(type)operator(=)string<delimiter(")content(text/css)delimiter(")>tag(>)
-plain(/*)comment<delimiter(<![CDATA[)content(*/
-body { background-image: url("marble.png?width=300&height=300"\) }     
-/*)delimiter(]]>)>plain(*/
-)tag(</style>)
+inline<comment(/*<![CDATA[*/)
+tag(body) operator({) key(background-image)operator(:) function<delimiter(url()content("marble.png?width=300&height=300")delimiter(\))> operator(})
+comment(/*]]>*/)>
+tag(</style>)
 
-plain(surprise ending: )comment<delimiter(<![CDATA[)>
+tag(<foo>)plain(bar)tag(</foo>)
+tag(<foo>)inline_delimiter(<![CDATA[)plain(bar)inline_delimiter(]]>)tag(</foo>)
+
+plain(surprise ending: )inline_delimiter(<![CDATA[)
