@@ -537,6 +537,7 @@ module CodeRay
       
       def load
         if scope = ARGV.find { |a| break $& if a[/^[^-].*/] }
+          ENV['assert'] = '1' if scope.chomp!('?')
           ENV[scope.chomp!('!') ? 'new' : 'only'] ||= scope
         end
         ENV['only'] = ENV['new'] if ENV['new']
