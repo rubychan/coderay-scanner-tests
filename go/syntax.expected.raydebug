@@ -63,8 +63,8 @@ comment(// Character literals)
     char('\\377')
     char('\\x07')
     char('\\xff')
-    char(')error(\\)ident(u12e4)char(')
-    char(')error(\\)ident(U00101234)char(')
+    char('\\u12e4')
+    char('\\U00101234')
 
 comment(// String literals)
 
@@ -79,7 +79,7 @@ comment(// String literals)
     string<delimiter(")char(\\xff)char(\\u00FF)delimiter(")>
     string<delimiter(")char(\\uD800)delimiter(")>       comment(// illegal: surrogate half)
     string<delimiter(")char(\\U00110000)delimiter(")>   comment(// illegal: invalid Unicode code point)
-    string<delimiter(")>error(\\)ident(z)string<delimiter(")content(           // illegal)>
+    string<delimiter(")error(\\)content(z)delimiter(")>           comment(// illegal)
 
 comment(// Predeclared identifiers)
 
