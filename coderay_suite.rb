@@ -162,6 +162,7 @@ module CodeRay
       end
       
       puts 'Finished in '.green + '%0.2fs'.white % time_for_lang + '.'.green
+      puts
       
       unless @hints.empty?
         flunk @hints.map { |hint| '  ' + hint }.join("\n") + "\n"
@@ -178,7 +179,11 @@ module CodeRay
           puts "No examples found!".red
         else
           puts '%d'.yellow % examples.size + " example#{'s' if examples.size > 1} found.".green
+          puts
         end
+        
+        total_filesize = total_time_for_scanning = total_time_for_direct_streaming = 0
+        
         for example_filename in examples.sort
           @known_issue_description = @known_issue_ticket_url = nil
           name = File.basename(example_filename, ".#{extension}")
@@ -204,18 +209,28 @@ module CodeRay
           
           if defined?(@time_for_encoding) && @time_for_encoding
             time_total = @time_for_scanning + @time_for_encoding
-            print '%5.2fs'.blue % time_total
-            print ':'.yellow + '%5.2fs'.magenta % @time_for_direct_streaming
+            # print '%5.2fs'.blue % time_total
+            # print ':'.yellow + '%5.2fs'.magenta % @time_for_direct_streaming
             if filesize >= 1024
-              print ' '
-              print '%4.0f scan'.white % [tokens.count / @time_for_scanning / 1000] + ', '.green
-              print '%4.0f encode'.white % [tokens.count / @time_for_encoding / 1000] + ', '.green
-              print '%4.0f sep'.blue % [tokens.count / time_total / 1000] + ', '.green
+              print 'in kTok/s: '.white
+              print '%4.0f scan'.yellow % [tokens.count / @time_for_scanning / 1000]
+              print ' + '.white
+              print '%4.0f encode'.white % [tokens.count / @time_for_encoding / 1000]
+              print ' = '.white
+              print '%4.0f both'.blue % [tokens.count / time_total / 1000] + ', '
               print '%4.0f stream'.magenta % [tokens.count / @time_for_direct_streaming / 1000]
-              print ' (KTok/s)'.white
-              if filesize > 5000
-                print ' = %4.0f kB/s'.yellow % [filesize / @time_for_direct_streaming / 1000]
-              end
+              print ', '.green
+              
+              print 'in kB/s: '.white
+              print '%5.0f'.yellow % [filesize / @time_for_scanning / 1000]
+              print ' / '.white
+              print '%5.0f'.magenta % [filesize / @time_for_direct_streaming / 1000]
+              
+              total_filesize += filesize
+              total_time_for_scanning += @time_for_scanning
+              total_time_for_direct_streaming += @time_for_direct_streaming
+            else
+              print 'too small'.white
             end
             @time_for_encoding = @time_for_scanning = nil
           end
@@ -232,6 +247,17 @@ module CodeRay
                 'http://odd-eyed-code.org/projects/coderay/issues/new'.white + '.'.yellow
             end
           end
+        end
+        
+        puts
+        
+        if total_time_for_scanning > 0 && total_time_for_direct_streaming > 0
+          print "Average speed for #{scanner.class.title} scanner: ".green
+          print '%0.0f'.yellow % [total_filesize / total_time_for_scanning / 1000]
+          print ' kB/s scanning / '.white
+          print '%0.0f'.magenta % [total_filesize / total_time_for_direct_streaming / 1000]
+          print ' kB/s highlighting.'.white
+          puts
         end
       end
     end
@@ -514,7 +540,7 @@ module CodeRay
           suite = File.join($mydir, name, 'suite.rb')
           require suite
         rescue LoadError
-          $stderr.puts <<-ERR
+          puts <<-ERR
           
       !! Suite #{suite} not found
           
