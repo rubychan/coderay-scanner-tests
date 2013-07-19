@@ -59,6 +59,24 @@ p x.method_name
 x = Baz.new
 p x.method_name
 
+# Refinements
+module FloatDivision
+  refine Fixnum do
+    def /(other)
+      self.to_f / other
+    end
+  end
+end
+
+class MathFun
+  using FloatDivision
+  def self.ratio(a, b)
+    a/b
+  end
+end
+
+p MathFun.ratio(6, 8)
+
 # Misc
 p nil.to_h
 p Hash([])
