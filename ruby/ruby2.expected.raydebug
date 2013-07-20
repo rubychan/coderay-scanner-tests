@@ -59,13 +59,31 @@ ident(p) ident(x)operator(.)ident(method_name)
 ident(x) operator(=) constant(Baz)operator(.)ident(new)
 ident(p) ident(x)operator(.)ident(method_name)
 
+comment(# Refinements)
+keyword(module) class(FloatDivision)
+  ident(refine) constant(Fixnum) keyword(do)
+    keyword(def) method(/)operator(()ident(other)operator(\))
+      predefined_constant(self)operator(.)ident(to_f) operator(/) ident(other)
+    keyword(end)
+  keyword(end)
+keyword(end)
+
+keyword(class) class(MathFun)
+  ident(using) constant(FloatDivision)
+  keyword(def) predefined_constant(self)operator(.)method(ratio)operator(()ident(a)operator(,) ident(b)operator(\))
+    ident(a)operator(/)ident(b)
+  keyword(end)
+keyword(end)
+
+ident(p) constant(MathFun)operator(.)ident(ratio)operator(()integer(6)operator(,) integer(8)operator(\))
+
 comment(# Misc)
 ident(p) predefined_constant(nil)operator(.)ident(to_h)
 ident(p) ident(Hash)operator(()operator([)operator(])operator(\))
 
-ident(days) operator(=) operator(%)ident(i)operator({)ident(sun) ident(mon) ident(tue) ident(wed) ident(thu) ident(fri) ident(sat)operator(})
+ident(days) operator(=) symbol<delimiter(%i{)content(sun mon tue wed thu fri sat)delimiter(})>
 ident(p) ident(days)
-ident(p) operator(%)constant(I)operator({) comment(#{1*3} }, %w{jan feb mar})
+ident(p) symbol<delimiter(%I{)content( )inline<inline_delimiter(#{)integer(1)operator(*)integer(3)inline_delimiter(})>content( )delimiter(})>operator(,) string<delimiter(%w{)content(jan feb mar)delimiter(})>
 
 ident(puts) ident(__dir__)
 ident(puts) constant(File)operator(.)ident(dirname)operator(()constant(File)operator(.)ident(realpath)operator(()predefined_constant(__FILE__)operator(\))operator(\))
