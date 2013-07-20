@@ -253,10 +253,10 @@ module CodeRay
         
         if total_time_for_scanning > 0 && total_time_for_direct_streaming > 0
           print "Average speed for #{scanner.class.title} scanner: ".green
-          print '%0.0f'.yellow % [total_filesize / total_time_for_scanning / 1000]
-          print ' kB/s scanning / '.white
-          print '%0.0f'.magenta % [total_filesize / total_time_for_direct_streaming / 1000]
-          print ' kB/s highlighting.'.white
+          print '%0.0f kB/s'.yellow % [total_filesize / total_time_for_scanning / 1000]
+          print ' scanning / '.white
+          print '%0.0f kB/s'.magenta % [total_filesize / total_time_for_direct_streaming / 1000]
+          print ' highlighting to HTML page.'.white
           puts
         end
       end
@@ -372,13 +372,15 @@ module CodeRay
       print "\b" * 'scanning...'.size
       print 'encoding...'.yellow
       @time_for_encoding = Benchmark.realtime do
-        DebugLintTokenizer.encode_tokens tokens
+        BenchmarkHighlighter.encode_tokens tokens
       end
       print "\b" * 'encoding...'.size
       
+      result = DebugLintTokenizer.encode code, scanner.lang
+      
       print 'benchmarking...'.magenta
       @time_for_direct_streaming = Benchmark.realtime do
-        result = DebugLintTokenizer.encode code, scanner.lang
+        BenchmarkHighlighter.encode code, scanner.lang
       end
       print "\b" * 'benchmarking...'.size
       print ' ' * 'benchmarking...'.size
@@ -470,11 +472,14 @@ module CodeRay
     end
     
     Highlighter = CodeRay::Encoders[:html].new(
-      :tab_width => 8,
       :line_numbers => :table,
       :wrap => :page,
       :hint => :debug,
       :css => :class
+    )
+    
+    BenchmarkHighlighter = CodeRay::Encoders[:div].new(
+      :line_numbers => :table
     )
     
     def highlight_test tokens, name, okay, changed_lines
