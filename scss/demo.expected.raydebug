@@ -1,0 +1,163 @@
+comment<delimiter(//)content( inline comment)>
+
+comment<delimiter(/*)content( block comment */)>
+
+comment<delimiter(/*)content(! keep comment */)>
+
+variable($brand) operator(:) color(#b3b3b5)operator(;)
+variable($brand--alt)operator(:) value(null)operator(;)
+
+variable($isSomething)operator(:) value(false) important(!default)operator(;)
+
+variable($array) operator(:) string<delimiter(")content(-webkit-)delimiter(")>operator(,) string<delimiter(")content(-moz-)delimiter(")>operator(,) string<delimiter(")delimiter(")>operator(;)
+
+directive(@import) string<delimiter(")content(path/to/import)delimiter(")>include(;)
+
+class(%clearfix)operator(,)
+class(.clearfix) operator({)
+	local_variable(&)pseudo_class(:after) operator({) key(content)operator(:) string<delimiter(")delimiter(")>operator(;) key(display)operator(:) value(table)operator(;) key(clear)operator(:) value(both)operator(;) operator(})
+operator(})
+
+function(@mixin box-shadow)operator(()variable($args)operator(\)) operator({)
+	directive(@each) variable($prefix) value(in) variable($array) operator({)
+		inline<inline_delimiter(#{)variable($array)inline_delimiter(})>key(box-shadow)operator(:) variable($args)operator(;)
+	operator(})
+operator(})
+
+directive(@function) predefined(em)operator(()variable($size)operator(,) variable($context)operator(:) float(14px)operator(\)) operator({)
+
+	directive(@warn) string<delimiter(")content(size wasnt a unit, forcing pixels)delimiter(")>operator(;)
+
+	directive(@return) operator(()variable($size) operator(/) variable($context)operator(\)) operator(*) float(1em)operator(;)
+operator(})
+
+
+function(@mixin switch)operator(()variable($condition)operator(,) variable($selector)operator(:) string<delimiter(")content(.lt-ie8)delimiter(")>operator(\))operator({)
+	directive(@if) variable($condition) operator({)
+		directive(@content)operator(;)
+	operator(}) directive(@else) operator({)
+		inline<inline_delimiter(#{)variable($selector)inline_delimiter(})> local_variable(&) operator({)
+			directive(@content)
+		operator(})
+	operator(})
+
+	directive(@debug) string<delimiter(")content(selector was )inline<inline_delimiter(#{)variable($selector)inline_delimiter(})>delimiter(")>operator(;)
+operator(})
+
+class(.selector) operator({)
+	key(color)operator(:) variable($brand)operator(;)
+	key(background)operator(:) variable($brand--alt) value(or) color(#000)operator(;)
+
+	key(width)operator(:) float(20%)operator(;)
+
+	operator(~) tag(li) operator({) key(margin-left)operator(:) float(5px)operator(;) operator(})
+
+	tag(code) operator({)
+		key(text-align)operator(:) value(right)operator(;)
+		key(font-family)operator(:) string<delimiter(")content(monaco)delimiter(")>
+	operator(})
+
+
+	directive(@media) operator(()key(min-width)operator(:) float(32em)operator(\)) operator({)
+		key(float)operator(:) value(left)operator(;)
+	operator(})
+operator(})
+
+directive(@media) operator(()key(min-width)operator(:) float(32em)operator(\)) operator({)
+	class(.grid) operator({) key(float)operator(:) value(left)operator(;) operator(})
+operator(})
+
+tag(footer) operator({)
+	key(position)operator(:) value(relative)operator(;)
+
+	class(.copy) operator({)
+		key(background)operator(:) function<delimiter(url()content("images/#{$sprite}")delimiter(\))>operator(;)
+	operator(})
+
+operator(})
+
+
+tag(a) operator({)
+	comment(// silent extend)
+	directive(@extend) class(%button) important(!optional)operator(;)
+
+	directive(@include) predefined(box-shadow)operator(()float(0) float(1px) float(0) float(1px) color(#fff)operator(,) value(inset) float(1px) float(1px) float(5px) predefined(rgba)operator(()color(#000)operator(,) float(0.4)operator(\))operator(\))operator(;)
+
+	comment(// nesting of properties)
+	key(font)operator(:) operator({)
+		key(size)operator(:) predefined(em)operator(()float(28)operator(,)float(18)operator(\))operator(;)
+		key(family)operator(:) variable($font__serif)operator(;)
+		key(weight)operator(:) value(normal)operator(;)
+	operator(})
+	
+	local_variable(&)pseudo_class(:hover)operator(,)
+	local_variable(&)pseudo_class(:focus) operator({)
+
+		comment(// extend via psuedo)
+		directive(@extend) class(.button)pseudo_class(:hover)operator(;)
+
+		key(background)operator(:) predefined(linear-gradient)operator(()value(to) value(bottom)operator(,) variable($brand)operator(,) predefined(darken)operator(()variable($brand)operator(,) float(20%)operator(\))operator(\))operator(;)
+
+	operator(})
+operator(})
+
+
+id(#main) operator({)operator(})
+
+tag(div)id(#main) operator({)operator(})
+
+tag(header) operator({)
+	local_variable(&)id(#main) operator({)operator(})
+operator(})
+
+
+
+class(.nav) operator({)
+	key(position)operator(:) value(absolute)operator(;)
+	key(top)operator(:) float(0)operator(;) key(left)operator(:) float(0)operator(;)
+
+	tag(ul) operator({) key(margin)operator(:) float(0)operator(;) key(padding)operator(:) float(0)operator(;) operator(})
+
+	tag(li) operator({)
+		key(float)operator(:) value(left)operator(;)
+		
+		operator(+) tag(li) operator({) key(margin-left)operator(:) float(5px)operator(;) operator(})
+	operator(})
+
+	tag(a) operator({)
+		key(display)operator(:) value(block)operator(;)
+
+		local_variable(&)pseudo_class(:hover)operator(,)
+		local_variable(&)pseudo_class(:focus) operator({)
+			key(background)operator(:) variable($primary)operator(;)
+		operator(})
+
+		local_variable(&)class(.link--root) operator({) key(background)operator(:) color(#222)operator(;) operator(})
+	operator(})
+	
+	class(.js) local_variable(&) operator({) key(position)operator(:) value(static)operator(;) operator(})
+
+	id(#hd) local_variable(&) operator({) key(float)operator(:) value(left)operator(;) operator(})
+
+operator(})
+
+id(#main) tag(ul)class(.links) tag(a) operator({) key(display)operator(:) value(inline-block)operator(;) operator(})
+
+
+
+comment<delimiter(//)content( loops)>
+directive(@for) variable($i) value(from) float(1) value(through) float(3) operator({)
+  class(.item-)inline<inline_delimiter(#{)variable($i)inline_delimiter(})> operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
+operator(})
+
+directive(@each) variable($animal) value(in) value(puma)operator(,) value(sea-slug)operator(,) value(egret)operator(,) value(salamander) operator({)
+  operator(.)inline<inline_delimiter(#{)variable($animal)inline_delimiter(})>tag(-icon) operator({)
+    key(background-image)operator(:) function<delimiter(url()content('/images/#{$animal}.png')delimiter(\))>operator(;)
+  operator(})
+operator(})
+
+variable($i)operator(:) float(6)operator(;)
+directive(@while) variable($i) operator(>) float(0) operator({)
+  class(.item-)inline<inline_delimiter(#{)variable($i)inline_delimiter(})> operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
+  variable($i)operator(:) variable($i) operator(-) float(2)operator(;)
+operator(})
