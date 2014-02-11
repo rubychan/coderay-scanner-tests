@@ -147,17 +147,17 @@ id(#main) tag(ul)class(.links) tag(a) operator({) key(display)operator(:) value(
 
 comment<delimiter(//)content( loops)>
 directive(@for) variable($i) value(from) float(1) value(through) float(3) operator({)
-  class(.item-)inline<inline_delimiter(#{)variable($i)inline_delimiter(})> operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
+  class(.item-#{$i}) operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
 operator(})
 
 directive(@each) variable($animal) value(in) value(puma)operator(,) value(sea-slug)operator(,) value(egret)operator(,) value(salamander) operator({)
-  operator(.)inline<inline_delimiter(#{)variable($animal)inline_delimiter(})>tag(-icon) operator({)
+  class(.#{$animal}-icon) operator({)
     key(background-image)operator(:) function<delimiter(url()content('/images/#{$animal}.png')delimiter(\))>operator(;)
   operator(})
 operator(})
 
 variable($i)operator(:) float(6)operator(;)
 directive(@while) variable($i) operator(>) float(0) operator({)
-  class(.item-)inline<inline_delimiter(#{)variable($i)inline_delimiter(})> operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
+  class(.item-#{$i}) operator({) key(width)operator(:) float(2em) operator(*) variable($i)operator(;) operator(})
   variable($i)operator(:) variable($i) operator(-) float(2)operator(;)
 operator(})
