@@ -188,7 +188,7 @@ module CodeRay
           @known_issue_description = @known_issue_ticket_url = nil
           name = File.basename(example_filename, ".#{extension}")
           next if ENV['lang'] && ENV['only'] && ![name, '*'].include?(ENV['only'])
-          print '%22s'.cyan % name + ' '
+          print '%23s'.cyan % name + ' '
           filesize = File.size(example_filename)
           amount = filesize
           human_filesize =
