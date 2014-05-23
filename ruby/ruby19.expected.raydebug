@@ -22,3 +22,5 @@ ident(_) key(_)operator(:)ident(_)
 ident(keywords) key(for)operator(:)ident(keys)
 ident(predefined_constants) key(nil)operator(:)ident(keys)
 key(alias)operator(:)key(void)operator(:)ident(goto)
+
+operator({)symbol(:foo) operator(=)operator(>) string<delimiter(')content(bar)delimiter(')>operator(,) key(foo)operator(:) string<delimiter(')content(bar)delimiter(')>operator(})

@@ -22,3 +22,5 @@ _ _:_
 keywords for:keys
 predefined_constants nil:keys
 alias:void:goto
+
+{:foo => 'bar', foo: 'bar'}
