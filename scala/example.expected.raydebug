@@ -1,0 +1,98 @@
+keyword(package) ident(com)operator(.)ident(heroku)operator(.)ident(sbt)
+
+keyword(import) ident(java)operator(.)ident(io)operator(.)ident(File)
+keyword(import) ident(java)operator(.)ident(net)operator(.)ident(URL)
+
+keyword(import) ident(com)operator(.)ident(heroku)operator(.)ident(sdk)operator(.)ident(deploy)operator(.)operator({)predefined_type(App)operator(,) ident(Curl)operator(})
+keyword(import) ident(sbt)operator(.)operator({)ident(Logger)operator(,) ident(_)operator(})
+keyword(import) ident(sbt)operator(.)ident(compiler)operator(.)ident(CompileFailed)
+
+keyword(import) ident(scala)operator(.)ident(collection)operator(.)ident(JavaConversions)
+
+type(class) class(SbtApp)operator(()ident(buildPackDesc)operator(:)ident(String)operator(,) ident(name)operator(:)ident(String)operator(,) ident(rootDir)operator(:)ident(File)operator(,) ident(targetDir)operator(:)ident(File)operator(,) ident(log)operator(:)ident(Logger)operator(\)) directive(extends) predefined_type(App)operator(()ident(buildPackDesc)operator(,) ident(name)operator(,) ident(rootDir)operator(,) ident(targetDir)operator(\)) operator({)
+
+  keyword(sealed) keyword(trait) class(PackageType)
+  keyword(case) type(class) class(Universal)operator(()ident(dir)operator(:)ident(File)operator(\)) directive(extends) ident(PackageType)
+  keyword(case) type(class) class(StartScript)operator(()ident(dir)operator(:)ident(File)operator(\)) directive(extends) ident(PackageType)
+
+  keyword(override) keyword(def) ident(logDebug)operator(()ident(message)operator(:)ident(String)operator(\)) operator({)
+    ident(log)operator(.)ident(debug)operator(()ident(message)operator(\))
+  operator(})
+
+  keyword(override) keyword(def) ident(logInfo)operator(()ident(message)operator(:)ident(String)operator(\)) operator({)
+    ident(log)operator(.)ident(info)operator(()ident(message)operator(\))
+  operator(})
+
+  keyword(override) keyword(def) ident(logWarn)operator(()ident(message)operator(:)ident(String)operator(\)) operator({)
+    ident(log)operator(.)ident(warn)operator(()ident(message)operator(\))
+  operator(})
+
+  keyword(override) keyword(def) ident(deploy)operator(()ident(includedFiles)operator(:)ident(java)operator(.)ident(util)operator(.)ident(List)operator([)ident(java)operator(.)ident(io)operator(.)ident(File)operator(])operator(,) ident(configVars)operator(:)ident(java)operator(.)ident(util)operator(.)ident(Map)operator([)ident(String)operator(,)ident(String)operator(])operator(,) ident(jdkVersion)operator(:)ident(String)operator(,) ident(jdkUrl)operator(:)ident(URL)operator(,) ident(stack)operator(:)ident(String)operator(,) ident(processTypes)operator(:)ident(java)operator(.)ident(util)operator(.)ident(Map)operator([)ident(String)operator(,)ident(String)operator(])operator(\)) operator({)
+    ident(logDebug)operator(()
+      ident(s)string<delimiter(")content(+--------------------+)char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| sbt-heroku details |)char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(+--------------------+-----------------------------------------------)char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| baseDirectory -> $getRootDir )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| targetDir     -> $targetDir )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| jdkVersion    -> $jdkVersion )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| jdkUrl        -> $jdkUrl )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| appName       -> $name )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| stack         -> $stack )char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(| includePaths  -> )delimiter(")> operator(+) predefined_type(JavaConversions)operator(.)ident(collectionAsScalaIterable)operator(()ident(includedFiles)operator(\))operator(.)ident(mkString)operator(()string<delimiter(")content(;)delimiter(")>operator(\)) operator(+) string<delimiter(")char(\\n)delimiter(")> operator(+)
+      ident(s)string<delimiter(")content(+--------------------------------------------------------------------)char(\\n)delimiter(")>
+    operator(\))
+
+    keyword(val) ident(defaultProcessTypes) operator(=) ident(packageType) keyword(match) operator({)
+      keyword(case) ident(Universal)operator(()ident(dir)operator(\)) operator(=)operator(>)
+      keyword(val) ident(startScript) operator(=) operator(()ident(dir) operator(/) string<delimiter(")content(bin)delimiter(")> operator(**) string<delimiter(")content(*)delimiter(")>operator(\))operator(.)
+      ident(filter)operator(()operator(!)ident(_)operator(.)ident(getName)operator(.)ident(endsWith)operator(()string<delimiter(")content(.bat)delimiter(")>operator(\))operator(\))operator(.)
+      ident(filter)operator(()operator(!)ident(_)operator(.)ident(getName)operator(.)ident(equals)operator(()string<delimiter(")content(bin)delimiter(")>operator(\))operator(\))operator(.)
+      ident(get)operator(()integer(0)operator(\))operator(.)ident(getName)
+      predefined_type(Map)operator([)ident(String)operator(,)ident(String)operator(])operator(()string<delimiter(")content(web)delimiter(")> operator(-)operator(>) operator(()string<delimiter(")content(target/universal/stage/bin/)delimiter(")> operator(+) ident(startScript) operator(+) string<delimiter(")content( -Dhttp.port=$PORT)delimiter(")>operator(\))operator(\))
+      keyword(case) ident(StartScript)operator(()ident(dir)operator(\)) operator(=)operator(>)
+      predefined_type(Map)operator([)ident(String)operator(,)ident(String)operator(])operator(()string<delimiter(")content(web)delimiter(")> operator(-)operator(>) string<delimiter(")content(target/start -Dhttp.port=$PORT $JAVA_OPTS)delimiter(")>operator(\))
+    operator(})
+
+    comment(// OMG)
+    keyword(val) ident(javaProcessTypes) operator(=) predefined_type(JavaConversions)operator(.)ident(mapAsJavaMap)operator(()ident(defaultProcessTypes) operator(++) predefined_type(JavaConversions)operator(.)ident(mapAsScalaMap)operator(()ident(processTypes)operator(\))operator(\))
+
+    keyword(try) operator({)
+      local_variable(super)operator(.)ident(deploy)operator(()ident(includedFiles)operator(,) ident(configVars)operator(,) ident(jdkVersion)operator(,) ident(jdkUrl)operator(,) ident(stack)operator(,) ident(javaProcessTypes)operator(\))
+    operator(}) keyword(catch) operator({)
+      keyword(case) ident(ce)operator(:) ident(Curl)operator(.)ident(CurlException) operator(=)operator(>)
+      keyword(if) operator(()ident(ce)operator(.)ident(getCode) operator(==) integer(404)operator(\)) operator({)
+        keyword(throw) keyword(new) ident(CompileFailed)operator(()predefined_type(Array)operator(()operator(\))operator(,) ident(s)string<delimiter(")content(Could not find app '$name'. Check that herokuAppName setting is correct.)delimiter(")>operator(,) predefined_type(Array)operator(()operator(\))operator(\))
+      operator(}) keyword(else) keyword(if) operator(()ident(ce)operator(.)ident(getCode) operator(==) integer(403) operator(||) ident(ce)operator(.)ident(getCode) operator(==) integer(401)operator(\)) operator({)
+        keyword(throw) keyword(new) ident(CompileFailed)operator(()predefined_type(Array)operator(()operator(\))operator(,) string<delimiter(")content(Check that HEROKU_API_KEY is set correctly, or if the Heroku Toolbelt is installed.)delimiter(")>operator(,) predefined_type(Array)operator(()operator(\))operator(\))
+      operator(})
+      keyword(throw) ident(ce)
+    operator(})
+  operator(})
+
+  keyword(override) keyword(def) ident(prepare)operator(()ident(includedFiles)operator(:)ident(java)operator(.)ident(util)operator(.)ident(List)operator([)ident(java)operator(.)ident(io)operator(.)ident(File)operator(])operator(\))operator(:) predefined_type(Unit) operator(=) operator({)
+    keyword(val) ident(defaultIncludedFiles) operator(=) ident(packageType) keyword(match) operator({)
+      keyword(case) ident(Universal)operator(()ident(dir)operator(\)) operator(=)operator(>)
+      predefined_type(Seq)operator(()ident(dir)operator(\))
+      keyword(case) ident(StartScript)operator(()ident(dir)operator(\)) operator(=)operator(>)
+      predefined_type(Seq)operator(()ident(dir)operator(,) ident(targetDir) operator(/) string<delimiter(")content(staged)delimiter(")>operator(\))
+    operator(})
+
+    comment(// OMG)
+    keyword(val) ident(javaIncludedFiles) operator(=) predefined_type(JavaConversions)operator(.)ident(seqAsJavaList)operator(()ident(defaultIncludedFiles) operator(++) predefined_type(JavaConversions)operator(.)ident(collectionAsScalaIterable)operator(()ident(includedFiles)operator(\))operator(\))
+
+    local_variable(super)operator(.)ident(prepare)operator(()ident(javaIncludedFiles)operator(\))
+
+    ident(sbt)operator(.)ident(IO)operator(.)ident(copyDirectory)operator(()ident(targetDir) operator(/) string<delimiter(")content(resolution-cache)delimiter(")> operator(/) string<delimiter(")content(reports)delimiter(")>operator(,) ident(getAppDir) operator(/) string<delimiter(")content(target)delimiter(")> operator(/) string<delimiter(")content(resolution-cache)delimiter(")> operator(/) string<delimiter(")content(reports)delimiter(")>operator(\))
+  operator(})
+
+  keyword(def) ident(packageType)operator(:) ident(PackageType) operator(=) operator({)
+    keyword(if) operator(()operator(()ident(targetDir) operator(/) string<delimiter(")content(universal)delimiter(")>operator(\))operator(.)ident(exists)operator(\)) operator({)
+      ident(Universal)operator(()ident(targetDir) operator(/) string<delimiter(")content(universal)delimiter(")> operator(/) string<delimiter(")content(stage)delimiter(")>operator(\))
+    operator(}) keyword(else) keyword(if) operator(()operator(()ident(targetDir) operator(/) string<delimiter(")content(start)delimiter(")>operator(\))operator(.)ident(exists)operator(\)) operator({)
+      ident(StartScript)operator(()ident(targetDir) operator(/) string<delimiter(")content(start)delimiter(")>operator(\))
+    operator(}) keyword(else) operator({)
+      keyword(throw) keyword(new) ident(CompileFailed)operator(()predefined_type(Array)operator(()operator(\))operator(,) string<delimiter(")content(You must stage your application before deploying it!)delimiter(")>operator(,) predefined_type(Array)operator(()operator(\))operator(\))
+    operator(})
+  operator(})
+
+operator(})
