@@ -1,0 +1,2 @@
+description: Ruby scanner can't parse hash key strings with nested interpolation.
+ticket_url: https://github.com/rubychan/coderay/pull/189
