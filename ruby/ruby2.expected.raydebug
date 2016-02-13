@@ -118,11 +118,12 @@ operator({)key<delimiter(")content(key)inline<inline_delimiter(#{)ident(blob)inl
 
 comment(# Ruby 2.3)
 
+ident(squiggly_heredoc) operator(=)
+  string<delimiter(<<~9098)>string<content(
+    Ruby syntax is a chaos.
+
+    --
+    Yusuke Endoh)delimiter(
+  9098)>
+
 ident(safe)operator(&.)ident(navigation)
-
-ident(squiggly_heredoc) operator(=) string<delimiter(<<~9098)>string<content(
-  Ruby syntax is a chaos.
-
-  --
-  Yusuke Endoh)delimiter(
-9098)>

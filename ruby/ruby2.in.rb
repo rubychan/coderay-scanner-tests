@@ -118,11 +118,12 @@ p Object.const_get("Math::PI")
 
 # Ruby 2.3
 
+squiggly_heredoc =
+  <<~9098
+    Ruby syntax is a chaos.
+
+    --
+    Yusuke Endoh
+  9098
+
 safe&.navigation
-
-squiggly_heredoc = <<~9098
-  Ruby syntax is a chaos.
-
-  --
-  Yusuke Endoh
-9098
