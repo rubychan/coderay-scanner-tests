@@ -1,0 +1,1 @@
+select value/1000 from  v$sesstat se,v$statname sn where se.STATISTIC# = sn.STATISTIC# and  sn.name =  'CPU used by this session' and se.SID=ss.SID

@@ -1,0 +1,1 @@
+class(select) ident(value)operator(/)integer(1000) keyword(from)  ident(v$sesstat) ident(se)operator(,)ident(v$statname) ident(sn) keyword(where) ident(se)operator(.)ident(STATISTIC)comment(# = sn.STATISTIC# and  sn.name =  'CPU used by this session' and se.SID=ss.SID)
