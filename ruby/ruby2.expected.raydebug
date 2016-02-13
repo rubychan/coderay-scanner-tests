@@ -114,6 +114,7 @@ operator({)key<delimiter(')content(ke)char(\\')content(y)char(\\\\)delimiter(')>
 operator({)key<delimiter(")content(key)delimiter(")>operator(:) integer(6)operator(})
 operator({)key<delimiter(")content(k)char(\\e)content(y)char(\\\\)escape(#)global_variable($.)escape(#)global_variable($")escape(#)class_variable(@@test)escape(#)global_variable($\\)delimiter(")>operator(:) integer(6)operator(})
 operator({)key<delimiter(")content(key)inline<inline_delimiter(#{)ident(blob)inline_delimiter(})>delimiter(")>operator(:) integer(6)operator(})
+operator({)key<delimiter(")content(key)inline<inline_delimiter(#{)string<delimiter(")content(blob)delimiter(")>inline_delimiter(})>delimiter(")>operator(:) integer(6)operator(})
 operator({)key<delimiter(")content(key)inline<inline_delimiter(#{)operator({)ident(blob)operator(})inline_delimiter(})>delimiter(")>operator(:) integer(6)operator(})
 
 
