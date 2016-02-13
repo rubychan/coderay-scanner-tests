@@ -98,5 +98,31 @@ ident(new_method)operator(()operator(\))
 ident(p) constant(Object)operator(.)ident(const_get)operator(()string<delimiter(")content(Math::PI)delimiter(")>operator(\))
 
 
+comment(# Ruby 2.1)
+
+operator([)integer(42r)operator(,) integer(42i)operator(,) integer(42ri)operator(])
+
+float(4e2i)  comment(# okay)
+float(4e2)ident(r)  comment(# syntax error)
 
 
+comment(# Ruby 2.2)
+
+operator({)key(key)operator(:) integer(6)operator(})
+operator({)key<delimiter(')content(key)delimiter(')>operator(:) integer(6)operator(})
+operator({)key<delimiter(')content(ke)char(\\')content(y)delimiter(')>operator(:) integer(6)operator(})
+operator({)key<delimiter(")content(key)delimiter(")>operator(:) integer(6)operator(})
+operator({)key<delimiter(")content(k)char(\\e)content(y)delimiter(")>operator(:) integer(6)operator(})
+operator({)key<delimiter(")content(key)inline<inline_delimiter(#{)ident(blob)inline_delimiter(})>delimiter(")>operator(:) integer(6)operator(})
+
+
+comment(# Ruby 2.3)
+
+ident(safe)operator(&.)ident(navigation)
+
+ident(squiggly_heredoc) operator(=) string<delimiter(<<~9098)>string<content(
+  Ruby syntax is a chaos.
+
+  --
+  Yusuke Endoh)delimiter(
+9098)>

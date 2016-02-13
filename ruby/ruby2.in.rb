@@ -98,5 +98,31 @@ new_method()
 p Object.const_get("Math::PI")
 
 
+# Ruby 2.1
+
+[42r, 42i, 42ri]
+
+4e2i  # okay
+4e2r  # syntax error
 
 
+# Ruby 2.2
+
+{key: 6}
+{'key': 6}
+{'ke\'y': 6}
+{"key": 6}
+{"k\ey": 6}
+{"key#{blob}": 6}
+
+
+# Ruby 2.3
+
+safe&.navigation
+
+squiggly_heredoc = <<~9098
+  Ruby syntax is a chaos.
+
+  --
+  Yusuke Endoh
+9098
