@@ -110,9 +110,9 @@ p Object.const_get("Math::PI")
 
 {key: 6}
 {'key': 6}
-{'ke\'y': 6}
+{'ke\'y\\': 6}
 {"key": 6}
-{"k\ey": 6}
+{"k\ey\\#$.#$"#@@test#$\": 6}
 {"key#{blob}": 6}
 
 
