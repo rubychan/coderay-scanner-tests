@@ -1012,7 +1012,7 @@ int main()
 // others]. For Design Pattern afficiandos, this is a crude example of the Singleton Pattern
 
 // File: 'counter.h'
-class Counter
+class Counter final
 {
 public:
   static int increment();
