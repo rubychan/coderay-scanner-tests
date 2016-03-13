@@ -218,7 +218,7 @@ count[shell.size() ? shell : "/bin/sh"]++;
 
 std::string user;
 char       *msg = 0;
-passwd     *pwd = 0;
+passwd     *pwd = nullptr;
 
 if ( (msg = getenv("USER"))    ||
      (msg = getenv("LOGNAME")) ||
@@ -314,6 +314,8 @@ printf("Number %d is character %c\n", num, num);
 //-----------------------------
 int  ascii_value = 'e';   // now 101
 char character   = 101;   // now 'e'
+char16_t ch1 { L'a' };
+char32_t ch2 { L'a' };
 
 //-----------------------------
 printf("Number %d is character %c\n", 101, 101);
@@ -1510,6 +1512,7 @@ int func()
 class Value
 {
 public:
+  Value () = default;
   virtual void do_something() = 0;
 };
 
@@ -1522,7 +1525,7 @@ public:
 class ValidValue : public Value
 {
 public:
-  virtual void do_something();
+  virtual void do_something() override;
 };
 
 Value* func();

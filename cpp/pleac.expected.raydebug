@@ -218,7 +218,7 @@ preprocessor(#include) include("boost/lexical_cast.hpp")
 
 ident(std)operator(::)predefined_type(string) ident(user)operator(;)
 predefined_type(char)       operator(*)ident(msg) operator(=) integer(0)operator(;)
-ident(passwd)     operator(*)ident(pwd) operator(=) integer(0)operator(;)
+ident(passwd)     operator(*)ident(pwd) operator(=) predefined_constant(nullptr)operator(;)
 
 keyword(if) operator(() operator(()ident(msg) operator(=) ident(getenv)operator(()string<delimiter(")content(USER)delimiter(")>operator(\)\))    operator(||)
      operator(()ident(msg) operator(=) ident(getenv)operator(()string<delimiter(")content(LOGNAME)delimiter(")>operator(\)\)) operator(||)
@@ -314,6 +314,8 @@ ident(printf)operator(()string<delimiter(")content(Number %d is character %c)cha
 comment(//-----------------------------)
 predefined_type(int)  ident(ascii_value) operator(=) char('e')operator(;)   comment(// now 101)
 predefined_type(char) ident(character)   operator(=) integer(101)operator(;)   comment(// now 'e')
+predefined_type(char16_t) ident(ch1) operator({) ident(L)char('a') operator(};)
+predefined_type(char32_t) ident(ch2) operator({) ident(L)char('a') operator(};)
 
 comment(//-----------------------------)
 ident(printf)operator(()string<delimiter(")content(Number %d is character %c)char(\\n)delimiter(")>operator(,) integer(101)operator(,) integer(101)operator(\);)
@@ -1012,7 +1014,7 @@ comment(// [i.e. group together] and allow selective access [i.e. hide some part
 comment(// others]. For Design Pattern afficiandos, this is a crude example of the Singleton Pattern)
 
 comment(// File: 'counter.h')
-keyword(class) class(Counter)
+keyword(class) class(Counter) keyword(final)
 operator({)
 directive(public)operator(:)
   directive(static) predefined_type(int) ident(increment)operator((\);)
@@ -1510,6 +1512,7 @@ preprocessor(#include) include(<iostream>)
 keyword(class) class(Value)
 operator({)
 directive(public)operator(:)
+  ident(Value) operator((\)) operator(=) keyword(default)operator(;)
   directive(virtual) directive(void) ident(do_something)operator((\)) operator(=) integer(0)operator(;)
 operator(};)
 
@@ -1522,7 +1525,7 @@ operator(};)
 keyword(class) class(ValidValue) operator(:) directive(public) ident(Value)
 operator({)
 directive(public)operator(:)
-  directive(virtual) directive(void) ident(do_something)operator((\);)
+  directive(virtual) directive(void) ident(do_something)operator((\)) directive(override)operator(;)
 operator(};)
 
 ident(Value)operator(*) ident(func)operator((\);)
