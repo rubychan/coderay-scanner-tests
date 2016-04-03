@@ -371,13 +371,14 @@ module CodeRay
         tokens = scanner.tokenize
       end
       print "\b" * 'scanning...'.size
+      
+      result = DebugLintTokenizer.encode code, scanner.lang
+      
       print 'encoding...'.yellow
       @time_for_encoding = Benchmark.realtime do
         BenchmarkHighlighter.encode_tokens tokens
       end
       print "\b" * 'encoding...'.size
-      
-      result = DebugLintTokenizer.encode code, scanner.lang
       
       print 'benchmarking...'.magenta
       @time_for_direct_streaming = Benchmark.realtime do
