@@ -304,7 +304,7 @@ module CodeRay
         begin
           DebugLintTokenizer.encode string, scanner.lang
         rescue => boom
-          assert_nothing_raised "Random test failed at #{size} #{RUBY_VERSION < '1.9' ? 'bytes' : 'chars'}" do
+          assert_nothing_raised "Random test failed at #{size} #{RUBY_VERSION < '1.9' ? 'bytes' : 'chars'} (#{string.inspect})" do
             puts boom.message
             raise
           end if ENV['assert']
