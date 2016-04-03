@@ -142,10 +142,11 @@ module CodeRay
     DebugLintTokenizer = CodeRay::Encoders[:debug_lint].new
     
     def test_ALL
-      scanner = CodeRay::Scanners[self.class.lang].new
+      name = "#{self.class.lang}#{ENV['version']}"
+      scanner = CodeRay::Scanners[name].new
       if scanner.is_a? CodeRay::Scanners[:text]
         puts
-        puts '    >> Skipping tests for '.yellow + self.class.lang.cyan + ', no scanner found <<'.yellow
+        puts '    >> Skipping tests for '.yellow + name.cyan + ', no scanner found <<'.yellow
         return
       end
       
@@ -558,11 +559,13 @@ module CodeRay
         for key in %w(only new)
           if ENV[key]
             case ENV[key]
-            when /^(\w+)\.([-\w]+)$/
+            when /^(\w+)(?::(\d))?\.([-\w]+)$/
               ENV['lang'] = $1
-              ENV[key] = $2
-            when /^(\w+)(?:\.\*)?$/
+              ENV['version'] = $2
+              ENV[key] = $3
+            when /^(\w+)(?::(\d))?(?:\.\*)?$/
               ENV['lang'] = $1
+              ENV['version'] = $2
               ENV[key] = '*'
             end
           end
