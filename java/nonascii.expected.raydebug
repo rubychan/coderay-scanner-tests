@@ -1,0 +1,15 @@
+comment(/* package whatever; // don't place package name! */)
+ 
+keyword(import) include(java.util)operator(.)operator(*)operator(;)
+keyword(import) include(java.lang)operator(.)operator(*)operator(;)
+keyword(import) include(java.io)operator(.)operator(*)operator(;)
+ 
+comment(/* Name of the class has to be "Main" only if the class is public. */)
+type(class) class(Ideone)
+operator({)
+	directive(public) directive(static) type(void) ident(main) operator(()predefined_type(String)type([]) ident(args)operator(\)) directive(throws) ident(java)operator(.)ident(lang)operator(.)ident(Exception)
+	operator({)
+		type(double) ident(δ) operator(=) integer(2)operator(;)
+		predefined_type(System)operator(.)ident(out)operator(.)ident(println)operator(()ident(δ)operator(\))operator(;)
+	operator(})
+operator(})
