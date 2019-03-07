@@ -1,0 +1,11 @@
+{% assignlist tabs = script:"tabbify_data" tabs:4 items_per_tab:3 %}
+
+<div class="tabs">
+ 
+  <ul>
+    {% for tab in tabs %}
+      <li>
+        <a href="#panel1-{{ forloop.index }}">Panel {{ forloop.index }}</a>
+      </li>
+    {% endfor %}
+  </ul>
