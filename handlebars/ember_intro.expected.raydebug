@@ -1,0 +1,11 @@
+comment({{! Getting Started Example
+    (from emberjs.com\)}})
+
+tag(<h1>)plain(People)tag(</h1>)
+tag(<ul>)
+inline<inline_delimiter({{#)attribute_name(each) attribute_name(peopleController)inline_delimiter(}})>
+  tag(<li>)plain(Hello, )tag(<b>)inline<inline_delimiter({{)attribute_name(fullName)inline_delimiter(}})>tag(</b>)plain(!)tag(</li>)
+inline<inline_delimiter({{/)attribute_name(each)inline_delimiter(}})>
+tag(</ul>)
+
+tag(<p>)plain(Learn more at )tag(<a) attribute_name(href)operator(=)string<delimiter(")>inline<inline_delimiter({{{)attribute_name(url)inline_delimiter(}}})>string<delimiter(")>tag(>)plain(emberjs.com)tag(</a>)tag(</p>)
