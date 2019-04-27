@@ -1,0 +1,163 @@
+// inline comment
+
+/* block comment */
+
+/*! keep comment */
+
+$brand : #b3b3b5;
+$brand--alt: null;
+
+$isSomething: false !default;
+
+$array : "-webkit-", "-moz-", "";
+
+@import "path/to/import";
+
+%clearfix,
+.clearfix {
+	&:after { content: ""; display: table; clear: both; }
+}
+
+@mixin box-shadow($args) {
+	@each $prefix in $array {
+		#{$array}box-shadow: $args;
+	}
+}
+
+@function em($size, $context: 14px) {
+
+	@warn "size wasnt a unit, forcing pixels";
+
+	@return ($size / $context) * 1em;
+}
+
+
+@mixin switch($condition, $selector: ".lt-ie8"){
+	@if $condition {
+		@content;
+	} @else {
+		#{$selector} & {
+			@content
+		}
+	}
+
+	@debug "selector was #{$selector}";
+}
+
+.selector {
+	color: $brand;
+	background: $brand--alt or #000;
+
+	width: 20%;
+
+	~ li { margin-left: 5px; }
+
+	code {
+		text-align: right;
+		font-family: "monaco"
+	}
+
+
+	@media (min-width: 32em) {
+		float: left;
+	}
+}
+
+@media (min-width: 32em) {
+	.grid { float: left; }
+}
+
+footer {
+	position: relative;
+
+	.copy {
+		background: url("images/#{$sprite}");
+	}
+
+}
+
+
+a {
+	// silent extend
+	@extend %button !optional;
+
+	@include box-shadow(0 1px 0 1px #fff, inset 1px 1px 5px rgba(#000, 0.4));
+
+	// nesting of properties
+	font: {
+		size: em(28,18);
+		family: $font__serif;
+		weight: normal;
+	}
+	
+	&:hover,
+	&:focus {
+
+		// extend via psuedo
+		@extend .button:hover;
+
+		background: linear-gradient(to bottom, $brand, darken($brand, 20%));
+
+	}
+}
+
+
+#main {}
+
+div#main {}
+
+header {
+	&#main {}
+}
+
+
+
+.nav {
+	position: absolute;
+	top: 0; left: 0;
+
+	ul { margin: 0; padding: 0; }
+
+	li {
+		float: left;
+		
+		+ li { margin-left: 5px; }
+	}
+
+	a {
+		display: block;
+
+		&:hover,
+		&:focus {
+			background: $primary;
+		}
+
+		&.link--root { background: #222; }
+	}
+	
+	.js & { position: static; }
+
+	#hd & { float: left; }
+
+}
+
+#main ul.links a { display: inline-block; }
+
+
+
+// loops
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+
+@each $animal in puma, sea-slug, egret, salamander {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+  }
+}
+
+$i: 6;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
